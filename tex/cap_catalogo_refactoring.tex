@@ -9,9 +9,9 @@ Apesar da ADM, e principalmente o KDM tenham sido propostos para auxiliar todo o
 
 Diante desse contexto, neste capítulo é identificado e descrito um conjunto de atividades pertinentes para auxiliar a criação de refatorações para o metamodelo KDM. Além disso, neste capítulo também é apresentado uma adaptação do catálogo de refatoração do~\citeonline{Fowler1999} para o metamodelo KDM~\cite{durelli_catalogo, durelli_VEM_ferramenta}. O intuito dessa catálogo de refatoração é facilitar a condução da modernização de um determinado sistema legado utilizando a abordagem ADM e o metamodelo KDM durante as etapas da engenharia reversa. Além disso, ainda é apresentado uma mapeamento entre os conceitos do paradigma orientado a objetos para o metamodelo KDM, assim, modernizadores podem de forma mais fácil adaptar novas refatorações para o KDM. Nota-se que esse capítulo é uma extensão do seguinte artigo: \textit{Towards a Refactoring Catalogue for Knowledge Discovery Metamodel}~\cite{durelli_catalogo}.
 
-Com o intuito de apresentar e facilitar o entendimento do catálogo de refatoração adaptado para o KDM de uma maneira mais prática, neste capítulo apenas algumas refatorações são apresentadas. No Apêndice A, todas as refatorações adaptadas podem ser visualizadas. Além disso, é importante destacar que o mecanismo das refatorações é implementada com o uso da ATL~\cite{Allilaire_06, Jouault_2005, Jouault_2008} e as pre- e pós-condições são implementadas utilizando OCL. Porém, ressalta-se que o mecanismo do catálogo de refatoração, bem como as pré- e pós-condições podem ser adaptado com o uso de outras tecnologias, como, por exemplo, \textit{Query/View/Transformation}~\cite{QVT:OMG}, EMF Henshin~\cite{EMF_Henshin}, SmartQVT~\cite{SmartQVT}, ModelMorf~\cite{ModelMorf}, Kermeta~\cite{kermeta}, \textit{Epsilon Transformation Language}~\cite{ETL_eclipse}, OpenArchitectureWare~\cite{OpenArchitectureWare}, VIATRA~\cite{viatra}, AndroMDA~\cite{andromda} e Fujaba transformations~\cite{fujaba}.
+Com o intuito de apresentar e facilitar o entendimento do catálogo de refatoração adaptado para o KDM de uma maneira mais prática, neste capítulo apenas algumas refatorações são apresentadas. É importante destacar que o mecanismo das refatorações é implementada com o uso da ATL~\cite{Allilaire_06, Jouault_2005, Jouault_2008} e as pre- e pós-condições são implementadas utilizando OCL. Porém, ressalta-se que o mecanismo do catálogo de refatoração, bem como as pré- e pós-condições podem ser adaptado com o uso de outras tecnologias, como, por exemplo, \textit{Query/View/Transformation}~\cite{QVT:OMG}, EMF Henshin~\cite{EMF_Henshin}, SmartQVT~\cite{SmartQVT}, ModelMorf~\cite{ModelMorf}, Kermeta~\cite{kermeta}, \textit{Epsilon Transformation Language}~\cite{ETL_eclipse}, OpenArchitectureWare~\cite{OpenArchitectureWare}, VIATRA~\cite{viatra}, AndroMDA~\cite{andromda} e Fujaba \textit{transformations}~\cite{fujaba}.
 
-As demais seções desta capítulo estão organizadas da seguinte forma:....
+As demais seções desta capítulo estão organizadas da seguinte forma:\change{terminar aqui. Deve colocar todas as seções bem escritas.}
 
 \section{Estrategia para Adaptar Refatorações para a ADM e KDM}
 
@@ -88,46 +88,79 @@ Nesta atividade as formas de especificar as restrições foram identificadas par
 Dessa forma, cada refatoração definida nesta Tese está associada com uma pré- e pós-condição definida em OCL. OCL foi escolhida pois a mesma é uma linguagem padronizada pela OMG e também possui suporte na plataforma Eclipse
 
 
-\subsection{Catálogo de Refatoração para o metamodelo KDM}
-%\subsection{Refatorações Adaptadas para o KDM}
+\subsection{Refatoração para o Metamodelo KDM}
 
-Nesta seção algumas das refatorações propostas por~\citeonline{Fowler1999} são escolhidas para serem adaptadas para o contexto do metamodelo KDM. Escolhe-se as refatorações definidas por~\citeonline{Fowler1999} uma vez que tais refatorações são bem conhecidas, básicas e de baixa granularidade. É importante salientar que as refatorações adaptadas seguem o mesmo \textit{template} definidos em~\citeonline{Fowler1999}, porém, os nomes de algumas refatorações foram alteradas para indicar o metamodelo KDM como seu novo domínio de aplicação, por exemplo, \texttt{MoveMethod} torna-se \texttt{MoveMethodUnit} e \texttt{MoveAttribute} torna-se \texttt{MoveStorableUnit}, etc. O catálogo de refatoração contêm 19 refatorações, tais refatorações são estruturadas em quatro grupos, como mostrado na Tabela~\ref{tab:refatoringsCatalogo}. O primeiro grupo é denominado \textit{Rename Feature} consiste de refatorações que são responsáveis por renomear entidades, tais como, renomear classes, atributos e métodos. O segundo grupo, \textit{Moving Features Between Objects} contêm refatorações responsáveis por mover atributos, métodos e classes. O terceiro grupo \textit{Organizing Data} é responsável por refatorações que são aplicadas para facilitar a troca de dados. Finalmente, o quarto grupo, \textit{Dealing With Generalization} representa refatorações que tem como objetivo movimentar, atributo e métodos entre hierarquia de herança.
+Nesta seção algumas das refatorações propostas por~\citeonline{Fowler1999} são escolhidas para serem adaptadas para o contexto do metamodelo KDM. Escolhe-se as refatorações definidas por~\citeonline{Fowler1999} uma vez que tais refatorações são bem conhecidas, básicas e de baixa granularidade. É importante salientar que as refatorações adaptadas seguem o mesmo \textit{template} definidos em~\citeonline{Fowler1999}, porém, os nomes de algumas refatorações foram alteradas para indicar o metamodelo KDM como seu novo domínio de aplicação, por exemplo, \texttt{MoveMethod} torna-se \texttt{MoveMethodUnit} e \texttt{MoveAttribute} torna-se \texttt{MoveStorableUnit}, etc. 
+
+No contexto desta Tese todas as refatorações são transformações que são realizadas em um instância do metamodelo KDM. Assim, todas as refatorações podem ser agrupadas em nível de sua granularidade. A granularidades podem ser agrupas em dois níveis de operações: (\textit{i}) operações atômicas ou (\textit{ii}) operações compostas. Mais especificadamente as granularidades de operações atômicas podem ser definidas por meio de operações primitivas que são executadas no metamodelo KDM. Tais operações primitivas são listadas a seguir:
+
+\begin{itemize}
+\item \texttt{add}: qualquer operação que adicione uma instância de uma metaclasse do metamodelo KDM (ver Tabela~\ref{tab:mapemanetoEntreOOPeKDM});
+\item \texttt{delete}: qualquer operação que remove uma instância de uma metaclasse do metamodelo KDM (ver Tabela~\ref{tab:mapemanetoEntreOOPeKDM});
+\item \texttt{change}: qualquer operação que altere um valor de um meta-atributo de uma metaclasse do metamodelo KDM (ver Tabela~\ref{tab:mapemanetoEntreOOPeKDM}).
+\end{itemize}
+
+As refatorações de granularidade compostas consistem em uma combinação de operações atômicas, por exemplo, a operação \texttt{move} consiste em uma combinação das operações atômicas \texttt{add} e \texttt{delete}. Na Tabela~\ref{tab:refatoringsCatalogo} é apresentado algumas refatorações que são adaptadas para o metamodelo KDM. %Tais refatorações são estruturadas em quatro grupos. O primeiro grupo é denominado \textit{Rename Feature} consiste de refatorações que são responsáveis por renomear entidades, tais como, renomear classes, atributos e métodos. O segundo grupo, \textit{Moving Features Between Objects} contêm refatorações responsáveis por mover atributos, métodos e classes. O terceiro grupo \textit{Organizing Data} é responsável por refatorações que são aplicadas para facilitar a troca de dados. Finalmente, o quarto grupo, \textit{Dealing With Generalization} representa refatorações que tem como objetivo movimentar, atributo e métodos entre hierarquia de herança.
 
 \begin{table}[h]
-\caption{Catálogo de Refatoração adaptado para o metamodelo KDM.\label{tab:refatoringsCatalogo}}
+\caption{Refatorações adaptadas para o metamodelo KDM.\label{tab:refatoringsCatalogo}}
 \begin{center}
-\begin{tabular}{ | m{4.5cm} | m{8cm}| } 
+\begin{tabular}{ | m{4.5cm} | m{2.5cm} | m{4cm}| } 
 \hline
-Grupo de Refatoração & Refatoração \\ 
+Refatoração & Granularidade & Tipo de Operação\\ 
 \hline
-\multirow{3}{4cm}{\textit{Rename Feature}} & 1 - \textit{Rename ClassUnit} \\ 
-                                           & 2 - \textit{Rename StorableUnit} \\
-                                           & 3 - \textit{Rename MethodUnit} \\ 
+\textit{Add Package} &  Atômica & \texttt{add}\\ 
 \hline
-\multirow{4}{4cm}{\textit{Moving Features Between Objects}} & 4 - \textit{Move StorableUnit} \\ 
-                                                            & 5 - \textit{Move MethodUnit} \\
-                                                            & 6 - \textit{Extract ClassUnit} \\
-                                                            & 7 - \textit{Inline ClassUnit} \\                                                            
+\textit{Add ClassUnit} &  Atômica & \texttt{add}\\ 
 \hline
-\multirow{6}{4cm}{\textit{Organizing Data}} & 8 - \textit{Replace data value with Object}\\
-                                            & 9 - \textit{Encapsulate StorableUnit}\\
-                                            & 10 - \textit{Replace Type Code with ClassUnit}\\
-                                            & 11 - \textit{Replace Type Code with SubClassUnit}\\
-                                            & 12 - \textit{Replace Type Code with State/Strategy}\\
-                                            & 13 - \textit{Change MethodUnit Signature}\\
+\textit{Add StorableUnit} &  Atômica & \texttt{add}\\ 
 \hline
-\multirow{6}{4cm}{\textit{Dealing With Generalization}} & 14 - \textit{Push Down MethodUnit}\\
-                                                        & 15 - \textit{Push Down StorableUnit}\\
-                                                        & 16 - \textit{Pull Up StorableUnit}\\
-                                                        & 17 - \textit{Pull Up MethodUnit}\\
-                                                        & 18 - \textit{Extract SubClass}\\
-                                                        & 19 - \textit{Collapse Hierarchy}\\
+\textit{Add MethodUnit} &  Atômica & \texttt{add}\\ 
+\hline
+\textit{Delete Package} &  Atômica & \texttt{delete}\\ 
+\hline
+\textit{Delete ClassUnit} &  Atômica & \texttt{delete}\\ 
+\hline
+\textit{Delete StorableUnit} &  Atômica & \texttt{delete}\\ 
+\hline
+\textit{Delete MethodUnit} &  Atômica & \texttt{delete}\\ 
+\hline
+\textit{Rename Package} &  Atômica & \texttt{Change}\\ 
+\hline
+\textit{Rename ClassUnit} &  Atômica & \texttt{Change}\\ 
+\hline
+\textit{Rename StorableUnit} &  Atômica & \texttt{Change}\\ 
+\hline
+\textit{Rename MethodUnit} &  Atômica & \texttt{Change}\\ 
+\hline
+\textit{Move StorableUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\ 
+\hline
+\textit{Move MethodUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\ 
+\hline
+\textit{Extract ClassUnit} &  Composta & \texttt{change} $|$ \texttt{add}\\ 
+\hline
+\textit{Inline ClassUnit} &  Composta & \texttt{change} $|$ \texttt{delete}\\ 
+\hline
+\textit{Flatten Hierarchy} &  Composta & \texttt{add} $|$ \texttt{delete} $|$ \texttt{change}\\ 
+\hline
+\textit{Push Down MethodUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\ 
+\hline
+\textit{Push Down StorableUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\ 
+\hline
+\textit{Pull Up MethodUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\
+\hline
+\textit{Pull Up StorableUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\
+\hline
+\textit{Extract SubClass} &  Composta & \texttt{add} $|$ \texttt{change}\\
+\hline
+\textit{Encapsulate StorableUnit} &  Composta & \texttt{add} $|$ \texttt{change}\\
 \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-As refatorações que são apresentadas nesse capítulo consistem de duas principais especificações~\cite{staron2004implementing} - uma especificação informal e uma especificação formal. Na especificação informal a ideologia básica por trás da reforação é expressada, usualmente essa ideologia é definida por meio de linguagem natural. A segunda especificação, a especificação formal é responsável por representar as pré- e pós-condições, bem como a transformação/refatoração propriamente dita em linguagens executáveis, ou seja, OCL e ATL são utilizadas na especificação formal, respectivamente. Ambas especificações são úteis para o modernizador - a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração, enquanto que a especificação formal facilita a implementação da refatoração. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. Maiores detalhes dessas especificações são apresentados na Subseção~\ref{sec:template_refatoracao}.
+
+Para facilitar a visualização e formalização das refatorações nesta Tese, todas as refatorações que são apresentadas consistem de duas principais especificações~\cite{staron2004implementing} - uma especificação informal e uma especificação formal. Na especificação informal a ideologia básica por trás da reforação é expressada, usualmente essa ideologia é definida por meio de linguagem natural. A segunda especificação, a especificação formal é responsável por representar as pré- e pós-condições, bem como a transformação/refatoração propriamente dita em linguagens executáveis, ou seja, OCL e ATL são utilizadas na especificação formal, respectivamente. Ambas especificações são úteis para o modernizador - a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração, enquanto que a especificação formal facilita a implementação da refatoração. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. Maiores detalhes dessas especificações são apresentados na Subseção~\ref{sec:template_refatoracao}.
 
 Consequentemente, pode-se definir que no contexto desta Tese cada refatoração consiste em uma transformação de modelos que possui pre- e pós-condições particulares que devem ser satisfeitas antes e depois da transformação/refatoração ser executada. Por exemplo, a refatoração \texttt{Remove ClassUnit} têm como pré-condição que uma determinada instância de \texttt{ClassUnit} deve existir na instância do KDM a ser refatoração e não ser referenciada. Nota-se que a definição de refatoração no contexto desta Tese engloba transformações que preservam o comportamento no contexto de modelos. A Definição~\ref{def:refatoracao} formaliza refatorações para o contexto desta Tese:
 
@@ -137,7 +170,7 @@ Consequentemente, pode-se definir que no contexto desta Tese cada refatoração 
 \end{definicao}
 
 
-\subsection{\textit{Template} de Refatoração para o metamodelo KDM}\label{sec:template_refatoracao}
+\subsection{\textit{Template} de Definição de Refatoração para o metamodelo KDM}\label{sec:template_refatoracao}
 
 Dado a Definição~\ref{def:refatoracao} de refatoração no contexto desta Tese é importante apresentar como cada refatoração é especificada. Como já salientado, as refatorações são definidas utilizando duas especificações, informal e formal. Assim, cada refatoração está especificada utilizando o seguinte \textit{template}:
 
@@ -468,6 +501,6 @@ Neste capítulo foi apresentado uma adaptação das refatorações já conhecida
 
 Antes de adaptar as refatorações propostas por~\citeonline{Fowler1999} para o metamodelo KDM, primeiramente foi necessário identificar as metaclasses do KDM que tivesse características similares aos conceitos do POO, bem como instruções comumente utilizadas em todas as linguagens de programação, tais como, ramificações, iterações, etc. Dessa forma, esse capítulo também apresentou um mapeamento entre os conceitos do POO e o metamodelo KDM. Acredita-se que modernizadores pouco familiarizado com o metamodelo KDM podem gastar menos tempo durante a criação de novas refatorações com a utilização deste mapeamento, assim, qualquer exemplo de refatoração pode ser facilmente adaptada para o metamodelo KDM. 
 
-A elaboração do catalogo de refatoração adaptado para o metamodelo KDM consistem de duas principais especificações - uma especificação informal e uma especificação formal. Na especificação informal a ideologia básica por trás da reforação é expressada por meio de linguagem natural. A segunda especificação é responsável por representas as pré- e pós-condições, bem como a transformação/refatoração propriamente dita em linguagens executáveis - OCL e ATL foram utilizadas. Ambas especificações são úteis para o modernizador -a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração,enquanto que a especificação formal facilita a implementação da refatoração. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. É importante destacar que neste capítulo apenas as refatorações \textit{Rename ClassUnit}, \textit{Pull Up StorableUnit}, \textit{Push Down StorableUnit} e \textit{Extract ClassUnit} são apresentadas e detalhadas.
+As refatoração adaptado para o metamodelo KDM consistem de duas principais especificações - uma especificação informal e uma especificação formal. Na especificação informal a ideologia básica por trás da reforação é expressada por meio de linguagem natural. A segunda especificação é responsável por representas as pré- e pós-condições, bem como a transformação/refatoração propriamente dita em linguagens executáveis - OCL e ATL foram utilizadas. Ambas especificações são úteis para o modernizador -a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração,enquanto que a especificação formal facilita a implementação da refatoração. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. É importante destacar que neste capítulo apenas as refatorações \textit{Rename ClassUnit}, \textit{Pull Up StorableUnit}, \textit{Push Down StorableUnit} e \textit{Extract ClassUnit} são apresentadas e detalhadas.
 
-No Capítulo X é apresentado uma ferramenta que foi desenvolvida dentro do ambiente Eclipse\footnote{www.eclipse.org} para apoiar o uso do catálogo de refatoração adaptado para o metamodelo KDM, dessa forma, essa ferramenta permite que modernizadores apliquem refatorações diretamente no metamodelo KDM. Já no Capítulo~\ref{chapter:Toward_a_Refactoring_Metamodel_for_KDM} é apresentado um metamodelo para auxiliar a especificação de refatorações bom base no metamodelo KDM.  
+No Capítulo \change{terminar aqui.} X é apresentado uma ferramenta que foi desenvolvida dentro do ambiente Eclipse\footnote{www.eclipse.org} para apoiar o uso do catálogo de refatoração adaptado para o metamodelo KDM, dessa forma, essa ferramenta permite que modernizadores apliquem refatorações diretamente no metamodelo KDM. Já no Capítulo~\ref{chapter:Toward_a_Refactoring_Metamodel_for_KDM} é apresentado um metamodelo para auxiliar a especificação de refatorações bom base no metamodelo KDM.  
