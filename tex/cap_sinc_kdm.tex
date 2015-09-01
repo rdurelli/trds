@@ -42,6 +42,7 @@ Para auxiliar a elaboração do passo [A] o \textit{framework} EMFCompare\footno
 Nessa seção o primeiro passo da abordagem KDM-SInc é apresentado. Como já salientado o primeiro passo da abordagem KDM-SInc utiliza o \textit{framework} EMFCompare. Esse \textit{framework} foi escolhido pois o mesmo pode ser facilmente adaptado e estendido. Especificadamente o passo [A] da abordagem KDM-SInc realizada três sub-passos: (\textit{i}) \textit{Matching}, (\textit{ii}) \textit{Diffing} e (\textit{iii}) Análise dos \textit{Diffs} como apresentado na Figura~\ref{fig:diff_emf_compare}. 
 
 Com pode ser observado na Figura~\ref{fig:diff_emf_compare} o primeiro sub-passo, \textit{matching}, necessita de duas instâncias do metamodelo KDM - uma instância original (\aspas{KDM esquerdo}) denominada \textbf{versão 1} na Figura~\ref{fig:diff_emf_compare} e uma instância refatorada (\aspas{KDM direito}) \textbf{versão 2} na Figura~\ref{fig:diff_emf_compare}. Dado as duas instâncias do metamodelo KDM, os correspondentes elementos nas duas versões do metamodelo KDM são identificados. Os correspondentes elementos são identificados por meio de identificadores únicos tais como XMI IDs. Por exemplo, na Figura~\ref{fig:diff_emf_compare} pode-se observar que a instância da metaclasse \texttt{ClassUnit} Artista apresentada na \textbf{versão 1} corresponde a instância da metaclasse \texttt{ClassUnit} Artista na \textbf{versão 2}. Para as instâncias das metaclasses \texttt{ClassUnit} Ator e \texttt{Extends} na \textbf{versão 2}, no entanto, nenhum elemento correspondente foi identificado na \textbf{versão 1}. Note que para cada elemento correspondente identificado, ou não identificado, um elemento \textit{match} é criado que será utilizado no sub-passo seguinte.
+
 \begin{figure}[h]
 	\centering
 	% Requires \usepackage{graphicx}
@@ -50,6 +51,7 @@ Com pode ser observado na Figura~\ref{fig:diff_emf_compare} o primeiro sub-passo
 	\includegraphics[scale=0.8]{images/matching_diffing_analise_3}
 	\fautor
 \end{figure}
+
 No segundo sub-passo, \textit{Diffing}, todos os correspondentes elementos identificados são examinados para identificar diferenças em seus meta-atributos. Para cada diferença identificada um objeto \textit{diff} é criado, o qual descreve com precisão cada diferença entre os correspondentes elementos. Por exemplo, ainda considerando a Figura~\ref{fig:diff_emf_compare}, quando a instância da metaclasse \texttt{ClassUnit} Artista da \textbf{versão 1} e \textbf{versão 2} são examinadas é possível observar que o meta-atributo \texttt{isAbstract} possui o valor \textit{false} na \textbf{versão 1}, enquanto que na \textbf{versão 2} o mesmo meta-atributo o valor é \textit{true} - representa a operação \texttt{change}. Instâncias de metaclasses que não contêm elementos correspondentes em ambas as versões são consideradas adicionadas ou deletadas (\texttt{add} e \texttt{delete}) - a operação é identificada dependendo da direção, por exemplo, se uma instância de uma metaclasse apenas existe do lado direito (\aspas{KDM direito}) essa instância foi adicionada, por outro lado, se uma instância apenas existe do lado esquerdo (KDM esquerdo) essa instância foi deletada. Na Figura~\ref{fig:diff_emf_compare} é possível identificar que duas instâncias foram adicionadas - uma instância da metaclasse \texttt{ClassUnit} denominada Ator e uma instancia da metaclasse \texttt{Extends}.
 
 Em seguida o terceiro sub-passo, Análise dos \textit{Diffs} é executado. Nesse sub-passo todos os objetos \textit{diffs} criados anteriormente são examinados para criar uma lista de dependência contendo as instâncias das metaclasses alteradas e quais operações foram realizadas. No exemplo apresentado na Figura~\ref{fig:diff_emf_compare} a lista criada contêm três dependências. A primeiro dependência informa que o meta-atributo \texttt{isAbstract} da metaclasse \texttt{ClassUnit} Artista da \textbf{versão 1} foi alterado (\texttt{change}) de \textit{false} para \textit{true} na \textbf{versão 2}. A segunda dependência ilustra que uma instância da metaclasse \texttt{ClassUnit} Ator foi adicionada (\texttt{add}) na \textbf{versão 2} e a terceira dependência representa que uma instância da metaclasse \texttt{Extends} foi adicionada na \textbf{versão 2}.
@@ -68,13 +70,17 @@ Nessa seção o segundo passo da abordagem KDM-SInc é apresentado. Esse passo r
 	\fautor
 \end{figure}
 
+Algoritmo~\ref{alg:death1} ilustra como o DFS identifica todas as metaclasses que precisam ser sincronizadas/atualizadas após a aplicação da refatoração. A Figura~\ref{fig:dfsalg} apresenta como é o funcionamento do algoritmo DFS. Cada no representa uma instância de uma metaclasse do metamodelo KDM os vertices representam os relacionamentos entre as instâncias das metaclasses, por exemplo, o nó \texttt{A} representa uma instância da metaclasse \texttt{Segment} e os nós \texttt{K}, \texttt{H}, \texttt{E} e \texttt{B} representam instâncias das metaclasses \texttt{CodeModel}, \texttt{StructureModel}, \texttt{ConceptualModel} e \texttt{DataModel}, respectivamente. Mais especificadamente o algoritmo funcionada da seguinte forma: primeiro é necessário escolher um ponto inicial de partida, no caso da nossa abordagem o ponto inicial é a metaclasse \texttt{Segment}, metaclasse raiz de qualquer instância do metamodelo KDM. Em seguida a metaclasse \texttt{Segment} deve ser visitada, adicionada em uma pilha e marcada como visitada. Posteriormente, o algoritmo visita uma outra metaclasse que ainda não foi visitada e verifica se o mesmo têm uma associação do tipo \texttt{implementation}. Caso afirmativo, o algoritmo deve verificar se essa associação contêm referência para algum elemento identificado na lista gerada no passo [A], caso a associação contenha um elemento o mesmo deve ser adicionado em um outra pilha e marcado como visitado. Todo esse processo continua até que o algoritmo alcance a ultima metaclasse. 
+
+
+
 \begin{algoritmo}[h]
      \SetAlgoLined
      \KwIn{DFS (G, u) onde \textit{G} é uma instância do  KDM, \textit{u} é a metaclasse inicial obtida pela expressão XPath, ou seja, \texttt{Segment}}
      \KwOut{Uma coleção de metaclasses que precisam ser sincronizadas}
      \Begin{
      \ForEach{$outgoing$ edge e = (u, v) of u} {
-	\If(\tcp*[f]{Garante que o maior número seja $n_1$}){vertex v as has not been visited}{
+	\If{vertex v as has not been visited}{
 			\If{vertex v contain implementation = true }{
 				
 				\ForEach{$implementations$ element}{
@@ -91,5 +97,258 @@ Nessa seção o segundo passo da abordagem KDM-SInc é apresentado. Esse passo r
      \caption{Algoritmo DFS.}
      \label{alg:death1}
    \end{algoritmo}
+
+Em seguida o algoritmo ainda verifica se a instância da metaclasse \texttt{Segment} possui alguma instância adjacente que ainda não foi marcada como visitado. Caso o algoritmo identifique uma instância de metaclasse adjacente ainda não visitada todo o processo é iniciado novamente, sempre verificando a associação \texttt{implementation}. Quando o algoritmo finalmente alcança a ultima instância da metaclasse, ou seja, todas as instâncias de metaclasse do KDM foram visitadas e verificadas corretamente, o algoritmo cria uma lista contendo todas as instâncias das metaclasses afetadas na refatoração. 
+   
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+	\caption{Funcionamento do Algoritmo DFS.}
+	\label{fig:dfsalg}
+	\includegraphics[scale=0.3]{images/algWorks2}
+	\fautor
+\end{figure}
+
+\subsection{Aplicando Propagação}
+Nesta seção o terceiro passo da abordagem KDM-SInc é apresentado. Esse passo objetiva realizar as mudanças e propagações necessários para manter uma determinada instância do metamodelo KDM sincronizada e consistente. A sincronização é importante para o metamodelo KDM uma vez que o mesmo possui metaclasses que contêm conexões diretas com outras metaclasses de outras visões/artefatos do KDM. Assim, manter a instância do metamodelo KDM sincronizado e consistente após a aplicação de uma refatoração é importante. 
+
+No contexto desta Tese, como apresentado no Capítulo~\ref{chapter:catalogo_refactoring_KDM} as refatorações que são definidas e adaptadas para o metamodelo KDM são refatorações de baixa granularidade e que são aplicadas diretamente na camada \texttt{Code} do metamodelo KDM. Porém, uma determinada refatoração pode demandar outras modificações que deveriam ser realizadas em outros camadas/visões do metamodelo KDM para mantê-lo consistente e sincronizado. Por exemplo, considere a refatoração \textit{Rename Package} - o nome de um determinado pacote é alterado de PacoteX para PacoteY, se uma instância da metaclasse \texttt{Layer}\footnote{Metaclasse definida no pacote \texttt{Structure} do metamodelo KDM para representar camadas em nível arquitetural.} é utilizada para representar o pacote em nível arquitetural, então essa mesma instância da metaclasse \texttt{Layer} também deve-se ser renomeada. 
+
+Diferentemente da atividade de refatoração apresentada no Capítulo~\ref{chapter:catalogo_refactoring_KDM} onde o engenheiro de modernização precisa escolher qual refatoração aplicar na instância do metamodelo KDM ou reutilizar um refatoração utilizando o metamodelo SRM apresentado no Capítulo~\ref{chapter:Toward_a_Refactoring_Metamodel_for_KDM}, esse passo utiliza um conjunto de ações pré-definidas que são iniciadas de acordo a(s) refatoração(ões) aplicada(s) na instância do metamodelo KDM. Mais especificadamente, todas as propagações especificadas nesse passo são pré-definidas para serem disparadas após a aplicação de específicas refatorações. Algumas propagações são realizadas sem a interferência do engenheiro de modernização, no entanto, existem propagações que precisam de informações importantes para realizar consistentemente a propagação. Assim, algumas propagações podem ser realizadas de forma totalmente automática, enquanto outras precisam de algumas informações antes de executar a propagação propriamente dita.
+
+Esse passo da abordagem KDM-SInc utiliza um conjunto de ações pré-definidas para propagar todas as mudanças em uma instância do metamodelo KDM com o intuito de mantê-lo consistente e sincronizado com todas as visões/artefatos. Todas as propagações são definidas com base nas mudanças realizadas em um determinada instância de metaclasses do metamodelo KDM. A abordagem KDM-SInc 
+
+Na Tabela\ref{tab:propagacaoes_kdm_sinc_package} as propagações pré-definidas são apresentadas.
+
+\begin{longtable}{ | m{1.9cm} | m{3.57cm}| m{9.3cm} | }
+ \caption{Propagações definidas para refatorações realizadas em instâncias metaclasse \texttt{Package}.\label{tab:propagacaoes_kdm_sinc_package}}\\
+ 
+ \hline
+ \multicolumn{3}{| c |}{Início da Tabela}\\
+ \hline
+ Refatoração & \multicolumn{2}{|c|}{Propagação} \\
+ \hline
+ \endfirsthead
+ 
+ \hline
+ \multicolumn{3}{|c|}{Continuação da Tabela\ref{long}}\\
+ \hline
+ Refatoração & \multicolumn{2}{|c|}{Propagação}\\
+ \hline
+ \endhead
+ 
+ \hline
+ \endfoot
+ 
+ \hline
+ \multicolumn{3}{| c |}{Fim da Tabela}\\
+ \hline\hline
+ \endlastfoot
+ 
+ Add \texttt{Package} & \texttt{Code Package} & Cria uma instância da metaclasse \texttt{Package}\tabularnewline
+\cline{2-3} 
+\cline{2-3} 
+ & \texttt{Action Package} & Não se aplica \tabularnewline
+ \cline{2-3} 
+ & \texttt{Structure Package} & \textbf{Cenário 1}: Cria-se um elemento arquitetural (\texttt{Layer}, \texttt{Component}, etc). Deve-se associar a instância da metaclasse \texttt{Package} criada por meio da associação  \texttt{implementation} do elemento arquitetural criado. \textbf{Cenário 2}: Já existe um elemento arquitetural (\texttt{Layer}, \texttt{Component}, etc) para representar em nível arquitetural a instância da metaclasse \texttt{Package} criada. Assim, apenas deve-se associar a instância da metaclasse \texttt{Package} criada por meio da associação \texttt{implementation} do elemento arquitetural. \tabularnewline
+\cline{2-3} 
+ & \texttt{Data Package} & Não se aplica \tabularnewline
+\cline{2-3} 
+ & \texttt{Conceptual Package} & \textbf{Cenário 1}: Cria-se uma instância da metaclasse \texttt{ScenarioUnit}. Deve-se associar a instância da metaclasse \texttt{Package} criada por meio da associação \texttt{implementation} da metaclasse \texttt{ScenarioUnit} criado. \textbf{Cenário 2}: Já existe uma instância da metaclasse \texttt{ScenarioUnit} para representar em nível de regra de negócio a instância da metaclasse \texttt{Package} criada. Assim, apenas deve-se associar a instância da metaclasse \texttt{Package} criada por meio da associação \texttt{implementation} da metaclasse \texttt{ScenarioUnit}. \tabularnewline
+\hline 
+ Delete \texttt{Package} & \texttt{Code Package} & \textbf{Cenário 1}: Verifica se a instância da metaclasse \texttt{Package} contêm \texttt{ClassUnits} e/ou \texttt{InterfaceUnits}  por meio da associação \texttt{codeElement} . Caso positivo, deve-se mover todas as \texttt{ClassUnits} e/ou \texttt{InterfaceUnit} para outra instância da metaclasse \texttt{Package}. \textbf{Cenário 2}: Verifica se a instância da metaclasse \texttt{Package} contêm \texttt{ClassUnits} e/ou \texttt{InterfaceUnits}  por meio da associação \texttt{codeElement}. Caso negativo, a instância da metaclasse \texttt{Package} pode ser deletada.\tabularnewline
+\cline{2-3} 
+& \texttt{Action Package} & Não se aplica \tabularnewline
+\cline{2-3}
+& \texttt{Structure Package} & Caso a instância de \texttt{Package} a ser deleta contenha uma representação em nível arquitetural, então deve-se remover a referência do pacote deletado que esta contido na associação \texttt{implementation} do elemento arquitetural. \tabularnewline
+\cline{2-3}
+& \texttt{Data Package} & Não se aplica \tabularnewline
+\cline{2-3}
+& \texttt{Conceptual Package} & Caso o pacote a ser deletado contenha uma representação em nível de regras de negócio, então, deve-se também remover a referência do pacote deletado que esta contido na associação \texttt{implementation} da metaclasse \texttt{ScenarioUnit} \tabularnewline
+\hline
+Rename \texttt{Package} & \texttt{Code Package} & Renomeia o meta-atributo \texttt{name} da instância da metaclasse \texttt{Package}.\tabularnewline
+\cline{2-3}
+& \texttt{Action Package} & Não se aplica \tabularnewline
+\cline{2-3}
+& \texttt{Structure Package} & Não se aplica. \tabularnewline
+\cline{2-3}
+& \texttt{Data Package} & Não se aplica. \tabularnewline
+\cline{2-3}
+& \texttt{Conceptual Package} & Não se aplica. \tabularnewline
+ \end{longtable}
+
+
+\begin{longtable}{ | m{1.9cm} | m{3.57cm}| m{9.3cm} | }
+ \caption{Propagações definidas para refatorações realizadas em instâncias metaclasse \texttt{Package}.\label{tab:propagacaoes_kdm_sinc_package}}\\
+ 
+ \hline
+ \multicolumn{3}{| c |}{Início da Tabela}\\
+ \hline
+ Refatoração & \multicolumn{2}{|c|}{Propagação} \\
+ \hline
+ \endfirsthead
+ 
+ \hline
+ \multicolumn{3}{|c|}{Continuação da Tabela\ref{long}}\\
+ \hline
+ Refatoração & \multicolumn{2}{|c|}{Propagação}\\
+ \hline
+ \endhead
+ 
+ \hline
+ \endfoot
+ 
+ \hline
+ \multicolumn{3}{| c |}{Fim da Tabela}\\
+ \hline\hline
+ \endlastfoot
+ 
+ Add \texttt{ClassUnit} & \texttt{Code Package} & Cria-se uma instância da metaclasse \texttt{ClassUnit}\tabularnewline
+\cline{2-3} 
+\cline{2-3} 
+ & \texttt{Action Package} & Não se aplica \tabularnewline
+ \cline{2-3} 
+ & \texttt{Structure Package} & Não se aplica \tabularnewline
+\cline{2-3} 
+ & \texttt{Data Package} & Deve-se criar uma instância da metaclasse \texttt{RelationaTable}. Além disso, deve-se também especificar que o meta-atributo \texttt{name} de ambas as metaclasses (\texttt{ClassUnit} criada e \texttt{RelationaleTable}) terão o mesmo valor. \tabularnewline
+\cline{2-3} 
+ & \texttt{Conceptual Package} & \textbf{Cenário 1}: Cria-se uma instância da metaclasse \texttt{RuleUnit}. Deve-se associar a instância da metaclasse \texttt{ClassUnit} criada por meio da associação \texttt{implementation} da metaclasse \texttt{RuleUnit} criado. \textbf{Cenário 2}: Já existe uma instância da metaclasse \texttt{RuleUnit} para representar em nível de regra de negócio a instância da metaclasse \texttt{ClassUnit} criada. Assim, apenas deve-se associar a instância da metaclasse \texttt{ClassUnit} criada por meio da associação \texttt{implementation} da metaclasse \texttt{RuleUnit}. \tabularnewline
+\hline 
+ Delete \texttt{ClassUnit} & \texttt{Code Package} & Deleta-se uma instância da metaclasse \texttt{ClassUnit}.\tabularnewline
+\cline{2-3} 
+& \texttt{Action Package} & Deve-se remover todas as instâncias das metaclasses que utilizam a instância da metaclasse \texttt{ClassUnit} deleta. Por exemplo, todas as instâncias das metaclasses \texttt{Calls}, \texttt{Extends}, \texttt{HasType}, \texttt{ParameterUnit}, devem ser removidas. \tabularnewline
+\cline{2-3}
+& \texttt{Structure Package} & Se a \texttt{ClassUnit} a ser removida esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, que por sua vez, esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se remover todas as instâncias de \texttt{HasType}, \texttt{Calls}, \texttt{Extends}, \texttt{Implements}, etc que possui relacionamento com a \texttt{ClassUnit} a ser removida. Em seguida, deve-se atualizar o meta-atributo \texttt{density} da metaclasse \texttt{AggregationRelationship}. \tabularnewline
+\cline{2-3}
+& \texttt{Data Package} & Deve-se identificar uma instância da metaclasse \texttt{RelationalTable} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{ClassUnit} a ser removida. Então deve-se também remover a instância da metaclasse \texttt{RelationalTable} \tabularnewline
+\cline{2-3}
+& \texttt{Conceptual Package} & Deve-se identificar uma instância da metaclasse \texttt{RuleUnit} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{ClassUnit} a ser removida. Em seguida, deve-se remover a instância da metaclasse \texttt{RuleUnit}. \tabularnewline
+\hline
+Rename \texttt{ClassUnit} & \texttt{Code Package} & Renomeia o meta-atributo \texttt{name} da instância da metaclasse \texttt{ClassUnit}.\tabularnewline
+\cline{2-3}
+& \texttt{Action Package} & Deve-se alterar todas as metaclasses que utilizam a instância da metaclasse \texttt{ClassUnit} renomeada. Todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Calls}, \texttt{Extends}, \texttt{HasType}, \texttt{ParameterUnit}, devem ser renomeadas. \tabularnewline
+\cline{2-3}
+& \texttt{Structure Package} & Se a \texttt{ClassUnit} a ser renomeada esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, que por sua vez, esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se remover todas as associações \texttt{to} ou \texttt{from} das instâncias de \texttt{HasType}, \texttt{Calls}, \texttt{Extends}, \texttt{Implements}, etc que possui relacionamento com a \texttt{ClassUnit} a ser removida. \tabularnewline
+\cline{2-3}
+& \texttt{Data Package} & Deve-se identificar uma instância da metaclasse \texttt{RelationalTable} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{ClassUnit} a ser renomeada. Em seguida, deve-se renomear o meta-atributo \texttt{name} da instância da metaclasse \texttt{RelationalTable}. \tabularnewline
+\cline{2-3}
+& \texttt{Conceptual Package} & Deve-se identificar uma instância da metaclasse \texttt{RuleUnit} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{ClassUnit} a ser renomeada. Em seguida, deve-se renomear o meta-atributo \texttt{name} da  instância da metaclasse \texttt{RuleUnit}. \tabularnewline
+ \end{longtable}
+
+
+\begin{longtable}{ | m{1.9cm} | m{3.57cm}| m{9.3cm} | }
+ \caption{Propagações definidas para refatorações realizadas em instâncias metaclasse \texttt{Package}.\label{tab:propagacaoes_kdm_sinc_package}}\\
+ 
+ \hline
+ \multicolumn{3}{| c |}{Início da Tabela}\\
+ \hline
+ Refatoração & \multicolumn{2}{|c|}{Propagação} \\
+ \hline
+ \endfirsthead
+ 
+ \hline
+ \multicolumn{3}{|c|}{Continuação da Tabela\ref{long}}\\
+ \hline
+ Refatoração & \multicolumn{2}{|c|}{Propagação}\\
+ \hline
+ \endhead
+ 
+ \hline
+ \endfoot
+ 
+ \hline
+ \multicolumn{3}{| c |}{Fim da Tabela}\\
+ \hline\hline
+ \endlastfoot
+ 
+ Add \texttt{StorableUnit} & \texttt{Code Package} & Cria-se uma instância da metaclasse \texttt{StorableUnit}\tabularnewline
+\cline{2-3} 
+\cline{2-3} 
+ & \texttt{Action Package} & Não se aplica \tabularnewline
+ \cline{2-3} 
+ & \texttt{Structure Package} & Não se aplica \tabularnewline
+\cline{2-3} 
+ & \texttt{Data Package} & Deve-se verificar se a instância da metaclasse \texttt{StorableUnit} criada esta contido em uma instância da metaclasse \texttt{ClassUnit} que por sua vez contêm uma metaclasse \texttt{RelationalTable} correspondente. Caso afirmativo, deve-se criar uma instância da metaclasse \texttt{ColumnSet} e associar a instância da metaclasse \texttt{RelationalTable}. \tabularnewline
+\cline{2-3} 
+ & \texttt{Conceptual Package} & Não se aplica. \tabularnewline
+\hline 
+ Delete \texttt{StorableUnit} & \texttt{Code Package} & Deleta-se uma instância da metaclasse \texttt{StorableUnit}.\tabularnewline
+\cline{2-3} 
+& \texttt{Action Package} & Deve-se remover todas as instâncias das metaclasses \texttt{Reads}, \texttt{Writes} e \texttt{Address} que utilizam a instância da metaclasse \texttt{StorableUnit} deleta. \tabularnewline
+\cline{2-3}
+& \texttt{Structure Package} & Se a \texttt{StorableUnit} a ser removida esta contida em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que por sua vez esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement} e que esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se remover todas as instâncias de \texttt{Reads}, \texttt{Writes} e \texttt{Address} que utilizam a instância da metaclasse \texttt{StorableUnit} deletada. Em seguida, deve-se atualizar o meta-atributo \texttt{density} da metaclasse \texttt{AggregationRelationship}. \tabularnewline
+\cline{2-3}
+& \texttt{Data Package} & Deve-se identificar uma instância da metaclasse \texttt{ColumnSet} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{StorableUnit} a ser removida. Então deve-se também remover a instância da metaclasse \texttt{ColumnSet}. \tabularnewline
+\cline{2-3}
+& \texttt{Conceptual Package} & Não se aplica. \tabularnewline
+\hline
+Rename \texttt{StorableUnit} & \texttt{Code Package} & Renomeia o meta-atributo \texttt{name} da instância da metaclasse \texttt{StorableUnit}.\tabularnewline
+\cline{2-3}
+& \texttt{Action Package} & Deve-se alterar todas as metaclasses que utilizam a instância da metaclasse \texttt{StorableUnit} renomeada. Todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Reads}, \texttt{Writes} e \texttt{Address} devem ser renomeadas. \tabularnewline
+\cline{2-3}
+& \texttt{Structure Package} & Se a \texttt{StorableUnit} a ser renomeado esta contido em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que por sua vez esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, e que esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se renomear todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Reads}, \texttt{Writes} e \texttt{Address} que utilizam a instância da metaclasse \texttt{StorableUnit} renomeada. \tabularnewline
+\cline{2-3}
+& \texttt{Data Package} & Deve-se identificar uma instância da metaclasse \texttt{ColumnSet} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{StorableUnit} a ser renomeada. Em seguida, deve-se renomear o meta-atributo \texttt{name} da instância da metaclasse \texttt{ColumnSet}. \tabularnewline
+\cline{2-3}
+& \texttt{Conceptual Package} & Não se aplica. \tabularnewline
+ \end{longtable}
+
+
+\begin{longtable}{ | m{1.9cm} | m{3.57cm}| m{9.3cm} | }
+ \caption{Propagações definidas para refatorações realizadas em instâncias metaclasse \texttt{Package}.\label{tab:propagacaoes_kdm_sinc_package}}\\
+ 
+ \hline
+ \multicolumn{3}{| c |}{Início da Tabela}\\
+ \hline
+ Refatoração & \multicolumn{2}{|c|}{Propagação} \\
+ \hline
+ \endfirsthead
+ 
+ \hline
+ \multicolumn{3}{|c|}{Continuação da Tabela\ref{long}}\\
+ \hline
+ Refatoração & \multicolumn{2}{|c|}{Propagação}\\
+ \hline
+ \endhead
+ 
+ \hline
+ \endfoot
+ 
+ \hline
+ \multicolumn{3}{| c |}{Fim da Tabela}\\
+ \hline\hline
+ \endlastfoot
+ 
+ Add \texttt{MethodUnit} & \texttt{Code Package} & Cria-se uma instância da metaclasse \texttt{MethodUnit}\tabularnewline
+\cline{2-3} 
+\cline{2-3} 
+ & \texttt{Action Package} & Não se aplica \tabularnewline
+ \cline{2-3} 
+ & \texttt{Structure Package} & Não se aplica \tabularnewline
+\cline{2-3} 
+ & \texttt{Data Package} & Não se aplica. \tabularnewline
+\cline{2-3} 
+ & \texttt{Conceptual Package} & Não se aplica. \tabularnewline
+\hline 
+ Delete \texttt{MethodUnit} & \texttt{Code Package} & Deleta-se uma instância da metaclasse \texttt{MethodUnit}.\tabularnewline
+\cline{2-3} 
+& \texttt{Action Package} & Deve-se remover todas as instâncias das metaclasses \texttt{Calls} que utilizam a instância da metaclasse \texttt{MethodUnit} deleta. \tabularnewline
+\cline{2-3}
+& \texttt{Structure Package} & Se a \texttt{MethodUnit} a ser removida esta contida em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que por sua vez esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, e que esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se remover todas as instâncias de \texttt{Calls} que utilizam a instância da metaclasse \texttt{StorableUnit} deletada. Em seguida, deve-se atualizar o meta-atributo \texttt{density} da metaclasse \texttt{AggregationRelationship}. \tabularnewline
+\cline{2-3}
+& \texttt{Data Package} & Não se aplica. \tabularnewline
+\cline{2-3}
+& \texttt{Conceptual Package} & Não se aplica. \tabularnewline
+\hline
+Rename \texttt{MethodUnit} & \texttt{Code Package} & Renomeia o meta-atributo \texttt{name} da instância da metaclasse \texttt{MethodUnit}.\tabularnewline
+\cline{2-3}
+& \texttt{Action Package} & Deve-se alterar todas as metaclasses que utilizam a instância da metaclasse \texttt{MethodUnit} renomeada. Todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Calls} devem ser renomeadas. \tabularnewline
+\cline{2-3}
+& \texttt{Structure Package} & Se o \texttt{MethodUnit} a ser renomeado esta contido em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que por sua vez esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, e que esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se renomear todas as associações \texttt{to} ou \texttt{from} da instância da metaclasse \texttt{Calls} que utilizam a instância da metaclasse \texttt{MethodUnit} renomeada. \tabularnewline
+\cline{2-3}
+& \texttt{Data Package} & Não se aplica. \tabularnewline
+\cline{2-3}
+& \texttt{Conceptual Package} & Não se aplica. \tabularnewline
+ \end{longtable}
 
 \section{Considerações Finais}
