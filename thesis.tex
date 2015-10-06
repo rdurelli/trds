@@ -30,11 +30,18 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{array}
 \usepackage{multirow}
+\usepackage{amsmath}
 \usepackage{rotating}
 \usepackage{longtable}
 \usepackage{xcolor}
 \usepackage{lipsum}                     % Dummytext
 \usepackage{subfigure}
+
+
+%---------------------------
+
+
+
 \usepackage{xargs}                      % Use more than one optional parameter in a new commands
 \usepackage[pdftex,dvipsnames]{xcolor}  % Coloured text etc.
 % 
@@ -202,6 +209,9 @@ Durante a condução da Tese foi percebido que a ADM fornece um conjunto de meta
 \chapter{Uma Abordagem para Manter o KDM Sincronizado Após a Aplicação de Refatorações}\label{chapter:Abordagem_de_sincronizacao}
 \input{tex/cap_sinc_kdm.tex}
 
+\chapter{A Ferramenta KDM-RE}\label{chapter:ferramenta_kdm_re}
+\input{tex/cap_ferramenta_kdm_re.tex}
+
 \chapter{Avaliação}\label{chapter:avaliacao}
 \input{tex/cap_experimento.tex}
 
@@ -242,7 +252,18 @@ Durante a condução da Tese foi percebido que a ADM fornece um conjunto de meta
 % Inicia os apêndices
 % ---
 \begin{apendicesenv}
+    
+    \chapter{Teste}
+    \begin{center}
+        \fbox{\includegraphics[page=1,scale=0.45]{tex/appendix/formulario_experimento2_1.pdf}}
+    \end{center}
+    \newpage
 
+
+    \chapter{Formulários dos Experimentos}
+    \label{chapter:formulario_experimento2}
+    \input{tex/appendix/formulario_caracterizacao_experimento}
+    
     \chapter{Documento básico usando a classe \textit{icmc}}
     \label{chapter:documento-basico}
     \input{tex/appendix/documento-basico}
