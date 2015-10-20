@@ -54,8 +54,6 @@ Nesta seção é apresentado um experimento conduzido com o objetivo de analisar
 
 Dessa forma, para avaliar a \textbf{$QP_1$} sete sistemas foram escolhidos para aplicar um conjunto de refatorações. Esses sete sistemas são bem conhecidos na literatura e estão implementados na linguagem de programação Java: Xerces-J\footnote{\texttt{http://xerces.apache.org/xerces-j/}}, Jexel\footnote{\texttt{https://jexel.googlecode.com}}, JFreeChart\footnote{\texttt{http://www.jfree.org/jfreechart/}}, Jester\footnote{\texttt{jester.sourceforge.net}}, GanttProject\footnote{\texttt{http://www.ganttproject.biz/}}, ArtofIllusion\footnote{\texttt{www.artofillusion.org}} e JHotDraw\footnote{\texttt{jhotdraw.org}}. Xerces-J é uma família de software para análisar (\textit{parsing}) XML. Jexel é API para escrever expressões regulares em Java. JFreeChart é uma biblioteca Java utiliza para gerar gráficos. Jester é uma biblioteca Java utiliza para gerar teste de unidades. GanttProject é uma sistema para gerenciamento de projetos. ArtofIllusion é uma API para modelagem e renderização em 3D. JHotDraw é uma ferramenta para auxiliar a criação de desenhos. Todos os sistemas foram transformados em instâncias do metamodelo KDM utilizando a ferramenta MoDisco\footnote{\texttt{https://eclipse.org/MoDisco/}}. 
 
-Na Tabela~\ref{tab:sistemas_experimentos} é possível visualizar algumas informações sobre os setes sistemas escolhidos. Como apresentado no Capítulo X\change{mudar}, a ferramenta KDM-RE apenas auxilia o engenheiro de modernização à aplicar refatorações em instâncias do metamodelo KDM. É de responsabilidade do engenheiro identificar onde aplicar a refatoração uma vez que a ferramenta KDM-RE ainda não identifica \textit{bad-smells}~\cite{Fowler1999}. Assim, esses setes sistemas foram escolhidos pois na literatura é possível identificar trabalhos que já detectaram e listaram quais são os \textit{bad-smells} desses sistemas~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}. Assim, o engenheiro de modernização apenas precisa aplicar as refatorações nos sistemas.  
-
 
 \begin{table}[h]
 \centering
@@ -82,7 +80,12 @@ JHotDraw & 7.0.6 & 16 & 468 \\
 \end{tabular}
 \end{table}
 
-Os \textit{bad-smells} identificados nesses sistemas são: \textit{Blob} (uma classe contém muitas linhas de código-fonte e monopoliza o comportamento do sistema), \textit{Data Class} (uma classe que contêm apenas atributos, porém não os utilizam para realizar nenhum tipo de processamento), \textit{Spaghetti Code} (código com uma estrutura de controle complexo e emaranhado) e \textit{Functional Decomposition} (quando uma classe desempenha uma única função, ao invés de ser um encapsulamento de dados e funcionalidade)~\cite{Fowler1999}. Para facilitar o entendimento e a organização desse capítulo os \textit{bad-smells} não são aqui apresentados. Porém, uma lista completa dos \textit{bad-smells} identificados dos sete sistemas escolhidos para esse experimento pode ser visualizada no Apêndice x.\change{mudar aqui}
+Na Tabela~\ref{tab:sistemas_experimentos} é possível visualizar algumas informações sobre os setes sistemas escolhidos. Como apresentado no Capítulo~\ref{chapter:ferramenta_kdm_re}, a ferramenta KDM-RE apenas auxilia o engenheiro de modernização à aplicar refatorações em instâncias do metamodelo KDM. É de responsabilidade do engenheiro identificar onde aplicar a refatoração uma vez que a ferramenta KDM-RE ainda não identifica \textit{bad-smells}~\cite{Fowler1999}. Assim, esses setes sistemas foram escolhidos pois na literatura é possível identificar trabalhos que já detectaram e listaram quais são os \textit{bad-smells} desses sistemas e quais são as possíveis refatorações para serem aplicadas como solução~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}. Assim, o engenheiro de modernização apenas precisa aplicar as refatorações nos sistemas.  
+
+
+
+
+Os \textit{bad-smells} identificados nesses sistemas são: \textit{Blob} (uma classe contém muitas linhas de código-fonte e monopoliza o comportamento do sistema), \textit{Data Class} (uma classe que contêm apenas atributos, porém não os utilizam para realizar nenhum tipo de processamento), \textit{Spaghetti Code} (código com uma estrutura de controle complexo e emaranhado) e \textit{Functional Decomposition} (quando uma classe desempenha uma única função, ao invés de ser um encapsulamento de dados e funcionalidade)~\cite{Fowler1999}. Está fora do escopo deste capítulo se aprofundar nesses \textit{bad-smells}. Porém, uma lista completa dos \textit{bad-smells} identificados dos sete sistemas escolhidos para esse experimento pode ser visualizada nos artigos~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}.
 
 O principal objetivo desse experimento é verificar se após a aplicação de um conjunto de refatorações com base em \textit{bad-smell} já identificados na literatura~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010} as refatorações adaptadas para o metamodelo KDM melhoraram os sistemas em termos de atributos de qualidade. Os atributos de qualidade foram avaliados utilizando o modelo \sigla{QMOOD}{\textit{Quality Model for Object-Oriented Design}}~\cite{Bansiya_QMOOD}. O QMOOD é um modelo de qualidade para POO que estabelece um modelo hierárquico definido e empiricamente validado para avaliar atributos de qualidade de POO. O uso do modelo QMOOD nesse experimento ocorreu pois: (\textit{i}) o QMOOD é bastante utilizado na literatura~\cite{Keeffe_2008, Seng_2006, Jensen_2010} para avaliar o efeito de refatoração e (\textit{ii}) o QMOOD define seis atributos de qualidade (\aspas{facilidade de compreensão} (\textit{understandability}), \aspas{eficácia} (\textit{effectiveness}), \aspas{extensibilidade} (\textit{extendibility}), \aspas{reusabilidade} (\textit{reusability}), \aspas{funcionalidade} (\textit{functionality}) e \aspas{flexibilidade} (\textit{flexibility})) que são calculados utilizando 11 métricas~\cite{Bansiya_QMOOD} (ver Tabela~\ref{tab:QMOOD_quality_metrics} e Tabela~\ref{tab:QMOOD_quality_metrics2}). 
 
@@ -224,12 +227,88 @@ Alguns dias antes da realização do experimento, o código-fonte dos setes sist
 
 \subsubsection{Execução}
 
-Após gerar as instâncias do metamodelo KDM dos setes sistemas e aplicar a ferramenta EMF \textit{Metrics} para mensurar os atributos de qualidade QMOOD, o próximo passo é a aplicação das refatorações no metamodelo KDM por meio da ferramenta KDM-RE (ver Capítulo X\change{mudar}). Como já salientado, a ferramenta KDM-RE no seu estado atual não identifica \textit{bad-smells}. Dessa forma, um conjunto de artigos foi lido na integra. Esses artigos listam e descrevem um conjunto de \textit{bad-smells} dos setes sistemas utilizados nesse experimento~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}. Uma lista completa dos \textit{bad-smells} identificados pelos autores pode ser visualizada no Apêndice X\change{mudar}. Essa lista foi utilizada nesse experimento para guiar o engenheiro de modernização a identificar qual refatoração aplicar (ver Figura~\ref{fig:execucao_experimento} \ding{183}).
+Após gerar as instâncias do metamodelo KDM dos setes sistemas e aplicar a ferramenta EMF \textit{Metrics} para mensurar os atributos de qualidade QMOOD, o próximo passo é a aplicação das refatorações no metamodelo KDM por meio da ferramenta KDM-RE (ver Capítulo~\ref{chapter:ferramenta_kdm_re}). Como já salientado, a ferramenta KDM-RE no seu estado atual não identifica \textit{bad-smells}. Dessa forma, um conjunto de artigos foi lido na integra pois listam e descrevem um conjunto de \textit{bad-smells} dos setes sistemas utilizados nesse experimento~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}. Uma lista completa dos \textit{bad-smells} identificados pelos autores pode ser visualizada no Apêndice X\change{mudar}. Essa lista foi utilizada nesse experimento para guiar o engenheiro de modernização a identificar qual refatoração aplicar (ver Figura~\ref{fig:execucao_experimento} \ding{183}).
 
 Após tomar conhecimento dos \textit{bad-smells} de cada sistema um conjunto de refatorações foi escolhido e depois executado por meio da ferramenta KDM-RE. Cada refatoração foi aplicada para tentar resolver e remover os \textit{bad-smells} identificados e melhorar assim os atributos de qualidade QMOOD. As refatorações escolhidas para remover os \textit{bad-smells} e melhorar os atributos de qualidade foram criteriosamente identificadas no catálogo de refatoração proposto por~\citeonline{Fowler1999} que descreve qual(is) refatoração(ões) aplicar para resolver um determinado \textit{bad-smell}. 
 
 
 \subsection{Análise dos Dados do Experimento 1}
+
+Na Tabela~\ref{tab:dados_coletados_experimento_1} é possível observar os atributos (reusabilidade, flexibilidade, facilidade de compreensão e eficácia) de qualidade avaliados no experimento 1 antes e após aplicar as refatorações.
+
+
+\begin{table}[h]
+\centering
+\caption{Dados coletados do experimento 1.}
+\label{tab:dados_coletados_experimento_1}
+\begin{tabular}{c|l|l|l|l|l|l|}
+\cline{2-7}
+\multicolumn{1}{l|}{}               & \multicolumn{3}{c|}{Reusabilidade}             & \multicolumn{3}{c|}{Flexibilidade} \\ \hline
+\multicolumn{1}{|c|}{Sistemas}      & Antes         & Depois        & Diferença      & Antes     & Depois    & Diferença  \\ \hline
+\multicolumn{1}{|c|}{Xerces-J}      & \multicolumn{1}{c|}{0.06}          & \multicolumn{1}{c|}{0.08}          & \multicolumn{1}{c|}{0.02} & \multicolumn{1}{c|}{0.11}      & \multicolumn{1}{c|}{0.13}      &\multicolumn{1}{c|}{0.02}\\ \hline
+\multicolumn{1}{|c|}{Jexel}         & \multicolumn{1}{c|}{0.10}          & \multicolumn{1}{c|}{0.12}          & \multicolumn{1}{c|}{0.02} & \multicolumn{1}{c|}{0.14}      & \multicolumn{1}{c|}{0.15}      &\multicolumn{1}{c|}{0.01}\\ \hline
+\multicolumn{1}{|c|}{JFreeChart}    & \multicolumn{1}{c|}{0.15}          & \multicolumn{1}{c|}{0.16}          & \multicolumn{1}{c|}{0.01} & \multicolumn{1}{c|}{0.12}      & \multicolumn{1}{c|}{0.14}      & \multicolumn{1}{c|}{0.02} \\ \hline
+\multicolumn{1}{|c|}{Jester}        & \multicolumn{1}{c|}{0.07}          & \multicolumn{1}{c|}{0.06}          & \multicolumn{1}{c|}{-0.01} & \multicolumn{1}{c|}{0.08}      & \multicolumn{1}{c|}{0.09}      & \multicolumn{1}{c|}{0.01}  \\ \hline
+\multicolumn{1}{|c|}{GanttProject}  & \multicolumn{1}{c|}{0.08}          & \multicolumn{1}{c|}{0.10}          & \multicolumn{1}{c|}{0.02} & \multicolumn{1}{c|}{0.15}      & \multicolumn{1}{c|}{0.17}      &  \multicolumn{1}{c|}{0.02} \\ \hline
+\multicolumn{1}{|c|}{ArtofIllusion} & \multicolumn{1}{c|}{0.04}          & \multicolumn{1}{c|}{0.09}          & \multicolumn{1}{c|}{0.05} & \multicolumn{1}{c|}{0.11}      & \multicolumn{1}{c|}{0.13}      & \multicolumn{1}{c|}{0.02} \\ \hline
+\multicolumn{1}{|c|}{JHotDraw}      & \multicolumn{1}{c|}{0.02}          & \multicolumn{1}{c|}{0.05}          & \multicolumn{1}{c|}{0.03} & \multicolumn{1}{c|}{0.03}      & \multicolumn{1}{c|}{0.05}      & \multicolumn{1}{c|}{0.02}\\ \hline
+\multicolumn{1}{|c|}{Média}         & \multicolumn{1}{c|}{0.074}         & \multicolumn{1}{c|}{0.094}         & \multicolumn{1}{c|}{0.020} & \multicolumn{1}{c|}{0.105}     & \multicolumn{1}{c|}{0.122}     & \multicolumn{1}{c|}{0.017} \\ \hline
+\multicolumn{1}{|l|}{Porcentagem}   & 44.07\%       & 55.93\%       &\multicolumn{1}{c|}{\textemdash}                & 46.25\%   & 53.75\%   & \multicolumn{1}{c|}{\textemdash}\\ \hline
+                                    & \multicolumn{3}{c|}{Facilidade de Compreensão} & \multicolumn{3}{c|}{Eficácia}      \\ \hline
+\multicolumn{1}{|c|}{Sistemas}      & Antes         & Depois        & Diferença      & Antes     & Depois    & Diferença  \\ \hline
+\multicolumn{1}{|c|}{Xerces-J}      & \multicolumn{1}{c|}{0.21}& \multicolumn{1}{c|}{0.23}          &\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.07}&\multicolumn{1}{c|}{0.09}&\multicolumn{1}{c|}{0.02}            \\ \hline
+\multicolumn{1}{|c|}{Jexel}         & \multicolumn{1}{c|}{0.16}          & \multicolumn{1}{c|}{0.18}          &\multicolumn{1}{c|}{0.02} & \multicolumn{1}{c|}{0.05}          & \multicolumn{1}{c|}{0.06}          &\multicolumn{1}{c|}{0.01}            \\ \hline
+\multicolumn{1}{|c|}{JFreeChart}    & \multicolumn{1}{c|}{0.17}          & \multicolumn{1}{c|}{0.21}          &\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.06}&\multicolumn{1}{c|}{0.02}\\ \hline
+\multicolumn{1}{|c|}{Jester}        & \multicolumn{1}{c|}{0.14}          & \multicolumn{1}{c|}{0.16}          &\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.09}&\multicolumn{1}{c|}{0.09}&\multicolumn{1}{c|}{0}\\ \hline
+\multicolumn{1}{|c|}{GanttProject}  & \multicolumn{1}{c|}{0.23}          & \multicolumn{1}{c|}{0.25}          &\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.05}&\multicolumn{1}{c|}{0.01}\\ \hline
+\multicolumn{1}{|c|}{ArtofIllusion} & \multicolumn{1}{c|}{0.09}          & \multicolumn{1}{c|}{0.11}          &\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.03}&\multicolumn{1}{c|}{0.05}&\multicolumn{1}{c|}{0.02}\\ \hline
+\multicolumn{1}{|c|}{JHotDraw}             & \multicolumn{1}{c|}{0.04}          & \multicolumn{1}{c|}{0.06}          &\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.01}&\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.01}\\ \hline
+\multicolumn{1}{|c|}{Média}         & \multicolumn{1}{c|}{0.148}         & \multicolumn{1}{c|}{0.171}         &\multicolumn{1}{c|}{0.022}&\multicolumn{1}{c|}{0.047}&\multicolumn{1}{c|}{0.060}&\multicolumn{1}{c|}{0.012}\\ \hline
+\multicolumn{1}{|l|}{Porcentagem}   & 46.43\%       & 53.57\%       &\multicolumn{1}{c|}{\textemdash}&  \multicolumn{1}{c|}{44\%}  &  \multicolumn{1}{c|}{56\%}  &\multicolumn{1}{c|}{\textemdash}\\ \hline
+\end{tabular}
+\end{table}
+
+
+
+
+\begin{figure}[h]    
+\begin{minipage}[t]{0.5\textwidth}
+\includegraphics[width=\linewidth]{images/GraficoBarraExperimentoReusabilidade}
+\caption{Actual Versus Predicted: Immediate}
+\label{fig:immediate}
+\end{minipage}
+\hspace{\fill}
+\begin{minipage}[t]{0.5\textwidth}
+\includegraphics[width=\linewidth]{images/GraficoBarraExperimentoFlexibilidade}
+\caption{Actual Versus Predicted: Proximal}
+\label{fig:proximal}
+\end{minipage}
+
+\vspace*{0.5cm} % (or whatever vertical separation you prefer)
+\begin{minipage}[t]{0.5\textwidth}
+\includegraphics[width=\linewidth]{images/GraficoBarraExperimentoFacilidadeDeCompreensao}
+\caption{Actual Versus Predicted: Distal}
+\label{fig:distal}
+\end{minipage}
+\hspace{\fill}
+\begin{minipage}[t]{0.5\textwidth}
+\includegraphics[width=\linewidth]{images/GraficoBarraExperimentoEficacia}
+\caption{Actual Versus Predicted: Combined}
+\label{fig:combined}
+\end{minipage}
+
+\end{figure}
+
+
+
+
+
+
+
+
+\subsection{Ameaças à Validade do Experimento 1}
+
+
 
 
 

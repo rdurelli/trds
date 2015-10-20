@@ -77,7 +77,7 @@
 % ----------------------------------------------------------------
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---An infrastructure for Creating KDM refactorings that deals with static synchronization and behavior preservation
-\titulo{Apoio Computacional para o Desenvolvimento e Aplicação de Refatorações para Modernização de Sistemas representados com o Metamodelo KDM.}
+\titulo{Um abordagem para a criação, adaptação e uso de refatorações para o metamodelo KDM.}
 \autor[Durelli, R. S.]{Rafael Serapilha Durelli}
 \orientador{Prof. Dr.}{Márcio Eduardo Delamaro}
 %\coorientador{Prof. Dr.}{Fulano de Tal}
@@ -93,12 +93,30 @@
 % Resumo em português
 % conter no máximo 500 palavras
 \textoresumo{
-A Modernização Dirigida à Arquitetura (do inglês - \sigla{ADM}{\textit{Architecture-Driven Modernization}}) tem como objetivo estabelecer meta-modelos padronizados para auxiliar todo o processo da reengenharia de software, como por exemplo o \sigla{KDM}{\emph{Knowledge Discovery Meta-model}}. Este meta-modelo, padronizado, é utilizado para representar artefatos de software, seus elementos, associações, e ambientes operacionais. Embora a refatoração dirigidas à modelo (do inglês - \sigla{MDRef}{\textit{Model-Driven Refactoring}} tenha alcançado bastante reconhecimento e aceitação na literatura, a MDRef tende a ser mais multifacetada e desafiadora do que refatorações tradicionais, aquelas aplicadas diretamente no código-fonte. Dessa forma, até o presente momento existe uma carência de abordagem e ferramentas que auxiliam todo o processo de refatoração para a ADM e principalmente para o meta-modelo KDM. A refatoração de um sistema em geral tende a ser uma atividade complexa; modificações manuais, sem qualquer catálogo de refatoração, bem como um ambiente integrado, pode resultar em efeitos colaterais indesejados e acarretar em um processo tedioso. Neste contexto, nesta Tese são elaboradas/adaptadas catálogos de refatoração para o meta-modelo KDM, além disso, também é criado um ambiente que auxilie a aplicação de refatorações diretamente no KDM, assim, os engenheiros podem reduzir o tempo e esforço durante a refatoração de sistemas legados. 
+A Modernização Dirigida à Arquitetura (do inglês - \sigla{ADM}{\textit{Architecture-Driven Modernization}}) tem como objetivo estabelecer metamodelos padronizados para auxiliar todo o processo da reengenharia de software, como por exemplo o \sigla{KDM}{\emph{Knowledge Discovery Meta-model}}. %Este metamodelo, padronizado, é utilizado para representar artefatos de software, seus elementos, associações, e ambientes operacionais. Embora a refatoração tenha alcançado bastante reconhecimento e aceitação na literatura, refatorações para modelos tende a ser mais multifacetada e desafiadora do que refatorações tradicionais. 
+Até o presente momento existe uma carência de abordagens e ferramentas que auxiliam todo o processo de refatoração para a ADM e principalmente para o metamodelo KDM. Nesta dissertação defende-se a tese de que refatorações podem ser aplicadas no contexto da ADM e KDM. Para demonstrar esta tese, é apresentada uma abordagem para a criação, adaptação e uso de refatorações para o KDM. A abordagem possui dois principais passos: (\textit{i}) o primeiro passo consiste na definição de diretrizes que guiam o engenheiro de modernização durante a criação e adaptação de refatorações para o KDM; e (\textit{ii}) o segundo passo consiste na disponibilização de refatorações por meio de um metamodelo. Um apoio computacional, denominado KDM-RE, também foi desenvolvida para apoiar o uso da abordagem, fornecendo editores para a aplicação de refatorações, sincronização dos artefatos e reutilização de refatorações. Foi realizado dois experimentos que buscaram reproduzir os cenários em que engenheiros de modernização tivessem que realizar refatorações em um modelo KDM. Os resultados mostram que a abordagem pode trazer benefícios para o engenheiro de modernização durante a aplicação de refatorações em relação ao atributo de qualidade \sigla{QMOOD}{\textit{Quality Model for Object-Oriented Design}}.
+
+
+%apresenta uma abordagem que consiste de três principais passos: (\textit{i}) o primeiro passo, consiste na definição de diretrizes para auxiliar o engenheiro de modernização na criação e adaptação de refatorações para o KDM; (\textit{ii}) o segundo passo consiste na definição de regras de propagações que são realizadas em instância do metamodelo KDM para manter todos os artefatos sincronizados e consistentes de acordo com a refatoração aplicada; e (\textit{iii}) o terceiro passo da abordagem consiste na reutilização de refatorações por meio de um metamodelo de refatorações. Uma ferramenta, denominada KDM-RE, também foi desenvolvida para apoiar o uso da abordagem, fornecendo editores para a aplicação de refatorações, sincronização dos artefatos e reutilização de refatorações. Foi realizado dois experimentos que buscaram reproduzir os cenários em que engenheiros de modernização tivessem que realizar refatorações em um modelo KDM. Os dados dos experimentos foram avaliados em relação ao atributo de qualidade \sigla{QMOOD}{\textit{Quality Model for Object-Oriented Design}}.
+
+
+%Além de viável a aplicação refatoração, sincronização dos artefatos e reutilização de refatoração para o metamodelo KDM, experimentos realizados ao longo deste projeto mostraram que a abordagem torna o 
+
+
+%O objetivo é permitir a interoperabilidade de refatorações para um amplo domínio e auxiliar o engenheiro de modernização a definir refatorações representativas em forma de metadados.
+
+
+%O KDM é um metamodelo que possui um conjunto de meta-classes complementares para representar diferentes visões conceituais de um mesmo sistema. Assim, o segundo passo da abordagem se preocupa em sincronizar e propagar as refatorações por todo o KDM para manter sua instância consistente. 
+
+
+
+
+%são elaboradas/adaptadas catálogos de refatoração para o meta-modelo KDM, além disso, também é criado um ambiente que auxilie a aplicação de refatorações diretamente no KDM, assim, os engenheiros podem reduzir o tempo e esforço durante a refatoração de sistemas legados. 
 %
-O KDM é um meta-modelo que possui um conjunto de meta-classes complementares para representar diferentes visões conceituais de um mesmo sistema, por exemplo, é possível representar desde o código-fonte até mesmo a arquitetura de um sistema utilizando um sub-conjunto de meta-classes especificas do KDM. Dessa forma, quando refatorações são aplicadas em uma visão conceitual, por exemplo, em uma instância do KDM que representa o código-fonte do sistema, todas as outras visões conceituais do sistema deveriam manter a consistente e a sincronização entre sí. No contexto da ADM, e principalmente do meta-modelo KDM existe uma carência em abordagens que sincronizam tais mudanças (ou seja, refatorações) de forma automática. Dessa forma, nesta Tese técnica de propagação de mudanças para auxiliar na identificação e atualização de todas as instâncias/visões do KDM é proposta, assim, é possível manter todas as visões/instâncias do meta-modelo KDM sincronizadas e consistentes.
+%O KDM é um meta-modelo que possui um conjunto de meta-classes complementares para representar diferentes visões conceituais de um mesmo sistema, por exemplo, é possível representar desde o código-fonte até mesmo a arquitetura de um sistema utilizando um sub-conjunto de meta-classes especificas do KDM. Dessa forma, quando refatorações são aplicadas em uma visão conceitual, por exemplo, em uma instância do KDM que representa o código-fonte do sistema, todas as outras visões conceituais do sistema deveriam manter a consistente e a sincronização entre sí. No contexto da ADM, e principalmente do meta-modelo KDM existe uma carência em abordagens que sincronizam tais mudanças (ou seja, refatorações) de forma automática. Dessa forma, nesta Tese técnica de propagação de mudanças para auxiliar na identificação e atualização de todas as instâncias/visões do KDM é proposta, assim, é possível manter todas as visões/instâncias do meta-modelo KDM sincronizadas e consistentes.
 %
-Durante a condução da Tese foi percebido que a ADM fornece um conjunto de meta-modelos para auxiliar o engenheiro de software a conduzir MDRE. Porém, a ADM não provê instruções ou ate mesmo um meta-modelo, para auxiliar o engenheiro a promover o reuso de refatorações juntamente com os seus meta-modelos padronizados (por exemplo, KDM) durante o processo de modernização. Essa limitação faz com que o engenheiro crie suas próprias soluções/refatorações, resultando em um possível atraso no processo de modernização. Contudo, as soluções/refatorações definidas não são facilmente reutilizadas. Dessa forna, um meta-modelo para auxiliar o engenheiro de modernização a promover o reuso de refatorações no contexto do meta-modelo KDM também é proposto. Posteriormente, estudos de casos e experimentos são apresentados e discutidos.
-}{Modelo, Monografia de qualificação, Dissertação, Tese, Latex}
+%Durante a condução da Tese foi percebido que a ADM fornece um conjunto de meta-modelos para auxiliar o engenheiro de software a conduzir MDRE. Porém, a ADM não provê instruções ou ate mesmo um meta-modelo, para auxiliar o engenheiro a promover o reuso de refatorações juntamente com os seus meta-modelos padronizados (por exemplo, KDM) durante o processo de modernização. Essa limitação faz com que o engenheiro crie suas próprias soluções/refatorações, resultando em um possível atraso no processo de modernização. Contudo, as soluções/refatorações definidas não são facilmente reutilizadas. Dessa forna, um meta-modelo para auxiliar o engenheiro de modernização a promover o reuso de refatorações no contexto do meta-modelo KDM também é proposto. Posteriormente, estudos de casos e experimentos são apresentados e discutidos.
+}{ADM, KDM, Engenheiro de Modernização, Experimento,}
 
 % ---
 % resumo em inglês
@@ -202,7 +220,7 @@ Durante a condução da Tese foi percebido que a ADM fornece um conjunto de meta
 \chapter{Características das Refatorações para o metamodelo KDM}\label{chapter:catalogo_refactoring_KDM}
 \input{tex/cap_catalogo_refactoring}
 
-\chapter{Definindo um Metamodelo de Refatorações Estruturadas}
+\chapter{O Metamodelo de Refatorações SRM}
 \label{chapter:Toward_a_Refactoring_Metamodel_for_KDM}
 \input{tex/Toward_a_Refactoring_Metamodel_for_KDM.tex}
 
