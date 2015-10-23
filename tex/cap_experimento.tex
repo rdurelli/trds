@@ -59,23 +59,23 @@ Dessa forma, para avaliar a \textbf{$QP_1$} sete sistemas foram escolhidos para 
 \centering
 \caption{Sistemas utilizados no Experimento 1.}
 \label{tab:sistemas_experimentos}
-\begin{tabular}{ | m{2cm} | m{1cm}| m{1cm} | m{1cm} | } 
+\begin{tabular}{ | m{2cm} | m{1cm}| m{1cm}| m{1cm} | m{1cm} | } 
 \hline
-Sistemas & Versão & KLOC & Classes \\ 
+Sistemas & Siglas & Versão & KLOC & Classes \\ 
 \hline
-Xerces-J & 2.7.0 & 240 & 991\\ 
+Xerces-J & XJ & 2.7.0 & 240 & 991\\ 
 \hline
-Jexel & 1.3 & 50.4 & 75\\
+Jexel & JEX & 1.3 & 50.4 & 75\\
 \hline
-JFreeChart & 1.0.9 & 170 & 521\\ 
+JFreeChart & JFC & 1.0.9 & 170 & 521\\ 
 \hline
-Jester & 0.7 & 48 & 14\\ 
+Jester & JES & 0.7 & 48 & 14\\ 
 \hline
-GanttProject & 1.10.2 & 41 & 245\\ 
+GanttProject & GP & 1.10.2 & 41 & 245\\ 
 \hline
-ArtofIllusion & 2.8.1 & 87 & 459\\ 
+ArtofIllusion & AOIL &  2.8.1 & 87 & 459\\ 
 \hline
-JHotDraw & 7.0.6 & 16 & 468 \\ 
+JHotDraw & JHD & 7.0.6 & 16 & 468 \\ 
 \hline
 \end{tabular}
 \end{table}
@@ -229,12 +229,68 @@ Alguns dias antes da realização do experimento, o código-fonte dos setes sist
 
 Após gerar as instâncias do metamodelo KDM dos setes sistemas e aplicar a ferramenta EMF \textit{Metrics} para mensurar os atributos de qualidade QMOOD, o próximo passo é a aplicação das refatorações no metamodelo KDM por meio da ferramenta KDM-RE (ver Capítulo~\ref{chapter:ferramenta_kdm_re}). Como já salientado, a ferramenta KDM-RE no seu estado atual não identifica \textit{bad-smells}. Dessa forma, um conjunto de artigos foi lido na integra pois listam e descrevem um conjunto de \textit{bad-smells} dos setes sistemas utilizados nesse experimento~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}. Uma lista completa dos \textit{bad-smells} identificados pelos autores pode ser visualizada no Apêndice X\change{mudar}. Essa lista foi utilizada nesse experimento para guiar o engenheiro de modernização a identificar qual refatoração aplicar (ver Figura~\ref{fig:execucao_experimento} \ding{183}).
 
-Após tomar conhecimento dos \textit{bad-smells} de cada sistema um conjunto de refatorações foi escolhido e depois executado por meio da ferramenta KDM-RE. Cada refatoração foi aplicada para tentar resolver e remover os \textit{bad-smells} identificados e melhorar assim os atributos de qualidade QMOOD. As refatorações escolhidas para remover os \textit{bad-smells} e melhorar os atributos de qualidade foram criteriosamente identificadas no catálogo de refatoração proposto por~\citeonline{Fowler1999} que descreve qual(is) refatoração(ões) aplicar para resolver um determinado \textit{bad-smell}. 
+Após tomar conhecimento dos \textit{bad-smells} de cada sistema um conjunto de refatorações foi escolhido e depois executado por meio da ferramenta KDM-RE. Cada refatoração foi aplicada para tentar resolver e remover os \textit{bad-smells} identificados e melhorar assim os atributos de qualidade QMOOD. As refatorações escolhidas para remover os \textit{bad-smells} e melhorar os atributos de qualidade foram criteriosamente identificadas no catálogo de refatoração proposto por~\citeonline{Fowler1999} que descreve qual(is) refatoração(ões) aplicar para resolver um determinado \textit{bad-smell}. As refatorações que foram aplicadas nos setes sistemas estão apresentadas na Tabela~\ref{tab:experimento_refatoracoes_aplicadas} e as respectivas sigla de cada uma. 
 
+
+
+\begin{table}[h]
+\centering
+\caption{Refatorações aplicadas no experimento 1.}
+\label{tab:experimento_refatoracoes_aplicadas}
+\begin{tabular}{ | m{3.5cm} | m{1.2cm}|m{2.2cm}| m{1.2cm}|}
+\hline
+\multicolumn{1}{|c|}{Refatorações} & \multicolumn{1}{c|}{Siglas} & \multicolumn{1}{c|}{Sistemas} & \multicolumn{1}{c|}{Siglas}\\ 
+\hline
+\multicolumn{1}{|c|}{Move Method} & \multicolumn{1}{c|}{MM} & \multicolumn{1}{c|}{Xerces-J} & \multicolumn{1}{c|}{XJ}\\ 
+\hline
+\multicolumn{1}{|c|}{Move Field} & \multicolumn{1}{c|}{MF} & \multicolumn{1}{c|}{Jexel} & \multicolumn{1}{c|}{JEX}\\ 
+\hline
+\multicolumn{1}{|c|}{Extract Class} & \multicolumn{1}{c|}{EC} & \multicolumn{1}{c|}{JFreeChart} & \multicolumn{1}{c|}{JFC}\\ 
+\hline
+\multicolumn{1}{|c|}{Extract Interface} & \multicolumn{1}{c|}{EI} & \multicolumn{1}{c|}{Jester} & \multicolumn{1}{c|}{JES} \\ 
+\hline
+\multicolumn{1}{|c|}{Move Class} & \multicolumn{1}{c|}{MC} & \multicolumn{1}{c|}{GanttProject} & \multicolumn{1}{c|}{GP} \\ 
+\hline
+\multicolumn{1}{|c|}{Pull Up Field} & \multicolumn{1}{c|}{PUF} & \multicolumn{1}{c|}{ArtofIllusion} & \multicolumn{1}{c|}{AOIL} \\ 
+\hline
+\multicolumn{1}{|c|}{Pull Up Method} & \multicolumn{1}{c|}{PUM} & \multicolumn{1}{c|}{JHotDraw} & \multicolumn{1}{c|}{JHD} \\ 
+\hline
+\multicolumn{1}{|c|}{Push Down Field} & \multicolumn{1}{c|}{PDF} &\multicolumn{1}{c|}{\textemdash} &\multicolumn{1}{c|}{\textemdash} \\ 
+\hline
+\multicolumn{1}{|c|}{Push Down Method} & \multicolumn{1}{c|}{PDM} &\multicolumn{1}{c|}{\textemdash} &\multicolumn{1}{c|}{\textemdash} \\ 
+\hline
+\end{tabular}
+\end{table}
+
+
+Na Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas} é possível observar os dados relacionado com a quantidade de refatorações aplicada em cada sistema. Nota-se que a refatoração \texttt{Move Method} foi a refatoração mais executada, aproximadamente 26.35\%.  Em seguida, a refatoração \texttt{Move Field} foi a segunda refatoração mais aplicada, aproximadamente 13.42\%. A maioria das refatorações aplicadas estão relacionadas com mover elementos e extrair elementos (\texttt{Extract Class}), somando as refatorações \texttt{Move Method}, \texttt{Move Field} e \texttt{Extract Class} têm-se 51.06\% das refatorações aplicadas. Esses dados estão diretamente relacionados aos \textit{bad-smells} utilizados nesse experimento: \textit{blob}, \textit{data class} e \textit{spaghetti code}. Por exemplo, para remover o \textit{bad-smell} do tipo \textit{blob} é necessário mover elementos de uma classe para outro classe a fim de reduzir o número de funcionalidades e adicionar comportamento em outras classes. Similarmente para remover o \textit{bad-smell} do tipo \textit{data class} deve-se aplicar a refatoração \texttt{Move Method}. Ainda observando a Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas} é possível observar que as refatorações menos aplicadas foram: \texttt{Push Up Method}, \texttt{Push Up Field} e \texttt{Move Class}, respectivamente. 
+
+\begin{table}[h]
+\centering
+\caption{Quantidade de refatorações aplicadas no experimento 1.}
+\label{tab:experimento_dados_refatoracoes_aplicadas}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|}
+\cline{2-10}
+                                   & \multicolumn{9}{c|}{Sistemas}                                \\ \hline
+\multicolumn{1}{|c|}{Refatorações} & XJ & JEX & JFC & JES & GP & AOIL & JHD & Média & Porcentagem \\ \hline
+\multicolumn{1}{|c|}{MM}           & 40 & 30  & 45  & 35  & 43 & 45   & 23  & 37.29 & 26.34\%     \\ \hline
+\multicolumn{1}{|c|}{MF}           & 25 & 15  & 20  & 16  & 21 & 23   & 13  & 19.00 & 13.42\%     \\ \hline
+\multicolumn{1}{|c|}{EC}           & 15 & 20  & 20  & 19  & 12 & 15   & 11  & 16.00 & 11.30\%     \\ \hline
+\multicolumn{1}{|c|}{EI}           & 13 & 10  & 15  & 16  & 8  & 12   & 10  & 12.00 & 8.48\%      \\ \hline
+\multicolumn{1}{|c|}{MC}           & 9  & 11  & 7   & 13  & 10 & 10   & 18  & 11.14 & 7.87\%      \\ \hline
+\multicolumn{1}{|c|}{PUF}          & 12 & 14  & 5   & 8   & 12 & 11   & 9   & 10.14 & 7.16\%      \\ \hline
+\multicolumn{1}{|c|}{PUM}          & 10 & 9   & 8   & 6   & 8  & 14   & 13  & 9.71  & 6.86\%     \\ \hline
+\multicolumn{1}{|c|}{PDF}          & 17 & 13  & 15  & 10  & 9  & 16   & 8   & 12.57 & 8.88\%      \\ \hline
+\multicolumn{1}{|c|}{PDM}          & 16 & 12  & 14  & 11  & 10 & 18   & 15  & 13.71 & 9.69\%      \\ \hline
+\end{tabular}
+\end{table}
+
+
+Após a aplicação das refatorações nos sete sistemas a ferramenta EMF \textit{Metrics} foi executada novamente para mensurar os atributos de qualidade QMOOD. A análise dos dados é apresentada na próxima seção.
 
 \subsection{Análise dos Dados do Experimento 1}
 
-Na Tabela~\ref{tab:dados_coletados_experimento_1} é possível observar os atributos (reusabilidade, flexibilidade, facilidade de compreensão e eficácia) de qualidade avaliados no experimento 1 antes e após aplicar as refatorações.
+Na Tabela~\ref{tab:dados_coletados_experimento_1} é possível observar os dados relacionados os atributos (reusabilidade, flexibilidade, facilidade de compreensão e eficácia) de qualidade avaliados no experimento 1 antes e após a aplicação das refatorações apresentadas na Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas}. A Tabela~\ref{tab:dados_coletados_experimento_1} sete colunas, \aspas{Antes} representa as métricas mensuradas dos sistemas antes de aplicar as refatorações. \aspas{Depois} representa as métricas coletadas dos sistemas após a aplicação das refatorações e \aspas{Diferença} representa a diferença das colunas \aspas{Antes} e \aspas{Depois}, ou seja, a diferençã entre as métricas são calculadas da seguinte forma: \aspas{Depois}-\aspas{Antes}. Os mesmos dados são plotados nos gráficos de barra nas Figuras~\ref{fig:immediate}, \ref{fig:proximal}, \ref{fig:distal} e \ref{fig:combined}. Nota-se que todos os atributos de qualidade foram melhorados após a aplicação das refatorações: (\textit{i}) Reusabilidade (antes 44.07\% depois 55.93\%), Flexibilidade (antes 46.25\% depois 53.75\%), Facilidade de Compreensão (antes 42.98\% depois 57.02\%) e Eficácia (antes 47.14\% depois 52.86\%). 
 
 
 \begin{table}[h]
@@ -256,44 +312,47 @@ Na Tabela~\ref{tab:dados_coletados_experimento_1} é possível observar os atrib
 \multicolumn{1}{|l|}{Porcentagem}   & 44.07\%       & 55.93\%       &\multicolumn{1}{c|}{\textemdash}                & 46.25\%   & 53.75\%   & \multicolumn{1}{c|}{\textemdash}\\ \hline
                                     & \multicolumn{3}{c|}{Facilidade de Compreensão} & \multicolumn{3}{c|}{Eficácia}      \\ \hline
 \multicolumn{1}{|c|}{Sistemas}      & Antes         & Depois        & Diferença      & Antes     & Depois    & Diferença  \\ \hline
-\multicolumn{1}{|c|}{Xerces-J}      & \multicolumn{1}{c|}{0.21}& \multicolumn{1}{c|}{0.23}          &\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.07}&\multicolumn{1}{c|}{0.09}&\multicolumn{1}{c|}{0.02}            \\ \hline
-\multicolumn{1}{|c|}{Jexel}         & \multicolumn{1}{c|}{0.16}          & \multicolumn{1}{c|}{0.18}          &\multicolumn{1}{c|}{0.02} & \multicolumn{1}{c|}{0.05}          & \multicolumn{1}{c|}{0.06}          &\multicolumn{1}{c|}{0.01}            \\ \hline
-\multicolumn{1}{|c|}{JFreeChart}    & \multicolumn{1}{c|}{0.17}          & \multicolumn{1}{c|}{0.21}          &\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.06}&\multicolumn{1}{c|}{0.02}\\ \hline
-\multicolumn{1}{|c|}{Jester}        & \multicolumn{1}{c|}{0.14}          & \multicolumn{1}{c|}{0.16}          &\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.09}&\multicolumn{1}{c|}{0.09}&\multicolumn{1}{c|}{0}\\ \hline
-\multicolumn{1}{|c|}{GanttProject}  & \multicolumn{1}{c|}{0.23}          & \multicolumn{1}{c|}{0.25}          &\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.05}&\multicolumn{1}{c|}{0.01}\\ \hline
-\multicolumn{1}{|c|}{ArtofIllusion} & \multicolumn{1}{c|}{0.09}          & \multicolumn{1}{c|}{0.11}          &\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.03}&\multicolumn{1}{c|}{0.05}&\multicolumn{1}{c|}{0.02}\\ \hline
-\multicolumn{1}{|c|}{JHotDraw}             & \multicolumn{1}{c|}{0.04}          & \multicolumn{1}{c|}{0.06}          &\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.01}&\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.01}\\ \hline
-\multicolumn{1}{|c|}{Média}         & \multicolumn{1}{c|}{0.148}         & \multicolumn{1}{c|}{0.171}         &\multicolumn{1}{c|}{0.022}&\multicolumn{1}{c|}{0.047}&\multicolumn{1}{c|}{0.060}&\multicolumn{1}{c|}{0.012}\\ \hline
-\multicolumn{1}{|l|}{Porcentagem}   & 46.43\%       & 53.57\%       &\multicolumn{1}{c|}{\textemdash}&  \multicolumn{1}{c|}{44\%}  &  \multicolumn{1}{c|}{56\%}  &\multicolumn{1}{c|}{\textemdash}\\ \hline
+\multicolumn{1}{|c|}{Xerces-J}      & \multicolumn{1}{c|}{0.21}& \multicolumn{1}{c|}{0.27}          &\multicolumn{1}{c|}{0.06}&\multicolumn{1}{c|}{0.07}&\multicolumn{1}{c|}{0.08}&\multicolumn{1}{c|}{0.01}            \\ \hline
+\multicolumn{1}{|c|}{Jexel}         & \multicolumn{1}{c|}{0.16}          & \multicolumn{1}{c|}{0.21}          &\multicolumn{1}{c|}{0.05} & \multicolumn{1}{c|}{0.05}          & \multicolumn{1}{c|}{0.06}          &\multicolumn{1}{c|}{0.01}            \\ \hline
+\multicolumn{1}{|c|}{JFreeChart}    & \multicolumn{1}{c|}{0.17}          & \multicolumn{1}{c|}{0.21}          &\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.03}&\multicolumn{1}{c|}{-0.01}\\ \hline
+\multicolumn{1}{|c|}{Jester}        & \multicolumn{1}{c|}{0.14}          & \multicolumn{1}{c|}{0.19}          &\multicolumn{1}{c|}{0.05}&\multicolumn{1}{c|}{0.09}&\multicolumn{1}{c|}{0.09}&\multicolumn{1}{c|}{0}\\ \hline
+\multicolumn{1}{|c|}{GanttProject}  & \multicolumn{1}{c|}{0.23}          & \multicolumn{1}{c|}{0.28}          &\multicolumn{1}{c|}{0.05}&\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.05}&\multicolumn{1}{c|}{0.01}\\ \hline
+\multicolumn{1}{|c|}{ArtofIllusion} & \multicolumn{1}{c|}{0.09}          & \multicolumn{1}{c|}{0.14}          &\multicolumn{1}{c|}{0.05}&\multicolumn{1}{c|}{0.03}&\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.01}\\ \hline
+\multicolumn{1}{|c|}{JHotDraw}             & \multicolumn{1}{c|}{0.04}          & \multicolumn{1}{c|}{0.08}          &\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.01}&\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.01}\\ \hline
+\multicolumn{1}{|c|}{Média}         & \multicolumn{1}{c|}{0.148}         & \multicolumn{1}{c|}{0.197}         &\multicolumn{1}{c|}{0.048}&\multicolumn{1}{c|}{0.047}&\multicolumn{1}{c|}{0.052}&\multicolumn{1}{c|}{0.005}\\ \hline
+\multicolumn{1}{|l|}{Porcentagem}   & 42.98\%       & 57.02\%       &\multicolumn{1}{c|}{\textemdash}&  \multicolumn{1}{c|}{47.14\%}  &  \multicolumn{1}{c|}{52.86\%}  &\multicolumn{1}{c|}{\textemdash}\\ \hline
 \end{tabular}
 \end{table}
 
+É importante observar que o atributo de qualidade Facilidade de Compreensão foi o que alcançou o maior ganho, aproximadamente 57\%. Por outro lado, o atributo de qualidade Eficácia teve o menor ganho, alcançando aproximadamente 53\%. Isto deve-se principalmente as refatorações aplicadas. Por exemplo, a maioria das refatorações aplicadas (\texttt{Move Method}, \texttt{Move Field} e \texttt{Extract Class} ver Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas}) aumentam o acoplamento (DCC), coesão (CAM) e tamanho do projeto (DSC) que são métricas utilizadas para calcular o atributo de qualidade Facilidade de Compreensão.
+
+Além disso, pode-se também observar que o sistema JHotDraw produziu o menor aumento para os quatro atributos de qualidade. A principal razão é que JHotDraw é conhecido na literatura por seguir as melhores práticas de projeto e implementação~\cite{Kessentini_2010}.
 
 
 
-\begin{figure}[h]    
-\begin{minipage}[t]{0.5\textwidth}
+\begin{figure}[!h]    
+\begin{minipage}[h]{0.5\textwidth}
 \includegraphics[width=\linewidth]{images/GraficoBarraExperimentoReusabilidade}
-\caption{Actual Versus Predicted: Immediate}
+\caption{Reusabilidade antes e depois das refatorações.}
 \label{fig:immediate}
 \end{minipage}
 \hspace{\fill}
-\begin{minipage}[t]{0.5\textwidth}
+\begin{minipage}[h]{0.5\textwidth}
 \includegraphics[width=\linewidth]{images/GraficoBarraExperimentoFlexibilidade}
-\caption{Actual Versus Predicted: Proximal}
+\caption{Flexibilidade antes e depois das refatorações.}
 \label{fig:proximal}
 \end{minipage}
 
 \vspace*{0.5cm} % (or whatever vertical separation you prefer)
-\begin{minipage}[t]{0.5\textwidth}
+\begin{minipage}[h]{0.5\textwidth}
 \includegraphics[width=\linewidth]{images/GraficoBarraExperimentoFacilidadeDeCompreensao}
-\caption{Actual Versus Predicted: Distal}
+\caption{Facilidade de Compreensão antes e depois das refatorações.}
 \label{fig:distal}
 \end{minipage}
 \hspace{\fill}
-\begin{minipage}[t]{0.5\textwidth}
+\begin{minipage}[h]{0.5\textwidth}
 \includegraphics[width=\linewidth]{images/GraficoBarraExperimentoEficacia}
-\caption{Actual Versus Predicted: Combined}
+\caption{Eficácia antes e depois das refatorações.}
 \label{fig:combined}
 \end{minipage}
 
@@ -314,7 +373,7 @@ Na Tabela~\ref{tab:dados_coletados_experimento_1} é possível observar os atrib
 
 \section{Experimento 2: Ferramenta KDM-RE}\label{sec:experimento_KDM_re}
 
-Nesta seção é apresentado um experimento conduzido com o objetivo de analisar o usa da ferramenta KDM-RE (ver Capítulo X\change{mudar}) durante a aplicação de refatorações para o metamodelo KDM. Para atingir esse objetivo, foi realizada uma comparação entre as ferramentas KDM-RE e EMF Refactor\footnote{\texttt{https://www.eclipse.org/emf-refactor/}}.
+Nesta seção é apresentado um experimento conduzido com o objetivo de analisar o uso da ferramenta KDM-RE (ver Capítulo X\change{mudar}) durante a aplicação de refatorações para o metamodelo KDM. Para atingir esse objetivo, foi realizada uma comparação entre as ferramentas KDM-RE e EMF Refactor\footnote{\texttt{https://www.eclipse.org/emf-refactor/}}.
 
 \subsection{Definição e Planejamento do Experimento 2}
 
