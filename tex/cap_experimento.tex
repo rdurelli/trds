@@ -1,6 +1,6 @@
 \section{Considerações Iniciais}
 
-Nos Capítulo X, Y, Z \change{Mudar aqui} foram apresentadas soluções para auxiliar o engenheiro de modernização a aplicar, reutilizar e propagar refatorações no contexto da abordagem ADM e do metamodelo KDM. Além disso, no Capítulo X foi apresentado uma ferramenta, KDM-RE, que automatiza todo o processo de aplicação, reutilização e propagação de mudanças no contexto do metamodelo KDM, deixando somente sob responsabilidade do engenheiro de modernização a identificação de onde aplicar refatorações. Desse modo, com o uso da ferramenta o engenheiro de modernização tem um ambiente totalmente integrado na IDE Eclipse, onde refatorações podem ser aplicadas e reutilizadas sem se preocupar com a propagação para outras visões/artefatos representados em um determinada instância do metamodelo KDM.
+Nos Capítulo~\ref{chapter:catalogo_refactoring_KDM},~\ref{chapter:Toward_a_Refactoring_Metamodel_for_KDM} e~\ref{chapter:Abordagem_de_sincronizacao} foram apresentadas soluções para auxiliar o engenheiro de modernização a aplicar, reutilizar e propagar refatorações no contexto da abordagem ADM e do metamodelo KDM. Além disso, no Capítulo X foi apresentado uma ferramenta, KDM-RE, que automatiza todo o processo de aplicação, reutilização e propagação de mudanças no contexto do metamodelo KDM, deixando somente sob responsabilidade do engenheiro de software a identificação de onde aplicar refatorações. Desse modo, com o uso da ferramenta o engenheiro de software tem um ambiente totalmente integrado no ambiente Eclipse, onde refatorações podem ser aplicadas e reutilizadas sem se preocupar com a propagação de mudanças para outras visões/artefatos representados em uma determinada instância do metamodelo KDM.
 
 Com o objetivo de verificar se as refatorações adaptadas para o metamodelo KDM realmente melhoraram a qualidade de um sistema e com o intuito de verificar se a ferramenta KDM-RE realmente proporciona facilidade e eficiência na prática, foi-se realizado dois experimentos ao longo deste projeto de doutorado. Esses experimentos foram planejados e executados seguindo a abordagem definida por~\citeonline{Wohlin}, que é composta por três principais fases: (\textit{i}) definição e planejamento, onde são especificados o contexto, as hipóteses, as variáveis, os participantes (quando necessário), os instrumentos e o modelo do experimento; (\textit{ii}) operação, onde ocorre a preparação e a execução do experimento com ou sem os participantes; e (\textit{iii}) análise dos dados, onde os dados coletados durante o experimento são agrupados e analisados por meio de técnicas estatísticas.
 
@@ -8,16 +8,16 @@ Na Seção~\ref{sec:teste_estatisticos} há uma descrição dos testes estatíst
 
 \section{Testes Estatísticos}\label{sec:teste_estatisticos}
 
-~\citeonline{Wohlin} declaram que os experimentos têm como objetivo responder questões a respeito de um objeto de estudo. Para cada questão são definidas uma ou mais métricas a partir da qual os dados são coletados e um também um conjunto de hipóteses sobre os possíveis resultados são definidos. Esse conjunto de hipóteses é formado por:
+~\citeonline{Wohlin} declaram que os experimentos têm como objetivo responder questões a respeito de um objeto de estudo. Para cada questão são definidas uma ou mais métricas a partir da qual os dados são coletados e também um conjunto de hipóteses sobre os possíveis resultados são definidos. Esse conjunto de hipóteses é formado por:
 
 \begin{itemize}
 \item Uma \textbf{hipótese nula}: Considera que não há uma diferença significativa entre os dados obtidos ao se aplicarem os diferentes tratamentos sobre o objeto de estudo;
-\item Uma ou mais \textbf{hipóteses alternativas}: Consideram os demais possíveis resultados. Por exemplo, a hipótese alternativa 1 considera que a ferramente X é mais eficiente do que a ferramenta Y, enquanto que a hipótese alternativa 2 considerada que a ferramenta X é menos eficiente do que a ferramenta Y.
+\item Uma ou mais \textbf{hipóteses alternativas}: Consideram os demais possíveis resultados. Por exemplo, a hipótese alternativa 1 considera que a ferramenta X é mais eficiente do que a ferramenta Y, enquanto que a hipótese alternativa 2 considerada que a ferramenta X é menos eficiente do que a ferramenta Y.
 \end{itemize}
 
-Alguns cálculos podem ser realizados sobre os dados coletados para se obter um resultado e uma das hipóteses alternativas ser aceita. Por exemplo, cálculos de média e de porcentagem podem indicar que, em determinado experimento, o tempo gasto pelos participantes para aplicar refatorações no metamodelo KDM foi menor quando a ferramenta X foi utilizada do que quando a ferramenta Y foi utiliza. Contudo, ainda se faz necessário testes estatísticos para comprovar que esse resultado é significativo, refutando assim, a hipótese nula.
+Alguns cálculos podem ser realizados sobre os dados coletados para obter um resultado e uma das hipóteses alternativas ser aceita. Por exemplo, cálculos de média e de porcentagem podem indicar que, em determinado experimento, o tempo gasto pelos participantes para aplicar refatorações no metamodelo KDM foi menor quando a ferramenta X foi utilizada do que quando a ferramenta Y foi utiliza. Contudo, ainda se faz necessários testes estatísticos para comprovar que esse resultado é significativo, refutando assim, a hipótese nula.
 
-No experimento apresentado na Seção~\ref{sec:experimento_KDM_re} foram aplicado os testes estatísticos \textbf{Shapiro-Wilk} e \textbf{Paried T-Test}. Os testes estatísticos foram aplicados com o apoio da ferramenta R\footnote{\texttt{https://www.r-project.org/}}. Esses testes são brevemente explicados a seguir.
+No experimento apresentado na Seção~\ref{sec:experimento_KDM_re} foram aplicado os testes estatísticos \textbf{Shapiro-Wilk} e \textbf{Paried T-Test}. Os testes estatísticos foram aplicados com o apoio da ferramenta R\footnote{\texttt{https://www.r-project.org/}}. Esses testes são brevemente explicados a seguir. \change{mudar Colocar os testes estatisticos realmentes utilizados}
 
 \begin{figure}[h]
 	\centering
@@ -27,9 +27,9 @@ No experimento apresentado na Seção~\ref{sec:experimento_KDM_re} foram aplicad
 	\fautor
 \end{figure}
 
-\subsection{Shapiro-Wilk e Paired T-Test}
+\subsection{Shapiro-Wilk e Paired T-Test}\label{sec:shapiro_wilk}
 
-O teste \textbf{Shapiro-Wilk} é aplicado para verificar se um conjunto de dados segue, ou não, uma distribuição normal, que possui graficamente o formato de um sino simétrico em relação à sua média, ver Figura~\ref{fig:shapiro_wilk}. Se o p-valor (resultado) do teste \textbf{Shapiro-Wilk} sobre um conjunto de dados for menor do que 0.05, significa que a chance dos dados seguirem uma distribuição normal é menor do que 5\%. Quando esse resultado ocorre, considera-se, estatisticamente, que os dados não seguem uma distribuição normal~\cite{Wohlin}. 
+O teste \textbf{Shapiro-Wilk} é aplicado para verificar se um conjunto de dados segue, ou não, uma distribuição normal, que possui graficamente o formato de um sino simétrico em relação à sua média, ver Figura~\ref{fig:shapiro_wilk}. Se o p-valor (resultado) do teste \textbf{Shapiro-Wilk} sobre um conjunto de dados for menor do que 0.05 significa que a chance dos dados seguirem uma distribuição normal é menor do que 5\%. Quando esse resultado ocorre, considera-se, estatisticamente, que os dados não seguem uma distribuição normal~\cite{Wohlin}. 
 
 
 Em geral, as ferramentas de estatísticas utilizam um gráfico de probabilidade, também conhecido como \textit{Q-Q Plot} para representar graficamente a distribuição de um conjunto de dados. Nesse gráfico, quando os dados se posicionam ao redor da linha diagonal, considera-se que os dados seguem uma distribuição normal. Na Figura~\ref{fig:qq_plot_exemple} são apresentados dois exemplos de gráficos de probabilidade, um com distribuição normal e outro não normal.
@@ -43,16 +43,16 @@ Em geral, as ferramentas de estatísticas utilizam um gráfico de probabilidade,
 	\fautor
 \end{figure}
 
-O teste \textbf{Paired T-Test} é utilizado para confrontar dois conjuntos de dados. Esse teste pode ser aplicado somente quando ambos os conjuntos de dados seguem uma distribuição normal. Se o P-valor (resultado) do \textbf{Paired T-Test} for menor que 0.05 significa que a chance dos dois conjuntos de dados serem estatisticamente semelhantes é menor do que 5\%. Portanto, nesse caso, a hipótese nula deve ser rejeitada~\cite{Wohlin}.
+O teste \textbf{Paired T-Test} é utilizado para confrontar dois conjuntos de dados. Esse teste pode ser aplicado somente quando ambos os conjuntos de dados seguem uma distribuição normal. Se o p-valor (resultado) do \textbf{Paired T-Test} for menor que 0.05 significa que a chance dos dois conjuntos de dados serem estatisticamente semelhantes é menor do que 5\%. Portanto, nesse caso, a hipótese nula deve ser rejeitada~\cite{Wohlin}.
 
 \section{Experimento 1: Refatorações no contexto do metamodelo KDM}\label{sec:experimento}
 
 Nesta seção é apresentado um experimento conduzido com o objetivo de analisar as qualidades das refatorações adaptadas para o metamodelo KDM. Especificamente, a seguinte questão de pesquisa é investida nesse experimento:
 
-\textbf{Questão de Pesquisa 1} (\textbf{$QP_1$}): Como as refatorações adaptadas/definidas para o metamodelo KDM podem ser úteis para engenheiros de modernização no cenário do mundo real? O benefício esperado de refatoração não esta limitada apenas à correção de \textit{bad-smells}, mas também podem e devem ser utilizadas para melhorar os atributos de qualidade dos programas, ou seja, melhorar à compreensão, eficácia, reusabilidade e flexibilidade.
+\textbf{Questão de Pesquisa 1} (\textbf{$QP_1$}): Como as refatorações adaptadas/definidas para o metamodelo KDM podem ser úteis para engenheiros de modernização no cenário do mundo real? O benefício esperado de refatoração não esta limitada apenas à correção de \textit{bad-smells}, mas também podem e devem ser utilizadas para melhorar os atributos de qualidade dos programas, ou seja, melhorar à \aspas{reusabilidade}, \aspas{flexibilidade}, \aspas{facilidade de compreensão} e \aspas{eficácia}.
 
 
-Dessa forma, para avaliar a \textbf{$QP_1$} sete sistemas foram escolhidos para aplicar um conjunto de refatorações. Esses sete sistemas são bem conhecidos na literatura e estão implementados na linguagem de programação Java: Xerces-J\footnote{\texttt{http://xerces.apache.org/xerces-j/}}, Jexel\footnote{\texttt{https://jexel.googlecode.com}}, JFreeChart\footnote{\texttt{http://www.jfree.org/jfreechart/}}, Jester\footnote{\texttt{jester.sourceforge.net}}, GanttProject\footnote{\texttt{http://www.ganttproject.biz/}}, ArtofIllusion\footnote{\texttt{www.artofillusion.org}} e JHotDraw\footnote{\texttt{jhotdraw.org}}. Xerces-J é uma família de software para análisar (\textit{parsing}) XML. Jexel é API para escrever expressões regulares em Java. JFreeChart é uma biblioteca Java utiliza para gerar gráficos. Jester é uma biblioteca Java utiliza para gerar teste de unidades. GanttProject é uma sistema para gerenciamento de projetos. ArtofIllusion é uma API para modelagem e renderização em 3D. JHotDraw é uma ferramenta para auxiliar a criação de desenhos. Todos os sistemas foram transformados em instâncias do metamodelo KDM utilizando a ferramenta MoDisco\footnote{\texttt{https://eclipse.org/MoDisco/}}. 
+Dessa forma, para avaliar a \textbf{$QP_1$} sete sistemas foram escolhidos para aplicar um conjunto de refatorações. Esses sete sistemas são bem conhecidos na literatura e estão implementados na linguagem de programação Java: Xerces-J\footnote{\texttt{http://xerces.apache.org/xerces-j/}}, Jexel\footnote{\texttt{https://jexel.googlecode.com}}, JFreeChart\footnote{\texttt{http://www.jfree.org/jfreechart/}}, Jester\footnote{\texttt{jester.sourceforge.net}}, GanttProject\footnote{\texttt{http://www.ganttproject.biz/}}, ArtofIllusion\footnote{\texttt{www.artofillusion.org}} e JHotDraw\footnote{\texttt{jhotdraw.org}}. Xerces-J é uma família de software para analisar (\textit{parsing}) XML. Jexel é API para escrever expressões regulares em Java. JFreeChart é uma biblioteca Java utiliza para gerar gráficos. Jester é uma biblioteca Java utiliza para gerar teste de unidades. GanttProject é uma sistema para gerenciamento de projetos. ArtofIllusion é uma API para modelagem e renderização em 3D. JHotDraw é uma ferramenta para auxiliar a criação de desenhos. Todos os sistemas foram transformados em instâncias do metamodelo KDM utilizando a ferramenta MoDisco\footnote{\texttt{https://eclipse.org/MoDisco/}}. 
 
 
 \begin{table}[h]
@@ -80,26 +80,24 @@ JHotDraw & JHD & 7.0.6 & 16 & 468 \\
 \end{tabular}
 \end{table}
 
-Na Tabela~\ref{tab:sistemas_experimentos} é possível visualizar algumas informações sobre os setes sistemas escolhidos. Como apresentado no Capítulo~\ref{chapter:ferramenta_kdm_re}, a ferramenta KDM-RE apenas auxilia o engenheiro de modernização à aplicar refatorações em instâncias do metamodelo KDM. É de responsabilidade do engenheiro identificar onde aplicar a refatoração uma vez que a ferramenta KDM-RE ainda não identifica \textit{bad-smells}~\cite{Fowler1999}. Assim, esses setes sistemas foram escolhidos pois na literatura é possível identificar trabalhos que já detectaram e listaram quais são os \textit{bad-smells} desses sistemas e quais são as possíveis refatorações para serem aplicadas como solução~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}. Assim, o engenheiro de modernização apenas precisa aplicar as refatorações nos sistemas.  
-
-
+Na Tabela~\ref{tab:sistemas_experimentos} é possível visualizar algumas informações sobre os setes sistemas. Como apresentado no Capítulo~\ref{chapter:ferramenta_kdm_re}, a ferramenta KDM-RE apenas auxilia o engenheiro de software a aplicar refatorações em instâncias do metamodelo KDM. É de responsabilidade do engenheiro identificar onde aplicar a refatoração uma vez que a ferramenta KDM-RE ainda não identifica \textit{bad-smells}~\cite{Fowler1999}. Assim, esses setes sistemas foram escolhidos, pois na literatura é possível identificar trabalhos que já detectaram e listaram quais são os \textit{bad-smells} desses sistemas e quais são as possíveis refatorações para serem aplicadas como solução~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}. Assim, o engenheiro de software apenas precisa aplicar as refatorações nos sistemas.  
 
 
 Os \textit{bad-smells} identificados nesses sistemas são: \textit{Blob} (uma classe contém muitas linhas de código-fonte e monopoliza o comportamento do sistema), \textit{Data Class} (uma classe que contêm apenas atributos, porém não os utilizam para realizar nenhum tipo de processamento), \textit{Spaghetti Code} (código com uma estrutura de controle complexo e emaranhado) e \textit{Functional Decomposition} (quando uma classe desempenha uma única função, ao invés de ser um encapsulamento de dados e funcionalidade)~\cite{Fowler1999}. Está fora do escopo deste capítulo se aprofundar nesses \textit{bad-smells}. Porém, uma lista completa dos \textit{bad-smells} identificados dos sete sistemas escolhidos para esse experimento pode ser visualizada nos artigos~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}.
 
-O principal objetivo desse experimento é verificar se após a aplicação de um conjunto de refatorações com base em \textit{bad-smell} já identificados na literatura~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010} as refatorações adaptadas para o metamodelo KDM melhoraram os sistemas em termos de atributos de qualidade. Os atributos de qualidade foram avaliados utilizando o modelo \sigla{QMOOD}{\textit{Quality Model for Object-Oriented Design}}~\cite{Bansiya_QMOOD}. O QMOOD é um modelo de qualidade para POO que estabelece um modelo hierárquico definido e empiricamente validado para avaliar atributos de qualidade de POO. O uso do modelo QMOOD nesse experimento ocorreu pois: (\textit{i}) o QMOOD é bastante utilizado na literatura~\cite{Keeffe_2008, Seng_2006, Jensen_2010} para avaliar o efeito de refatoração e (\textit{ii}) o QMOOD define seis atributos de qualidade (\aspas{facilidade de compreensão} (\textit{understandability}), \aspas{eficácia} (\textit{effectiveness}), \aspas{extensibilidade} (\textit{extendibility}), \aspas{reusabilidade} (\textit{reusability}), \aspas{funcionalidade} (\textit{functionality}) e \aspas{flexibilidade} (\textit{flexibility})) que são calculados utilizando 11 métricas~\cite{Bansiya_QMOOD} (ver Tabela~\ref{tab:QMOOD_quality_metrics} e Tabela~\ref{tab:QMOOD_quality_metrics2}). 
+O principal objetivo desse experimento é verificar se após a aplicação de um conjunto de refatorações com base em \textit{bad-smell} já identificados na literatura~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010} as refatorações adaptadas para o metamodelo KDM melhoraram os sistemas em termos de atributos de qualidade. Os atributos de qualidade foram avaliados utilizando o modelo \sigla{QMOOD}{\textit{Quality Model for Object-Oriented Design}}~\cite{Bansiya_QMOOD}. O QMOOD é um modelo de qualidade para POO que estabelece um modelo hierárquico definido e empiricamente validado para avaliar atributos de qualidade de POO. O uso do modelo QMOOD nesse experimento ocorreu, pois: (\textit{i}) o QMOOD é bastante utilizado na literatura~\cite{Keeffe_2008, Seng_2006, Jensen_2010} para avaliar o efeito de refatoração e (\textit{ii}) o QMOOD define seis atributos de qualidade (\aspas{facilidade de compreensão} (\textit{understandability}), \aspas{eficácia} (\textit{effectiveness}), \aspas{extensibilidade} (\textit{extendibility}), \aspas{reusabilidade} (\textit{reusability}), \aspas{funcionalidade} (\textit{functionality}) e \aspas{flexibilidade} (\textit{flexibility})) que são calculados utilizando 11 métricas~\cite{Bansiya_QMOOD} (ver Tabela~\ref{tab:QMOOD_quality_metrics} e Tabela~\ref{tab:QMOOD_quality_metrics2}). 
 
 
-Nesse experimento apenas quatro atributos de qualidade foram considerados: reusabilidade, flexibilidade, facilidade de compreensão e eficácia. De acordo com~\citeonline{Bansiya_QMOOD} esses atributos de qualidade podem ser definidos como: 
+Nesse experimento apenas quatro atributos de qualidade foram considerados: \aspas{reusabilidade}, \aspas{flexibilidade}, \aspas{facilidade de compreensão} e \aspas{eficácia}. De acordo com~\citeonline{Bansiya_QMOOD} esses atributos de qualidade podem ser definidos como: 
 
 \begin{itemize}
 \item Reusabilidade: Características de POO que permitem que um projeto seja reaplicado para um novo problema sem esforço significativo;
 \item Flexibilidade: A capacidade de um projeto ser adaptado para disponibilizar novos recursos;
 \item Facilidade de Compreensão: Propriedades do projeto que permitem que seja facilmente aprendido e compreendido. Está relacionado com a complexidade da estrutura do projeto;
-\item Eficácia: Capacidade do projeto obter a funcionalidade e o comportamento desejado, utilizando conceitos e técnicas de POO.
+\item Eficácia: Capacidade de o projeto obter a funcionalidade e o comportamento desejado, utilizando conceitos e técnicas de POO.
 \end{itemize}
 
-O atributo de qualidade funcionalidade foi excluído nesse experimento porque assume-se que, por definição, uma refatoração não deve alterar o comportamento/funcionalidade do sistema; em vez disso, apenas altera a estrutura do sistema. Também foi excluído o atributo de qualidade extensibilidade pois de acordo com~\citeonline{Bansiya_QMOOD} é um atributo de qualidade subjetivo. 
+O atributo de qualidade \aspas{funcionalidade} foi excluído nesse experimento porque se assume que, por definição, uma refatoração não deve alterar o comportamento/funcionalidade do sistema; em vez disso, apenas altera a estrutura do sistema. Também foi excluído o atributo de qualidade extensibilidade, pois de acordo com~\citeonline{Bansiya_QMOOD} é um atributo de qualidade subjetivo. 
 
 A Tabela~\ref{tab:QMOOD_quality_metrics} apresenta as propriedades de POO e as métricas que foram utilizadas para mensurar as instâncias do metamodelo KDM antes e após a aplicação das refatorações. A Tabela~\ref{tab:QMOOD_quality_metrics2} apresenta os atributos de qualidade e as propriedades definidas por~\citeonline{Bansiya_QMOOD}. Nesse experimento o ganho de qualidade é calculado pela comparação de cada atributo de qualidade antes e após a aplicação de um conjunto de refatorações. Dessa forma, o ganho total da qualidade ($G_{q}$) para cada atributo de qualidade QMOOD pode ser estimado de acordo com a Definição~\ref{def:qmood}
 
@@ -169,49 +167,99 @@ Esse experimento foi planejado utilizando o modelo GQM (\textit{Goal, Question, 
 \item \textbf{Objeto de estudo}: o objeto de estudo desse experimento são as refatorações adaptadas para o metamodelo KDM;
 \item \textbf{Propósito}: o propósito desse experimento é avaliar as refatorações adaptadas para o metamodelo KDM;
 \item \textbf{Perspectiva}: esse experimento esta sendo executado sobre a perspectiva de um pesquisador;
-\item \textbf{Qualidade de foco}: o efeito primário sobre investigação nesse experimento são os atributos de qualidade QMOOD após a aplicação de um conjunto de refatoração;
-\item \textbf{Contexto}: esse experimento foi conduzido utilizando Eclipse 4.3.2 em uma máquina 2.5 GHz Intel Core i5 com 8GB de memória física executando o sistema operacional Mac OS X 10.9.2.
+\item \textbf{Qualidade de foco}: o efeito primário sobre investigação nesse experimento são os atributos de qualidade QMOOD. Mais especificadamente os atributos \aspas{reusabilidade}, \aspas{flexibilidade}, \aspas{facilidade de compreensão} e \aspas{eficácia} após a aplicação de um conjunto de refatoração;
+\item \textbf{Contexto}: esse experimento foi conduzido utilizando o ambiente de desenvolvimento Eclipse 4.3.2 em uma máquina 2.5 GHz Intel Core i5 com 8GB de memória física executando o sistema operacional Mac OS X 10.9.2.
 \end{itemize}
 
 
-O experimento pode ser resumido utilizando o seguinte \textit{template}~\cite{Wohlin}:
-
-\textbf{Analisar} as refatorações adaptadas para o metamodelo KDM
-
-\textbf{Com o propósito de} avaliar as refatorações adaptadas 
-
-\textbf{Com respeito aos} atributos de qualidade QMOOD
-
-\textbf{Do ponto de vista dos} pesquisados
-
-\textbf{No contexto de } diferentes sistemas.
+O experimento pode ser resumido utilizando o seguinte \textit{template}~\cite{Wohlin}: \textbf{Analisar} as refatorações adaptadas para o metamodelo KDM; \textbf{com o propósito de} avaliar as refatorações adaptadas; \textbf{com respeito a} \aspas{reusabilidade}, \aspas{flexibilidade}, \aspas{facilidade de compreensão} e \aspas{eficácia}; \textbf{do ponto de vista dos} pesquisadores; \textbf{no contexto de} distintos sistemas.
 
 \subsubsection{Formulação das Hipóteses}
 
-A \mathbf{$QP_1$} foi formalizada em duas hipóteses, como apresentado a seguir:
+
+
+A \mathbf{$QP_1$} foi formalizada em hipóteses. Para cada atributo de qualidade (\aspas{reusabilidade}, \aspas{flexibilidade}, \aspas{facilidade de compreensão} e \aspas{eficácia}) utilizado nesse experimento foi criado hipóteses como apresentado a seguir:
+
+%\aspas{reusabilidade}, \aspas{flexibilidade}, \aspas{facilidade de compreensão} e \aspas{eficácia}
 
 \begin{itemize}
-\item \textbf{Hipótese Nula} \textbf{$(H1_{0})$}: Não há diferença significativa entre instâncias do metamodelo KDM antes e após a aplicação de um conjunto de refatorações em relação aos atributos de qualidade QMOOD. Isso pode ser formalizado como: 
+
+\item \aspas{Reusabilidade}:
 
 \begin{itemize}
-\item $H1_{0}$: $\mu_{QMOOD_{antes}} = \mu_{QMOOD_{depois}}$
+\item \textbf{Hipótese Nula} \textbf{$(H1_{0})$}: Não há diferença significativa entre instâncias do metamodelo KDM antes e após a aplicação de um conjunto de refatorações em relação a reusabilidade. Isso pode ser formalizado como: 
+
+\begin{itemize}
+\item $H1_{0}$: $\mu_{reusabilidade_{antes}} = \mu_{reusabilidade_{depois}}$
 \end{itemize}
 
-\item \textbf{Hipótese Alternativa} \textbf{$(H1_{1})$}: Há diferença significativa entre a instâncias do metamodelo KDM refatorado e a instância do metamodelo KDM não refatorada em relação aos atributos de qualidade QMOOD. Isso pode ser formalizado como: 
+\item \textbf{Hipótese Alternativa} \textbf{$(H1_{1})$}: Há diferença significativa entre as instâncias do metamodelo KDM refatorado e a instância do metamodelo KDM não refatorada em relação a reusabilidade. Isso pode ser formalizado como: 
 
 \begin{itemize}
-\item $H1_{1}$: $\mu_{QMOOD_{antes}} \neq \mu_{QMOOD_{depois}}$;
+\item $H1_{1}$: $\mu_{reusabilidade_{antes}} \neq \mu_{reusabilidade_{depois}}$;
+\end{itemize}
+\end{itemize}
+
+\item \aspas{Flexibilidade}:
+
+\begin{itemize}
+%segunda hipotese
+\item \textbf{Hipótese Nula} \textbf{$(H2_{0})$}: Não há diferença significativa entre instâncias do metamodelo KDM antes e após a aplicação de um conjunto de refatorações em relação a flexibilidade. Isso pode ser formalizado como: 
+
+\begin{itemize}
+\item $H2_{0}$: $\alpha_{flexibilidade_{antes}} = \alpha_{flexibilidade_{depois}}$
+\end{itemize}
+
+\item \textbf{Hipótese Alternativa} \textbf{$(H2_{1})$}: Há diferença significativa entre as instâncias do metamodelo KDM refatorado e a instância do metamodelo KDM não refatorada em relação a flexibilidade. Isso pode ser formalizado como: 
+
+\begin{itemize}
+\item $H2_{1}$: $\alpha_{flexibilidade_{antes}} \neq \alpha_{flexibilidade_{depois}}$;
+\end{itemize}
+\end{itemize}
+
+\item \aspas{Facilidade de Compreensão}:
+
+\begin{itemize}
+%terceira hipotese
+\item \textbf{Hipótese Nula} \textbf{$(H3_{0})$}: Não há diferença significativa entre instâncias do metamodelo KDM antes e após a aplicação de um conjunto de refatorações em relação a facilidade de compreensão. Isso pode ser formalizado como: 
+
+\begin{itemize}
+\item $H3_{0}$: $\beta_{compreensao_{antes}} = \beta_{compreensao_{depois}}$
+\end{itemize}
+
+\item \textbf{Hipótese Alternativa} \textbf{$(H3_{1})$}: Há diferença significativa entre as instâncias do metamodelo KDM refatorado e a instância do metamodelo KDM não refatorada em relação a facilidade de compreensão. Isso pode ser formalizado como: 
+
+\begin{itemize}
+\item $H3_{1}$: $\beta_{compreensao_{antes}} \neq \beta_{compreensao_{depois}}$;
+\end{itemize}
+\end{itemize}
+
+\item \aspas{Eficácia}:
+    
+    \begin{itemize}
+%terceira hipotese
+\item \textbf{Hipótese Nula} \textbf{$(H4_{0})$}: Não há diferença significativa entre instâncias do metamodelo KDM antes e após a aplicação de um conjunto de refatorações em relação a eficácia. Isso pode ser formalizado como: 
+
+\begin{itemize}
+\item $H4_{0}$: $\gamma_{eficacia_{antes}} = \gamma_{eficacia_{depois}}$
+\end{itemize}
+
+\item \textbf{Hipótese Alternativa} \textbf{$(H4_{1})$}: Há diferença significativa entre as instâncias do metamodelo KDM refatorado e a instância do metamodelo KDM não refatorada em relação a eficacia. Isso pode ser formalizado como: 
+
+\begin{itemize}
+\item $H4_{1}$: $\gamma_{eficacia_{antes}} \neq \gamma_{eficacia_{depois}}$;
+\end{itemize}
 \end{itemize}
 
 \end{itemize}
 
 \subsubsection{Variáveis}
 
-Esse experimento teve as seguintes variáveis independentes: (\textit{i}) a ferramenta KDM-RE, (\textit{ii}) EMF \textit{Metrics} e EMF \textit{Smell}~\cite{Arendt_2012}, (\textit{iii}) o Eclipse IDE versão 4.2.1, (\textit{iv}) a linguagem de programação Java, e (\textit{v}) os setes sistemas utilizados nesse experimento, ver Tabela~\ref{tab:sistemas_experimentos}. As variáveis dependentes são as seguintes: (\textit{i}) reusabilidade, (\textit{ii}) flexibilidade, (\textit{iii}) facilidade de compreensão e (\textit{iv}) eficácia.
+Esse experimento teve as seguintes variáveis independentes: (\textit{i}) a ferramenta KDM-RE, (\textit{ii}) EMF \textit{Metrics} e EMF \textit{Smell}~\cite{Arendt_2012}, (\textit{iii}) o ambiente de desenvolvimento Eclipse versão 4.3.2, (\textit{iv}) a linguagem de programação Java, e (\textit{v}) os setes sistemas utilizados nesse experimento, ver Tabela~\ref{tab:sistemas_experimentos}. As variáveis dependentes são as seguintes: (\textit{i}) reusabilidade, (\textit{ii}) flexibilidade, (\textit{iii}) facilidade de compreensão e (\textit{iv}) eficácia.
 
 \subsection{Operação do Experimento 1}
 
-Depois de definir e planejar o experimento, sua fase de operação foi realizada em duas etapas: Preparação e Execução. Na Figura~\ref{fig:execucao_experimento} é apresentado o esquema seguido durante a preparação e execução desse experimento.
+Depois de definir e planejar o experimento, sua fase de operação foi realizada em duas etapas: Preparação e Execução. Na Figura~\ref{fig:execucao_experimento} é apresentado o esquema seguido durante a preparação (\ding{182}) e execução (\ding{183}) desse experimento.
 
 \begin{figure}[h]
 	\centering
@@ -223,13 +271,14 @@ Depois de definir e planejar o experimento, sua fase de operação foi realizada
 
 \subsubsection{Preparação}
 
-Alguns dias antes da realização do experimento, o código-fonte dos setes sistemas apresentado na Tabela~\ref{tab:sistemas_experimentos} foram baixados. Posteriormente, todos os setes sistemas foram transformado em instâncias do metamodelo KDM. Essa transformação foi realizada por meio da ferramenta MoDisco\footnote{\texttt{https://eclipse.org/MoDisco/}} (ver Figura~\ref{fig:execucao_experimento} \ding{182}). Em seguida, para cada instância do metamodelo KDM gerada (que representa os setes sistemas) a ferramenta EMF \textit{Metrics}~\cite{Arendt_2012} foi executada. Essa ferramenta foi escolhida para mensurar os atributos de qualidade QMOOD (reusabilidade, flexibilidade, facilidade de compreensão e  eficácia). Segundo~\citeonline{Arendt_2012} EMF \textit{Metrics} é um Eclipse \textit{plugin} que provê a especificação e calcula métricas para qualquer instância de metamodelo que utilize como base o metamodelo EMF, neste caso o metamodelo KDM. Uma lista especificando os atributos de qualidade QMOOD foi obtida para os setes sistemas.
+Alguns dias antes da realização do experimento, o código-fonte dos setes sistemas apresentado na Tabela~\ref{tab:sistemas_experimentos} foram baixados. Posteriormente, todos os setes sistemas foram transformados em instâncias do metamodelo KDM. Essa transformação foi realizada por meio da ferramenta MoDisco\footnote{\texttt{https://eclipse.org/MoDisco/}} (ver Figura~\ref{fig:execucao_experimento} \ding{182}). Em seguida, para cada instância do metamodelo KDM gerada (que representa os setes sistemas) a ferramenta EMF \textit{Metrics}~\cite{Arendt_2012} foi executada. Essa ferramenta foi escolhida para mensurar os atributos de qualidade QMOOD (reusabilidade, flexibilidade, facilidade de compreensão e eficácia). Segundo~\citeonline{Arendt_2012} EMF \textit{Metrics} é um Eclipse \textit{plugin} que provê a especificação e calcula métricas para qualquer instância de metamodelo que utilize como base o metamodelo EMF, neste caso o metamodelo KDM. Como resultado da aplicação do EMF \textit{Metrics} uma lista especificando os atributos de qualidade QMOOD foi obtida para os setes sistemas.
 
 \subsubsection{Execução}
 
-Após gerar as instâncias do metamodelo KDM dos setes sistemas e aplicar a ferramenta EMF \textit{Metrics} para mensurar os atributos de qualidade QMOOD, o próximo passo é a aplicação das refatorações no metamodelo KDM por meio da ferramenta KDM-RE (ver Capítulo~\ref{chapter:ferramenta_kdm_re}). Como já salientado, a ferramenta KDM-RE no seu estado atual não identifica \textit{bad-smells}. Dessa forma, um conjunto de artigos foi lido na integra pois listam e descrevem um conjunto de \textit{bad-smells} dos setes sistemas utilizados nesse experimento~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}. Uma lista completa dos \textit{bad-smells} identificados pelos autores pode ser visualizada no Apêndice X\change{mudar}. Essa lista foi utilizada nesse experimento para guiar o engenheiro de modernização a identificar qual refatoração aplicar (ver Figura~\ref{fig:execucao_experimento} \ding{183}).
+Após gerar as instâncias do metamodelo KDM dos setes sistemas e aplicar a ferramenta EMF \textit{Metrics} para mensurar os atributos de qualidade QMOOD, o próximo passo é a aplicação das refatorações no metamodelo KDM por meio da ferramenta KDM-RE (ver Capítulo~\ref{chapter:ferramenta_kdm_re}). Como já salientado, a ferramenta KDM-RE no seu estado atual não identifica \textit{bad-smells}. Dessa forma, um conjunto de artigos foi lido na integra, pois listam e descrevem um conjunto de \textit{bad-smells} dos setes sistemas utilizados nesse experimento~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}. Esses artigos apresentam uma lista completa dos \textit{bad-smells} identificados. Essa lista foi utilizada nesse experimento para guiar o engenheiro de modernização a identificar qual refatoração aplicar (ver Figura~\ref{fig:execucao_experimento} \ding{183}).
 
-Após tomar conhecimento dos \textit{bad-smells} de cada sistema um conjunto de refatorações foi escolhido e depois executado por meio da ferramenta KDM-RE. Cada refatoração foi aplicada para tentar resolver e remover os \textit{bad-smells} identificados e melhorar assim os atributos de qualidade QMOOD. As refatorações escolhidas para remover os \textit{bad-smells} e melhorar os atributos de qualidade foram criteriosamente identificadas no catálogo de refatoração proposto por~\citeonline{Fowler1999} que descreve qual(is) refatoração(ões) aplicar para resolver um determinado \textit{bad-smell}. As refatorações que foram aplicadas nos setes sistemas estão apresentadas na Tabela~\ref{tab:experimento_refatoracoes_aplicadas} e as respectivas sigla de cada uma. 
+Após tomar conhecimento dos \textit{bad-smells} de cada sistema um conjunto de refatorações foi escolhido e depois executado por meio da ferramenta KDM-RE. Cada refatoração foi aplicada para tentar resolver e remover os \textit{bad-smells} identificados e melhorar assim os atributos de qualidade QMOOD. As refatorações escolhidas para remover os \textit{bad-smells} e melhorar os atributos de qualidade foram criteriosamente identificadas no catálogo de refatoração proposto por~\citeonline{Fowler1999} que descreve qual (is) refatoração (ões) aplicar para resolver um determinado \textit{bad-smell}. É importante salientar que nesse experimento as refatorações não foram aplicadas no diagrama de classe, ou seja, de forma totalmente manual e por intervenção de \textit{Wizards} como apresentada no Capítulo X. As refatorações não foram executadas manualmente pelo engenheiro de software uma vez que muitas refatorações foram aplicadas o que iria demandar muito tempo para a condução do experimento. Dessa forma, foi criado um arquivo que continha as refatorações, os parâmetros e os caminhos para cada instância do KDM que representavam os sete sistemas utilizados no experimento. Esse arquivo foi criado tendo como base os \textit{bad-smell} identificados, assim soube-se previamente qual refatoração aplicar, bem como seus parâmetros – portanto, a ferramenta KDM-RE executou as refatorações de forma semiautomática diminuindo o tempo para a condução do experimento. Para cada refatoração um limite de tempo de 5 minutos foi definido, esse limite de tempo é importante para verificar se a ferramenta KDM-RE não entrou em \textit{loop} infinito.
+As refatorações que foram aplicadas nos setes sistemas estão apresentadas na Tabela~\ref{tab:experimento_refatoracoes_aplicadas}, bem como suas respectivas siglas. 
 
 
 
@@ -263,7 +312,7 @@ Após tomar conhecimento dos \textit{bad-smells} de cada sistema um conjunto de 
 \end{table}
 
 
-Na Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas} é possível observar os dados relacionado com a quantidade de refatorações aplicada em cada sistema. Nota-se que a refatoração \texttt{Move Method} foi a refatoração mais executada, aproximadamente 26.35\%.  Em seguida, a refatoração \texttt{Move Field} foi a segunda refatoração mais aplicada, aproximadamente 13.42\%. A maioria das refatorações aplicadas estão relacionadas com mover elementos e extrair elementos (\texttt{Extract Class}), somando as refatorações \texttt{Move Method}, \texttt{Move Field} e \texttt{Extract Class} têm-se 51.06\% das refatorações aplicadas. Esses dados estão diretamente relacionados aos \textit{bad-smells} utilizados nesse experimento: \textit{blob}, \textit{data class} e \textit{spaghetti code}. Por exemplo, para remover o \textit{bad-smell} do tipo \textit{blob} é necessário mover elementos de uma classe para outro classe a fim de reduzir o número de funcionalidades e adicionar comportamento em outras classes. Similarmente para remover o \textit{bad-smell} do tipo \textit{data class} deve-se aplicar a refatoração \texttt{Move Method}. Ainda observando a Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas} é possível observar que as refatorações menos aplicadas foram: \texttt{Push Up Method}, \texttt{Push Up Field} e \texttt{Move Class}, respectivamente. 
+Na Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas} é possível observar os dados relacionados com a quantidade de refatorações aplicada em cada sistema. Nota-se que a refatoração \texttt{Move Method} foi a refatoração mais executada, aproximadamente 26.35\%.  Em seguida, a refatoração \texttt{Move Field} foi a segunda refatoração mais aplicada, aproximadamente 13.42\%. A maioria das refatorações aplicadas está relacionada com mover (\texttt{Move Field} e \texttt{Move Method}) e extrair elementos (\texttt{Extract Class}), somando as refatorações \texttt{Move Method}, \texttt{Move Field} e \texttt{Extract Class} têm-se 51.06\% das refatorações aplicadas – ou seja, mais da metade as refatorações. Esses dados estão diretamente relacionados aos \textit{bad-smells} utilizados nesse experimento: \textit{blob}, \textit{data class} e \textit{spaghetti code}. Por exemplo, para remover o \textit{bad-smell} do tipo \textit{blob} é necessário mover elementos de uma classe para outra classe a fim de reduzir o número de funcionalidades e adicionar comportamento em outras classes. Similarmente para remover o \textit{bad-smell} do tipo \textit{data class} deve-se aplicar a refatoração \texttt{Move Method}. Ainda observando a Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas} é possível observar que as refatorações menos aplicadas foram: \texttt{Push Up Method}, \texttt{Push Up Field} e \texttt{Move Class}, respectivamente. 
 
 \begin{table}[h]
 \centering
@@ -290,7 +339,7 @@ Após a aplicação das refatorações nos sete sistemas a ferramenta EMF \texti
 
 \subsection{Análise dos Dados do Experimento 1}
 
-Na Tabela~\ref{tab:dados_coletados_experimento_1} é possível observar os dados relacionados os atributos (reusabilidade, flexibilidade, facilidade de compreensão e eficácia) de qualidade avaliados no experimento 1 antes e após a aplicação das refatorações apresentadas na Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas}. A Tabela~\ref{tab:dados_coletados_experimento_1} sete colunas, \aspas{Antes} representa as métricas mensuradas dos sistemas antes de aplicar as refatorações. \aspas{Depois} representa as métricas coletadas dos sistemas após a aplicação das refatorações e \aspas{Diferença} representa a diferença das colunas \aspas{Antes} e \aspas{Depois}, ou seja, a diferençã entre as métricas são calculadas da seguinte forma: \aspas{Depois}-\aspas{Antes}. Os mesmos dados são plotados nos gráficos de barra nas Figuras~\ref{fig:immediate}, \ref{fig:proximal}, \ref{fig:distal} e \ref{fig:combined}. Nota-se que todos os atributos de qualidade foram melhorados após a aplicação das refatorações: (\textit{i}) Reusabilidade (antes 44.07\% depois 55.93\%), Flexibilidade (antes 46.25\% depois 53.75\%), Facilidade de Compreensão (antes 42.98\% depois 57.02\%) e Eficácia (antes 47.14\% depois 52.86\%). 
+Na Tabela~\ref{tab:dados_coletados_experimento_1} é possível observar os dados relacionados aos atributos (reusabilidade, flexibilidade, facilidade de compreensão e eficácia) de qualidade avaliados no experimento 1 antes e após a aplicação das refatorações apresentadas na Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas}. A Tabela~\ref{tab:dados_coletados_experimento_1} possui sete colunas, \aspas{Antes} representa as métricas mensuradas dos sistemas antes de aplicar as refatorações. \aspas{Depois} representa as métricas coletadas dos sistemas após a aplicação das refatorações e \aspas{Diferença} representa a diferença das colunas \aspas{Antes} e \aspas{Depois}, ou seja, a diferença entre as métricas são calculadas da seguinte forma: \aspas{Depois}-\aspas{Antes}. Os mesmos dados são plotados nos gráficos de barra nas Figuras~\ref{fig:immediate}, \ref{fig:proximal}, \ref{fig:distal} e \ref{fig:combined}. 
 
 
 \begin{table}[h]
@@ -309,7 +358,7 @@ Na Tabela~\ref{tab:dados_coletados_experimento_1} é possível observar os dados
 \multicolumn{1}{|c|}{ArtofIllusion} & \multicolumn{1}{c|}{0.04}          & \multicolumn{1}{c|}{0.09}          & \multicolumn{1}{c|}{0.05} & \multicolumn{1}{c|}{0.11}      & \multicolumn{1}{c|}{0.13}      & \multicolumn{1}{c|}{0.02} \\ \hline
 \multicolumn{1}{|c|}{JHotDraw}      & \multicolumn{1}{c|}{0.02}          & \multicolumn{1}{c|}{0.05}          & \multicolumn{1}{c|}{0.03} & \multicolumn{1}{c|}{0.03}      & \multicolumn{1}{c|}{0.05}      & \multicolumn{1}{c|}{0.02}\\ \hline
 \multicolumn{1}{|c|}{Média}         & \multicolumn{1}{c|}{0.074}         & \multicolumn{1}{c|}{0.094}         & \multicolumn{1}{c|}{0.020} & \multicolumn{1}{c|}{0.105}     & \multicolumn{1}{c|}{0.122}     & \multicolumn{1}{c|}{0.017} \\ \hline
-\multicolumn{1}{|l|}{Porcentagem}   & 44.07\%       & 55.93\%       &\multicolumn{1}{c|}{\textemdash}                & 46.25\%   & 53.75\%   & \multicolumn{1}{c|}{\textemdash}\\ \hline
+\multicolumn{1}{|l|}{Porcentagem}   & 44.07\%       & 55.93\%       &\multicolumn{1}{c|}{11.86\%}                & 46.25\%   & 53.75\%   & \multicolumn{1}{c|}{7.50\%}\\ \hline
                                     & \multicolumn{3}{c|}{Facilidade de Compreensão} & \multicolumn{3}{c|}{Eficácia}      \\ \hline
 \multicolumn{1}{|c|}{Sistemas}      & Antes         & Depois        & Diferença      & Antes     & Depois    & Diferença  \\ \hline
 \multicolumn{1}{|c|}{Xerces-J}      & \multicolumn{1}{c|}{0.21}& \multicolumn{1}{c|}{0.27}          &\multicolumn{1}{c|}{0.06}&\multicolumn{1}{c|}{0.07}&\multicolumn{1}{c|}{0.08}&\multicolumn{1}{c|}{0.01}            \\ \hline
@@ -320,13 +369,14 @@ Na Tabela~\ref{tab:dados_coletados_experimento_1} é possível observar os dados
 \multicolumn{1}{|c|}{ArtofIllusion} & \multicolumn{1}{c|}{0.09}          & \multicolumn{1}{c|}{0.14}          &\multicolumn{1}{c|}{0.05}&\multicolumn{1}{c|}{0.03}&\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.01}\\ \hline
 \multicolumn{1}{|c|}{JHotDraw}             & \multicolumn{1}{c|}{0.04}          & \multicolumn{1}{c|}{0.08}          &\multicolumn{1}{c|}{0.04}&\multicolumn{1}{c|}{0.01}&\multicolumn{1}{c|}{0.02}&\multicolumn{1}{c|}{0.01}\\ \hline
 \multicolumn{1}{|c|}{Média}         & \multicolumn{1}{c|}{0.148}         & \multicolumn{1}{c|}{0.197}         &\multicolumn{1}{c|}{0.048}&\multicolumn{1}{c|}{0.047}&\multicolumn{1}{c|}{0.052}&\multicolumn{1}{c|}{0.005}\\ \hline
-\multicolumn{1}{|l|}{Porcentagem}   & 42.98\%       & 57.02\%       &\multicolumn{1}{c|}{\textemdash}&  \multicolumn{1}{c|}{47.14\%}  &  \multicolumn{1}{c|}{52.86\%}  &\multicolumn{1}{c|}{\textemdash}\\ \hline
+\multicolumn{1}{|l|}{Porcentagem}   & 42.98\%       & 57.02\%       &\multicolumn{1}{c|}{14.05\%}&  \multicolumn{1}{c|}{47.14\%}  &  \multicolumn{1}{c|}{52.86\%}  &\multicolumn{1}{c|}{5.71\%}\\ \hline
 \end{tabular}
 \end{table}
 
-É importante observar que o atributo de qualidade Facilidade de Compreensão foi o que alcançou o maior ganho, aproximadamente 57\%. Por outro lado, o atributo de qualidade Eficácia teve o menor ganho, alcançando aproximadamente 53\%. Isto deve-se principalmente as refatorações aplicadas. Por exemplo, a maioria das refatorações aplicadas (\texttt{Move Method}, \texttt{Move Field} e \texttt{Extract Class} ver Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas}) aumentam o acoplamento (DCC), coesão (CAM) e tamanho do projeto (DSC) que são métricas utilizadas para calcular o atributo de qualidade Facilidade de Compreensão.
+Nota-se que todos os atributos de qualidade foram melhorados após a aplicação das refatorações: (\textit{i}) \aspas{reusabilidade} (antes = 44.07\%, depois = 55.93\% e diferença = 11.86\%), \aspas{flexibilidade} (antes = 46.25\%, depois = 53.75\% e diferença = 7.50\%), \aspas{facilidade de compreensão} (antes = 42.98\%, depois = 57.02\% e diferença = 14.05\%) e \aspas{eficácia} (antes = 47.14\%, depois = 52.86\% e diferença = 5.71\%).
+É importante observar que o atributo de qualidade \aspas{facilidade de compreensão} foi o que alcançou o maior ganho, aproximadamente 57\%. Por outro lado, o atributo de qualidade \aspas{eficácia} teve o menor ganho, alcançando aproximadamente 53\%. Isto deve-se principalmente as refatorações aplicadas. Por exemplo, a maioria das refatorações aplicadas (\texttt{Move Method}, \texttt{Move Field} e \texttt{Extract Class} (ver Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas})) aumentam o acoplamento (DCC), coesão (CAM) e tamanho do projeto (DSC) que são métricas utilizadas para calcular o atributo de qualidade Facilidade de Compreensão.
 
-Além disso, pode-se também observar que o sistema JHotDraw produziu o menor aumento para os quatro atributos de qualidade. A principal razão é que JHotDraw é conhecido na literatura por seguir as melhores práticas de projeto e implementação~\cite{Kessentini_2010}.
+Além disso, pode-se também observar nas Figuras~\ref{fig:immediate}, \ref{fig:proximal}, \ref{fig:distal} e \ref{fig:combined} que o sistema JHotDraw produziu o menor aumento para os quatro atributos de qualidade. Acredita-se que a principal razão é que JHotDraw é conhecido na literatura por seguir as melhores práticas de projeto e implementação~\cite{Kessentini_2010}, assim, poucas refatorações foram aplicadas nesse sistema.
 
 
 
@@ -358,11 +408,12 @@ Além disso, pode-se também observar que o sistema JHotDraw produziu o menor au
 
 \end{figure}
 
+\subsubsection{Teste das Hipóteses}
+
+Nesta seção são apresentados os resultados dos testes estatísticos aplicados sobre os dados coletados no experimento. Antes de aplicar qualquer teste estatístico é importante verificar se um conjunto de dados segue, ou não, uma distribuição normal (ver Seção~\ref{sec:shapiro_wilk}). Dessa forma, para os conjunto de dados (antes e depois das refatorações) dos atributos de qualidade \aspas{reusabilidade}, \aspas{flexibilidade}, \aspas{facilidade de compreensão} e \aspas{eficácia} apresentados na Tabela~\ref{tab:dados_coletados_experimento_1} aplicou-se o teste \textbf{Shapiro-Wilk} para verificar se os dados seguem uma distribuição normal. Além disso, para cada conjunto de dados também foi criado um gráfico de probabilidade denominado \textit{Q-Q Plot}.
 
 
-
-
-
+O p-valor resultante do teste \textit{Shapiro-Wilk} sobre os dados das r
 
 
 \subsection{Ameaças à Validade do Experimento 1}
