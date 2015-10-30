@@ -408,20 +408,29 @@ Além disso, pode-se também observar nas Figuras~\ref{fig:immediate}, \ref{fig:
 
 \end{figure}
 
+\begin{figure}[h]
+	\centering
+	\caption{Gráficos resultantes do teste de normalidade.}
+	\label{fig:qq_plot_experimento1}
+	\includegraphics[scale=0.9]{images/qqPlotAll2_experimento1}
+	\fautor
+\end{figure}
+
 \subsubsection{Teste das Hipóteses}
 
-Nesta seção são apresentados os resultados dos testes estatísticos aplicados sobre os dados coletados no experimento. Antes de aplicar qualquer teste estatístico é importante verificar se um conjunto de dados segue, ou não, uma distribuição normal (ver Seção~\ref{sec:shapiro_wilk}). Dessa forma, para os conjunto de dados (antes e depois das refatorações) dos atributos de qualidade \aspas{reusabilidade}, \aspas{flexibilidade}, \aspas{facilidade de compreensão} e \aspas{eficácia} apresentados na Tabela~\ref{tab:dados_coletados_experimento_1} aplicou-se o teste \textbf{Shapiro-Wilk} para verificar se os dados seguem uma distribuição normal. Além disso, para cada conjunto de dados também foi criado um gráfico de probabilidade denominado \textit{Q-Q Plot}. Na Tabela~\ref{tab:shapiro_experimento_1}
+Nesta seção são apresentados os resultados dos testes estatísticos aplicados sobre os dados coletados no experimento. Antes de aplicar qualquer teste estatístico é importante verificar se um conjunto de dados segue, ou não, uma distribuição normal (ver Seção~\ref{sec:shapiro_wilk}). Dessa forma, para os conjunto de dados (antes e depois das refatorações) dos atributos de qualidade \aspas{reusabilidade}, \aspas{flexibilidade}, \aspas{facilidade de compreensão} e \aspas{eficácia} apresentados na Tabela~\ref{tab:dados_coletados_experimento_1} aplicou-se o teste \textbf{Shapiro-Wilk} para verificar se os dados seguem uma distribuição normal. Além disso, para cada conjunto de dados também foi criado gráficos de probabilidade denominado \textit{Q-Q Plot}, ver Figura~\ref{fig:qq_plot_experimento1}. Como pode ser observado na Tabela~\ref{tab:dados_coletados_experimento_1} o p-valor resultante para cada atributo de qualidade é: reusabilidade (antes = 0.8988, depois = 0.7245), flexibilidade (antes = 0.3298, depois = 0.416), facilidade de compreensão (antes = 0.8137, depois = 0.4716) e eficácia (antes = 0.9355, depois = 0.8362). Note que todos os p-valor dos testes foram superior a 0.05, então, pode-se afirmar, com nível de confiança de 95\%, que os dados seguem uma distribuição normal. Isso também pode ser verificado nos gráficos mostrados na Figura~\ref{fig:qq_plot_experimento1}. Nota-se que em tais gráficos os pontos estão formados pelo quantis amostrais e o pontos alinham-se nas respectivas retas, assim, pode-se afirmar que os dados estão normalizados.
 
+Como os dados estão normalizados (ver Tabela~\ref{tab:shapiro_experimento_1}), o \textit{Paried T-Test} foi aplicado sobre os dados para verificar as hipóteses da \mathbf{$QP_1$} do experimento (Seção~\ref{sec:experimento}). Como pode ser observado o todos os atributos de qualidade foram p-valor < 0.05, então, como nível de confiança de 95\%, existem evidências de diferença entre os atributos de qualificação antes e após a aplicação das refatorações. Portanto, pode-se refutar as hipóteses nulas \textbf{$H1_{0}$}, \textbf{$H2_{0}$} e \textbf{$H3_{0}$} e as hipóteses alternativas foram aceitas. Como observado na Tabela X o atributo de qualidade eficácia tem uma relação com o atributo de qualifidade facilidade de compreensão - quando um é melhorado o outro tende a piorar. Dessa forma, para o atributo de qualidade eficácia não pode-se refutar a hipótese nula, os dados não se demostraram estatisticamente significantes para refuta-la.
 
 \begin{table}[]
 \centering
-\caption{My caption}
-\label{my-label}
+\caption{\textit{Shapiro-Wilk} aplicado para verificar se os dados seguem uma distribuição normal.}
+\label{tab:shapiro_experimento_1}
 \begin{tabular}{|c|c|c|c|}
 \hline
 \multicolumn{4}{|c|}{Reusabilidade}                       \\ \hline
 \multicolumn{2}{|c|}{Antes} & \multicolumn{2}{c|}{Depois} \\ \hline
-w=0.97        & p-valor=0.8988        & w=0.9494        & p-valor=0.8988        \\ \hline
+w=0.97        & p-valor=0.8988        & w=0.9494        & p-valor=0.7245        \\ \hline
 \multicolumn{4}{|c|}{Flexibilidade}                       \\ \hline
 \multicolumn{2}{|c|}{Antes} & \multicolumn{2}{c|}{Depois} \\ \hline
 w=0.8998        & p-valor=0.3298        & w=0.9129        & p-valor=0.416        \\ \hline
@@ -435,14 +444,30 @@ w=0.9756        & p-valor=0.9355         & w=0.9621        & p-valor=0.8362     
 \end{table}
 
 
-
-
-
+\begin{table}[]
+\centering
+\caption{\textit{Paried T-Test} aplicado sobre os dados para verificar as hipóteses da \mathbf{$QP_1$}.}
+\label{}
+\begin{tabular}{|m{1cm}|l|l|m{7.1cm}|}
+\hline
+\multicolumn{1}{|c|}{Atributo de Qualidade} & \multicolumn{1}{c|}{T} & \multicolumn{1}{c|}{P-valor} & \multicolumn{1}{c|}{Comentário} \\ \hline
+\multicolumn{1}{|c|}{Reusabilidade} & \multicolumn{1}{c|}{-3.3498} & \multicolumn{1}{c|}{0.01542} & Refuta-se \textbf{$(H1_{0})$} com significância de 5\%\\ \hline
+\multicolumn{1}{|c|}{Flexibilidade} &\multicolumn{1}{c|}{-5.5602}& \multicolumn{1}{c|}{0.001433} &Refuta-se \textbf{$(H2_{0})$} com significância de 5\%\\ \hline
+\multicolumn{1}{|c|}{Facilidade de Compreensão} & \multicolumn{1}{c|}{11.0194} &    \multicolumn{1}{c|}{3.322e-05}&Refuta-se \textbf{$(H3_{0})$} com significância de 5\%\\ \hline
+\multicolumn{1}{|c|}{Eficácia}&\multicolumn{1}{c|}{-1.6951}&\multicolumn{1}{c|}{0.141}&\multicolumn{1}{c|}{Não refuta-se \textbf{$(H4_{0})$}, pois 0.141 > 0.05}\\ \hline
+\end{tabular}
+\end{table}
 
 \subsection{Ameaças à Validade do Experimento 1}
 
+Nesta seção são apresentados os itens que podem afetar os valores e a conclusão do experimento 1. O experimento 1 é afetado pelas ameaças à validade listadas abaixo.
+
+\textbf{Validade Externa:} Validade Externa refere-se a generalidade do experimento. O experimento 1, foi conduzido em sete sistemas diferentes de código aberto amplamente utilizados, pertencentes a diferentes domínios e com tamanhos diferentes. No entanto, não é possível afirmar que os resultados podem ser generalizados para todas as aplicações Java instanciadas para o metamodelo KDM, bem como outras linguagens de programação, e outros engenheiros de software. Outra ameaça pode ser o número limitado de sujeitos/sistemas estudados, o que ameaça externamente a generalização dos nossos resultados. Replicações futuras deste estudo são necessárias para confirmar o resultado da abordagem.
 
 
+\textbf{Validade por Construção}: A validade de construção está preocupada com a relação entre a teoria e o que é observado. Como a ferramenta KDM-RE no seu estado atual não identifica \textit{bad-smells} a escolha das refatorações aplicadas esta totalmente dependente do conhecimento de terceiros. Dessa forma, para mitigar essa ameaça, os sete sistamas foram escolhidos, pois já haviam identificados e listados os \textit{bad-smells} na literatura por outros autores~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}.
+
+\textbf{Validade de Conclusão}: Essa validade está relacionada com a precisão das métricas empregadas durante o experimento 1. Para mitigar essa ameaça, foi-se utilizado métricas já consolidadas na literatura, tais como QMOOD. 
 
 
 \section{Experimento 2: Ferramenta KDM-RE}\label{sec:experimento_KDM_re}
