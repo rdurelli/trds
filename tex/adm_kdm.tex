@@ -1,7 +1,7 @@
 
 \section{Considerações Iniciais}
 
-Este capítulo apresenta uma abordagem conceitual da modernização de sistemas e os esforços do OMG para a realização de uma padronização em nível de modelo desses sistemas. O escopo do trabalho é delimitado e se discute especificadamente sobre Modernização Dirigida à Arquitetura (do inglês - \textit{Architecture-Driven Modernization} - ADM) e \textit{Knowledge Discovery metamodel} (KDM). ADM é o processo de modernização apoiado por modelos da OMG que utiliza os conceitos da MDE. Neste capítulo, são abordados os principais pontos dessa modernização, bem como é apresentada uma descrição mais detalhada do seu principal metamodelo, que é o KDM. Esse capítulo fornece a base necessária para realizar e entender esta Tese.
+Este capítulo apresenta uma abordagem conceitual da modernização de sistemas e os esforços do OMG para a realização de uma padronização em nível de modelo desses sistemas. O escopo do trabalho é delimitado e se discute especificadamente sobre Modernização Dirigida à Arquitetura (do inglês - \textit{Architecture-Driven Modernization} - ADM) e \textit{Knowledge Discovery metamodel} (KDM). ADM é o processo de modernização apoiado por modelos do OMG que utiliza os conceitos da MDE. Neste capítulo, são abordados os principais pontos dessa modernização, bem como é apresentada uma descrição mais detalhada do seu principal metamodelo, que é o KDM.
 
 O capítulo está organizado da seguinte forma: na Seção~\ref{sec:modernizacaoOrientada_Arquitetura} é feita uma contextualização sobre a Modernização Dirigida à Arquitetura; na Seção~\ref{sec:knowledge_discovery_meta_model} o metamodelo KDM é apresentado; na Subseção~\ref{subsection:codePackage} é descrito o pacote \texttt{Code}; na Subseção~\ref{sec:actionPackage} é descrito o pacote \texttt{Action}; na Subseção~\ref{sec:structurePackage} é apresentado o pacote \texttt{Structure}; na Seção~\ref{sec:Ferramenta_de_apoio_KDM_capitulo} é mostrada uma ferramenta de apoio ao KDM e na Seção~\ref{sec:consideracoes_finais_capitutloADM_KDM} são discutidas as considerações finais do capítulo.
 
@@ -10,7 +10,7 @@ O capítulo está organizado da seguinte forma: na Seção~\ref{sec:modernizacao
 
 O crescente interesse na MDE motivou o \sigla{OMG}{\textit{Object Management Group}} a lançar a iniciativa denominada Modernização Dirigida à Arquitetura (do inglês - \textit{Architecture-Driven Modernization} (ADM)), cujo objetivo foi estabelecer metamodelos padronizados para auxiliar todo o  processo da reengenharia de software. Tal iniciativa foi motivada devido ao alto número de projetos reengenharia de software que não obtiveram sucesso~\cite{Sneed_2005, Demeyer2}. Como resultado desse esforço os conceitos da ADM foram criados, os quais possuem como objetivo revitalizar/modernizar softwares existentes\footnote{No contexto desse documento softwares existentes e sistemas legados são utilizados de forma intercambiáveis} com a utilização de metamodelos padronizados empregando os princípios da abordagem Arquitetura Dirigida a Modelo (do inglês - \sigla{MDA}{\textit{Model-Driven Architecture}}) (ver Seção~\ref{Cap2_Sec2_Desenvolvimento_Dirigido_a_Modelos}). %No contexto da ADM, todos os modelos são homogêneos, permitindo assim a criação de transformações \textit{Model-To-Model} M2M 
 
-Dentre os termos mais recentes relacionados à reengenharia de software, a ADM se destaca. De acordo com o OMG~\cite{OMG_OMG} o objetivo da ADM não é substituir o processo tradicional da reengenharia de software, pelo contrário, a ADM tem como objetivo auxiliar e melhorar o processo de reengenharia de software por meio da utilização dos princípios da MDA. A ADM consiste em uma adaptação do modelo de ferradura tipicamente conhecido em reengenharia de software (i.e, o modelo de ferradura, basicamente contêm dois lados, esquerdo, direito e uma \aspas{ponte} ligando os dois lados). Na Figura~\ref{fig:horse_shoe} é apresentado o modelo de ferradura adaptado para a ADM. É importante observar que essa figura contêm todas as fases e \aspas{palavras-chaves} tradicionais que são encontradas na reengenharia de software tradicional e em MDA, tais como: Modelo Especifico de Plataforma (do inglês - \sigla{PSM}{\textit{Platform-Specific Model}}), Modelo Independente de Plataforma (do inglês - \sigla{PSM}{\textit{Platform-Independent Model}}) e Modelo Computacional Independente (do inglês - \sigla{CIM}{\textit{Computation-Independent Model}}). As fases tradicionais da reengenharia de software adaptadas para a ADM são:
+Dentre os termos mais recentes relacionados à reengenharia de software, a ADM se destaca. De acordo com o OMG~\cite{OMG_OMG} o objetivo da ADM não é substituir o processo tradicional da reengenharia de software, pelo contrário, a ADM tem como objetivo auxiliar e melhorar o processo de reengenharia de software por meio da utilização dos princípios da MDA. A ADM consiste em uma adaptação do modelo de ferradura tipicamente conhecido em reengenharia de software (i.e, o modelo de ferradura, basicamente contêm dois lados, esquerdo, direito e uma \aspas{ponte} ligando os dois lados). Na Figura~\ref{fig:horse_shoe} é apresentado o modelo de ferradura adaptado para a ADM. É importante observar que essa figura contém todas as fases e \aspas{palavras-chaves} tradicionais que são encontradas na reengenharia de software tradicional e em MDA, tais como: Modelo Especifico de Plataforma (do inglês - \textit{Platform-Specific Model} (PSM)), Modelo Independente de Plataforma (do inglês - \textit{Platform-Independent Model} (PIM)) e Modelo Computacional Independente (do inglês - \textit{Computation-Independent Model} (CIM)). As fases tradicionais da reengenharia de software adaptadas para a ADM são:
 
 
 \begin{itemize}
@@ -27,9 +27,9 @@ Dentre os termos mais recentes relacionados à reengenharia de software, a ADM s
  \fadaptada{ADM:OMG}
 \end{figure}
 
-Como ressaltado anteriormente, durante todo o processo da ADM todos os modelos (i.e., PSM, PIM e CIM) podem estabelecer transformações/refatorações entre si, como ilustrado na Figura~\ref{fig:horse_shoe}. Geralmente tais transformações são executadas por meio de linguagens de transformações. Como salientado no Capítulo~\ref{chapter:fundamentacao_teorica}, Seção~\ref{sec:transformacoes_de_modelos} usualmente essas transformações são implementadas utilizando diferentes linguagens de transformações que podem ser declarativas, imperativas ou híbridas. 
+Durante o processo da ADM todos os modelos (i.e., PSM, PIM e CIM) podem estabelecer transformações/refatorações entre si, como ilustrado na Figura~\ref{fig:horse_shoe}. Geralmente tais transformações são executadas por meio de linguagens de transformações. Como salientado no Capítulo~\ref{chapter:fundamentacao_teorica}, Seção~\ref{sec:transformacoes_de_modelos} usualmente essas transformações são implementadas utilizando diferentes linguagens de transformações que podem ser declarativas, imperativas ou híbridas. 
 
-É importante também destacar que a ADM não tem como intuito apenas seguir todos os princípios da abordagem MDA~\cite{ADM:OMG}. Um dos principais objetivos da ADM é definir um conjunto de metamodelos, padronizados, para lidar com diferentes desafios que são encontrados durante a reengenharia de software. Dessa forma, em Novembro de 2003, a \sigla{ADMTF}{\textit{Architecture-Driven Modernization Task Force}} criou uma \sigla{RFP}{\textit{Request-for-Proposal}} que por sua vez descrevia um conjunto de metamodelos, tais metamodelos são: (\textit{i}) \sigla{KDM}{\textit{Knowledge Discovery metamodel}}, maiores informações sobre esse metamodelo é apresentado na seção~\ref{sec:knowledge_discovery_meta_model}, (\textit{ii}) \sigla{SMM}{\textit{Structured Metrics metamodel}} que é um metamodelo para representar e definir métricas e resultados de medições, (\textit{iii}) \sigla{ADMPR}{\textit{ADM Pattern Recognition}}, que facilita a busca de padrões em um software, (\textit{iv}) \sigla{ADMVS}{\textit{ADM Visualization Specification}}, que tem como objetivo representar visualmente metadados de uma aplicação representada em KDM, (\textit{v}) \sigla{ADMRS}{\textit{ADM Refactoring Specification}}, que almeja definir um metamodelo padronizado para especificar e definir refatorações utilizando outros metamodelos da ADM, como por exemplo o KDM. O estado atual de cada metamodelo pode ser visto na Tabela~\ref{tab:todos_os_meta_modelos_da_ADM}~\cite{ADM:OMG}. É de suma importância destacar que alguns metamodelos ainda encontram-se em fase de desenvolvimento e outros já foram finalizadas e disponíveis pela OMG.
+É importante também destacar que a ADM não tem como intuito apenas seguir todos os princípios da abordagem MDA~\cite{ADM:OMG}. Um dos principais objetivos da ADM é definir um conjunto de metamodelos, padronizados, para lidar com diferentes desafios que são encontrados durante a reengenharia de software. Dessa forma, em Novembro de 2003, a \sigla{ADMTF}{\textit{Architecture-Driven Modernization Task Force}} criou uma \sigla{RFP}{\textit{Request-for-Proposal}} que por sua vez descrevia um conjunto de metamodelos. Tais metamodelos são: (\textit{i}) Knowledge Discovery Metamodel (KDM), maiores informações sobre esse metamodelo é apresentado na seção~\ref{sec:knowledge_discovery_meta_model}, (\textit{ii}) \sigla{SMM}{\textit{Structured Metrics metamodel}} que é um metamodelo para representar e definir métricas e resultados de medições, (\textit{iii}) \sigla{ADMPR}{\textit{ADM Pattern Recognition}}, que facilita a busca de padrões em um software, (\textit{iv}) \sigla{ADMVS}{\textit{ADM Visualization Specification}}, que tem como objetivo representar visualmente metadados de uma aplicação representada em KDM, (\textit{v}) \sigla{ADMRS}{\textit{ADM Refactoring Specification}}, que almeja definir um metamodelo padronizado para especificar e definir refatorações utilizando outros metamodelos da ADM, como por exemplo o KDM. O estado atual de cada metamodelo pode ser visto na Tabela~\ref{tab:todos_os_meta_modelos_da_ADM}~\cite{ADM:OMG}. Como observado nessa tabela, alguns metamodelos ainda encontram-se em fase de desenvolvimento e outros já foram finalizadas e disponíveis pelo OMG.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
@@ -43,7 +43,7 @@ Como ressaltado anteriormente, durante todo o processo da ADM todos os modelos (
 ADMPR (ADM Pattern Recognition)                     & Em desenvolvimento &        &               \\ \hline
 ADMRS (ADM Refactoring Specification)               & Em desenvolvimento &        &               \\ \hline
 ADMVS (ADM Visualization Specification)             & Em desenvolvimento &        &               \\ \hline
-ASTM (Abstract Syntax Tree Metamodel)               & \multicolumn{1}{c|}{Disponível}         & 1.0    & Janeiro/2011  \\ \hline
+\sigla{ASTM}{\textit{Abstract Syntax Tree Metamodel}}               & \multicolumn{1}{c|}{Disponível}         & 1.0    & Janeiro/2011  \\ \hline
 KDM (Knowledge Discovery Metamodel)                 & \multicolumn{1}{c|}{Disponível}         & 1.3    & Agosto/2011   \\ \hline
 \multirow{2}{*}{SMM (Structured Metrics Metamodel)} & \multicolumn{1}{c|}{Disponível}         & 1.0    & Janeiro/2012  \\ \cline{2-4} 
                                                     & Em desenvolvimento & 1.1    & Novembro/2013 \\ \hline
@@ -56,7 +56,7 @@ KDM é um metamodelo que pode ser utilizado para representar todos os artefatos 
 \section{Knowledge Discovery metamodel}
 \label{sec:knowledge_discovery_meta_model}
 
-\sigla{KDM}{Knowledge Discovery metamodel} é um metamodelo para representar existentes artefatos de software, seus elementos, associações, e ambientes operacionais. O KDM tem como principal objetivo permitir que engenheiros de software criem ferramentas para auxiliar a modernização de software que sejam independente de plataforma e linguagem~\cite{KDM:specification, PerezCastillo:2011jo, ADMCHAPTERR}. Além disso, o KDM facilita e assegura a interoperabilidade e troca de dados entre diferentes ferramentas. 
+\sigla{KDM}{Knowledge Discovery Metamodel} é um metamodelo para representar existentes artefatos de software, seus elementos, associações, e ambientes operacionais. O KDM tem como principal objetivo permitir que engenheiros de software criem ferramentas para auxiliar a modernização de software que sejam independente de plataforma e linguagem~\cite{KDM:specification, PerezCastillo:2011jo, ADMCHAPTERR}. Além disso, o KDM facilita e assegura a interoperabilidade e troca de dados entre diferentes ferramentas. 
 
 Um problema tradicional facilmente identificado em várias ferramentas que lidam com a reengenharia de software é que tais ferramentas analisam diversos artefatos de um determinado software (por exemplo, código-fonte, banco de dados, \textit{scripts}, etc.) para obter conhecimentos explícitos com o intuito de realizar transformações/refatorações~\cite{rosenberg, Canfora2011}. Como consequência cada ferramenta gera e analisa tais conhecimentos de forma implícita, ou seja, os conhecimentos gerados são restritos a uma especifica linguagem de programação, e/ou a uma plataforma. Como resultado tais restrições podem criar dificuldades com relação a interoperabilidade entre diferentes ferramentas. Consequentemente, o KDM fornece uma estrutura que tem com objetivo facilitar a troca de dados entre diversas ferramentas. Além disso, o KDM possui um conjunto de metaclasse e uma estrutura padronizada que fornece meios para especificar desde artefatos físicos até lógicos de um determinado sistema. Em virtude dessa padronização, todas as técnicas/abordagem/ferramentas que utilizam o KDM como entrada pode ser considerada independente de plataforma e linguagem, aumentando assim, a interoperabilidade e o reúso. Em 2012 o KDM tornou-se \sigla{ISO}{\emph{International Standards Organization}}~\cite{KDM:ISO} como uma estrutura que facilita a troca de dados entre as diversas ferramentas. O KDM é definido via \sigla{MOF}{\emph{Meta-Object Facility}}~\cite{MOF} e estabelece o formato de troca de dados via \sigla{XMI}{\emph{XML Metadata Interchange}}, o qual é denominado KDM XMI \emph{schema}.
 
@@ -71,10 +71,10 @@ Pode-se sumarizar os principais objetivos do KDM como~\cite{ADM:OMG}:
 	\item KDM permite a modificação/refatoração de sistemas legados utilizando os princípios da MDA;
 	\item KDM facilita o rastreamento de mudança entre artefatos;
 	\item KDM facilita a sincronização de estruturas lógicas e físicas de um determinado sistema legado;
-	\item KDM contêm metaclasses para representar desde código-fonte até metaclasses para representar elementos arquiteturais de um determinado sistema legado.
+	\item KDM contém metaclasses para representar desde código-fonte até metaclasses para representar elementos arquiteturais de um determinado sistema legado.
 \end{itemize}
 
-De acordo com~\citeonline{KDM:specification} e~\citeonline{PerezCastillo:2011jo} o KDM possui o objetivo de cobrir um amplo escopo, para abranger um conjunto diversificado de aplicações, plataformas e linguagens de programação. Um dos principais objetivos do KDM é fornecer a capacidade de troca de metadados entre diversas ferramentas e, assim, facilitar a cooperação entre fornecedores para integrar e aumentar a interoperabilidade de diferentes abordagens, técnicas, algoritmos, etc. A fim de alcançar essa interoperabilidade e, especialmente, a integração de informações sobre diferentes facetas de um determinado sistema a partir de múltiplas ferramentas, o KDM define vários níveis de conformidade, aumentando assim a probabilidade de que duas ou mais ferramentas apoiaram o mesmo metamodelo. Além disso, o KDM também é estruturado de forma modular, seguindo o princípio da separação de interesse, com a capacidade de representar partes heterogêneas de um sistema. A separação de interesses no contexto do metamodelo KDM é alcançada por meio de pacotes, como apresentado na Figura~\ref{kdm:domain}. Cada pacote está em um nível de conformidade e possui o objetivo de definir um ponto de vista arquitetural do sistema. Em outras palavras, cada pacote do KDM constitui uma determinada ontologia para descrever e representar a grande maioria dos artefatos de sistemas de software existentes. Por exemplo, os pacotes \texttt{Code} e \texttt{Action} contêm metaclasses que representam o código-fonte de um sistema, tais como, variáveis, procedimentos/métodos/funções, chamadas para métodos, etc. Similarmente o pacote \texttt{Structure} contém metaclasses para representar elementos arquiteturais do sistema, tais como, componentes, camadas, subcomponentes, etc. O pacote \texttt{Conceptual} possui  metaclasses para definir regras de negócio do sistema.
+De acordo com~\citeonline{PerezCastillo:2011jo} o KDM possui o objetivo de cobrir um amplo escopo, para abranger um conjunto diversificado de aplicações, plataformas e linguagens de programação. Um dos principais objetivos do KDM é fornecer a capacidade de troca de metadados entre diversas ferramentas e, assim, facilitar a cooperação entre fornecedores para integrar e aumentar a interoperabilidade de diferentes abordagens, técnicas, algoritmos, etc. A fim de alcançar essa interoperabilidade e, especialmente, a integração de informações sobre diferentes facetas de um determinado sistema a partir de múltiplas ferramentas, o KDM define vários níveis de conformidade, aumentando assim a probabilidade de que duas ou mais ferramentas apoiaram o mesmo metamodelo. Além disso, o KDM também é estruturado de forma modular, seguindo o princípio da separação de interesse, com a capacidade de representar partes heterogêneas de um sistema. A separação de interesses no contexto do metamodelo KDM é alcançada por meio de pacotes, como apresentado na Figura~\ref{kdm:domain}. Cada pacote está em um nível de conformidade e possui o objetivo de definir um ponto de vista arquitetural do sistema. Em outras palavras, cada pacote do KDM constitui uma determinada ontologia para descrever e representar a grande maioria dos artefatos de sistemas de software existentes. Por exemplo, os pacotes \texttt{Code} e \texttt{Action} contêm metaclasses que representam o código-fonte de um sistema, tais como, variáveis, procedimentos/métodos/funções, chamadas para métodos, etc. Similarmente o pacote \texttt{Structure} contém metaclasses para representar elementos arquiteturais do sistema, tais como, componentes, camadas, subcomponentes, etc. O pacote \texttt{Conceptual} possui  metaclasses para definir regras de negócio do sistema.
 
 
 \begin{figure}[htb]
@@ -85,18 +85,18 @@ De acordo com~\citeonline{KDM:specification} e~\citeonline{PerezCastillo:2011jo}
  \fadaptada{KDM:specification}
 \end{figure}
 
-Da perspectiva de um engenheiro de modernização, essa separação de interesse do KDM, por meio de pacote, significa que o engenheiro só precisa se preocupar com os pacotes do KDM que considerar necessários para as suas atividades de modernização, por exemplo, uma determinada abordagem pode necessitar apenas do pacote \texttt{Code} e \texttt{Action}, enquanto uma outra abordagem utilize apenas o pacote responsável por definir elementos arquiteturais. Se essas abordagens forem evoluídas ao longo do tempo e necessitarem de outros pacotes do KDM, os respectivos pacotes podem ser adicionados ao repertório da abordagem/ferramenta, conforme necessário.
+Da perspectiva de um engenheiro de modernização, essa separação de interesse do KDM, por meio de pacote, significa que o engenheiro só precisa se preocupar com os pacotes do KDM que considerar necessários para as suas atividades de modernização, por exemplo, uma determinada abordagem pode necessitar apenas do pacote \texttt{Code} e \texttt{Action}, enquanto uma outra abordagem pode utilizar apenas o pacote responsável por definir elementos arquiteturais. Se essas abordagens forem evoluídas ao longo do tempo e necessitarem de outros pacotes do KDM, pacotes podem ser adicionados ao repertório da abordagem/ferramenta, conforme necessário.
 
 Como observado na Figura~\ref{kdm:domain} o KDM possui três níveis de conformidade, nível 0, nível 1 e nível 2. Informações sobre cada nível são apresentadas a seguir:
 
 \begin{itemize}
-    \item \textbf{Nível 0}: nesse nível de conformidade são definidos os seguintes pacotes do KDM: (\textit{i})     \texttt{Core}, (\textit{ii}) \texttt{kdm}, (\textit{iii}) \texttt{Source}, (\textit{iv}) \texttt{Code} e (\textit{v}) \texttt{Action}. Esse nível de conformidade representa um denominador comum que pode servir como uma base para a interoperabilidade entre diferentes categorias de ferramentas que utilizem o metamodelo KDM. Para que uma ferramenta esteja em conformidade com o Nível 0 ela deve fornecer completo suporte para todas as metaclasses que foram definidas nos pacotes \texttt{Core}, \texttt{kdm}, \texttt{Source}, \texttt{Code} e \texttt{Action};
-    \item \textbf{Nível 1}: nesse nível os pacotes definidos no Nível 0 são estendidos para representar outros artefatos de um determinado sistema. Esse nível define os seguintes pacotes: (\textit{i}) \texttt{Build}, (\textit{ii}) \texttt{Structure}, (\textit{iii}) \texttt{Data}, (\textit{iv}) \texttt{Conceptual}, (\textit{v}) \texttt{UI}, (\textit{vi}) \texttt{Event} e (\textit{vii}) \texttt{Platform}. Para que uma ferramenta esteja em conformidade com o Nível 1 ela deve fornecer suporte para todos os pacotes do Nível 0 pelo menos um do pacotes do Nível 1;
-    \item \textbf{Nível 2}: esse nível é a união de todos os pacotes definidos no nível anterior. Para que uma ferramenta esteja em conformidade com o Nível 2 ela deve fornecer suporte para todos os pacotes do Nível 1 e pelo menos um do Nível 2.
+    \item \textbf{Nível 0}: nesse nível de conformidade são definidos os seguintes pacotes do KDM: (\textit{i})     \texttt{Core}, (\textit{ii}) \texttt{kdm}, (\textit{iii}) \texttt{Source}, (\textit{iv}) \texttt{Code} e (\textit{v}) \texttt{Action}. Esse nível de conformidade representa um denominador comum que pode servir como uma base para a interoperabilidade entre diferentes categorias de ferramentas que utilizem o metamodelo KDM. Para que uma ferramenta esteja em conformidade com o \textbf{Nível 0} ela deve fornecer completo suporte para todas as metaclasses que foram definidas nos pacotes \texttt{Core}, \texttt{kdm}, \texttt{Source}, \texttt{Code} e \texttt{Action};
+    \item \textbf{Nível 1}: nesse nível os pacotes definidos no \textbf{Nível 0} são estendidos para representar outros artefatos de um determinado sistema. Esse nível define os seguintes pacotes: (\textit{i}) \texttt{Build}, (\textit{ii}) \texttt{Structure}, (\textit{iii}) \texttt{Data}, (\textit{iv}) \texttt{Conceptual}, (\textit{v}) \texttt{UI}, (\textit{vi}) \texttt{Event} e (\textit{vii}) \texttt{Platform}. Para que uma ferramenta esteja em conformidade com o \textbf{Nível 1} ela deve fornecer suporte para todos os pacotes do \textbf{Nível 0} pelo menos um do pacotes do Nível 1;
+    \item \textbf{Nível 2}: esse nível é a união de todos os pacotes definidos no nível anterior. Para que uma ferramenta esteja em conformidade com o \textbf{Nível 2} ela deve fornecer suporte para todos os pacotes do \textbf{Nível 1} e pelo menos um do \textbf{Nível 2}.
 \end{itemize}
 
 
-Todos os pacotes do metamodelo KDM são organizados em quatro camadas de abstração. A seguir tais camadas são apresentadas:
+Todos os pacotes do metamodelo KDM apresentado na Figura~\ref{kdm:domain} são organizados em quatro camadas de abstração. Essas quatro camadas estão apresentadas esquematicamente na Figura~\ref{fig:kdm_layer}. A seguir tais camadas são apresentadas:
 
 \begin{itemize}
     \item \sigla{CI}{Camada de Infraestrutura}: do inglês \textit{Infrastructure Layer};
@@ -271,8 +271,8 @@ Em uma determinada instância do KDM, cada elemento do pacote~$\mathtt{code}$ re
 \begin{figure}[!ht]
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.8]{images/codeModel}
 	\caption{Diagrama de classes - $\mathtt{CodeModel}$}
+	\includegraphics[scale=0.8]{images/codeModel}
 	\label{fig:CodeModel}
 	\fadaptada{KDM:specification}
 \end{figure}
@@ -285,9 +285,8 @@ O pacote~$\mathtt{Code}$ consiste em um total de 24 metaclasses; tais metaclasse
 
 \begin{figure}[!ht]
 	\centering
-	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.8]{images/ClassUnit_InterfaceUnit}
 	\caption{Diagrama de classes elucidando as metaclasses \texttt{ClassUnit} e \texttt{InterfaceUnit}}
+	\includegraphics[scale=0.8]{images/ClassUnit_InterfaceUnit}
 	\label{fig:classUnit_e_InterfaceUnit}
 	\fadaptada{KDM:specification}
 \end{figure}
@@ -323,8 +322,8 @@ $\mathtt{ClassUnit}$ e $\mathtt{InterfaceUnit}$ representam \aspas{classes} e \a
 \begin{figure}[!ht]
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.8]{images/StorableUnit_MethodUnit2}
 	\caption{Diagrama de classes elucidando as metaclasses \texttt{StorableUnit}, \texttt{MethodUnit}, \texttt{ParameterUnit} e \texttt{MemberUnit}}
+	\includegraphics[scale=0.8]{images/StorableUnit_MethodUnit2}
 	\label{fig:StorableUnit_MethodUnit}
 	\fadaptada{KDM:specification}
 \end{figure}
@@ -368,8 +367,9 @@ Analisando tanto o Código-fonte~\ref{lst:example_kdm_instance} quanto a Figura~
 \begin{minipage}{.45\textwidth}
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.6]{images/kdm_instance_java_correspoding_2_with_extends}
 	\captionof{figure}{Instância KDM correspondente ao Código-fonte~\ref{lst:example_kdm_instance}}
+	\includegraphics[scale=0.6]{images/kdm_instance_java_correspoding_2_with_extends}
+	\fautor
 	\label{fig:kdm_instance_Java}
 \end{minipage}
 
@@ -385,8 +385,8 @@ O pacote~$\mathtt{Action}$ define um conjunto de metaclasses, cujo propósito é
 \begin{figure}[!ht]
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.8]{images/ActionModel_Class_Diagram}
 	\caption{Diagrama de classes ilustrando o pacote~$\mathtt{Action}$.}
+	\includegraphics[scale=0.8]{images/ActionModel_Class_Diagram}
 	\label{fig:actionModel}
 	\fadaptada{KDM:specification}
 \end{figure}
@@ -427,9 +427,9 @@ A fim de compreender como o pacote~$\mathtt{Action}$ é usado no KDM, no Código
 \end{minipage}\hfill
 \begin{minipage}{.65\textwidth}
 	\centering
-	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.6]{images/actionInstanceKDM_2}
 	\captionof{figure}{Instância KDM correspondente ao Código-fonte~\ref{lst:example_kdm_instance_2}}
+	\includegraphics[scale=0.6]{images/actionInstanceKDM_2}
+	\fautor
 	\label{fig:kdm_instance_Java_action}
 \end{minipage}
 
@@ -462,20 +462,20 @@ Esse pacote define um ponto de vista arquitetural para um domínio estrutural. A
  
 A metaclasse \texttt{AbstractStructureElement} (conforme a Figura~\ref{fig:structureModel} \ding {203}) representa uma parte arquitetural, relacionada com a organização do sistema de software existente em módulos e possui quatro associações. A primeira associação representa os elementos pertencentes ao modelo e é chamada de $\mathtt{structureElement}$ $\mathtt{:AbstractStructureElement[0..*]}$. Em seguida, há a associação~$\mathtt{structureRelationship}$ $\mathtt{:AbstractStructureRelationship[0..*]}$, ela é usada para representar todas os relacionamentos em nível arquitetural. A associação $\mathtt{aggregated:}$ $\mathtt{AggregatedRelationship[0..*]}$ representa uma relação abstrata entre dois elementos do KDM, dentro dela é possível definir relações concretas. A última associação da metaclasse~$\mathtt{AbstractStructureElement}$ é o~$\mathtt{implementation:KDMEntity[0..*]}$. Esta associação é usada para especificar os elementos computacionais (do pacote~$\mathtt{Code}$, ou seja, $\mathtt{Package}$, $\mathtt{ClassUnit}$, $\mathtt{InterfaceUnit}$, etc) que representam o elemento estrutural. 
 
-Na Figura~\ref{fig:kdm_structureExample} é descrita uma possível arquitetura mostrada para ilustrar como o KDM pode ser utilizado para representar elementos arquiteturais. Pode ser observado que esta figura é dividida em três níveis para ilustrar como o pacote~$\mathtt{Structure}$ está relacionado com o pacote~$\mathtt{Code}$. O nível mais baixo representa o código-fonte, artefatos físicos. L1 e L2 representam pacotes em código-fonte - cada caixa dentro dos pacotes representa as suas classes e interfaces, também é possível perceber que essas classes e interfaces são relacionados uns com os outros de alguma maneira. No meio há metaclasses do pacote~$\mathtt{Code}$, o que significa que as instâncias dessas meta -classes são usadas para representar os artefatos de baixo nível, ou seja, instâncias de~$\mathtt{Package}$ são usadas para representar L1 e L2 e instâncias de~$\mathtt{ClassUnit}$ e~$\mathtt{InterfaceUnit}$ são usados para representar as classes e interfaces, respectivamente. Finalmente, no nível superior a arquitetura é mostrada. Todos os elementos arquiteturais são representados com a seguinte padronização: a metaclasse que representa o elemento arquiteturais, ':' seguido pelo seu nome. A arquitetura apresentada é dividida da seguinte forma: no ponto mais alto de abstração há um~$\mathtt{SoftwareSystem}$ (~$\mathtt{S1}$) \ding {202}, que é dividido em duas camadas, ~$\mathtt{Layer}$~$\mathtt{L1}$ \ding {203} e ~$\mathtt{Layer}$~$\mathtt{L2}$ \ding {204}. Tais camadas representam elementos arquiteturais correspondentes aos pacotes L1 e L2 representadas no nível mais baixo. A~$\mathtt{Layer}$~$\mathtt{L1}$ pode acessar os elementos da~$\mathtt{Layer}$~$\mathtt{L2}$, essa restrição \aspas{pode acessar} é representada pela metaclasse~$\mathtt{AggregatedRelationship}$ \ding {205}. Além disso, a~$\mathtt{Layer}$~$\mathtt{L2}$ contém dois componentes,~$\mathtt{C1}$ \ding {206} e~$\mathtt{C2}$ \ding {207}. Finalmente, o~$\mathtt{Component}$~$\mathtt{C1}$ fornece recursos através de uma interface para o~$\mathtt{Component}$~$\mathtt{C2}$.
+Na Figura~\ref{fig:kdm_structureExample} é descrita uma possível arquitetura mostrada para ilustrar como o KDM pode ser utilizado para representar elementos arquiteturais. Pode ser observado que esta figura é dividida em três níveis para ilustrar como o pacote~$\mathtt{Structure}$ está relacionado com o pacote~$\mathtt{Code}$. O nível mais baixo representa o código-fonte, artefatos físicos. L1 e L2 representam pacotes em código-fonte - cada caixa dentro dos pacotes representa as suas classes e interfaces, também é possível perceber que essas classes e interfaces são relacionados uns com os outros de alguma maneira. No meio há metaclasses do pacote~$\mathtt{Code}$, o que significa que as instâncias dessas meta -classes são usadas para representar os artefatos de baixo nível, ou seja, instâncias de~$\mathtt{Package}$ são usadas para representar L1 e L2 e instâncias de~$\mathtt{ClassUnit}$ e~$\mathtt{InterfaceUnit}$ são usados para representar as classes e interfaces, respectivamente. Finalmente, no nível superior a arquitetura é mostrada. Todos os elementos arquiteturais são representados com a seguinte padronização: a metaclasse que representa o elemento arquiteturais, ':' seguido pelo seu nome. A arquitetura apresentada é dividida da seguinte forma: no ponto mais alto de abstração há um~$\mathtt{SoftwareSystem}$ ($\mathtt{S1}$) \ding {202}, que é dividido em duas camadas, ~$\mathtt{Layer}$~$\mathtt{L1}$ \ding {203} e ~$\mathtt{Layer}$~$\mathtt{L2}$ \ding {204}. Tais camadas representam elementos arquiteturais correspondentes aos pacotes L1 e L2 representadas no nível mais baixo. A~$\mathtt{Layer}$~$\mathtt{L1}$ pode acessar os elementos da~$\mathtt{Layer}$~$\mathtt{L2}$, essa restrição \aspas{pode acessar} é representada pela metaclasse~$\mathtt{AggregatedRelationship}$ \ding {205}. Além disso, a~$\mathtt{Layer}$~$\mathtt{L2}$ contém dois componentes,~$\mathtt{C1}$ \ding {206} e~$\mathtt{C2}$ \ding {207}. Finalmente, o~$\mathtt{Component}$~$\mathtt{C1}$ fornece recursos através de uma interface para o~$\mathtt{Component}$~$\mathtt{C2}$.
 
 \noindent \begin{minipage}{.47\textwidth}
 	\centering
-	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.7]{images/StructureExample}
 	\captionof{figure}{Exemplo de uma Arquitetura.}
+	\includegraphics[scale=0.7]{images/StructureExample}
+	\fautor
 	\label{fig:kdm_structureExample}
 \end{minipage}\hfill
 \begin{minipage}{.55\textwidth}
 	\centering
-	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.67]{images/StructureKDMINstance}
 	\captionof{figure}{Instância KDM correspondente a Figura~\ref{fig:kdm_structureExample}}
+	\includegraphics[scale=0.67]{images/StructureKDMINstance}
+	\fautor
 	\label{fig:kdm_instance_StructureExample}
 \end{minipage}
 
@@ -484,8 +484,9 @@ O correspondente, porém simplificado da instância KDM é mostrado na Figura~\r
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=3.3in]{images/relationshipExample1.pdf}
 	\caption{Relacionamento entre dois elementos arquiteturais}
+	\includegraphics[width=3.3in]{images/relationshipExample1.pdf}
+	\fautor
 	\label{fig:relationship_example_1}
 \end{figure}
 
@@ -497,17 +498,17 @@ Em \ding{202} os elementos arquiteturais são apresentados, camadas~$\mathtt{Con
 
 Um dos trabalhos mais importantes publicados no contexto da ADM é o de~\citeonline{Bruneliere_2010MODISCO, Bruneliere_2014} que propõe uma ferramenta chamada MoDisco. MoDisco é uma framework genérico e extensível para a abordagem de Engenheria Reversa dirigida a modelos e foi implementada no \sigla{IDE}{\textit{Integrated Development Environment}} Eclipse como um \textit{plugin}. Mais especificadamente, MoDisco é construido utilizando o \textit{Eclipse Modeling Framework} (EMF). Basicamente essa ferramenta é capaz de recuperar o código-fonte legado, base de dados e outros artefatos legado e representá-los com o metamodelo KDM. Um dos principais objetivos da ferramenta MoDisco é ser adaptável para diferentes cenários, facilitando assim a sua utilização por uma base de usuários potencialmente maior~\cite{Bruneliere_2014}. Inicialmente criado como um modelo experimental de investigação pela Equipe AtlanMod (\sigla{EMN}{\textit{Ecole des mines de Nantes}} \& \sigla{INRIA}{\textit{Institut National de Recherche en Informatique et en Automatique}}), o projeto evoluiu para uma solução industrializados graças à colaboração com a empresa MIA-Software. Este trabalho conjunto ativo resultou em um conjunto eficiente e utilizável de ferramentas para a descoberta, consulta e manipulação de modelos de software para auxiliar toda a atividade de engenharia reversa.
 
-Como ilustrado na Figura~\ref{fig:modisco_allArtefacts} MoDisco tem como objetivo representar uma grande variedade de artefatos (por exemplo, código-fonte, banco de dados, arquivos de configuração, documentação, etc.) de um sistema legado. 
+Como ilustrado na Figura~\ref{fig:modisco_allArtefacts} MoDisco tem como objetivo representar uma grande variedade de artefatos (por exemplo, código-fonte, banco de dados, arquivos de configuração, documentação, etc.) de um sistema legado. Contudo, uma das limitações dessa ferramenta é o suporte e a aplicação de refatorações. Observe que, naturalmente, MoDisco não é capaz de aplicar refatorações de forma automática, pois a maioria das refatorações necessitam de interação do usuário para fornecer as informações necessárias. No contexto desta Tese foi utilizado a ferramenta MoDisco para recuperar as informações do código-fonte legado escrito em Java. Sem o auxílio dessa ferramenta todo o sistema legado, escrito em Java, deveria ser transformada em uma instância do KDM de forma manual, o que poderia atrasar esta pesquisa, uma vez que toda a manipulação do KDM foi possível por causa da existência do MoDisco e do seu suporte em Java para manipular o metamodelo KDM. Por exemplo, não é possível para o MoDisco adivinhar quais refatorações devem ser aplicadas e em quais elementos; tais informações devem ser fornecidas por um usuário.
+
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[scale=0.55]{images/modiscoAllArtefacts.png}
 	\caption{Visão geral de um projeto MoDisco.}
+	\includegraphics[scale=0.55]{images/modiscoAllArtefacts.png}
 	\label{fig:modisco_allArtefacts}
 	\fadaptada{Bruneliere_2014}
 \end{figure}
 
-Contudo, uma das limitações dessa ferramenta é o suporte e a aplicação de refatorações. Observe que, naturalmente, MoDisco não é capaz de aplicar refatorações de forma automática, pois a maioria das refatorações necessitam de interação do usuário para fornecer as informações necessárias. No contexto desta Tese foi utilizado a ferramenta MoDisco para recuperar as informações do código-fonte legado escrito em Java. Sem o auxílio dessa ferramenta todo o sistema legado, escrito em Java, deveria ser transformada em uma instância do KDM de forma manual, o que poderia atrasar esta pesquisa, uma vez que toda a manipulação do KDM foi possível por causa da existência do MoDisCo e do seu suporte em Java para manipular o metamodelo KDM. Por exemplo, não é possível para o MoDisco adivinhar quais refatorações devem ser aplicadas e em quais elementos; tais informações devem ser fornecidas por um usuário.
 
 \section{Considerações Finais}\label{sec:consideracoes_finais_capitutloADM_KDM}
 
