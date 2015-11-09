@@ -23,7 +23,7 @@ Dentre os termos mais recentes relacionados à reengenharia de software, a ADM s
  \caption{Modelo de ferradura adaptada para a ADM}
  \label{fig:horse_shoe}
  \centering
- \includegraphics[scale=0.78]{images/horseshoes.pdf}
+ \includegraphics[scale=0.8]{images/horseshoes.pdf}
  \fadaptada{ADM:OMG}
 \end{figure}
 
@@ -51,9 +51,9 @@ KDM (Knowledge Discovery Metamodel)                 & \multicolumn{1}{c|}{Dispon
 \end{table}
 
 É importante destacar que a abordagem proposta nesta Tese, se concentra no metamodelo KDM. Consequentemente, é de suma importância o entendimento desse metamodelo, por isso, esse metamodelo é mais detalhado neste capítulo.
-KDM é um metamodelo que pode ser utilizado para representar todos os artefatos de um determinado software existente, por exemplo, o KDM contêm metaclasses especificas para representar desde de código-fonte até a arquitetura de um determinado software. O KDM é um metamodelo de representação intermediária comum para sistemas existentes e seus ambientes operacionais. Utilizando esse metamodelo para sistemas existentes é possível trocar representações do sistema em modelo entre plataformas e linguagens com a finalidade de analisar, padronizar e transformar/refatorar os sistemas existentes~\cite{ADM:OMG}. A ideia por trás do KDM é que a comunidade comece a criar analisadores sintáticos (do inglês \textit{parsers}) para diferentes linguagens de programação, que transforme os códigos-fontes em instâncias do metamodelo KDM. Como resultado, qualquer técnica, ferramenta e abordagem que utilize o KDM como o artefato de entrada pode ser considerado uma técnicas, ferramenta e/ou abordagem independente de linguagem e de plataforma. Por exemplo, um catálogo de refatoração para o KDM~\cite{durelli_catalogo, durelli_VEM_ferramenta} pode ser utilizado para refatorar vários sistemas independentemente da linguagem de programação. Maiores informações sobre o KDM, bem como seus pacotes, metaclasses e metarelacionamentos são apresentados a seguir.
+KDM é um metamodelo que pode ser utilizado para representar todos os artefatos de um determinado software existente, por exemplo, o KDM contêm metaclasses especificas para representar desde de código-fonte até a arquitetura de um determinado software. O KDM é um metamodelo de representação intermediária comum para sistemas existentes e seus ambientes operacionais. Utilizando esse metamodelo para sistemas existentes é possível trocar representações do sistema em modelo entre plataformas e linguagens com a finalidade de analisar, padronizar e transformar/refatorar os sistemas existentes~\cite{ADM:OMG}. A ideia por trás do KDM é que a comunidade comece a criar analisadores sintáticos (do inglês \textit{parsers}) para diferentes linguagens de programação, que transforme os códigos-fontes em instâncias do metamodelo KDM. Como resultado, qualquer técnica, ferramenta, abordagem, etc, que utilize KDM como o artefato de entrada pode ser considerado uma técnicas, ferramenta, abordagem independente de linguagem e de plataforma. Por exemplo, um catálogo de refatoração para o KDM~\cite{durelli_catalogo, durelli_VEM_ferramenta} pode ser utilizado para refatorar vários sistemas independentemente da linguagem de programação. Maiores informações sobre o KDM, bem como seus pacotes, metaclasses e metarelacionamentos são apresentados a seguir.
 
-\section{Knowledge Discovery Metamodel (KDM)}
+\section{Knowledge Discovery metamodel}
 \label{sec:knowledge_discovery_meta_model}
 
 \sigla{KDM}{Knowledge Discovery Metamodel} é um metamodelo para representar existentes artefatos de software, seus elementos, associações, e ambientes operacionais. O KDM tem como principal objetivo permitir que engenheiros de software criem ferramentas para auxiliar a modernização de software que sejam independente de plataforma e linguagem~\cite{KDM:specification, PerezCastillo:2011jo, ADMCHAPTERR}. Além disso, o KDM facilita e assegura a interoperabilidade e troca de dados entre diferentes ferramentas. 
@@ -61,18 +61,18 @@ KDM é um metamodelo que pode ser utilizado para representar todos os artefatos 
 Um problema tradicional facilmente identificado em várias ferramentas que lidam com a reengenharia de software é que tais ferramentas analisam diversos artefatos de um determinado software (por exemplo, código-fonte, banco de dados, \textit{scripts}, etc.) para obter conhecimentos explícitos com o intuito de realizar transformações/refatorações~\cite{rosenberg, Canfora2011}. Como consequência cada ferramenta gera e analisa tais conhecimentos de forma implícita, ou seja, os conhecimentos gerados são restritos a uma especifica linguagem de programação, e/ou a uma plataforma. Como resultado tais restrições podem criar dificuldades com relação a interoperabilidade entre diferentes ferramentas. Consequentemente, o KDM fornece uma estrutura que tem com objetivo facilitar a troca de dados entre diversas ferramentas. Além disso, o KDM possui um conjunto de metaclasse e uma estrutura padronizada que fornece meios para especificar desde artefatos físicos até lógicos de um determinado sistema. Em virtude dessa padronização, todas as técnicas/abordagem/ferramentas que utilizam o KDM como entrada pode ser considerada independente de plataforma e linguagem, aumentando assim, a interoperabilidade e o reúso. Em 2012 o KDM tornou-se \sigla{ISO}{\emph{International Standards Organization}}~\cite{KDM:ISO} como uma estrutura que facilita a troca de dados entre as diversas ferramentas. O KDM é definido via \sigla{MOF}{\emph{Meta-Object Facility}}~\cite{MOF} e estabelece o formato de troca de dados via \sigla{XMI}{\emph{XML Metadata Interchange}}, o qual é denominado KDM XMI \emph{schema}.
 
 
-Pode-se sumarizar os principais objetivos do KDM como~\cite{ADM:OMG}: (\textit{i}) KDM representa artefatos de um sistema legado como entidades, relacionamentos e atributos; (\textit{ii}) KDM suporta uma  variedade de plataforma e linguagem; (\textit{iii}) KDM define uma terminologia unificada para artefatos de sistemas legados; (\textit{iv}) KDM representa estruturas lógicas e físicas de sistemas legados; (\textit{v}) KDM permite a modificação/refatoração de sistemas legados utilizando os princípios da MDA; (\textit{vi}) KDM facilita o rastreamento de mudança entre artefatos; (\textit{vii}) KDM facilita a sincronização de estruturas lógicas e físicas de um determinado sistema legado; (\textit{viii}) KDM contém metaclasses para representar desde código-fonte até metaclasses para representar elementos arquiteturais de um determinado sistema legado.
+Pode-se sumarizar os principais objetivos do KDM como~\cite{ADM:OMG}:
 
-%\begin{itemize}
-	%\item KDM representa artefatos de um sistema legado como entidades, relacionamentos e atributos;
-	%\item KDM suporta uma  variedade de plataforma e linguagem;
-%	\item KDM define uma terminologia unificada para artefatos de sistemas legados;
-	%\item KDM representa estruturas lógicas e físicas de sistemas legados;
-	%\item KDM permite a modificação/refatoração de sistemas legados utilizando os princípios da MDA;
-	%\item KDM facilita o rastreamento de mudança entre artefatos;
-	%\item KDM facilita a sincronização de estruturas lógicas e físicas de um determinado sistema legado;
-	%\item KDM contém metaclasses para representar desde código-fonte até metaclasses para representar elementos arquiteturais de um determinado sistema legado.
-%\end{itemize}
+\begin{itemize}
+	\item KDM representa artefatos de um sistema legado como entidades, relacionamentos e atributos;
+	\item KDM suporta uma  variedade de plataforma e linguagem;
+	\item KDM define uma terminologia unificada para artefatos de sistemas legados;
+	\item KDM representa estruturas lógicas e físicas de sistemas legados;
+	\item KDM permite a modificação/refatoração de sistemas legados utilizando os princípios da MDA;
+	\item KDM facilita o rastreamento de mudança entre artefatos;
+	\item KDM facilita a sincronização de estruturas lógicas e físicas de um determinado sistema legado;
+	\item KDM contém metaclasses para representar desde código-fonte até metaclasses para representar elementos arquiteturais de um determinado sistema legado.
+\end{itemize}
 
 De acordo com~\citeonline{PerezCastillo:2011jo} o KDM possui o objetivo de cobrir um amplo escopo, para abranger um conjunto diversificado de aplicações, plataformas e linguagens de programação. Um dos principais objetivos do KDM é fornecer a capacidade de troca de metadados entre diversas ferramentas e, assim, facilitar a cooperação entre fornecedores para integrar e aumentar a interoperabilidade de diferentes abordagens, técnicas, algoritmos, etc. A fim de alcançar essa interoperabilidade e, especialmente, a integração de informações sobre diferentes facetas de um determinado sistema a partir de múltiplas ferramentas, o KDM define vários níveis de conformidade, aumentando assim a probabilidade de que duas ou mais ferramentas apoiaram o mesmo metamodelo. Além disso, o KDM também é estruturado de forma modular, seguindo o princípio da separação de interesse, com a capacidade de representar partes heterogêneas de um sistema. A separação de interesses no contexto do metamodelo KDM é alcançada por meio de pacotes, como apresentado na Figura~\ref{kdm:domain}. Cada pacote está em um nível de conformidade e possui o objetivo de definir um ponto de vista arquitetural do sistema. Em outras palavras, cada pacote do KDM constitui uma determinada ontologia para descrever e representar a grande maioria dos artefatos de sistemas de software existentes. Por exemplo, os pacotes \texttt{Code} e \texttt{Action} contêm metaclasses que representam o código-fonte de um sistema, tais como, variáveis, procedimentos/métodos/funções, chamadas para métodos, etc. Similarmente o pacote \texttt{Structure} contém metaclasses para representar elementos arquiteturais do sistema, tais como, componentes, camadas, subcomponentes, etc. O pacote \texttt{Conceptual} possui  metaclasses para definir regras de negócio do sistema.
 
@@ -96,14 +96,14 @@ Como observado na Figura~\ref{kdm:domain} o KDM possui três níveis de conformi
 \end{itemize}
 
 
-Todos os pacotes do metamodelo KDM apresentado na Figura~\ref{kdm:domain} são organizados em quatro camadas de abstração. As camadas de abstração são: (\textit{i}) \sigla{CI}{Camada de Infraestrutura}: do inglês \textit{Infrastructure Layer}; (\textit{ii}) \sigla{CEP}{Camada de Elementos de Programa}: do inglês \textit{Program Elements Layer}; (\textit{iii}) \sigla{CRTE}{Camada de Recurso de Tempo de Execução}: do inglês \textit{Runtime Resource Layer}; (\textit{iv}) \sigla{CA}{Camada de Abstração}: do inglês \textit{Abstraction Layer}. Essas quatro camadas estão apresentadas esquematicamente na Figura~\ref{fig:kdm_layer}.
+Todos os pacotes do metamodelo KDM apresentado na Figura~\ref{kdm:domain} são organizados em quatro camadas de abstração. Essas quatro camadas estão apresentadas esquematicamente na Figura~\ref{fig:kdm_layer}. A seguir tais camadas são apresentadas:
 
-%\begin{itemize}
-    %\item \sigla{CI}{Camada de Infraestrutura}: do inglês \textit{Infrastructure Layer};
-    %\item \sigla{CEP}{Camada de Elementos de Programa}: do inglês \textit{Program Elements Layer};
-    %\item \sigla{CRTE}{Camada de Recurso de Tempo de Execução}: do inglês \textit{Runtime Resource Layer};
-    %\item \sigla{CA}{Camada de Abstração}: do inglês \textit{Abstraction Layer}.
-%\end{itemize}
+\begin{itemize}
+    \item \sigla{CI}{Camada de Infraestrutura}: do inglês \textit{Infrastructure Layer};
+    \item \sigla{CEP}{Camada de Elementos de Programa}: do inglês \textit{Program Elements Layer};
+    \item \sigla{CRTE}{Camada de Recurso de Tempo de Execução}: do inglês \textit{Runtime Resource Layer};
+    \item \sigla{CA}{Camada de Abstração}: do inglês \textit{Abstraction Layer}.
+\end{itemize}
 
 
 %(\textit{i}) \sigla{CI}{Camada de Infraestrutura} (do inglês \textit{Infrastructure Layer}), (\textit{ii}) \sigla{CEP}{Camada de Elementos de Programa} (do inglês \textit{Program Elements Layer}), (\textit{iii}) \sigla{CRTE}{Camada de Recurso de Tempo de Execução} (do inglês \textit{Runtime Resource Layer}) e (\textit{iv} ) \sigla{CA}{Camada de Abstração} (do inglês \textit{Abstraction Layer}). 
@@ -125,7 +125,139 @@ A camada CEP possui dois pacotes: (\textit{i}) \texttt{Code} e (\textit{ii}) \te
 
 A camada CRTE contêm quatro pacotes: (\textit{i}) \texttt{Data}, (\textit{ii}) \texttt{Platform}, (\textit{iii}) \texttt{Event} e (\textit{iv}) \texttt{UI}. Coletivamente tais pacotes representam a estrutura e comportamento de recursos de tempo de execução do sistema. Tais pacotes são diretamente instanciados por meio da definição de recursos, abstração do \texttt{Code Model}, ou são manualmente instanciado pelo engenheiro de modernização. A rastreabilidade entre os elementos abstraídos e os elementos físicos (por exemplo, código-fonte) é mantida pelo meta-atributo denominado \texttt{implementation}. Finalmente, a camada CA contêm três pacotes: (\textit{i}) \texttt{Conceptual}, (\textit{ii}) \texttt{Structure} e (\textit{iii}) \texttt{Build}. Esses pacotes possuem metaclasses para representar o maior nível de abstração de um sistema, por exemplo, a estrutura do sistema, regras de negócios, documentações do sistema, etc.
 
-Uma característica importante de ser observada e ressaltada é que todas as camadas do KDM interagem, significando que todas as camadas são conectadas de alguma forma\footnote{Essa conectividade entre os elementos de cada camada são mantidos por um conjunto de meta-atributo, por exemplo, o meta-atributo \texttt{implementation}.}, como consequência se uma mudança/refatoração é realizada em uma camada especifica, a mudança/refatoração deve ser propagada para outras camadas com o intuito de manter todas as camadas sincronizadas e consistentes preservando assim a estrutura estática do KDM e o comportamento do código representado em KDM. Nas próximas seções são apresentados os principais pacotes do metamodelo KDM que compõem o contexto para o desenvolvimento deste trabalho.
+\begin{figure}[htb]
+ \caption{Representação das quatro camadas do KDM de um determinado sistema.}
+ \label{fig:kdm_layer_sistema_completo}
+ \centering
+ \includegraphics[scale=0.6]{images/kdm_Layer.pdf}
+ \fautor
+\end{figure}
+
+Como salientado anteriormente cada camada do KDM representa diferentes perspectivas de conhecimento sobre os artefatos de sistemas. Tais camadas e/ou pacotes do KDM podem ser criados automaticamente, semi-automaticamente, ou manualmente por meio da aplicação de várias técnicas de extração de conhecimento, análises e transformação. Por exemplo, na Figura~\ref{fig:kdm_layer_sistema_completo} é apresentado uma arquitetura de software que esta dividida em várias camadas do KDM, e consequentemente utiliza vários pacotes e metaclasses para representar todos os artefatos do software. 
+
+A Figura~\ref{fig:kdm_layer_sistema_completo} pode ser analisada verticalmente e horizontalmente; verticalmente é possível identificar as quatros camadas do KDM apresentadas anteriormente: CI \ding{182}, CEP \ding{183}, CRTE \ding{184} e CA \ding{185}. Tais camadas possuem abstrações (metaclasses) dos artefatos heterogêneos que servem para funções distintas e que estão representados horizontalmente. Por exemplo, em \emph{Data Tier} são definidos diferentes tipos de artefatos de bancos de dados, XML, CVS e DAT. Os componentes que realizam a conectividade com os bancos de dados (por exemplo, \sigla{ODBC}{\emph{Open Database Connectivity}} e \sigla{JDBC}{\emph{Java Database Connectivity}}) estão em \emph{Data Access tier}. Em \emph{Processing Logic tier} estão definidos os componentes que implementam regras de negócio. Além disso, também são definidos os componentes que interagem com componentes de interface com o usuário. Em \emph{Proxy tier} estão definidos artefatos que fazem iterações com elementos externos, por exemplo, SOAP, DCOM, CORBA, JNI, ou RMI. Finalmente, \emph{Presentation tier} é responsável por produzir e controlar componentes gráficos, tais como, formulários, páginas \emph{web} ou relatórios. 
+
+Uma característica importante de ser observada e ressaltada na Figura~\ref{fig:kdm_layer_sistema_completo} é que todas as camadas do KDM interagem, significando que todas as camadas são conectadas de alguma forma\footnote{Essa conectividade entre os elementos de cada camada são mantidos por um conjunto de meta-atributo, por exemplo, o meta-atributo \texttt{implementation}.}, como consequência se uma mudança/refatoração é realizada em uma camada especifica, a mudança/refatoração deve ser propagada para outras camadas com o intuito de manter todas as camadas sincronizadas e consistentes preservando assim a estrutura estática do KDM e o comportamento do código representado em KDM. Na Tabela~\ref{tab:visao_geral_kdm} é apresentada uma visão detalhada de todas as camadas do metamodelo do KDM. Além disso, essa tabela também apresenta as técnicas que podem ser utilizadas para instanciar cada pacote do KDM. 
+
+\begin{longtable}{ | m{2.5cm} | m{5.9cm}| m{3.5cm} | m{3.5cm} | } 
+ \caption{ Visão geral das camadas do KDM e técnicas utilizadas para instanciar todos os pacotes do KDM.\label{tab:visao_geral_kdm}}\\
+ 
+ \hline
+ \multicolumn{4}{| c | }{Início da Tabela~\ref{tab:visao_geral_kdm}}\\
+ \hline
+ \textbf{Camadas} & \textbf{Pacotes do KDM}  & \textbf{Artefatos de Entrada} &\textbf{Técnicas}\\
+ \hline
+ \endfirsthead
+ 
+ \hline
+ \multicolumn{4}{|c|}{Continuação da Tabela~\ref{tab:visao_geral_kdm}}\\
+ \hline
+ \textbf{Camadas} & \textbf{Pacotes do KDM}  & \textbf{Artefatos de Entrada} &\textbf{Técnicas}\\
+ \hline
+ \endhead
+ 
+ \hline
+ \endfoot
+ 
+ \hline
+ \multicolumn{4}{| c |}{Fim da Tabela~\ref{tab:visao_geral_kdm}}\\
+ \hline\hline
+ \endlastfoot
+ 
+ \hline CI & Pacotes: \emph{Code} e \emph{Action} (\emph{Code Model}) \newline - Representa aspecto estrutural e comportamental do código-fonte, ou seja, contêm metaclasses para representar todos os elementos do código classes/módulos, funções/métodos, variáveis/propriedades, etc )  & \begin{enumerate}
+  \item Aplicação de Software; e
+  \item Repositório de arquivos.
+  \end{enumerate} & \begin{enumerate}
+  \item Sistema de Arquivo; e
+  \item Repositories traversal.
+  \end{enumerate} \tabularnewline
+\hline CEP & Pacotes: \emph{Code} e \emph{Action} (\emph{Code Model}) \newline - Representa aspecto estrutural e comportamental do código-fonte, ou seja, contêm metaclasses para representar todos os elementos do código classes/módulos, funções/métodos, variáveis/propriedades, etc ) & \begin{enumerate}
+ 	\item Código-fonte;
+ 	\item Definição da API;
+ 	\item \emph{Schemas} do Banco de Dados; e
+ 	\item Definição de recursos. 
+ \end{enumerate} & \begin{enumerate}
+ 	\item \emph{Parsing} da árvore sintatica abstrata (AST); e
+ 	\item Padrões de reconhecimento.
+ \end{enumerate} \tabularnewline
+\hline 
+\multirow{4}{2.5cm}{
+CRTE
+} &  \emph{Platform Model} \newline - Representa recursos utilizados pelo software em tempo de exeução, suas composições e seus comportamentos & \begin{enumerate}
+	\item \emph{Inventory Model;}
+	\item \emph{Code Model};
+	\item Definições dos recursos; e
+	\item Arquivos de configuração.
+\end{enumerate} & \begin{enumerate}
+	\item \emph{Parsing} a árvore sintatica abstrata;
+	\item Padrões de reconhecimento;
+	\item Análise de dependência; e
+	\item Clusterização.
+\end{enumerate} \tabularnewline
+\cline{2-4} 
+ & \emph{Data Model} \newline - Representa a estrutura dos elementos de persistência que um determinado sistema possui (tabelas, visões, colunas). & \begin{enumerate}
+	\item \emph{Schemas} do Banco de Dados; e
+	\item Definições dos recursos.
+\end{enumerate} & \begin{enumerate}
+	\item \emph{Parsing} da árvore sintatica abstrata (AST); e
+ 	\item Padrões de reconhecimento.
+\end{enumerate} \tabularnewline
+\cline{2-4} 
+ &  \emph{UI Model} \newline - Representa os elementos gráficos do sistema, seus layout, fluxo de controle, etc & \begin{enumerate}
+ 	\item Definições dos recursos;
+ 	\item \emph{Inventory Model}; e
+ 	\item \emph{Code Model}.
+ \end{enumerate} & \begin{enumerate}
+ 	\item \emph{Parsing} da árvore sintatica abstrata (AST); e
+ 	\item Análise e instanciação manual das metaclasses.
+ \end{enumerate} \tabularnewline
+\cline{2-4} 
+ & \emph{Event Model} \newline - Representa as aspectos comportamentais do sistema, modelo de transições de estado, etc. & \begin{enumerate}
+ 	\item Definições dos recursos;
+ 	\item Arquivos de configuração;
+ 	\item Code Model;
+ 	\item Data Model;
+ 	\item Platform Model; e
+ 	\item UI Model.
+ \end{enumerate} & \begin{enumerate}
+ 	\item Padrões de reconhecimento; e
+ 	\item Análise e instanciação manual.
+ \end{enumerate} \tabularnewline
+\hline 
+\multirow{3}{2.5cm}{CA} & \emph{Structure Model} \newline - Representa a composição de elementos arquiteturais do sistema e seus relacionamentos.  & \begin{enumerate}
+	\item \emph{Inventory Model};
+	\item \emph{Code Model};
+	\item \emph{Data Model};
+	\item \emph{Platform Model}; e
+	\item \emph{UI Model}.
+\end{enumerate} & \begin{enumerate}
+	\item Análise de dependência;
+	\item Clusterização; 
+	\item Análise e instanciação manual
+\end{enumerate}\tabularnewline
+\cline{2-4} 
+ & \emph{Conceptual Model} \newline - Representa comportamento e fluxo de cenário, termos de regra de negócio, fatos e regras implementadas pelo sistema.& \begin{enumerate}
+ 	\item \emph{Code Model};
+ 	\item \emph{Data Model};
+ 	\item \emph{Platform Model};
+ 	\item \emph{UI Model};
+ 	\item Documentação;
+ 	\item Banco de dados.
+ \end{enumerate} & \begin{enumerate}
+ 	\item Padrões de reconhecimento;
+ 	\item Definição manual.
+ \end{enumerate}\tabularnewline
+\cline{2-4} 
+ &  \emph{Build Model} \newline - Representa os fatos sobre o processo de implantação do sistema: \emph{input/output}, ferramentas utilizadas para desenvolver o código-fonte, etc & \begin{enumerate}
+ 	\item \emph{Inventory Model};
+ \end{enumerate} & \begin{enumerate}
+ 	\item Definição manual;
+ 	\item Itens do inventório;
+ \end{enumerate}\tabularnewline
+\hline
+ \end{longtable}
+
+Nas próximas seções são apresentados os principais pacotes que compõem o contexto para o desenvolvimento deste trabalho.
 
 \subsection{Pacote Code}\label{subsection:codePackage}
 
@@ -149,7 +281,7 @@ A metaclasse \texttt{CodeModel} representa um contêiner para outras instâncias
 
 %This metamodel element is a container for other \texttt{code} element instances. As can be observed in Figure~\ref{fig:CodeModel} the \texttt{Code} package \ding{205} depends on the \texttt{kdm} \ding{202}, \texttt{Source} \ding{203}, and \texttt{Core} \ding{204} packages. The meta-class \texttt{CodeModel} \ding{206} is the specific KDM model that owns collections of facts about the existing software system such that these facts correspond to the \texttt{Code} domain, its superclass is \texttt{KDMModel}. It has as association \texttt{codeElement:AbstractCodeElement[0..*]} meaning that one shall arrange code elements (e.g., methods, fields, etc) into one or more code models. The \texttt{AbstractCodeRelationship} \ding{207} is an abstract meta-class representing any relationship determined by a programming language, it is also used to constrain the subclasses of \texttt{KDMRelationship} (see Figure~\ref{fig:CodeModel} \ding{208}) in the \texttt{Code} model. The meta-class \texttt{ComputationalObject} represents the named elements determined by the programming language, which describe certain computational objects at the runtime, for example, methods, and variables.
 
-O pacote~$\mathtt{Code}$ consiste em um total de 24 metaclasses; tais metaclasses são um arranjo de abstrações para representar toda, ou a grande maioria, da estrutura estática de um terminado código-fonte dado um linguagem de programação, seja ela procedural ou orientada a objetos~\cite{KDM:specification}. Na Tabela~\ref{tab:meta_classes_pacoteCODE} algumas metaclasses são apresentadas. Como pode ser observado algumas metaclasses podem ser diretamente elucidadas e mapeadas, como por exemplo, \aspas{classes} e \aspas{interfaces} construções facilmente encontradas em linguagens orientadas a objetos podem ser facilmente mapeada para as metaclasses denominada $\mathtt{ClassUnit}$ e $\mathtt{InterfaceUnit}$, respectivamente. Um mapeamento mais completo entre elementos estruturais e metaclasses do KDM pode ser identificado em~\citeonline{bruno_marinho_dissertacao} e no Capítulo~\ref{chapter:catalogo_refactoring_KDM}. Uma representação dessas metaclasses, bem como seus relacionamentos são apresentados em diagrama de classe na Figura~\ref{fig:classUnit_e_InterfaceUnit}.
+O pacote~$\mathtt{Code}$ consiste em um total de 24 metaclasses; tais metaclasses são um arranjo de abstrações para representar toda, ou a grande maioria, da estrutura estática de um terminado código-fonte dado um linguagem de programação, seja ela procedural ou orientada a objetos~\cite{KDM:specification}. Na Tabela~\ref{tab:meta_classes_pacoteCODE} algumas metaclasses são apresentadas. Como pode ser observado algumas metaclasses podem ser diretamente elucidadas e mapeadas, como por exemplo, \aspas{classes} e \aspas{interfaces} construções facilmente encontradas em linguagens orientadas a objetos podem ser facilmente mapeada para as metaclasses denominada $\mathtt{ClassUnit}$ e $\mathtt{InterfaceUnit}$, respectivamente. Um mapeamento mais completo entre elementos estruturais e metaclasses do KDM pode ser identificado em~\citeonline{bruno_marinho_dissertacao}. Uma representação dessas metaclasses, bem como seus relacionamentos são apresentados em diagrama de classe na Figura~\ref{fig:classUnit_e_InterfaceUnit}. 
 
 \begin{figure}[!ht]
 	\centering
@@ -163,18 +295,18 @@ O pacote~$\mathtt{Code}$ consiste em um total de 24 metaclasses; tais metaclasse
 
 \begin{table}[h]
 \centering
-\caption{Metaclasses para modelagem de estruturas estáticas do código-fonte.}
+\caption{metaclasses para modelagem de estruturas estáticas do código-fonte}
 \label{tab:meta_classes_pacoteCODE}
 \begin{tabular}{|l|l|}
 \hline
 Elemento do Código-Fonte & metaclasses do KDM \\ \hline
-\multicolumn{1}{|c|}{Classe}                   & \multicolumn{1}{|c|}{\texttt{ClassUnit}}           \\ \hline
-\multicolumn{1}{|c|}{Interface}                & \multicolumn{1}{|c|}{\texttt{InterfaceUnit}}       \\ \hline
-\multicolumn{1}{|c|}{Método}                   & \multicolumn{1}{|c|}{\texttt{MethodUnit}}          \\ \hline
-\multicolumn{1}{|c|}{Atributo}                 & \multicolumn{1}{|c|}{\texttt{StorableUnit}}        \\ \hline
-\multicolumn{1}{|c|}{Variável Local}           & \multicolumn{1}{|c|}{\texttt{MemberUnit}}          \\ \hline
-\multicolumn{1}{|c|}{Parâmetro}                & \multicolumn{1}{|c|}{\texttt{ParameterUnit}}       \\ \hline
-\multicolumn{1}{|c|}{Associação}               & \multicolumn{1}{|c|}{\texttt{KDMRelationShip}}     \\ \hline
+Classe                   & \texttt{ClassUnit}           \\ \hline
+Interface                & \texttt{InterfaceUnit}       \\ \hline
+Método                   & \texttt{MethodUnit}          \\ \hline
+Atributo                 & \texttt{StorableUnit}        \\ \hline
+Variável Local           & \texttt{MemberUnit}          \\ \hline
+Parâmetro                & \texttt{ParameterUnit}       \\ \hline
+Associação               & \texttt{KDMRelationShip}     \\ \hline
 \end{tabular}
 \end{table}
 
