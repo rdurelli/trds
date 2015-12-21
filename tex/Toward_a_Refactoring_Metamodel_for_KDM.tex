@@ -168,7 +168,7 @@ Formalmente pode-se definir o metamodelo como:
 	\item Todas as meta-associações \textit{mR} $\in SRM_{mR}$ é um conjunto R = $E_{1}$, $E_{2}$  , onde  $E_{1}$ e $E_{2}$ são associações de R. Posteriormente, cada R, contêm um nome. Ambos $E_{1}$  e $E_{1}$ possuem uma cardinalidade e são associados a uma metaclasse de $SRM_{mC}$.
 \end{itemize}
 
-Na Figura~\ref{fig:meta_modelo_SRM} é apresentado o metamodelo SRM. O SRM contêm 12 metaclasses e três enumerações. Um descrição detalhada de cada elementos desse metamodelo é apresentado a seguir:
+Na Figura~\ref{fig:meta_modelo_SRM} é apresentado o metamodelo SRM. O SRM contêm 12 metaclasses e três enumerações. Um descrição de cada elementos desse metamodelo é apresentado a seguir:
 
 \begin{figure}[h]
 	\centering
@@ -180,7 +180,7 @@ Na Figura~\ref{fig:meta_modelo_SRM} é apresentado o metamodelo SRM. O SRM cont�
 \end{figure}
 
 \begin{itemize}
-\item \texttt{RefactoringModel} representa a metaclasse raiz do metamodelo.
+\item \texttt{RefactoringModel} representa a metaclasse raiz do metamodelo. Em outras palavras, essa metaclasse representa uma coleção de metadados que corresponde a uma ou mais refatorações definidas para o metamodelo KDM.
 
 \begin{itemize}
 	\item \textbf{Associações}
@@ -330,8 +330,158 @@ Na Figura~\ref{fig:meta_modelo_SRM} é apresentado o metamodelo SRM. O SRM cont�
 
 \end{itemize}
 
-Três enumerações também foram definidas, como pode ser observado na Figura~\ref{fig:meta_modelo_SRM} delimitada por um retângulo de linha pontilhada. A primeira enumeração é \texttt{Language}, que é utilizada para especificar a linguagem da operação/refatoração, valores válidos são: ``ATL'' e ``OCL''. A segunda enumeração é \texttt{LevelKind}, a qual é utilizada para definir o level da refatoração. Finalmente, \texttt{KDMPackageKind} é utilizado para definir qual pacote do metamodelo KDM é (são) utilizado(s) durante a execução da refatoração. 
+Três enumerações também foram definidas, como pode ser observado na Figura~\ref{fig:meta_modelo_SRM} delimitada por um retângulo de linha pontilhada. A primeira enumeração é \texttt{Language}, que é utilizada para especificar a linguagem da operação/refatoração, valores válidos são: ``ATL'' e ``OCL''. A segunda enumeração é \texttt{LevelKind}, a qual é utilizada para definir o nível da refatoração. Finalmente, \texttt{KDMPackageKind} é utilizado para definir qual pacote do metamodelo KDM é (são) utilizado(s) durante a execução da refatoração. 
 
+%Para facilitar o entendimento do metamodelo SRM, bem como o relacionamento entre suas metaclasses a seguir são apresentadas descrições de como cada metaclasse se relacionam e devem ser utilizadas para proporcionar o reúso de refatorações para o metamodelo KDM.
+
+%\subsection{Metaclasses \texttt{RefactoringModel}, \texttt{Author} e \texttt{RefactoringLibrary} }
+
+%\texttt{RefactoringModel} representa a metaclasse raiz do metamodelo SRM. Em outras palavras, essa metaclasse representa uma coleção de metadados que corresponde a uma ou mais refatorações definidas para o metamodelo KDM. Essa metaclasse não contém nenhum meta-atributo, porém, como apresentado anteriormente possui duas associações: (\textit{i}) \texttt{author:Author[0..1]} e (\textit{ii}) \texttt{libraries:RefactoringLibrary[0..*]}
+
+\section{Implementação do SRM}
+
+O metamodelo SRM foi implementado utilizando EMF. Dessa forma, existem duas possibilidades para instanciar o metamodelo SRM: (\textit{i}) utilizando uma visão de árvore do metamodelo e (\textit{ii}) utilizando a API fornecida pelo EMF. A primeira opção, utiliza uma visão de árvore da instância do metamodelo SRM, como apresentado na Figura~\ref{fig:visao_arvore_metamodelo_srm}. Quando o engenheiro de modernização clica com o botão direito metaclasses do metamodelo são apresentadas para que o engenheiro escolha qual metaclasse especificar e instanciar. Porém, note que o engenheiro de modernização deve conhecer a estrutura correta do metamodelo SRM para utilizar a visão de árvore. 
+
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+	\caption{Visão de Árvore do metamodelo SRM.}
+	\label{fig:visao_arvore_metamodelo_srm}
+	\includegraphics[scale=0.65]{images/tree_srm}
+	\fautor
+\end{figure}
+
+A segunda opção é a utilização da API fornecida pelo EMF. Nesta segunda opção a linguagem Java é utilizada juntamente com a API EMF. Para utilizar a segunda opção os engenheiros de modernização necessitam ter conhecimento avançado de Java, isto é, a instanciação de uma refatoração utilizando a segunda opção é bastante verbosa, complexa e propensa a erros, pois exige conhecimento avançadas de refatoração e habilidades de programação em relação a API Ecore/EMF. No Código-fonte~\ref{cod:instancia_do_SRM} é apresentado um trecho onde é feita a instanciação em memória de algumas metaclasses definidas no metamodelo SRM utilizando a segunda opção. Note que nesse código-fonte a instanciação das metaclasses do metamodelo SRM é um processo verboso e propenso a erros. Para instanciar o metamodelo SRM o engenheiro deve saber utilizar a API do \textit{framework} EMF. Metaclasses são instanciadas em EMF utilizando o conceito de fabrica (em inglês - \textit{Factory}). Cada fabrica de uma metaclasse possui um método \texttt{createX}, onde X representa o nome da metaclasse do metamodelo. Para criar uma instancia válida do metamodelo SRM o engenheiro de modernização deve seguir um conjunto de passos. Por exemplo, como pode ser observado na linha 1 do Código-fonte~\ref{cod:instancia_do_SRM} uma instância da metaclasse \texttt{Author} é criada por meio da interface \texttt{RefactoringModelFactory} e do método \texttt{createAuthor()}. Em seguida, todos os meta-atributos da metaclasse \texttt{Author} devem ser especificados como apresentado nas linhas 2 e 3 do Código-fonte~\ref{cod:instancia_do_SRM}. Nas linhas 4-14 outras metaclasses do metamodelo SRM são instanciadas. 
+
+\begin{codigo}[caption={[Instanciação do metamodelo SRM programaticamente.] Instanciação do metamodelo SRM.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={cod:instancia_do_SRM}, language=Java]{Name}
+Author author = RefactoringModelFactory.eINSTANCE.createAuthor();
+author.setName("Rafael");
+author.setLastName("Durelli");
+RefactoringModel rM = RefactoringModelFactory.eINSTANCE.createRefactoringModel();
+rM.setAuthor(author);
+RefactoringLibrary library = RefactoringModelFactory.eINSTANCE.createRefactoringLibrary();
+lib.setName("Fowler's refactorings");
+lib.setDescription("Contains some Fowler's refactorings such as ExtractClass, RenameElements, PushMethod, PushAttribute, etc.");
+lib.setShortDescription("Fine grained Refactorings");
+rM.getLibraries().add(lib);
+Catalog cat = RefactoringModelFactory.eINSTANCE.createCatalog();
+cat.setAuthor(author);
+cat.setName("Fowler's catalog");
+libr.getCatalogs().add(cat);
+...
+\end{codigo}
+
+Como observado o processo de instanciação do metamodelo SRM não é um processo trivial em nenhuma opção. Além disso, engenheiros de modernização devem estar familiarizados como as semânticas das refatorações (por exemplo, qual(is) é (são) o(s) pré-requisito(s) para a execução de uma refatoração) e como/onde utilizar e programar tais refatorações. Com o intuito de facilitar e diminuir a quantidade de código-fonte, esforço obrigatórios e competência necessárias para instanciar refatorações utilizando o metamodelo SRM, foi criado uma DSL para auxiliar a instanciação de refatorações. A seguir as gramáticas definidas que regem a DSL para auxiliar a instanciação do metamodelo SRM são apresentadas.
+
+\subsection{Gramática da DSL utilizada para instanciar o SRM}
+
+Nesta seção as gramáticas especificadas para criar uma DSL para auxiliar a instanciação do metamodelo SRM são apresentadas.
+%
+%Cada trecho de código da DSL representa uma instancia de uma metaclasse do metamodelo SRM, ou seja, cada declaração da DSL está em conformidade com uma metaclasse do SRM. Por exemplo, considere a palavra-chave \texttt{refactoringModel} \texttt{author} entre \aspas{\{} e \aspas{\}} representa a instanciação da metaclasse \texttt{Author} do SRM que possui dois meta-atributos: \texttt{name} e \texttt{lastName}. 
+
+A DSL criada para auxiliar a instanciação do SRM foi desenvolvida utilizando Xtext\footnote{\texttt{https://www.eclipse.org/Xtext/}}. Xtext é um \textit{framework} do Eclipse\footnote{\texttt{https://www.eclipse.org}} que facilita a definição de gramática\footnote{Gramáticas representam a definição formal de um sintaxe textual concreta. Consistem em um conjunto de regras de produção para definir como o \textit{textual input} (ou seja, sentenças) são representadas. Basicamente, as regras de produção podem ser representadas utilizando \sigla{BNF}{\textit{Backus–Naur Form}}, por exemplo, \textit{S ::= P1 ... Pn}, essa gramática define um símbolo \textit{S} por um conjunto de expressões \textit{P1 ... Pn}.} 
+com a utilização de um metamodelo que foi definido utilizando EMF. Xtext tem como principal objetivo automatizar e agilizar o processo de desenvolvimento de DSLs. Note que a sintaxe da DSL segue as terminologias e conceitos definidos no metamodelo SRM para facilitar a utilização da DSL e o entendimento do metamodelo SRM.
+
+Em Xtext a gramática segue uma notação similar ao \textit{Backus–Naur Form} (BNF) chamada de regras do \textit{parser}. Tais regras representam a sintaxe concreta da DSL. Note que para facilitar o entendimento da DSL, trechos da mesma são mostradas em listagens de códigos separados, bem como símbolos para explanar o propósito de uma terminada linha da gramática. No Código-fonte~\ref{lst:dsl_part_1} é ilustrado o primeiro trecho da gramática concreta da DSL desenvolvida. A gramática começa com a definição do nome da DSL (SRM) (ver Código-fonte~\ref{lst:dsl_part_1} \ding{182}). Em sequência é definido os metamodelos que devem ser importados para serem utilizados durante a criação da DSL: o metamodelo SRM\ding{183} e o Ecore\ding{184}.
+
+
+\begin{lstlisting}[language=Xtext, frame=single, basicstyle={\scriptsize}, mathescape=true, label={lst:dsl_part_1}, caption={Gramática da DSL - parte 1}]
+$\textrm{\ding{182}}$ grammar refactoring.xtext.SRM with org.eclipse.xtext.common.Terminals 
+$\textrm{\ding{183}}$ import platform:/resource/refactoring/model/SRM.ecore
+$\textrm{\ding{184}}$ import http://www.eclipse.org/emf/2002/Ecore as ecore
+RefactoringModel: 
+	$\textrm{\ding{185}}$ `refactoringModel' name = ID `{'
+	$\textrm{\ding{186}}$ author = Author
+	$\textrm{\ding{187}}$ libraries += RefactoringLibrary$^{*}$;
+	`}'
+\end{lstlisting}
+
+
+Em seguida é criado a primeira regra. Essa regra começa com a definição da metaclasse \texttt{RefactoringModel}. O corpo da regra começa logo após os \aspas{\texttt{:}}. Primeiramente para o entendimento da regra, é importante destacar que literais de \textit{string} (em Xtext os literais podem ser expressos com aspas simples ou duplas) definem palavras-chave da DSL. Como pode ser observado no Código-fonte~\ref{lst:dsl_part_1} é esperado a palavra-chave \texttt{refactoringModel}\ding{185} seguido por um \texttt{ID} e \aspas{\{}. A gramática que rege o objeto \texttt{ID} é definida como uma sequência ilimitada de maiúsculas e minúsculas, números e o carácter de sublinhado, embora possa não começa por um dígito. A gramática que representa o nó \texttt{ID}\ding{182} pode ser visualizada no Código-fonte~\ref{lst:dsl_part_2}. 
+
+\begin{lstlisting}[language=Xtext, frame=single, basicstyle=\scriptsize, mathescape=true, label={lst:dsl_part_2}, caption={Gramática da DSL - parte 2}]
+	$\textrm{\ding{182}}$ terminal ID: (`a'..`z' | `A'..`Z'|`_')(`a'..`z' | `A'..`Z'|`_'|`0'..`9')*;
+\end{lstlisting}
+
+Ainda no Código-fonte~\ref{lst:dsl_part_1} a expressão \texttt{author=Author}\ding{186} especifica que pode-se instanciar uma instancia da metaclasse \texttt{Author}. A expressão \texttt{(libraries += RefactoringLibrary)$^{*}$}\ding{187} descrita no Código-fonte~\ref{lst:dsl_part_1} especifica que pode-se instanciar várias instâncias da metaclasse \texttt{RefactoringLibrary}. O operador estrela, \aspas{\texttt{*}}, ilustra que o número de elementos (nesse caso \texttt{RefactoringLibrary}) é arbitrário; em particular, ele pode ser qualquer número \texttt{>=} 0. Operador \texttt{+=} por sua vez representa que a propriedade \texttt{libraries} será uma lista do tipo \texttt{RefactoringLibrary}.
+
+\begin{lstlisting}[language=Xtext, frame=single, basicstyle=\scriptsize, mathescape=true, label={lst:dsl_part_3}, caption={Gramática da DSL - parte 3}]
+Author:
+	$\textrm{\ding{182}}$ `author' `{'
+	$\textrm{\ding{183}}$ `name' `:' name = ID  
+		$\textrm{\ding{229} \ding{184}}$ `lastName' `:' lastName = ID; 
+`}'
+RefactoringLibrary:
+	$\textrm{\ding{185}}$ `refactoringLibraries' `{'
+	$\textrm{\ding{186}}$ `name' `:' name = ID  
+		$\textrm{\ding{229}}$ `shortDescription' `:' shortDescription = STRING
+		$\textrm{\ding{229}}$ `description' `:' description = STRING
+		$\textrm{\ding{229}}$ $\textrm{\ding{187}}$ catalogs += Catalog$^{*}$
+`}'
+\end{lstlisting}
+
+A definição das regras que regem as metaclasses \texttt{Author} e \texttt{RefactoringLibrary} são apresentadas no Código-fonte~\ref{lst:dsl_part_3}. A regra para a definição de \texttt{Author} começa com a definição da palavra-chave \texttt{author} seguida por um \aspas{\{}\ding{182}. Em seguida a palavra-chave \texttt{name} é esperada, seguido por \aspas{\texttt{:}} \ding{183}. Posteriormente a palavra-chave \texttt{lastName} também é esperada, seguido por \aspas{\texttt{:}} \ding{184}. Na linha 6 do Código-fonte~\ref{lst:dsl_part_3} começa a definição da regra da metaclasse \texttt{RefactoringLibrary}. A regra para a definição de \texttt{RefactoringLibrary} começa com a definição da palavra-chave \texttt{refactoringLibraries} seguida por um \aspas{\{}\ding{185}. Em seguida, deve-se especificar a palavra-chave \texttt{name} e \texttt{:}. Posteriormente, as palavras-chaves \texttt{shortDescription} e \texttt{description} são especificadas nas linhas 9 e 10, respectivamente. A expressão descrita na Linha 11 representa que pode haver qualquer número de instâncias da metaclasse \texttt{Catalog}.
+
+\begin{lstlisting}[language=Xtext, frame=single, basicstyle=\scriptsize, mathescape=true, label={lst:dsl_part_4}, caption={Gramática da DSL - parte 4}]
+Catalog:
+	$\textrm{\ding{182}}$`catalog' `{' 
+		$\textrm{\ding{229} \ding{183}}$`name' `:' name=ID
+		$\textrm{\ding{229} \ding{184}}$`author' `:' author=[Author]
+		$\textrm{\ding{229} \ding{185}}$refactorings += Refactoring$^{*}$
+	`}'
+Refactoring:
+	`refactoring' `{' 
+		$\textrm{\ding{229}}$`name' `:' name = ID
+		$\textrm{\ding{229}}$`motivation' `:' motivation = STRING
+		$\textrm{\ding{229}}$`summary' `:' summary = STRING
+		$\textrm{\ding{229} \ding{186}}$ operation = Operation?
+		$\textrm{\ding{229} \ding{187}}$ preCondition = PreCondition?
+		$\textrm{\ding{229} \ding{188}}$ postCondition = PostCondition?
+		$\textrm{\ding{229} \ding{189}}$ classification = Classification
+		$\textrm{\ding{229} \ding{190}}$(`containedRefactoring' `:' chainOfRefactoring+=Refactoring)$^{*}$
+	`}'
+\end{lstlisting}
+
+O Código-fonte~\ref{lst:dsl_part_4} representa as sintaxes concretas das metaclasses \texttt{Catalog} e \texttt{Refactoring}. A sintaxe concreta da metaclasse \texttt{Catalog} começa com a palavra-chave \texttt{catalog} seguida por um \aspas{\{}\ding{182}. Em seguida o nome do catálogo de refatoração deve ser especifica por meio da palavra-chave \texttt{name} \ding{183}. Posteriormente, deve-se especificar uma instância da metaclasse \texttt{Author}, informando quem é o autor desse catalogo de refatoração, ver Código-fonte~\ref{lst:dsl_part_4}\ding{184}. Na Linha 5 do Código-fonte~\ref{lst:dsl_part_4} deve-se informar várias instâncias da metaclasse \texttt{Refactoring}, essa sintaxe representa as refatorações que compõem esse catalogo de refatoração. Nas linhas 7-16 a definição da sintaxe concreta para a definição de uma refatoração por meio do metamodelo SRM é apresentada. Inicialmente, uma refatoração deve possuir um nome, conforme ilustrado na linha 9 do Código-fonte~\ref{lst:dsl_part_4}. Posteriormente, a motivação, bem como o resumo da refatoração também devem ser especificados, conforme apresentado nas linhas 10 e 11 do Código-fonte~\ref{lst:dsl_part_4}. As linhas 12, 13, 14 e 15 informam que uma metaclasse do tipo \texttt{Operation}\ding{186}, \texttt{PreCondition}\ding{187}, \texttt{PostCondition}\ding{188} e \texttt{Classification} \ding{189} devem ser instanciadas, respectivamente. Na linha 16 representa a sintaxe da DSL para especificar um conjunto de refatorações que quando combinadas podem realizar refatorações complexas.
+
+\begin{lstlisting}[language=Xtext, frame=single, basicstyle=\scriptsize, mathescape=true, label={lst:dsl_part_5}, caption={Gramática da DSL - parte 5}]
+Operation: 
+	$\textrm{\ding{182}}$`operation' `{'
+		$\textrm{\ding{229}}$`language' `:' language=Language
+		`body' `:' `{'
+			$\textrm{\ding{229} \ding{184}}$body = STRING
+		`}'
+	`}'
+PreCondition: 
+	$\textrm{\ding{185}}$`preCondition' `{'
+		$\textrm{\ding{229}}$`context' `:' context=STRING
+		$\textrm{\ding{229}}$`language' `:' language=Language
+		`body' `:' `{' 
+			$\textrm{\ding{229}}$body=STRING	
+		`}'
+	`}'
+PostCondition: 
+	$\textrm{\ding{186}}$`postCondition' `{'
+		$\textrm{\ding{229}}$`context' `:' context=STRING
+		$\textrm{\ding{229}}$`language' `:' language=Language
+		`body' `:' `{' 
+			$\textrm{\ding{229}}$body=STRING	
+		`}'
+	`}'
+enum Language: 
+	ATL | OCL | XQuery
+\end{lstlisting}
+
+No Código-fonte~\ref{lst:dsl_part_5} as sintaxes concretas das metaclasses \texttt{Operation}, \texttt{PreCondition} e \texttt{PostCondition} são definidas. A sintaxe concreta da metaclasse \texttt{Operation} inicia com a palavra-chave \texttt{operation} seguida por um \aspas{\{}\ding{182}. Em seguida, deve-se especificar qual a linguagem que a operação/refatoração será escrita. \texttt{Language} é uma enumeração (\textit{enum}) que está representado na linha 24 do Código-fonte~\ref{lst:dsl_part_5}. A linha 5 representa a sintaxe concreta para especificar o \aspas{corpo} da operação/refatoração propriamente dita \ding{184}. Na linha 8 a sintaxe concreta da metaclasse \texttt{PreCondition} é definida. A sintaxe concreta inicia com a palavra-chave \texttt{preCondition} seguida por um \aspas{\{}\ding{182}, \texttt{context}, \texttt{language} e \texttt{body}. A sintaxe concreta da metaclasse \texttt{PostCondition} é definida nas linhas 16 até 23. Note que a sintaxe é similar à sintaxe definida na metaclasse \texttt{PreCondition}. A partir das gramáticas da DSL apresentadas, XText gera um editor textual no ambiente de desenvolvimento Eclipse IDE. Esse editor textual provê \textit{highlighting} de sintaxe, \textit{code completion} e \textit{code navigation}. O editor resultante pode ser observado no Capítulo~\ref{chapter:ferramenta_kdm_re} na Seção~\ref{label:sec_modulo_do_srm}, onde é apresentada a ferramenta KDM-RE.
+
+
+\section{Trabalhos Relacionados}
+
+Poucos trabalhos relacionados foram identificados na literatura sobre metamodelos para especificar refatorações. X et al. definiram um metamodelo, o qual é apresenta na Figura~\ref{fig:metamodelo_relacionados_refatoracao}. Note que esse metamodelo é semelhante ao metamodelo aqui proposto. Porém, nosso objetivo não é apenas especificar e documentar refatorações como os autores. Nosso principal objetivo é criar uma forma de compartilhar refatorações de prover a interoperabilidade entre diversas ferramentas, assim, qualquer ferramenta que utilize o metamodelo KDM, poderá utilizar as refatorações definidas e compartilhadas utilizando o metamodelo SRM. Tais autores não deixam claro qual é a o principal motivo para a criação do metamodelo de refatoração definido por eles.
+
+\change{Especificar cada metaclasse definidas pelos autores....}
+
+Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla bla 
 
 \section{Considerações Finais}
 \label{sec:consideracoes_finais}
