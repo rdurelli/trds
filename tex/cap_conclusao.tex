@@ -194,13 +194,16 @@ Acredita-se, portanto, que as contribuições trazidas por esta Tese contribuem 
 
 %Outra contribuição é o apoio computacional apresentado no Capítulo~\ref{chapter:ferramenta_kdm_re}. O apoio computacional foi definido para automatizar a atividade de aplicação e reutilização de refatorações em sistemas representados pelo KDM. Para auxiliar o engenheiro de software, as refatorações podem ser aplicadas diretamente em diagramas de classes UML, porém, a refatoração é de fato realizada transparentemente no metamodelo KDM e posteriormente replicada nos diagramas de classes UML. Adicionalmente, após a aplicação de refatorações em sistemas representados pelo KDM é de suma importância manter todos os pacotes/artefatos sincronizados e consistentes. Dessa forma, esse apoio computacional também contém um plug-in responsável por aplicar regras de propagações que são realizadas em instância do metamodelo KDM. O intuito desse plug-in é manter todos os artefatos sincronizados e consistentes de acordo com a refatoração aplicada.
 
-\section{Limitações}
+\section{Limitações}\label{sec:limitacoes_trabalho}
 
 A abordagem e o apoio computacional desenvolvidos nesta Tese possuem as seguintes limitações:
 
 \begin{itemize}
 
 \item A abordagem de criação de refatorações para o KDM descreve como criar refatorações para o metamodelo KDM. Contudo, a forma como o mecanismo, bem como as pré- e pós-condições dependem do conhecimento do engenheiro de modernização. Neste projeto de doutorado foram realizados exemplos práticos com a utilização de ATL e OCL para implementar o mecanismo e as asserções (pré- e pós-condições), respectivamente;
+
+\item O metamodelo SRM proporciona a interoperabilidade de refatorações para um amplo domínio. No entanto, como o SRM é baseado no KDM pode-se apenas especificar refatorações para os elementos estruturais representados pelas metaclasses contidas no KDM;  
+
 
 \item O apoio computacional KDM-RE contém um módulo que provê uma DSL para auxiliar a instanciação do metamodelo SRM. Essa DSL aumenta o nível de abstração do processo de instanciação de refatorações, escondendo determinadas complexidades. O uso dessa DSL guia o engenheiro de modernização durante a especificação de uma determinada refatoração, norteando qualis metaclasses deve) ser especificadas. No entanto, a semântica de uma determinada refatoração utilizando essa DSL continua sendo responsabilidade do engenheiro de modernização;
 
