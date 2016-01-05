@@ -74,6 +74,21 @@
  morecomment=[s]{/*}{*/}, 
  morestring=[b]",
  tabsize=4}
+ 
+ \lstdefinelanguage{XML}
+{
+  basicstyle=\ttfamily\footnotesize,
+  morestring=[b]",
+  moredelim=[s][\bfseries\color{Maroon}]{<}{\ },
+  moredelim=[s][\bfseries\color{Maroon}]{</}{>},
+  moredelim=[l][\bfseries\color{Maroon}]{/>},
+  moredelim=[l][\bfseries\color{Maroon}]{>},
+  morecomment=[s]{<?}{?>},
+  morecomment=[s]{<!--}{-->},
+  commentstyle=\color{DarkOliveGreen},
+  stringstyle=\color{blue},
+  identifierstyle=\color{red}
+}
 % ----------------------------------------------------------------
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---An infrastructure for Creating KDM refactorings that deals with static synchronization and behavior preservation
