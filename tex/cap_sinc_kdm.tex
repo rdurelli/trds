@@ -211,7 +211,7 @@ Na Tabela~\ref{tab:propagacaoes_kdm_sinc_classUnit} as regras que regem as propa
  \cline{2-3} 
  & \texttt{Structure Package} & Não se aplica \tabularnewline
 \cline{2-3} 
- & \texttt{Data Package} & Deve-se criar uma instância da metaclasse \texttt{RelationaTable}. Além disso, deve-se também especificar que o meta-atributo \texttt{name} de ambas as metaclasses (\texttt{ClassUnit} criada e \texttt{RelationaleTable}) terão o mesmo valor. \tabularnewline
+ & \texttt{Data Package} & Deve-se criar uma instância da metaclasse \texttt{RelationalTable}. Além disso, deve-se também especificar que o meta-atributo \texttt{name} de ambas as metaclasses (\texttt{ClassUnit} criada e \texttt{RelationalTable}) terão o mesmo valor. Deve-se também criar criar uma instância da metaclasse \texttt{UniqueKey}. \tabularnewline
 \cline{2-3} 
  & \texttt{Conceptual Package} & \textbf{Cenário 1}: Cria-se uma instância da metaclasse \texttt{RuleUnit}. Deve-se associar a instância da metaclasse \texttt{ClassUnit} criada por meio da associação \texttt{implementation} da metaclasse \texttt{RuleUnit} criado. \textbf{Cenário 2}: Já existe uma instância da metaclasse \texttt{RuleUnit} para representar em nível de regra de negócio a instância da metaclasse \texttt{ClassUnit} criada. Assim, apenas deve-se associar a instância da metaclasse \texttt{ClassUnit} criada por meio da associação \texttt{implementation} da metaclasse \texttt{RuleUnit}. \tabularnewline
 \hline 

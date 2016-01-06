@@ -5,14 +5,17 @@ Quando se conduz uma revisão de literatura sem o pré-estabelecimento de um pro
 
 De acordo com~\citeonline{Petersen_20151} MS são projetados para dar uma visão geral de uma área de investigação por meio da classificação e contagem de contribuições em relação a um conjunto de categorias de classificação~\cite{Petersen_2008, Kitchenham_2010}. Em outras palavras, trata-se de realizar uma vasta pesquisa na literatura, a fim de identificar quais temas já foram abordados na literatura, quais temas ainda não foram abordados e quais são novas possíveis pesquisas~\cite{Kitchenham_2010}. Embora, ambas as técnicas, MS e \sigla{RS}{Revisão Sistemática} compartilhem algumas características - (por exemplo, no que diz respeito à busca e seleção do estudo), segundo~\citeonline{Petersen_20151} tais técnicas são diferentes em termos de objetivos e, portanto, utilizam diferentes abordagens para análise de dados. Enquanto RS visa sintetizar evidências, também considerando a força da evidência, MS preocupa-se principalmente com a estruturação de uma determinada área de pesquisa~\cite{Petersen_20151}. Segundo~\citeonline{Kitchenham_2010} MS implica na forma mais adequada para se identificar, avaliar e interpretar toda uma área de pesquisa para um tema em particular. 
 
-Resume-se que um MS configura um alicerce para novas atividades de pesquisa acerca de um determinado tema. Neste contexto, foi realizado um MS sobre ADM e KDM~\cite{durelli_systematic_mapping}; a motivação para realizar esse MS é identificar os temas que têm sido mais investigados, bem como os temas que ainda não foram pesquisados no contexto da abordagem ADM e o metamodelo KDM. Embora, a ADM seja uma abordagem relativamente nova, o OMG afirma que ela é uma importante abordagem, pois combina dois dos principais campos da Engenharia de Software, ou seja, Engenharia Dirigida por Modelos (ver Capítulo~\ref{chapter:fundamentacao_teorica}, Seção~\ref{Cap2_Sec2_Desenvolvimento_Dirigido_a_Modelos}) e reengenharia de software. Desde a criação da ADM muitos esforços têm enfatizado a modernização de sistemas por meio desta abordagem. Assim, se faz necessário a condução de uma investigação mais sistemática dos temas englobados por esta área de pesquisa. Nota-se que esse capítulo é uma extensão do seguinte artigo: \textit{A Mapping Study on Architecture-Driven Modernization}~\cite{durelli_systematic_mapping}.
+Resume-se que um MS configura um alicerce para novas atividades de pesquisa acerca de um determinado tema. Neste contexto, foi realizado um MS sobre ADM e KDM~\cite{durelli_systematic_mapping}; a motivação para realizar esse MS é identificar os temas que têm sido mais investigados, bem como os temas que ainda não foram pesquisados no contexto da abordagem ADM e o metamodelo KDM. Embora, a ADM seja uma abordagem relativamente nova, o OMG afirma que ela é uma importante abordagem, pois combina dois dos principais campos da Engenharia de Software: MDE (ver Capítulo~\ref{chapter:fundamentacao_teorica}, Seção~\ref{Cap2_Sec2_Desenvolvimento_Dirigido_a_Modelos}) e reengenharia de software. Desde a criação da ADM muitos esforços têm enfatizado a modernização de sistemas por meio desta abordagem. Assim, se faz necessário a condução de uma investigação mais sistemática dos temas englobados por esta área de pesquisa. Nota-se que esse capítulo é uma extensão do seguinte artigo: \textit{A Mapping Study on Architecture-Driven Modernization}~\cite{durelli_systematic_mapping}.
 
 
-Este capítulo está organizado da seguinte forma: Seção X descreve como o MS foi conduzido. Seção X apresenta as principais descobertas desse MS. Na Seção X as ameaças às validades são apresentadas. Na Seção X as considerações finais são destacadas.\change{mudar e colocar a estrutura}
+Este capítulo está organizado da seguinte forma: Seção~\ref{sec:metodologia_pesquisa} descreve a metodologia de como o MS foi conduzido. Subseção~\ref{subsec:estrategia_de_busca} apresenta a estratégia de busca utilizada nesse MS. A Subseção~\ref{subsec:fonte_de_estudo_e_selecao} descreve as fontes de estudos utilizadas no MS, além disso, também apresenta como foi realizado a seleção dos estudos. Subseção~\ref{subsec:definindo_esquema_de_classificacao} apresenta o esquema de classificação considerado no MS. Na Subseção~\ref{subsec:extracao_e_sintese_do_dados} a extração e síntese dos dados são discutidas. Na Subseção~\ref{subsec:mapeamento_e_dis} um gráfico de bolha resultante do MS é apresentado, dando ênfase nas principais descobertas desse MS. Ainda nessa subseção as questões de pesquisas são discutidas. A Seção~\ref{subsec:principais_constatações_e_questões_Em_Aberto} apresenta as principais constatações e questões em aberto relacionadas a ADM e KDM. Seção~\ref{subsec:ameaças_a_validade} apresenta as ameaças à validade do MS. Finalmente, Seção~\ref{sec:considerações_finais_do_mapeamento_sistematico} descreve as considerações finais desse capítulo.
+
+
+%Seção X apresenta as principais descobertas desse MS. Na Seção X as ameaças às validades são apresentadas. Na Seção X as considerações finais são destacadas.\change{mudar e colocar a estrutura}
 
 \section{Metodologia de Pesquisa}\label{sec:metodologia_pesquisa}
 
-Como já salientado nas considerações iniciais um MS fornece um processo sistemático para identificar relevantes pesquisas com o objetivo de responder específicas questões. Durante a condução deste MS todos os passos propostos por~\citeonline{Petersen_20151, Petersen_2008} foram seguidos. Uma visão geral de todos os passos propostos por tais autores pode ser observada na Figura~\ref{fig:all_steps_MS}. Nota-se que cada passo produz um resultado intermediário, como visualizado na Figura~\ref{fig:all_steps_MS}. De acordo com tais autores, cinco passos essenciais são: (\textit{i}) \textit{definition of research questions}, (\textit{ii}) \textit{conducting the search for relevant primary studies}, (\textit{iii}) \emph{screening} \textit{of papers}, (\textit{iv}) \emph{keywording} \textit{of abstracts} e (\textit{v}) \textit{data extraction and mapping}. 
+Como já salientado nas considerações iniciais um MS fornece um processo sistemático para identificar relevantes pesquisas com o objetivo de responder específicas questões. Durante a condução deste MS todos os passos propostos por~\citeonline{Petersen_20151, Petersen_2008} foram seguidos. Uma visão geral de todos os passos propostos por tais autores pode ser observada na Figura~\ref{fig:all_steps_MS}. Nota-se que cada passo produz um resultado intermediário, como visualizado na Figura~\ref{fig:all_steps_MS}. De acordo com tais autores, cinco passos essenciais são: (\textit{i}) \textit{Definition of Research Questions}, (\textit{ii}) \textit{Conducting Search}, (\textit{iii}) \emph{Screening of Papers}, (\textit{iv}) \emph{Keywording using Abstracts} e (\textit{v}) \textit{Data Extraction and Mapping Process}. 
 
 \begin{figure}[h]
  \caption{Processo para a condução de um Mapeamento Sistemático}
@@ -22,7 +25,7 @@ Como já salientado nas considerações iniciais um MS fornece um processo siste
  \fadaptada{Petersen_2008}
 \end{figure}
 
-\subsection{Estratégia de Busca}
+\subsection{Estratégia de Busca}\label{subsec:estrategia_de_busca}
 
 O protocolo do MS é definido neste passo - esse protocolo usualmente é dividido em dois sub-passos: (\textit{i}) a definição das questões de pesquisa e (\textit{ii}) a \textit{string} de busca. 
 
@@ -31,19 +34,19 @@ O protocolo do MS é definido neste passo - esse protocolo usualmente é dividid
 \begin{itemize}
 \item \textbf{QP$_1$} - Dado os metamodelos da ADM, qual metamodelo tem sido mais utilizado na literatura? Além disso, dado o metamodelo identificado, qual (is) é (são) o (s) pacote (s) mais e menos utilizado (s)?
 \item \textbf{QP$_2$} - Que tipos de estudos têm sido publicados no contexto da ADM?
-\item \textbf{QP$_3$} - Quais são as áreas que têm sido mais e menos investidas no contexto da ADM? Além disso, quais são os tipos de contribuições que foram publicadas até agora?
+\item \textbf{QP$_3$} - Quais são as áreas que têm sido mais e menos investigadas no contexto da ADM? Adicionalmente, quais são os tipos de contribuições que foram publicadas até agora?
 \end{itemize}
 
-Considerando as QPs acima estabelecidas, definiram-se os atributos e a amplitude do MS com a técnica \sigla{PICO}{\textit{Population}, \textit{Intervention}, \textit{Comparator} e \textit{Outcomes}}~\cite{Kitchenham_2010} e identificaram-se termos a serem utilizados na \textit{string} de busca:
+Considerando as QPs estabelecidas, definiram-se os atributos e a amplitude do MS com a técnica \sigla{PICO}{\textit{Population}, \textit{Intervention}, \textit{Comparator} e \textit{Outcomes}}~\cite{Kitchenham_2010} e identificaram-se termos a serem utilizados na \textit{string} de busca:
 
 \begin{itemize}
-\item Quanto à população: Em Engenharia de Software e no contexto de MS, população diz respeito a uma específica área de pesquisa. No contexto deste MS a população são artigos publicados na literatura científica sobre algum processo, técnica ou ferramenta que utilize a abordagem ADM;
+\item Quanto à população: Em Engenharia de Software e no contexto de MS, população diz respeito à uma específica área de pesquisa. No contexto deste MS a população são artigos publicados na literatura científica sobre algum processo, técnica ou ferramenta que utilize ADM e seus metamodelos;
 
-\item Quanto à intervenção: Em Engenharia de Software, intervenção refere-se à metodologia de software, ferramenta, tecnologia ou procedimento. No contexto, deste MS a intervenção são abordagens e ferramentas publicadas na literatura científica que utilizam a abordagem ADM;
+\item Quanto à intervenção: Em Engenharia de Software, intervenção refere-se à metodologia de software, ferramenta, tecnologia ou procedimento. No contexto, deste MS a intervenção são abordagens e ferramentas publicadas na literatura científica que utilizam ADM e seus metamodelos;
 
 \item Quanto à comparação: A comparação não é aplicada no contexto deste MS;
 
-\item Quanto aos resultados esperados: Espera-se como resultado uma visão geral dos estudos que foram publicados para a abordagem ADM e seus metamodelos, enfatizando estudos primários que descrevem técnicas, abordagens, processos e ferramentas para auxiliar o modernizador durante a condução de modernização de sistemas legados com a utilização da abordagem ADM.
+\item Quanto aos resultados esperados: Espera-se como resultado uma visão geral dos estudos que foram publicados para a ADM e seus metamodelos, enfatizando estudos primários que descrevem técnicas, abordagens, processos e ferramentas para auxiliar o engenheiro de modernização durante a condução de modernização de sistemas legados com a utilização da abordagem ADM.
 
 \end{itemize}
 
@@ -57,10 +60,10 @@ A partir dos termos identificados, define-se a \textit{string} de busca para a r
  \fautor
 \end{figure}
 
-\subsection{Fonte de Estudos e Seleção dos Estudos}
+\subsection{Fonte de Estudos e Seleção dos Estudos}\label{subsec:fonte_de_estudo_e_selecao}
 
 As fontes de estudos utilizadas durante o MS foram as bibliotecas digitais da \textit{ACM}, 
-\textit{IEEE XPLORE}, \textit{Scopus}, \textit{Web of Science} e \textit{Engineering Village}. Tais bibliotecas digitais foram selecionadas com base na experiência reportada por~\citeonline{dyba_2015}. Nota-se que os recursos fornecidos por essas bibliotecas digitais, bem como a sintaxe exata da \textit{string} de busca a ser aplicada, variam de uma biblioteca para outra, assim, a \textit{string} de busca apresentada na Figura~\ref{fig:string_de_busca} foi utilizada como base para construir uma \textit{string} de busca semanticamente equivalente e sob medida para cada biblioteca digital. %As \textit{strings} de buscas utilizada em todas as bibliotecas digitais pode ser visualizada na Tabela~\ref{long}.
+\textit{IEEE XPLORE}, \textit{Scopus}, \textit{Web of Science} e \textit{Engineering Village}. Tais bibliotecas digitais foram selecionadas com base na experiência reportada por~\citeonline{dyba_2015}. De acordo com esses autores, tais fontes de estudos são suficientes para identificar estudos primários relevantes. Nota-se que os recursos fornecidos por essas bibliotecas digitais, bem como a sintaxe exata da \textit{string} de busca a ser aplicada, variam de uma biblioteca para outra, assim, a \textit{string} de busca apresentada na Figura~\ref{fig:string_de_busca} foi utilizada como base para construir uma \textit{string} de busca semanticamente equivalente e sob medida para cada biblioteca digital. %As \textit{strings} de buscas utilizada em todas as bibliotecas digitais pode ser visualizada na Tabela~\ref{long}.
 
 
 %\begin{longtable}[!tb]{ | m{2cm} | m{12cm}| }
@@ -143,7 +146,7 @@ Somando todas as bibliotecas digitais, obteve-se 259 estudos primários no prime
  \fautor
 \end{figure}
 
-\subsection{Definindo um Esquema de Classificação}
+\subsection{Definindo um Esquema de Classificação}\label{subsec:definindo_esquema_de_classificacao}
 
 O esquema de classificação utilizado neste MS foi o esquema proposto por~\citeonline{Petersen_2008, Petersen_20151}. Esse esquema classifica cada publicação entre categorias de acordo com três perspectivas: (\textit{i}) \textbf{Área de Foco}, (\textit{ii}) \textbf{Tipo de Contribuição} e (\textit{iii}) \textbf{Tipo de Pesquisa}. O esquema de classificação resultante é descrito a seguir:
 
@@ -181,11 +184,11 @@ O esquema de classificação utilizado neste MS foi o esquema proposto por~\cite
 \end{itemize}
 
 
-\subsection{Extração e Síntese do Dados}
+\subsection{Extração e Síntese dos Dados}\label{subsec:extracao_e_sintese_do_dados}
 
 Os 30 estudos selecionados na etapa anterior foram analisados. Assim, criou-se um formulário para auxiliar a extração de dados. Esse formulário contém dados relevantes quanto à como a ADM e seus metamodelos estão sendo utilizados na literatura, data de quando a extração do dado foi realizada, título do estudo primário, autores do estudo primário, veículo de publicação e um resumo destacando as principais contribuições do estudo primário para posteriormente realizar a classificação. Durante o processo de extração, dados sobre cada estudo primário foram independentemente coletados por todos os pesquisados que participaram do MS. É importante destacar que a primeira execução desse MS foi realizada em Novembro de 2013, posteriormente, o MS foi conduzido novamente em Agosto de 2015 com o objetivo de atualizar o MS.
 
-\subsection{Mapeamento e discussão das QPs}
+\subsection{Mapeamento e discussão das QPs}\label{subsec:mapeamento_e_dis}
 
 O foco desta seção é apresentar uma visão geral de como a ADM e seus metamodelos estão sendo pesquisados e utilizados na literatura, bem como identificar possíveis grupos de evidências (ou seja, onde pode haver margem para uma literatura mais completa) e deserto de evidências (ou seja, onde melhor ou nova pesquisa é necessária) de pesquisas. Além de apresentar essa visão geral, esta seção também tem como objetivo apresentar respostas para as QPs definidas anteriormente.
 
@@ -316,18 +319,18 @@ Em~\cite{Perez-Castillo:2011:ECS:1982185.1982249,6080834, 6498507,Perez-Castillo
 %\subsection{Ferramentas identificada no MP}
 
 %Durante a condução do MP foi possível identificar 15 ferramentas como pode ser observado na Figura~\ref{fig:mapa_mapeamento_sistematico}, facetas \textbf{Tipo de Contribuição}. Porém, apenas nove ferramentas foram explicitamente explicadas seu propósito.   
-\section{Principais Constatações e Questões em Aberto}
+\section{Principais Constatações e Questões em Aberto}\label{subsec:principais_constatações_e_questões_Em_Aberto}
 
 As recentes propostas em ADM têm-se concentrado principalmente na elaboração de abordagens para auxiliar a modernização do sistema legado para outra plataforma/arquitetura. No entanto, se olharmos para o problema global da integração da modernização considerando o contexto da ADM, ainda há espaço para melhorias. Por exemplo, hoje em dia apenas a ferramenta MoDisco\footnote{https://eclipse.org/MoDisco/} cria uma instância do metamodelo KDM de forma automática. Porém, essa ferramenta preocupa-se apenas com os pacotes \texttt{Code} e \texttt{Action}. Assim, para integrar o metamodelo KDM em um contexto maior, novos \textit{parsers} precisam ser definidos e criados. Embora alguns autores tenham criado algumas iniciativas~\cite{5440163,Bruneliere_2010MODISCO}, essa área ainda é limitada. Neste contexto, ainda se faz necessário novos esforços para criar \textit{parsers} para representar todas as camadas do metamodelo KDM de forma automática ou semi-automática.
 
 Foi observado durante o MS que existem algumas principais limitações a serem investidas para facilitar a utilização da ADM e do metamodelo KDM de forma eficaz. Por exemplo, como já salientado no Capítulo~\ref{chapter:fundamentacao_teorica} Seção~\ref{sec:refatoracao}, refatorações são técnicas utilizadas para melhorar a estrutura do software. Hoje em dia é evidente que a refatoração é de suma importância para melhorar a qualidade do código-fonte, e assim, melhorar a sua manutenibilidade.
-Embora a ADM, e principalmente o KDM tenham ambos propostos para auxiliar todo o processo da modernização de sistemas, até esse momento existe uma ausência de abordagens e ferramentas que auxiliem os modernizadores de software a aplicar refatorações de forma consistente para o metamodelo KDM. Dessa forma, usualmente os modernizadores de software precisam desenvolver suas próprias ferramentas para refatorar diversos sistemas representados em nível do metamodelo KDM. Tais soluções geralmente são proprietárias e consequentemente são difíceis de reutilizar e prover interoperabilidade entre ferramentas.
+Embora a ADM, e principalmente o KDM tenham ambos propostos para auxiliar todo o processo da modernização de sistemas, até esse momento existe uma ausência de abordagens e ferramentas que auxiliem os engenheiros de modernização a aplicar refatorações de forma consistente para o metamodelo KDM. Dessa forma, usualmente os engenheiros de modernização precisam desenvolver suas próprias ferramentas para refatorar diversos sistemas representados em nível do metamodelo KDM. Tais soluções geralmente são proprietárias e consequentemente são difíceis de reutilizar e prover interoperabilidade entre ferramentas.
 
 Além disso, é sabido que a atividade de refatoração é pertinente a qualquer processo de modernização. Dessa forma, quando um sistema é representado utilizando diferentes visões conceituais para representar níveis de abstração do sistema (por exemplo, visão arquitetural, visão de código-fonte, visão do banco de dados, etc.), um acidente comum que surge durante atividades de refatorações é a dessincronização das instâncias do metamodelo, resultando em visões inconsistentes após a aplicação de uma refatoração. Assim, no contexto do metamodelo KDM existe uma carência de abordagens e apoios ferramentais que auxiliam a sincronizar tais mudanças após a aplicação de um conjunto de refatorações no KDM. Pesquisas recentes sugerem que a aplicação de técnicas de propagação de mudanças pode auxiliar na identificação e atualização de todas as instâncias/visões do KDM, permitindo assim manter todas as visões/instâncias do metamodelo KDM sincronizadas. 
 
 Na literatura é possível identificar um conjunto de refatorações já validadas e que são usualmente aplicadas em código-fonte, por exemplo, \textit{Extract Class}, \textit{Move Method}, \textit{Move Attribute}, etc. Essas são apenas alguns exemplos de refatorações úteis que não são facilmente reutilizadas na prática durante a condução de modernização de um determinado sistema. Essa limitação pode ser atribuída devido a ausência de um meio padronizado de disponibilizar refatorações. Embora a ADM forneça um conjunto de metamodelos para auxiliar o engenheiro de software a conduzir MDE até esse momento a ADM não provê instruções para auxiliar o engenheiro a promover o reuso de refatorações juntamente com os seus metamodelos padronizados (por exemplo, KDM) durante o processo de modernização. Essa limitação faz com que o engenheiro crie suas próprias soluções/refatorações, resultando em um possível atraso no processo de modernização. Contudo, as soluções/refatorações definidas não são facilmente reutilizadas pois são proprietárias e dependente de linguagem. Uma abordagem promissora é lidar com a refatoração de forma independente da linguagem – aumentando assim as possibilidades de reutilização de refatorações. Dessa forma, existe uma necessidade de criar uma metamodelo para auxiliar o engenheiro de modernização a promover o reuso de refatorações no contexto da ADM e principalmente de forma integrada com o metamodelo KDM. 
 
-\section{Ameaças à Validade}
+\section{Ameaças à Validade}\label{subsec:ameaças_a_validade}
 Nesta seção as ameaças à validade deste MS são destacadas. Foram definidos quatro ameaças à validade que são apresentadas a seguir:
 
 \begin{itemize}
@@ -344,7 +347,7 @@ A fim de garantir a validade, foram analisadas várias fontes de dados. No caso 
 \end{itemize}
 
 
-\section{Considerações Finais}
+\section{Considerações Finais}\label{sec:considerações_finais_do_mapeamento_sistematico}
 
 Pesquisas na área da ADM podem levar a avanças na modernização de sistemas, resultando sistemas que são mais sustentáveis, extensíveis e reutilizáveis. Para obter uma visão geral da pesquisa atual nesta área de pesquisa neste capítulo foi realizado um MS. O MS foi conduzido em várias bibliotecas digitais, \textit{ACM}, \textit{IEEE XPLORE}, \textit{Scopus}, \textit{Web of Science}, \textit{Engeneering Village} e \textit{Google Scholar}. Posteriormente foi identificado 30 estudos primários, os quais foram utilizados para extrair informações para responder três QPs. Scopus foi a biblioteca digital que retornou mais estudos primários, 58\% (150), foram recuperados 20\% (51) estudos da ACM, 12\% (30) da Engineering Village, 6\% (17) da Web of Science e 4\% (11) da IEEE. 
 
@@ -356,7 +359,7 @@ A maioria dos estudos primários identificados foram classificados como \aspas{\
 Outra contribuição deste capítulo é o mapa definido na Figura~\ref{fig:mapa_mapeamento_sistematico}. Ao observar esse mapa é possível ter uma visão global da literatura em relação à ADM - identificando assim quais categorias foram enfatizadas nas últimas pesquisas, lacunas e possibilidades para futuras pesquisas. Além disso, esse mapa também fornece esclarecimentos adicionais sobre as frequências de publicação ao longo do tempo.
 
 Como já salientado, é evidente que a aplicação de refatoração é de suma importância para melhorar a qualidade do código-fonte, e assim, melhorar a sua manutenibilidade.
-No entanto, embora a ADM, e principalmente o KDM tenham ambos sido propostos para auxiliar todo o processo da modernização de sistemas, até esse momento existe uma ausência de abordagens e apoios computacionais que auxiliem os engenheiros de modernização a aplicar refatorações de forma consistente para o metamodelo KDM. Dessa forma, usualmente os modernizadores de software precisam desenvolver suas próprias ferramentas para refatorar diversos sistemas. Tais soluções geralmente tendem a serem proprietárias e consequentemente torna-se difícil a reutilização e a interoperabilidade entre ferramentas. 
+No entanto, embora a ADM, e principalmente o KDM tenham ambos sido propostos para auxiliar todo o processo da modernização de sistemas, até esse momento existe uma ausência de abordagens e apoios computacionais que auxiliem os engenheiros de modernização a aplicar refatorações de forma consistente para o metamodelo KDM. Dessa forma, usualmente os engenheiros de modernização precisam desenvolver suas próprias ferramentas para refatorar diversos sistemas. Tais soluções geralmente tendem a serem proprietárias e consequentemente torna-se difícil a reutilização e a interoperabilidade entre ferramentas. 
 
 Com o intuito de mitigar essa ausência de abordagens e apoios computacionais que auxiliem os engenheiros de modernização a aplicar refatorações de forma consistente para o metamodelo KDM, nos próximos capítulos desta Tese abordagens, bem como um apoio computacional definidos para auxiliar o engenheiro de modernização e o engenheiro de software durante a aplicação, reúso e compartilhamento de refatorações são apresentadas. Mais especificadamente, no Capítulo~\ref{chapter:catalogo_refactoring_KDM} é apresentado como as refatorações tradicionais~\cite{Fowler1999} podem ser adaptadas para o metamodelo KDM~\cite{durelli_catalogo, durelli_VEM_ferramenta}. Adicionalmente, algumas refatorações são apresentadas e adaptadas para o metamodelo KDM. Além disso, ainda é apresentado um mapeamento entre os conceitos do paradigma orientado a objetos para o metamodelo KDM, assim, engenheiros de modernização podem de forma mais fácil adaptar novas refatorações para o KDM.
 
