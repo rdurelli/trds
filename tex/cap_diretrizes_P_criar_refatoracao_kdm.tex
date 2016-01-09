@@ -230,7 +230,7 @@ Dado essa motivação, no contexto desta Tese, a segunda abordagem é utilizada.
 ATL possui um modulo de execução denominado \textit{refining} que é utilizado para criar refatorações em nível de modelo. Esse modulo foi introduzido para facilitar a programação de (ou refatoração) transformações. Com o modulo \textit{refining}, os engenheiros de modernização podem se concentrarem no código ATL dedicada à geração de elementos estruturados modificados. Outros elementos estruturados do KDM (por exemplo, aqueles que permanecem inalteradas antes e após a refatoração) são implicitamente processados pelo mecanismo de ATL. O modulo \textit{refining} pode ser utilizado simplesmente substituindo a palavra-chave \texttt{from} pela palavra-chave \texttt{refining}. Obviamente, o modo de \textit{refining} só pode ser utilizado para as transformações endógenas (\aspas{\textit{in-place}}) (ver Capítulo~\ref{chapter:fundamentacao_teorica}, Seção~\ref{sec:transformacoes_de_modelos})
 
 
-Como apresentado na Seção~\ref{sec:refatoracao_para_o_metamodelo_kdm} as refatorações são agrupadas em dois níveis de operações: (\textit{i}) operações atômicas e (\textit{ii}) operações compostas. As granularidades definidas como operações atômicas são: \texttt{add}, \texttt{delete} e \texttt{change}. Essas operações atômicas podem ser facilmente implementadas em ATL. Dessa forma, um \textit{template} para cada operação atômica é disponibilizado como artefato para auxiliar o engenheiro de modernização a criar genericamente refatorações para o KDM. O \textit{template} para a operação atômica \texttt{add} é apresentado no Código-fonte~\ref{codigo:template_addKDMElement}. As partes fixas dos \textit{templates} são formadas por texto ATL e as partes variantes são formadas por dois tipos de instruções: (\textit{i}) argumentos, \textbf{ArgX}\footnote{\textbf{ArgX}, onde \textbf{X} representa um número sequencial do argumentos. \label{foot:Arg}}, demarcadas pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e que devem ser substituídos por metaclasses do metamodelo KDM, por exemplo, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc; e (\textit{ii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}} que devem ser substituídos de acordo com o domínio do sistema que será aplicado a refatoração, por exemplo, nomes de pacotes, classes, interfaces, atributos, métodos, etc.  
+Como apresentado na Seção~\ref{sec:refatoracao_para_o_metamodelo_kdm} as refatorações são agrupadas em dois níveis de operações: (\textit{i}) operações atômicas e (\textit{ii}) operações compostas. As granularidades definidas como operações atômicas são: \texttt{add}, \texttt{delete} e \texttt{change}. Essas operações atômicas podem ser facilmente implementadas em ATL. Dessa forma, um \textit{template} para cada operação atômica é disponibilizado como artefato para auxiliar o engenheiro de modernização a criar genericamente refatorações para o KDM. O \textit{template} para a operação atômica \texttt{add} é apresentado no Código-fonte~\ref{codigo:template_addKDMElement}. As partes fixas dos \textit{templates} são formadas por texto ATL e as partes variantes são formadas por três tipos de instruções: (\textit{i}) argumentos, \textbf{ArgX}\footnote{\textbf{ArgX}, onde \textbf{X} representa um número sequencial do argumentos. \label{foot:Arg}}, demarcadas pelos símbolos \aspas{\textbf{<\#}} e \aspas{\textbf{\#>}} e que devem ser substituídos por \textit{strings} validas na linguagem ATL; (\textit{ii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcadas pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e que devem ser substituídos por metaclasses do metamodelo KDM, por exemplo, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc; e (\textit{ii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}} que devem ser substituídos de acordo com o domínio do sistema que será aplicado a refatoração, por exemplo, nomes de pacotes, classes, interfaces, atributos, métodos, etc.  
 
 %argumentos, \textbf{ArgX} onde X representa um número cardinal, demarcadas pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} ou \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}}. O primeiro símbolo (\aspas{\textbf{<\%}} e \aspas{\textbf{\%>}}) informa para o engenheiro de modernização que metaclasses do KDM devem ser substituídas pelo argumento.
 
@@ -246,9 +246,9 @@ Como apresentado na Seção~\ref{sec:refatoracao_para_o_metamodelo_kdm} as refat
 \begin{tabular}{ | m{1.7cm} | m{12cm}| } 
 \hline
 \multicolumn{1}{|c|}{Argumentos}                                         & \multicolumn{1}{c|}{Valores} \\ \hline
-\multicolumn{1}{|c|}{\textbf{<\%Arg1\%>}} & Nome do módulo. Pode-se utilizar qualquer nome válido na linguagem ATL; \\ 
+\multicolumn{1}{|c|}{\textbf{<\#Arg1\#>}} & Nome do módulo. Pode-se utilizar qualquer \textit{string} válida na linguagem ATL; \\ 
 \hline
-\multicolumn{1}{|c|}{\textbf{<\%Arg2\%>}} & Nome da regra. Pode-se utilizar qualquer \textit{string} válida na linguagem ATL; \\  
+\multicolumn{1}{|c|}{\textbf{<\#Arg2\#>}} & Nome da regra. Pode-se utilizar qualquer \textit{string} válida na linguagem ATL; \\  
 \hline
 \multicolumn{1}{|c|}{\textbf{<\%Arg3\%>}} & Nome de uma metaclasse (\texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc). Deve-se especificar o nome da metaclasse que conterá a nova instância da metaclasse a ser criada; \\ 
 \hline
@@ -261,12 +261,12 @@ Como apresentado na Seção~\ref{sec:refatoracao_para_o_metamodelo_kdm} as refat
 \end{tabular}
 \end{table}
 
-Além do \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKDMElement} outro artefato também deve ser utilizado para auxiliar o engenheiro de modernização a substituir as partes variáveis do \textit{template} de forma correta. Esse artefato é apresentado na Tabela~\ref{tab:guia_template_operacao_add}. Essa tabela é utilizada como um guia para conduzir o engenheiro de modernização a especificar corretamente os as partes variantes do \textit{template}, ou seja, os argumentos.
+Além do \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKDMElement} outro artefato também deve ser utilizado para auxiliar o engenheiro de modernização a substituir as partes variáveis do \textit{template} de forma correta. Esse artefato é apresentado na Tabela~\ref{tab:guia_template_operacao_add}. Essa tabela é utilizada como um guia para conduzir o engenheiro de modernização a especificar corretamente as partes variantes do \textit{template}, ou seja, os argumentos.
 
 \begin{codigo}[caption={[\textit{Template} ATL para realizar a operação atômica \textit{add}.] \textit{Template} ATL para realizar a operação atômica \textit{add}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_addKDMElement}, language=ATL]{Name}
-module add(*@<\textbf{\%Arg1\%}>@*);
+module (*@<\textbf{\#Arg1\#}>@*);
 create OUT : MM refining IN : MM;
-rule create(*@<\textbf{\%Arg2\%}>@*){
+rule create(*@<\textbf{\#Arg2\#}>@*){
 	from
 		source : MM!(*@<\textbf{\%Arg3\%}>@*) (source.name = (*@<\textbf{$@$Arg4@}>@*))
 	to 
@@ -279,20 +279,13 @@ rule create(*@<\textbf{\%Arg2\%}>@*){
 }
 \end{codigo}
 
-Dado o \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKDMElement}, bem como as Tabelas~\ref{tab:mapemanetoEntreOOPeKDM} e~\ref{tab:guia_template_operacao_add} a combinação desses três artefatos auxilia/guia o engenheiro de software a criar a operação atômica \texttt{add} para um determinado elemento estrutural do KDM, ou seja, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc. Por exemplo, 
-%
-%
-%quando combinado com a Tabela~\ref{x} (os elementos estruturais \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc) e Tabela X auxiliam a originar a operação atômica \texttt{add} para um determinado elemento estrutural do KDM. 
-%
-%
-%os elemennnnnntos estruturais (\texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc) apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} origina uma operação atômica \texttt{add} para um determinado elemento estrutu
-%
-no Código-fonte~\ref{codigo:exemplo_add_classUnit} é apresentado uma simples ATL que adiciona uma nova instância da metaclasse \texttt{ClassUnit} denominada \texttt{\aspas{novaClassUnit}} no pacote \texttt{com.br.teste}. Como pode ser observado na linha 5 é especificado o nome do pacote (\texttt{\aspas{com.br.teste}}) que é onde a nova instância da \texttt{ClassUnit} será adicionada. A linha 8 representa que a nova instância da \texttt{ClassUnit} será adicionada no associação \texttt{codeElement}. Nas linhas 10-12 uma nova instância da metaclasse \texttt{ClassUnit} é adicionada e seu nome definido como \aspas{novaClassUnit}.
 
-Mostrar que o Engenheiro de modernização pode adaptar qualquer elemento... Mostrar uma exemplo em ATL onde pode ser substituido pela metaclasse do KDM........
+%para adicionar uma nova instância da metaclasse \texttt{ClassUnit} denominada \texttt{\aspas{novaClassUnit}} no pacote \texttt{com.br.teste}. Como pode ser observado na linha 5 é especificado o nome do pacote (\texttt{\aspas{com.br.teste}}) que é onde a nova instância da \texttt{ClassUnit} será adicionada. A linha 8 representa que a nova instância da \texttt{ClassUnit} será adicionada no associação \texttt{codeElement}. Nas linhas 10-12 uma nova instância da metaclasse \texttt{ClassUnit} é adicionada e seu nome definido como \aspas{novaClassUnit}.
+
+%Mostrar que o Engenheiro de modernização pode adaptar qualquer elemento... Mostrar uma exemplo em ATL onde pode ser substituido pela metaclasse do KDM........
 
 \begin{codigo}[caption={[ATL para realizar a operação atômica \textit{add} \texttt{ClassUnit}.] ATL para realizar a operação atômica \textit{add} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:exemplo_add_classUnit}, language=ATL]{Name}
-module addAClassUnit;
+module add;
 create OUT : MM refining IN : MM;
 rule createClass{
 	from
@@ -307,13 +300,58 @@ rule createClass{
 }
 \end{codigo}
 
-Da mesma forma o engenheiro de modernização pode implementar a operação atômica \texttt{delete} facilmente como apresentado no Código-fonte~\ref{codigo:exemplo_delete_classUnit}. 
-É importante observar que a  palavra-chave \texttt{drop} é utilizada em ATL para remover uma determinada instância. Dessa forma, o engenheiro de modernização deve primeiro especificar qual instância almeja-se deletar.  Assim, na linha 5 é informado o nome da instância da \texttt{ClassUnit} que almeja-se deletar. Em seguida, nas linhas 6-8 a instância especificada é deletada. 
+Dado o \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKDMElement}, bem como as Tabelas~\ref{tab:mapemanetoEntreOOPeKDM} e~\ref{tab:guia_template_operacao_add} a combinação desses três artefatos auxilia/guia o engenheiro de software a criar a operação atômica \texttt{add} para um determinado elemento estrutural do KDM, ou seja, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc. Por exemplo, 
+%
+%
+%quando combinado com a Tabela~\ref{x} (os elementos estruturais \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc) e Tabela X auxiliam a originar a operação atômica \texttt{add} para um determinado elemento estrutural do KDM. 
+%
+%
+%os elemennnnnntos estruturais (\texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc) apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} origina uma operação atômica \texttt{add} para um determinado elemento estrutu
+%
+no Código-fonte~\ref{codigo:exemplo_add_classUnit} é apresentado uma simples ATL criada utilizando esses três artefatos. Os argumentos \textbf{<\#Arg1\#>} e \textbf{<\#Arg2\#>} foram substituídos pelas \textit{Strings} \texttt{add} e \texttt{Class}, respectivamente, ver linhas 1 e 3. Na linha 5 \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{Package}, enquanto que o argumento \textbf{<$@$Arg4$@$>} foi substituído pela \textit{String} \texttt{\aspas{com.br.teste}} a qual representa o nome da instância da metaclasse \texttt{Package} onde uma nova instância da metaclasse \texttt{ClassUnit} será adicionada. Finalmente, os argumentos \textbf{<\%Arg5\%>} e \textbf{<$@$Arg6$@$>} foram substituída pela metaclasse \texttt{ClassUnit} e pela \textit{String} \texttt{\aspas{novaClassUnit}}, ver linhas 10 e 11.
+
+
+Similarmente, o engenheiro de modernização pode implementar a operação atômica \texttt{delete} facilmente seguindo um \textit{template}. O \textit{template} responsável pela operação atômica \texttt{delete} é apresentado no Código-fonte~\ref{codigo:template_delete}\footnote{A palavra-chave \texttt{drop} é utilizada na linha 7 do Código-fonte~\ref{codigo:template_delete} para especificar que uma determinada instância será removida.}. Esse \textit{template} também possui partes fixas e partes variantes. As partes fixas são textos em ATL e as partes variantes são formadas por argumentos demarcados pelas instruções \aspas{\textbf{<\#}} e \aspas{\textbf{\#>}}, \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e \aspas{\textbf{<$@$}} e \aspas{\textbf{$@$>}}. 
+
+
+O guia para auxiliar o engenheiro de modernização a especificar corretamente as partes variantes do \textit{template} \texttt{delete} é apresentado na Tabela~\ref{tab:guia_template_operacao_delete}. Por meio de três artefatos: (\textit{i}) o \textit{template} representado no Código-fonte~\ref{codigo:template_delete}, (\textit{ii}) o mapeamento entre OO e KDM apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} e (\textit{iii}) e o guia apresentado na Tabela ~\ref{tab:guia_template_operacao_delete} o engenheiro de modernização pode criar a operação atômica \texttt{delete}. Por exemplo, considere o Código-fonte~\ref{codigo:exemplo_delete_classUnit} onde almeja-se remover uma instância da metaclasse \texttt{ClassUnit}. 
+
+\begin{codigo}[caption={[\textit{Template} ATL para realizar a operação atômica \textit{delete}.] \textit{Template} ATL para realizar a operação atômica \textit{delete}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_delete}, language=ATL]{Name}
+module (*@<\textbf{\#Arg1\#}>@*);
+create OUT : MM refining IN : MM;
+rule delete(*@<\textbf{\#Arg2\#}>@*) {
+  from
+      source : MM!(*@<\textbf{\%Arg3\%}>@*) (source.name = (*@<\textbf{$@$Arg4$@$}>@*))
+  to
+      drop
+}
+\end{codigo}
+
+\begin{table}
+\centering
+\caption{Guia para auxiliar a substituir os argumentos do \textit{template} apresentado no Código-fonte~\ref{codigo:template_delete}.}
+\label{tab:guia_template_operacao_delete}
+\begin{tabular}{ | m{1.7cm} | m{12cm}| } 
+\hline
+\multicolumn{1}{|c|}{Argumentos}                                         & \multicolumn{1}{c|}{Valores} \\ \hline
+\multicolumn{1}{|c|}{\textbf{<\#Arg1\#>}} & Nome do módulo. Pode-se utilizar qualquer \textit{string} válida na linguagem ATL; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<\#Arg2\#>}} & Nome da regra. Pode-se utilizar qualquer \textit{string} válida na linguagem ATL; \\  
+\hline
+\multicolumn{1}{|c|}{\textbf{<\%Arg3\%>}} & Nome de uma metaclasse (\texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc). Deve-se especificar o nome da metaclasse que representa a instância da metaclasse a ser deletada; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<$@$Arg4@>}} & Nome da instância do elemento estrutural especificado no \textbf{<\%Arg3\%>}. Deve-se especificar o nome da instância da metaclasse que representa a instância da metaclasse a ser deletada. Esse argumento depende do domínio do sistema que será aplicado a refatoração e é identifica no meta-atributo \texttt{name} das metaclasses do KDM;  \\ 
+\hline
+\end{tabular}
+\end{table}
+
+Os argumentos \textbf{<\#Arg1\#>} e \textbf{<\#Arg2\#>} foram substituídos pelas \textit{Strings} \texttt{remove} e \texttt{Class}, respectivamente, ver linhas 1 e 3. Na linha 5 \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{ClassUnit}, enquanto que o argumento \textbf{<$@$Arg4$@$>} foi substituído pela \textit{String} \texttt{\aspas{ClassToRemove}}. Essa \textit{String} representa o nome da instância da \texttt{ClassUnit} que almeja-se deletar.
+
 
 \begin{codigo}[caption={[ATL para realizar a operação atômica \textit{delete} \texttt{ClassUnit}.] ATL para realizar a operação atômica \textit{delete} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:exemplo_delete_classUnit}, language=ATL]{Name}
-module removeClassUnit;
+module remove;
 create OUT : MM refining IN : MM;
-rule deleteClassUnit {
+rule deleteClass {
   from
       source : MM!ClassUnit (source.name = (*@\aspas{ClassToRemove}@*))
   to
