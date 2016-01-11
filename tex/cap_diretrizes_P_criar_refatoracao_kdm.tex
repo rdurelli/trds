@@ -303,9 +303,9 @@ rule createClass{
 		source : MM!Package (source.name = (*@\aspas{com.br.teste}@*))
 	to 
 		target: MM!Package (
-			codeElement (*@$\leftarrow$@*) source.codeElement(*@$\rightarrow$@*)including(newClassUnit)
+			codeElement (*@$\leftarrow$@*) source.codeElement(*@$\rightarrow$@*)including(newElement)
 		),
-		newClassUnit: MM!ClassUnit (
+		newElement: MM!ClassUnit (
 			name (*@$\leftarrow$@*) (*@\aspas{novaClassUnit}@*)
 		)
 }
@@ -582,14 +582,14 @@ Nesta seção a refatoração \textit{Push Down StorableUnit} é apresentada. Es
   \centering
 	% Requires \usepackage{graphicx}
 	\captionof{figure}{Instância simplificada do KDM antes e depois da refatoração \textit{Push Down StorableUnit}}
-	\includegraphics[scale=0.6]{images/antes_e_depois_push_down_storableUnit.pdf}
+	\includegraphics[scale=0.6]{images/pushDownStorableUnitAntesDepois2}
 	\fautor
 	\label{fig:antes_e_depois_pushDown_StorableUnit}
 \end{minipage}\hfill
 			\item Algoritmo: 
 			    \begin{itemize}
 			        \item para cada sub-\texttt{ClassUnit}Selecionadas que realmente usa o \{\texttt{StorableUnit}Selecionado\} - sub-\texttt{ClassUnit}Selecionadas.add(\{\texttt{StorableUnit}Selecionado\})
-			        \item \{\texttt{ClassUnit}\}.remove(\{\texttt{StorableUnit}Selecionado\}). 
+			        \item \{\texttt{ClassUnit}\}.delete(\{\texttt{StorableUnit}Selecionado\}). 
 			    \end{itemize} 
 	    \end{enumerate}
 		\item Especificação Formal:
@@ -611,26 +611,27 @@ Na linha 1 do Código-fonte~\ref{codigo:pre_push_down_storableUnit} é declarado
 	\begin{codigo}[caption={[ATL representando a refatoração \textit{Push Down StorableUnit}.] ATL da refatoração \textit{Push Down StorableUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:push_Down_StorableUnit_ATL}, language=ATL]{Name}
 module pushDownStorableUnit;
 create OUT : MM refining IN : MM;
-rule pushDownStorableUnit {
+rule createStorableUnit {
 	from
-		source : MM!ClassUnit (source.name = (*@\aspas{\{sub-\texttt{ClassUnit}Selecionada\}}@*) or source.name = (*@\aspas{\{sub-\texttt{ClassUnit}Selecionada\}}@*))
+		source : MM!ClassUnit (source.name = (*@\aspas{\{sub-\texttt{ClassUnit}Selecionada\}}@*)
 	to 
 		target : MM!ClassUnit (
-			codeElement(*@$\leftarrow$@*)source.codeElement(*@$\rightarrow$@*)including(attr)
+			codeElement(*@$\leftarrow$@*)source.codeElement(*@$\rightarrow$@*)including(newElement)
 		),
-		attr: MM!StorableUnit (
+		newElement: MM!StorableUnit (
 			name(*@$\leftarrow$@*)(*@\{\texttt{StorableUnit}Selecionado.name\}@*),
 			type(*@$\leftarrow$@*)(*@\{\texttt{StorableUnit}Selecionado.type\}@*)
 		)
 }
-rule removeStorableUnitFromSuperClass {
+rule deleteStorableUnit {
 	from
-		source : MM!StorableUnit (source.name = (*@\{\texttt{StorableUnit}Selecionado.name\}@*) and not source.refImmediateComposite().codeRelation.isEmpty())
+		source : MM!StorableUnit (source.name = (*@\{\texttt{StorableUnit}Selecionado.name\}@*) and source.refImmediateComposite().name = (*@\{\texttt{ClassUnit}.name\}@*) )
 	to
 		drop
 }
 \end{codigo}
-Na linha 1 do Código-fonte~\ref{codigo:push_Down_StorableUnit_ATL} o nome da refatoração é definido. Em seguida, na linha 2 é apresentado o cabeçalho da refatoração, novamente a palavra-chave \textit{refining} é especificada para informar que a transformação/refatoração é do tipo endógenas (ver Capítulo~\ref{chapter:fundamentacao_teorica} Seção~\ref{sec:transformacoes_de_modelos}). Posteriormente, nas linhas 3 até 13 a primeira regra dessa refatoração é definida. Na linha 5 uma condição de guarda é definida para identificar quais são as \{sub-\texttt{ClassUnit}Selecionadas\}. Em seguida, linhas 7, 8 e 9 informa que uma nova instância de \texttt{StorableUnit} será criado nas \{sub-\texttt{ClassUnit}Selecionadas\}. Nas linhas 10, 11 e 12 os meta-atributos do \{\texttt{StorableUnit}Selecionado\} são copiados. Após mover o \{\texttt{StorableUnit}Selecionado\} para as sub-classes, o próximo passo é remover o \{\texttt{StorableUnit}Selecionado\} da super-classe. Esse passo é representado na regra descrita nas linhas 15 até 20. Na linha 17 o \{\texttt{StorableUnit}Selecionado\} é identificado, depois na linha 19 a palavra-chave \textit{drop} é utilizada, a qual especifica que uma determinada instância será removida, neste caso o \{\texttt{StorableUnit}Selecionado\}.   
+O Código-fonte~\ref{codigo:push_Down_StorableUnit_ATL} apresenta a refatoração \texttt{Push Down StorableUnit}. Como apresentado na Tabela~\ref{tab:refatoringsCatalogo} essa refatoração pode ser implementada pela combinação de duas operações atômicas: (\textit{i}) \texttt{add} e \texttt{delete}. Dessa forma, os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:template_addKDMElement} e \ref{codigo:template_delete} foram utilizados como guia para implementar essa refatoração.
+%Na linha 1 do Código-fonte~\ref{codigo:push_Down_StorableUnit_ATL} o nome da refatoração é definido. Em seguida, na linha 2 é apresentado o cabeçalho da refatoração, novamente a palavra-chave \textit{refining} é especificada para informar que a transformação/refatoração é do tipo endógenas (ver Capítulo~\ref{chapter:fundamentacao_teorica} Seção~\ref{sec:transformacoes_de_modelos}). Posteriormente, nas linhas 3 até 13 a primeira regra dessa refatoração é definida. Na linha 5 uma condição de guarda é definida para identificar quais são as \{sub-\texttt{ClassUnit}Selecionadas\}. Em seguida, linhas 7, 8 e 9 informa que uma nova instância de \texttt{StorableUnit} será criado nas \{sub-\texttt{ClassUnit}Selecionadas\}. Nas linhas 10, 11 e 12 os meta-atributos do \{\texttt{StorableUnit}Selecionado\} são copiados. Após mover o \{\texttt{StorableUnit}Selecionado\} para as sub-classes, o próximo passo é remover o \{\texttt{StorableUnit}Selecionado\} da super-classe. Esse passo é representado na regra descrita nas linhas 15 até 20. Na linha 17 o \{\texttt{StorableUnit}Selecionado\} é identificado, depois na linha 19 a palavra-chave \textit{drop} é utilizada, a qual especifica que uma determinada instância será removida, neste caso o \{\texttt{StorableUnit}Selecionado\}.   
 			\item Pós-condição:
 			 \begin{codigo}[caption={[OCL representando a pós-condição da refatoração \textit{Push Down StorableUnit}.] Pós-condição da refatoração \textit{Push Down StorableUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:pos_condicao_pushDown_StorableUnit}, language=OCL]{Name}
 context StorableUnit::PushDownStorableUnit(subClasses:Bag(ClassUnit))
