@@ -675,19 +675,19 @@ Nesta seção a refatoração \textit{Extract ClassUnit} é apresentada. Essa re
 			        \item \{\texttt{MethodUnit}Selecionados\} não são definido em \{\texttt{ClassUnit}Selecionada\};
 			        \item todos os \{\texttt{StorableUnit}Selecionados\} e \{\texttt{MethodUnit}Selecionados\} estão definidos na nova instância da \texttt{ClassUnit} criada.
 			    \end{itemize}
-			\item Mecanismo: O primeiro passo da refatoração \textit{Extract ClassUnit} é selecionar um conjunto de \texttt{StorableUnits} e/ou \texttt{MethodUnits} que serão movidos para uma nova instância de metaclasse \texttt{ClassUnit}, no exemplo ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{202} duas instâncias de \texttt{StorableUnits} são selecionadas. Posteriormente, uma nova instância da metaclasse \texttt{ClassUnit} é criada e adicionada ao mesmo \texttt{Package} que a instância da metaclasse \texttt{ClassUnit} e que contém os \{\texttt{StorableUnit}Selecionados\}, como ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{204}. Em seguida, todos os \{\texttt{StorableUnit}Selecionados\} são movidos para esse nova instância, como representado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{203}. Ainda na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{205} é possível observar que uma outra metaclasse denominada \texttt{HasType} foi também instanciada. Essa metaclasse ilustra o relacionamento de associação entre duas classes no metamodelo KDM. Note que igual similar a metaclasse \texttt{Extends} e \texttt{Implements}, a metaclasse \texttt{HasType} possui duas meta-relacionamentos, \texttt{to} e \texttt{from}.
+			\item Mecanismo: O primeiro passo da refatoração \textit{Extract ClassUnit} é selecionar um conjunto de \texttt{StorableUnits} e/ou \texttt{MethodUnits} que serão adicionados para uma nova instância de metaclasse \texttt{ClassUnit}, no exemplo ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{202} duas instâncias de \texttt{StorableUnits} são selecionadas. Posteriormente, uma nova instância da metaclasse \texttt{ClassUnit} é criada e adicionada ao mesmo \texttt{Package} que a instância da metaclasse \texttt{ClassUnit} e que contém os \{\texttt{StorableUnit}Selecionados\}, como ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{204}. Em seguida, todos os \{\texttt{StorableUnit}Selecionados\} são adicionados nessa nova instância, como representado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{203}. %Em seguida, deve-se deletar os \{\texttt{StorableUnit}Selecionados\}.
 \begin{minipage}{.90\textwidth}
 	\vspace*{\fill}
   \centering
 	% Requires \usepackage{graphicx}
 	\captionof{figure}{Instância simplificada do KDM antes e depois da refatoração \textit{Extract ClassUnit}}
-	\includegraphics[scale=0.6]{images/antes_e_depois_refatoracao_extract_ClassUnit.pdf}
+	\includegraphics[scale=0.6]{images/extractClassUnitAntesEDepois2}
 	\fautor
 	\label{fig:antes_e_depois_extract_ClassUnit}
 \end{minipage}\hfill
 			\item Algoritmo: 
 			    \begin{itemize}
-			        \item createNewClassUnit(\{novoNome\});
+			        \item addNewClassUnit(\{novoNome\});
 			        \item adiciona essa nova instância dentro de um \texttt{Package};
 			        \item para cada \{\texttt{StorableUnit}Selecionado\} - move(\{newClassUnit\}, \{\texttt{StorableUnit}Selecionado\})
 			        \item para cada \{\texttt{MethodUnit}Selecionado\} - move(\{newClassUnit\}, \{\texttt{MethodUnit}Selecionado\});
