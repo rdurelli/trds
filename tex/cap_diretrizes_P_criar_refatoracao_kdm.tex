@@ -54,14 +54,14 @@ Na Figura~\ref{fig:diretrizes_kdm_refatoracao_capitulo} é apresentada uma macro
 \begin{figure}[h]
 	\centering
 	% Requires \usepackage{graphicx}
-	\caption{Elementos para a criação de refatorações para o KDM.}
+	\caption{Macro-visão para a criação de refatorações para o KDM.}
 	\label{fig:diretrizes_kdm_refatoracao_capitulo}
-	\includegraphics[scale=0.9]{images/criar_refatoracao_kdm}
+	\includegraphics[scale=0.9]{images/novoMacroAbordagemKDMRefactoring}
 	\fautor
 \end{figure}
 
 
-Na Figura~\ref{fig:todos_os_passos_diretrizes} uma micro-visão da Figura~\ref{fig:diretrizes_kdm_refatoracao_capitulo} é apresentada. Nota-se que a criação de refatorações para o metamodelo KDM possui cinco principais atividades que o engenheiro de modernização deve seguir. Nas subseções a seguir essas atividades são apresentadas. %Gerenciamento de consistência e Apoio computacional são apresentados no Capítulo~\ref{chapter:Abordagem_de_sincronizacao} e Capítulo~\ref{chapter:ferramenta_kdm_re}, respectivamente.
+Na Figura~\ref{fig:todos_os_passos_diretrizes} uma micro-visão da Figura~\ref{fig:diretrizes_kdm_refatoracao_capitulo} é apresentada. Nota-se que a criação de refatorações para o metamodelo KDM possui cinco principais passos que o engenheiro de modernização deve seguir. Nas subseções a seguir esses passos são apresentadas. %Gerenciamento de consistência e Apoio computacional são apresentados no Capítulo~\ref{chapter:Abordagem_de_sincronizacao} e Capítulo~\ref{chapter:ferramenta_kdm_re}, respectivamente.
 
 
 \begin{figure}[h]
@@ -69,7 +69,7 @@ Na Figura~\ref{fig:todos_os_passos_diretrizes} uma micro-visão da Figura~\ref{f
 	% Requires \usepackage{graphicx}
 	\caption{Diretrizes para criar refatorações para o KDM.}
 	\label{fig:todos_os_passos_diretrizes}
-	\includegraphics[scale=0.7]{images/fasesParaConstruirRefatoracoesKDM2}
+	\includegraphics[scale=0.7]{images/novaImagemAbordagemCriarRefatoracao}
 	\fautor
 \end{figure}
 
@@ -138,7 +138,7 @@ Como apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} algumas metaclasses 
 Com a utilização da Tabela~\ref{tab:mapemanetoEntreOOPeKDM} o engenheiro de modernização pode agora escolher qual refatoração criar para o metamodelo KDM. É de suma importância identificar previamente qual elemento do metamodelo KDM será utilizado durante a refatoração para o engenheiro criar e implementar a refatoração como apresentado na Seção~\ref{sec:linguagemDeTransformacaoUtilizada}. Por exemplo, suponha que o engenheiro de modernização almeja criar a refatoração \texttt{Rename Method}. Dessa forma, utilizando a Tabela~\ref{tab:mapemanetoEntreOOPeKDM} pode-se observar qual é a metaclasse em KDM que representa métodos; métodos em KDM são representados por instâncias da metaclasse \texttt{MethodUnit}, assim, a refatoração torna-se \texttt{Rename MethodUnit}. Adicionalmente, por meio da Tabela~\ref{tab:mapemanetoEntreOOPeKDM} é possível identificar todos os relacionamentos que a metaclasse \texttt{MethodUnit} possui, os quais podem ser úteis durante a implementação da refatoração.
 
 
-\subsection{Escolher Refatoração}\label{sec:refatoracao_para_o_metamodelo_kdm}
+\subsection{Identificar Operações}\label{sec:refatoracao_para_o_metamodelo_kdm}
 
 Após identificar todos os elementos estruturais e identificar o mapeamento entre POO e o metamodelo KDM, o próximo passo é identificar as operações que compõem a refatoração a ser criada. Como já salientado, no contexto desta Tese todas as refatorações são transformações que são realizadas em instâncias do KDM. Assim, as refatorações podem ser agrupadas em nível de sua granularidade. As granularidades podem ser definidas em dois níveis de operações: (\textit{i}) operações atômicas e (\textit{ii}) operações compostas. As granularidades definidas como operações atômicas podem ser especificadas por meio de operações primitivas que são executadas na instância do metamodelo KDM. Tais operações primitivas são listadas a seguir
 
@@ -261,9 +261,8 @@ Como apresentado na Seção~\ref{sec:refatoracao_para_o_metamodelo_kdm} as refat
 \end{tabular}
 \end{table}
 
-Além do \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKDMElement} outro artefato também deve ser utilizado para auxiliar o engenheiro de modernização a substituir as partes variáveis do \textit{template} de forma correta. Esse artefato é apresentado na Tabela~\ref{tab:guia_template_operacao_add}. Essa tabela é utilizada como um guia para conduzir o engenheiro de modernização a especificar corretamente as partes variantes do \textit{template}, ou seja, os argumentos.
 
-\begin{codigo}[caption={[\textit{Template} ATL para realizar a operação atômica \textit{add}.] \textit{Template} ATL para realizar a operação atômica \textit{add}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_addKDMElement}, language=ATL]{Name}
+\begin{codigo}[caption={[\textit{Template} ATL para realizar a operação atômica \texttt{add}.] \textit{Template} ATL para realizar a operação atômica \texttt{add}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_addKDMElement}, language=ATL]{Name}
 module (*@<\textbf{\#Arg1\#}>@*);
 create OUT : MM refining IN : MM;
 rule create(*@<\textbf{\#Arg2\#}>@*){
@@ -284,7 +283,19 @@ rule create(*@<\textbf{\#Arg2\#}>@*){
 
 %Mostrar que o Engenheiro de modernização pode adaptar qualquer elemento... Mostrar uma exemplo em ATL onde pode ser substituido pela metaclasse do KDM........
 
-\begin{codigo}[caption={[ATL para realizar a operação atômica \textit{add} \texttt{ClassUnit}.] ATL para realizar a operação atômica \textit{add} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:exemplo_add_classUnit}, language=ATL]{Name}
+Além do \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKDMElement} outro artefato também deve ser utilizado para auxiliar o engenheiro de modernização a substituir as partes variáveis do \textit{template} de forma correta. Esse artefato é apresentado na Tabela~\ref{tab:guia_template_operacao_add}. Essa tabela é utilizada como um guia para conduzir o engenheiro de modernização a especificar corretamente as partes variantes do \textit{template}, ou seja, os argumentos.
+
+Dado o \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKDMElement}, bem como as Tabelas~\ref{tab:mapemanetoEntreOOPeKDM} e~\ref{tab:guia_template_operacao_add} a combinação desses três artefatos auxilia/guia o engenheiro de software a criar a operação atômica \texttt{add} para um determinado elemento estrutural do KDM, ou seja, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc. Por exemplo, 
+%
+%
+%quando combinado com a Tabela~\ref{x} (os elementos estruturais \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc) e Tabela X auxiliam a originar a operação atômica \texttt{add} para um determinado elemento estrutural do KDM. 
+%
+%
+%os elemennnnnntos estruturais (\texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc) apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} origina uma operação atômica \texttt{add} para um determinado elemento estrutu
+%
+no Código-fonte~\ref{codigo:exemplo_add_classUnit} é apresentado uma simples ATL criada utilizando esses três artefatos. Os argumentos \textbf{<\#Arg1\#>} e \textbf{<\#Arg2\#>} foram substituídos pelas \textit{Strings} \texttt{add} e \texttt{Class}, respectivamente, ver linhas 1 e 3. Na linha 5 \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{Package}, enquanto que o argumento \textbf{<$@$Arg4$@$>} foi substituído pela \textit{String} \texttt{\aspas{com.br.teste}} a qual representa o nome da instância da metaclasse \texttt{Package} onde uma nova instância da metaclasse \texttt{ClassUnit} será adicionada. Finalmente, os argumentos \textbf{<\%Arg5\%>} e \textbf{<$@$Arg6$@$>} foram substituída pela metaclasse \texttt{ClassUnit} e pela \textit{String} \texttt{\aspas{novaClassUnit}}, ver linhas 10 e 11.
+
+\begin{codigo}[caption={[ATL para realizar a operação atômica \texttt{add} \texttt{ClassUnit}.] ATL para realizar a operação atômica \texttt{add} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:exemplo_add_classUnit}, language=ATL]{Name}
 module add;
 create OUT : MM refining IN : MM;
 rule createClass{
@@ -300,23 +311,13 @@ rule createClass{
 }
 \end{codigo}
 
-Dado o \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKDMElement}, bem como as Tabelas~\ref{tab:mapemanetoEntreOOPeKDM} e~\ref{tab:guia_template_operacao_add} a combinação desses três artefatos auxilia/guia o engenheiro de software a criar a operação atômica \texttt{add} para um determinado elemento estrutural do KDM, ou seja, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc. Por exemplo, 
-%
-%
-%quando combinado com a Tabela~\ref{x} (os elementos estruturais \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc) e Tabela X auxiliam a originar a operação atômica \texttt{add} para um determinado elemento estrutural do KDM. 
-%
-%
-%os elemennnnnntos estruturais (\texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc) apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} origina uma operação atômica \texttt{add} para um determinado elemento estrutu
-%
-no Código-fonte~\ref{codigo:exemplo_add_classUnit} é apresentado uma simples ATL criada utilizando esses três artefatos. Os argumentos \textbf{<\#Arg1\#>} e \textbf{<\#Arg2\#>} foram substituídos pelas \textit{Strings} \texttt{add} e \texttt{Class}, respectivamente, ver linhas 1 e 3. Na linha 5 \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{Package}, enquanto que o argumento \textbf{<$@$Arg4$@$>} foi substituído pela \textit{String} \texttt{\aspas{com.br.teste}} a qual representa o nome da instância da metaclasse \texttt{Package} onde uma nova instância da metaclasse \texttt{ClassUnit} será adicionada. Finalmente, os argumentos \textbf{<\%Arg5\%>} e \textbf{<$@$Arg6$@$>} foram substituída pela metaclasse \texttt{ClassUnit} e pela \textit{String} \texttt{\aspas{novaClassUnit}}, ver linhas 10 e 11.
-
 
 Similarmente, o engenheiro de modernização pode implementar a operação atômica \texttt{delete} facilmente seguindo um \textit{template}. O \textit{template} responsável pela operação atômica \texttt{delete} é apresentado no Código-fonte~\ref{codigo:template_delete}\footnote{A palavra-chave \texttt{drop} é utilizada na linha 7 do Código-fonte~\ref{codigo:template_delete} para especificar que uma determinada instância será removida.}. Esse \textit{template} também possui partes fixas e partes variantes. As partes fixas são textos em ATL e as partes variantes são formadas por argumentos demarcados pelas instruções \aspas{\textbf{<\#}} e \aspas{\textbf{\#>}}, \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e \aspas{\textbf{<$@$}} e \aspas{\textbf{$@$>}}. 
 
 
 O guia para auxiliar o engenheiro de modernização a especificar corretamente as partes variantes do \textit{template} \texttt{delete} é apresentado na Tabela~\ref{tab:guia_template_operacao_delete}. Por meio de três artefatos: (\textit{i}) o \textit{template} representado no Código-fonte~\ref{codigo:template_delete}, (\textit{ii}) o mapeamento entre OO e KDM apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} e (\textit{iii}) e o guia apresentado na Tabela ~\ref{tab:guia_template_operacao_delete} o engenheiro de modernização pode criar a operação atômica \texttt{delete}. Por exemplo, considere o Código-fonte~\ref{codigo:exemplo_delete_classUnit} onde almeja-se remover uma instância da metaclasse \texttt{ClassUnit}. 
 
-\begin{codigo}[caption={[\textit{Template} ATL para realizar a operação atômica \textit{delete}.] \textit{Template} ATL para realizar a operação atômica \textit{delete}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_delete}, language=ATL]{Name}
+\begin{codigo}[caption={[\textit{Template} ATL para realizar a operação atômica \texttt{delete}.] \textit{Template} ATL para realizar a operação atômica \texttt{delete}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_delete}, language=ATL]{Name}
 module (*@<\textbf{\#Arg1\#}>@*);
 create OUT : MM refining IN : MM;
 rule delete(*@<\textbf{\#Arg2\#}>@*) {
@@ -327,7 +328,7 @@ rule delete(*@<\textbf{\#Arg2\#}>@*) {
 }
 \end{codigo}
 
-\begin{table}
+\begin{table}[h]
 \centering
 \caption{Guia para auxiliar a substituir os argumentos do \textit{template} apresentado no Código-fonte~\ref{codigo:template_delete}.}
 \label{tab:guia_template_operacao_delete}
@@ -348,7 +349,7 @@ rule delete(*@<\textbf{\#Arg2\#}>@*) {
 Os argumentos \textbf{<\#Arg1\#>} e \textbf{<\#Arg2\#>} foram substituídos pelas \textit{Strings} \texttt{remove} e \texttt{Class}, respectivamente, ver linhas 1 e 3. Na linha 5 \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{ClassUnit}, enquanto que o argumento \textbf{<$@$Arg4$@$>} foi substituído pela \textit{String} \texttt{\aspas{ClassToRemove}}. Essa \textit{String} representa o nome da instância da \texttt{ClassUnit} que almeja-se deletar.
 
 
-\begin{codigo}[caption={[ATL para realizar a operação atômica \textit{delete} \texttt{ClassUnit}.] ATL para realizar a operação atômica \textit{delete} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:exemplo_delete_classUnit}, language=ATL]{Name}
+\begin{codigo}[caption={[ATL para realizar a operação atômica \texttt{delete} \texttt{ClassUnit}.] ATL para realizar a operação atômica \texttt{delete} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:exemplo_delete_classUnit}, language=ATL]{Name}
 module remove;
 create OUT : MM refining IN : MM;
 rule deleteClass {
@@ -359,12 +360,52 @@ rule deleteClass {
 }
 \end{codigo}
 
-A última operação atômica é a operação \texttt{change}. Essa operação é responsável por alterar o valor de um meta-atributo de uma metaclasse do metamodelo KDM, como por exemplo \textit{Rename Package} apresentado no Código-fonte~\ref{codigo:exemplo_rename_Package}. Na linha 5 é especificado e identificado a instância da metaclasse \texttt{Package} que será alterada. Nas linhas 7-9 a instância especificada da metaclasse \texttt{Package} é alterada.
+Finalmente, a operação atômica \texttt{change} também pode ser implementada por meio de \textit{template}. O Código-fonte~\ref{codigo:template_change} representa o \textit{template} da operação atômica \texttt{change}. Esse \textit{template} também possui partes fixas e instruções demarcadas por \aspas{\textbf{<\#}} e \aspas{\textbf{\#>}}, \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e \aspas{\textbf{<$@$}} e \aspas{\textbf{$@$>}} que representam as partes variantes.
 
-\begin{codigo}[caption={[ATL para realizar a operação atômica \textit{change} \texttt{ClassUnit}.] ATL para realizar a operação atômica \textit{change} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:exemplo_rename_Package}, language=ATL]{Name}
-module renamePackage;
+\begin{codigo}[caption={[\textit{Template} para realizar a operação atômica \texttt{change}.] \textit{Template} para realizar a operação atômica \texttt{change}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_change}, language=ATL]{Name}
+module (*@<\textbf{\#Arg1\#}>@*);
 create OUT : MM refining IN : MM;
-rule rename {
+rule change(*@<\textbf{\#Arg2\#}>@*) {
+	from
+		source : MM!(*@<\textbf{\%Arg3\%}>@*) (source.name=(*@<\textbf{$@$Arg4$@$}>@*))
+	to 
+		target : MM!(*@<\textbf{\%Arg3\%}>@*) (
+			(*@<\textbf{\%Arg5\%}>@*) (*@$\leftarrow$@*) (*@<\textbf{$@$Arg6$@$}>@*)
+		)
+}
+\end{codigo}
+
+\begin{table}[h]
+\centering
+\caption{Guia para auxiliar a substituir os argumentos do \textit{template} apresentado no Código-fonte~\ref{codigo:template_change}.}
+\label{tab:guia_template_operacao_change}
+\begin{tabular}{ | m{1.7cm} | m{12cm}| } 
+\hline
+\multicolumn{1}{|c|}{Argumentos}                                         & \multicolumn{1}{c|}{Valores} \\ \hline
+\multicolumn{1}{|c|}{\textbf{<\#Arg1\#>}} & Nome do módulo. Pode-se utilizar qualquer \textit{string} válida na linguagem ATL; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<\#Arg2\#>}} & Nome da regra. Pode-se utilizar qualquer \textit{string} válida na linguagem ATL; \\  
+\hline
+\multicolumn{1}{|c|}{\textbf{<\%Arg3\%>}} & Nome de uma metaclasse (\texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc). Deve-se especificar o nome da metaclasse que conterá a instância da metaclasse a ser alterada; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<$@$Arg4@>}} & Nome da instância do elemento estrutural especificado no \textbf{<\%Arg3\%>}. Deve-se especificar o nome da instância da metaclasse a ser alterada. Esse argumento depende do domínio do sistema que será aplicado a refatoração e é identifica no meta-atributo \texttt{name} das metaclasses do KDM;  \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<\%Arg5\%>}} & Nome do(s) meta-atributo(s) da metaclasse que será alterada. Deve-se especificar o(s) nome(s) do(s) meta-atributo(s) que será(ão) alterado(s);  \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<$@$Arg6$@$>}} & Novo(s) valor(es) para ser setado(s) no(s) meta-atributo(s) especificado(s) no \textbf{<\%Arg5\%>}. Esse argumento também depende do domínio do sistema que será aplicado a refatoração.  \\ 
+\hline
+\end{tabular}
+\end{table}
+
+Na Tabela~\ref{tab:guia_template_operacao_change} o guia para auxiliar o engenheiro de modernização a especificar corretamente as partes variantes do \textit{template} \texttt{change} é apresentado. A junção dos três artefatos: (\textit{i}) o \textit{template} apresentado no Código-fonte~\ref{codigo:template_change}, (\textit{ii}) o mapemanto entre OO e KDM (ver Tabela~\ref{tab:mapemanetoEntreOOPeKDM}) e (\textit{iii}) o guia apresentado na Tabela~\ref{tab:guia_template_operacao_change} auxiliam o engenheiro de modernização a criar a operação atômica \texttt{change}. Por exemplo, considere o Código-fonte~\ref{codigo:exemplo_rename_Package} onde esses três artefatos foram utilizados pelo engenheiro de modernização para implementar a operação atômica \texttt{change}. Nesse código-fonte uma determinada instância da metaclasse \texttt{Package} é alterado, ou seja, seu meta-atributo \texttt{name} é renomeado. Assim, os argumentos \textbf{<\#Arg1\#>} e \textbf{<\#Arg2\#>} foram substituídos pelas \textit{Strings} \texttt{renamePackage} e \texttt{rename}, respectivamente, ver linhas 1 e 3. Na linha 5 \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{Package}, enquanto que o argumento \textbf{<$@$Arg4$@$>} foi substituído pela \textit{String} \texttt{\aspas{PackageToRename}} a qual representa o nome da instância da metaclasse \texttt{Package} onde uma nova instância da metaclasse \texttt{ClassUnit} será alterada. O argumento \textbf{<\%Arg5\%>} foi substitudo pelo meta-atributo \texttt{name} e o \textbf{<$@$Arg6$@$>} foi substituído por uma \textit{String} que representa o novo nome da instância da metaclasse \texttt{Package}, ver linha 8.
+
+
+%A última operação atômica é a operação \texttt{change}. Essa operação é responsável por alterar o valor de um meta-atributo de uma metaclasse do metamodelo KDM, como por exemplo \textit{Rename Package} apresentado no Código-fonte~\ref{codigo:exemplo_rename_Package}. Na linha 5 é especificado e identificado a instância da metaclasse \texttt{Package} que será alterada. Nas linhas 7-9 a instância especificada da metaclasse \texttt{Package} é alterada.
+
+\begin{codigo}[caption={[ATL para realizar a operação atômica \texttt{change} \texttt{ClassUnit}.] ATL para realizar a operação atômica \texttt{change} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:exemplo_rename_Package}, language=ATL]{Name}
+module rename;
+create OUT : MM refining IN : MM;
+rule renamePackage {
 	from
 		source : MM!Package (source.name=(*@\aspas{PackageToRename}@*))
 	to 
@@ -375,13 +416,13 @@ rule rename {
 \end{codigo}
 
 
-Como apresentado na Tabela~\ref{tab:refatoringsCatalogo} com a combinação dessas operações atômicas os engenheiros de modernização podem criar refatorações mais significativas. O Código-fonte~\ref{codigo:exemplo_add_classUnit} e o Código-fonte~\ref{codigo:exemplo_delete_classUnit} ilustram as operações atômicas \texttt{add} e \texttt{delete} para instâncias da metaclasse \texttt{ClassUnit}, respectivamente. Porém, engenheiros de modernização podem adaptarem esses códigos para utilizam outros elementos estruturais tais como: \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc. Por exemplo, caso almeja-se deletar uma determinada instância da metaclasse \texttt{InterfaceUnit} o engenheiro de modernização deve apenas substituir a linha 5 do Código-fonte~\ref{codigo:exemplo_delete_classUnit} por \aspas{\texttt{source: MM!InterfaceUnit(source.name = \aspas{InterfaceToRemove})}}. 
+Como apresentado na Tabela~\ref{tab:refatoringsCatalogo} com a combinação dessas operações atômicas os engenheiros de modernização podem criar refatorações mais significativas. O Código-fonte~\ref{codigo:exemplo_add_classUnit} e o Código-fonte~\ref{codigo:exemplo_delete_classUnit} ilustram as operações atômicas \texttt{add} e \texttt{delete} para instâncias da metaclasse \texttt{ClassUnit}, respectivamente. A combinação dessas operações resulta na refatoração \texttt{move}. %Porém, engenheiros de modernização podem adaptarem esses códigos para utilizam outros elementos estruturais tais como: \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc. Por exemplo, caso almeja-se deletar uma determinada instância da metaclasse \texttt{InterfaceUnit} o engenheiro de modernização deve apenas substituir a linha 5 do Código-fonte~\ref{codigo:exemplo_delete_classUnit} por \aspas{\texttt{source: MM!InterfaceUnit(source.name = \aspas{InterfaceToRemove})}}. 
 
 Após a criação de uma refatoração o engenheiro de modernização deve especificar as restrições da refatoração criada. Tais restrições são especificadas utilizando linguagens de restrições como por exemplo OCL. Na próximo seção maiores informações são apresentadas.
 
 \subsection{Definir Restrições (Pré- e Pós-condições)}\label{sec:linguagem_de_restricao}
 
-Após o engenheiro de modernização criar uma determinada refatoração o próximo passo é criar restrições (pré- e pós-condições) para a refatoração. Usualmente antes e após a aplicação de uma determinada refatoração algumas restrições precisam ser satisfeitas. Tais restrições usualmente são úteis para verificar se os parâmetros necessários para executar a refatoração foi completamente e corretamente informando, bem como verificar se a refatoração foi aplicada de forma totalmente correta. No contexto de modelos, tais restrições são especificadas utilizando linguagem como OCL. Tais restrições no contexto de refatorações são conhecidas como pré- e pós-condições. Utilizando OCL, é possível verificar, por exemplo, se todos os parâmetros obrigatórios para executar o mecanismo da refatoração foram especificados pelo modernizador. Além disso, essas condições são importantes para assegurar que a refatoração será aplicada de forma correta e ainda irá preservar a semântica da instância do meta-modelo, como por exemplo, preservar comportamentos, sincronização, etc. 
+Após o engenheiro de modernização criar uma determinada refatoração o próximo passo é criar restrições (pré- e pós-condições) para a refatoração. Usualmente antes e após a aplicação de uma determinada refatoração algumas restrições precisam ser satisfeitas. Tais restrições usualmente são úteis para verificar se os parâmetros necessários para executar a refatoração foi completamente e corretamente informando, bem como verificar se a refatoração foi aplicada de forma totalmente correta. No contexto de modelos, tais restrições são especificadas utilizando linguagem como OCL. Essas restrições no contexto de refatorações são conhecidas como pré- e pós-condições. Utilizando OCL, é possível verificar, por exemplo, se todos os parâmetros obrigatórios para executar o mecanismo da refatoração foram especificados pelo modernizador. Além disso, essas condições são importantes para assegurar que a refatoração será aplicada de forma correta e ainda irá preservar a semântica da instância do meta-modelo, como por exemplo, preservar comportamentos, sincronização, etc. 
 
 Dessa forma, cada refatoração definida nesta Tese está associada com uma pré- e pós-condição definida em OCL. OCL foi escolhida pois a mesma é uma linguagem padronizada pela OMG e também possui suporte na plataforma Eclipse. É importante observar que as diretrizes apresentadas neste capítulo não têm a preocupação de ensinar como escrever/implementar as restrições das refatorações utilizando OCL. Assim, o engenheiro de modernização é responsável por criar e implementar todas as pré- e pós-condições de uma dada refatoração para o KDM.
 
@@ -389,17 +430,17 @@ Dessa forma, cada refatoração definida nesta Tese está associada com uma pré
 
 %Com o intuito de facilitar a visualização, formalização e entendimento das refatorações criadas para o metamodelo KDM, as refatorações aqui apresentadas utilizam duas especificações~\cite{staron2004implementing}: (\textit{i}) especificação informal e (\textit{ii}) especificação formal. Na especificação informal a ideologia da reforação é expressada, usualmente essa ideologia é definida por meio de linguagem natural. A especificação formal é responsável por representar as pré- e pós-condições, bem como a transformação/refatoração em OCL e ATL, respectivamente. Acredita-se que ambas especificações são úteis para o engenheiro de modernização - a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração, enquanto que a especificação formal facilita a implementação da refatoração. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. Maiores detalhes sobre essas especificações são apresentados na Subseção~\ref{sec:template_refatoracao}.
 
-\subsection{\textit{Template} de Definição de Refatoração para o metamodelo KDM}\label{sec:template_refatoracao}
+\subsection{Especificar Refatoração}\label{sec:template_refatoracao}
 
 Após definir a refatoração, sua implementação, bem como suas pré- e pós-condições para o metamodelo KDM é importante documentar a refatoração criada. Dessa forma, para facilitar a visualização, formalização e entendimento das refatorações criadas para o metamodelo KDM, os engenheiros de modernização devem especificar as refatorações criadas seguindo duas especificações~\cite{staron2004implementing}: (\textit{i}) especificação informal e (\textit{ii}) especificação formal. 
 
-Na especificação informal a ideologia da reforação é expressada, usualmente essa ideologia é definida por meio de linguagem natural. A especificação formal é responsável por representar as pré- e pós-condições, bem como a transformação/refatoração em OCL e ATL, respectivamente. Acredita-se que ambas especificações são úteis para o engenheiro de modernização - a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração, enquanto que a especificação formal facilita a implementação da refatoração. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. Maiores detalhes sobre essas especificações são apresentados na Subseção~\ref{sec:template_refatoracao}.
+Na especificação informal a ideologia da reforação é expressada, usualmente essa ideologia é definida por meio de linguagem natural. A especificação formal é responsável por representar as pré- e pós-condições, bem como a transformação/refatoração em OCL e ATL, respectivamente. Acredita-se que ambas especificações são úteis para o engenheiro de modernização - a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração, enquanto que a especificação formal facilita a implementação da refatoração. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. 
 %
 %
 %
 %Dado a Definição~\ref{def:refatoracao} de refatoração no contexto desta Tese é importante apresentar como cada refatoração é especificada. Como já salientado, as refatorações são definidas utilizando duas especificações, informal e formal. Assim, 
 %
-As refatorações para o metamodelo KDM devem ser especificadas utilizando o seguinte \textit{template}:
+As refatorações para o metamodelo KDM devem ser especificadas utilizando os seguintes \textit{templates}:
 
 \begin{enumerate}
 	\item Especificação Informal:
@@ -424,12 +465,13 @@ As refatorações para o metamodelo KDM devem ser especificadas utilizando o seg
 
 \section{Catálogo de Refatoração para o metamodelo KDM}\label{sec:catalogo_refatoracao_kdm}
 
-Para facilitar o entendimento de como as refatorações são criadas para o metamodelo KDM, nesta seção são apresentadas algumas refatorações que foram criadas para o KDM seguindo as atividades descritas anteriormente. As refatorações que foram criadas para o metamodelo KDM podem ser visualizadas na Tabela~\ref{tab:refatoringsCatalogo}. Porém, nesse capítulo apenas algumas refatorações são detalhadas. As refatorações aqui apresentadas bem como outras refatorações foram implementadas em um ambiente computacional denominado KDM-RE apresentado no Capítulo~\ref{chapter:ferramenta_kdm_re}. Nas próximas seções as refatorações \textit{Rename ClassUnit}, \textit{Push Down StorableUnit} e \textit{Extract ClassUnit} são apresentadas e detalhadas. Todas as refatorações são definidas programaticamente utilizando a linguagem de transformação ATL. A linguagem de restrição utilizada nas refatorações foi a OCL. Todas as refatorações aqui criadas são especificadas utilizando o \textit{template} apresentado anteriormente.
+Para facilitar o entendimento de como as refatorações são criadas para o metamodelo KDM, nesta seção são apresentadas algumas refatorações que foram criadas para o KDM seguindo os passos descritos anteriormente. As refatorações que foram criadas para o metamodelo KDM podem ser visualizadas na Tabela~\ref{tab:refatoringsCatalogo}. Porém, nesse capítulo apenas algumas refatorações são detalhadas. As refatorações apresentadas na Tabela~\ref{tab:refatoringsCatalogo} foram implementadas em um ambiente computacional denominado KDM-RE apresentado no Capítulo~\ref{chapter:ferramenta_kdm_re}. Nas próximas seções as refatorações \textit{Rename ClassUnit}, \textit{Push Down StorableUnit} e \textit{Extract ClassUnit} são apresentadas e detalhadas. Todas as refatorações são definidas programaticamente utilizando a linguagem de transformação ATL. A linguagem de restrição utilizada nas refatorações foi a OCL. Todas as refatorações aqui criadas são especificadas/documentadas utilizando o \textit{template} apresentado anteriormente.
 
 
+ %O apoio computacional, KDM-RE apresentado no Capítulo X, implementa todas as refatorações descritas na Tabela~\ref{tab:refatoringsCatalogo}.
 
 \subsection{Refatoração \textit{Rename ClassUnit}}
-Nesta seção a refatoração \textit{Rename ClassUnit} é apresentada. Essa refatoração usualmente é aplicada quando o nome da classe não revela o seu real propósito~\cite{Fowler1999}. Assim, deve-se renomear a classe para um nome mais significativo. Note que a descrição da refatoração \textit{Rename ClassUnit} segue as atividades definidas, bem como o \textit{template} especificado anteriormente, primeiro a especificação informal da refatoração apresentada seguida da especificação formal.
+Nesta seção a refatoração \textit{Rename ClassUnit} é apresentada. Essa refatoração usualmente é aplicada quando o nome da classe não revela o seu real propósito~\cite{Fowler1999}. Assim, deve-se renomear a classe para um nome mais significativo. Note que a descrição da refatoração \textit{Rename ClassUnit} segue os passos definidos, bem como o \textit{template} especificado anteriormente, primeiro a especificação informal da refatoração apresentada seguida da especificação formal.
 
 \begin{enumerate}
 	\item Especificação Informal:
@@ -459,14 +501,10 @@ Nesta seção a refatoração \textit{Rename ClassUnit} é apresentada. Essa ref
 	\vspace*{\fill}
   \centering
 	% Requires \usepackage{graphicx}
-	\captionof{figure}{instância simplificada do KDM antes e depois da refatoração \textit{Rename ClassUnit}}
-	\includegraphics[scale=0.6]{images/antes_e_depois_rename_classUnit.pdf}
+	\captionof{figure}{Instância simplificada do KDM antes e depois da refatoração \textit{Rename ClassUnit}}
+	\includegraphics[scale=0.6]{images/antes_depois_refatoracao_renameClassUnit}
 	\fautor
 	\label{fig:antes_e_depois_rename_classUnit}
-	\captionof{figure}{instância simplificada do KDM antes e depois da refatoração \textit{Rename ClassUnit} - parte 2}
-	\includegraphics[scale=0.6]{images/antes_e_depois_rename_classUnit_Create.pdf}
-	\fautor
-	\label{fig:antes_e_depois_rename_classUnit_create}
 \end{minipage}\hfill
 			\item Algoritmo: 
 			    \begin{itemize}
