@@ -405,7 +405,7 @@ Na Tabela~\ref{tab:guia_template_operacao_change} o guia para auxiliar o engenhe
 \begin{codigo}[caption={[ATL para realizar a operação atômica \texttt{change} \texttt{ClassUnit}.] ATL para realizar a operação atômica \texttt{change} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:exemplo_rename_Package}, language=ATL]{Name}
 module rename;
 create OUT : MM refining IN : MM;
-rule renamePackage {
+rule changePackage {
 	from
 		source : MM!Package (source.name=(*@\aspas{PackageToRename}@*))
 	to 
@@ -496,7 +496,7 @@ Nesta seção a refatoração \textit{Rename ClassUnit} é apresentada. Essa ref
 			        \item todas as referencias para \{\texttt{ClassUnit}Selecionada\} são por meio do \{novoNome\};
 			        \item todos os construtores da \{\texttt{ClassUnit}Selecionada\} são agora \{novoNome\}.
 			    \end{itemize}
-			\item Mecanismo: O primeiro passo no mecanismo da refatoração \textit{Rename ClassUnit} é mudar o meta-atributo \texttt{name} da \{\texttt{ClassUnit}Selecionada\} para \{novoNome\}. Porém, note na Figura~\ref{fig:antes_e_depois_rename_classUnit} \ding{202}, a qual representa uma instância simplificada do KDM, que antes de realizar a refatoração, tanto a \{\texttt{ClassUnit}Selecionada\} quanto seu construtor possuem o mesmo nome. Assim, como apresentado na Figura~\ref{fig:antes_e_depois_rename_classUnit} \ding{203} ambas instâncias devem ser atualizadas, ou seja, a \{\texttt{ClassUnit}Selecionada\} e o construtor devem mudar para \{novoNome\}. Similarmente, deve-se também mudar todas as chamadas para \{novoNome\}, isso é realizado por meio das metaclasses \texttt{Calls}, \texttt{Creates}, etc, no meta-relacionamento \texttt{to}. Note-se que na Figura~\ref{fig:antes_e_depois_rename_classUnit_create} \ding{204}  a instância da metaclasse \texttt{Creates} possui o meta-relacionamento \texttt{to} ainda com o nome antigo, assim, deve-se alterar para \{novoNome\} como apresentado na Figura~\ref{fig:antes_e_depois_rename_classUnit_create} \ding{205}.
+			\item Mecanismo: O mecanismo da refatoração \textit{Rename ClassUnit} é trivial, deve-se apenas mudar o valor do meta-atributo \texttt{name} da \{\texttt{ClassUnit}Selecionada\} para \{novoNome\}. Note que na na Figura~\ref{fig:antes_e_depois_rename_classUnit} \ding{204} que o meta-atributo \texttt{name} da \{\texttt{ClassUnit}Selecionada\} contém o valor \texttt{ClassX} e na  Figura~\ref{fig:antes_e_depois_rename_classUnit} \ding{205} o seu valor foi alterado para \texttt{ClassY}.
 			\begin{minipage}{.90\textwidth}
 	\vspace*{\fill}
   \centering
@@ -509,8 +509,8 @@ Nesta seção a refatoração \textit{Rename ClassUnit} é apresentada. Essa ref
 			\item Algoritmo: 
 			    \begin{itemize}
 			        \item \{\texttt{ClassUnit}Selecionada\}.renameClassUnit(\{novoNome\});
-			        \item para cada construtor - \texttt{MethodUnit.Kind=Construtor}.renameMethodUnit(\{novoNome\});
-			        \item para cada referência da \{\texttt{ClassUnit}Selecionada\} deve-se mudar o meta-relacionamento \texttt{to} das metaclasses \texttt{Calls}, \texttt{Creates}, etc. 
+			        %\item para cada construtor - \texttt{MethodUnit.Kind=Construtor}.renameMethodUnit(\{novoNome\});
+			        %\item para cada referência da \{\texttt{ClassUnit}Selecionada\} deve-se mudar o meta-relacionamento \texttt{to} das metaclasses \texttt{Calls}, \texttt{Creates}, etc. 
 			    \end{itemize}
 		\end{enumerate}
 	\item Especificação Formal:
@@ -529,24 +529,16 @@ Na linha 1 do Código-fonte~\ref{codigo:pre_renameClassUnit} é declarado o nome
 	\begin{codigo}[caption={[ATL representando a refatoração \textit{Rename ClassUnit}.] ATL da refatoração \textit{Rename ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:rename_classUnit_refatoracao}, language=ATL]{Name}
 module renameClassUnit;
 create OUT : MM refining IN : MM;
-rule renameClassUnit {
+rule changeClassUnit {
 	from
 		source : MM!ClassUnit (source.name = (*@\aspas{\{\texttt{ClassUnit}Selecionada\}}@*))
 	to 
 		target : MM!ClassUnit (
-			name (*@$\leftarrow$@*) (*@\aspas{newName}@*)
-		)
-}
-rule renameConstrutor {
-	from
-		source : MM!MethodUnit (source.name = (*@\aspas{\{\texttt{ClassUnit}Selecionada\}}@*) and source.kind=(*@\aspas{constructor}@*))
-	to 
-		target : MM!MethodUnit (
-			name (*@$\leftarrow$@*) (*@\aspas{newName}@*)
+			name (*@$\leftarrow$@*) (*@\aspas{\{newName\}}@*)
 		)
 }
 \end{codigo}
-			Como pode ser observado no Código-fonte~\ref{codigo:rename_classUnit_refatoracao} na linha 1 primeiramente é definido o nome da refatoração. Em seguida, na linha 2 é apresentado o cabeçalho da refatoração, note a palavra-chave \textit{refining}. Essa palavra-chave informa que essa transformação/refatoração é do tipo endógenas (\textit{in-place}) (ver Capítulo~\ref{chapter:fundamentacao_teorica} Seção~\ref{sec:transformacoes_de_modelos}), ou seja, irá alterar uma mesma instância do metamodelo KDM. Linha 3 até linha 10 a primeira regra é definida. Linha 5 uma condição de guarda é definida, a qual informa que apenas uma instância da metaclasse do tipo \texttt{ClassUnit} que possui um nome especifico será selecionada para a refatoração. Nas linhas 7, 8 e 9 o nome da instância da metaclasse do tipo \texttt{ClassUnit} é alterado. Posteriormente deve-se também alterar o nome do construtor, isso é realizado na regra especificado nas linha 11 até 17. Na linha 13 uma condição de guarda é especificada para informar que apenas métodos do tipo construtor devem ser obtidos, bem como o método deve possuir o mesmo nome da classe selecionada para aplicar a refatoração. Linhas 15, 16 e 17 o nome do construtor é alterado. Observe que tanto \{\texttt{ClassUnit}Selecionada\} quanto \{\textit{newName}\} são parâmetros que devem ser especificados pelo engenheiro. Assim, foi criado um \textit{plug-in} para auxiliar o engenheiro durante a especificação e execução das refatorações. Maiores informações sobre esse \textit{plug-in} estão no Capítulo~\ref{chapter:ferramenta_kdm_re}.     
+A refatoração \textit{Rename ClassUnit} é caracterizada pela operação atômica \texttt{change}. Dessa forma, a refatoração foi implementada seguindo o \textit{template} apresentado na Seção~\ref{sec:linguagemDeTransformacaoUtilizada} no Código-fonte~\ref{codigo:template_change}. Dessa forma, o \textit{template} e a Tabela~\ref{tab:guia_template_operacao_change} foram utilizadas para realizar a implementação do Código-fonte~\ref{codigo:rename_classUnit_refatoracao}. Observe que tanto \{\texttt{ClassUnit}Selecionada\} quanto \{\textit{newName}\} são parâmetros que devem ser especificados pelo engenheiro. Assim, foi criado um \textit{plug-in} para auxiliar o engenheiro durante a especificação e execução das refatorações. Maiores informações sobre esse \textit{plug-in} estão no Capítulo~\ref{chapter:ferramenta_kdm_re}.     
 			\item Pós-condição:
 			 \begin{codigo}[caption={[OCL representando a pós-condição da refatoração \textit{Rename ClassUnit}.] Pós-condição da refatoração \textit{Rename ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:pos_condicao_rename_classUnit}, language=OCL]{Name}
  context ClassUnit::RenameClassUnit(newName: String)
