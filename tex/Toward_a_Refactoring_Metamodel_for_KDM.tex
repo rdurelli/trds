@@ -153,7 +153,7 @@ Formalmente pode-se definir o metamodelo como:
 	\item Todas as meta-associações \textit{mR} $\in SRM_{mR}$ é um conjunto R = $E_{1}$, $E_{2}$  , onde  $E_{1}$ e $E_{2}$ são associações de R. Posteriormente, cada R, contém um nome. Ambos $E_{1}$  e $E_{1}$ possuem uma cardinalidade e são associados a uma metaclasse de $SRM_{mC}$.
 \end{itemize}
 
-Da mesma forma que o KDM (ver Capítulo X Seção Y)\change{mudar} o SRM possui três níveis de conformidade. Além disso, o SRM é estruturado de forma modular, seguindo o princípio da separação de interesse, com a capacidade de representar diferentes partes de uma refatoração. Essa separação de interesse é alcançada por meio de pacotes como ilustrado na Figura~\ref{fig:pacotes_SRM_conformidade_level}. O primeiro nível de conformidade representa que o SRM utiliza as metaclasses do metamodelo KDM. Além das metaclasses do KDM o metamodelo SRM é separado em três pacotes: (\textit{i}) \textit{transformation}, (\textit{ii}) \textit{Constraint} e (\textit{iii}) \textit{Refactoring}. Cada pacote constitui uma determinada ontologia para descrever e representa transformações, restrições e refatorações, respectivamente. O SRM possui três níveis de conformidade, nível 0, nível 1 e nível 2. Cada nível é descrito a seguir:
+Da mesma forma que o KDM (ver Capítulo~\ref{chapter:fundamentacao_teorica} Seção~\ref{sec:knowledge_discovery_meta_model}) o SRM possui três níveis de conformidade. Além disso, o SRM é estruturado de forma modular, seguindo o princípio da separação de interesse, com a capacidade de representar diferentes partes de uma refatoração. Essa separação de interesse é alcançada por meio de pacotes como ilustrado na Figura~\ref{fig:pacotes_SRM_conformidade_level}. O primeiro nível de conformidade representa que o SRM utiliza as metaclasses do metamodelo KDM. Além das metaclasses do KDM o metamodelo SRM é separado em três pacotes: (\textit{i}) \textit{Transformation}, (\textit{ii}) \textit{Constraint} e (\textit{iii}) \textit{Refactoring}. Cada pacote constitui uma determinada ontologia para descrever e representa transformações, restrições e refatorações, respectivamente. O SRM possui três níveis de conformidade, nível 0, nível 1 e nível 2. Cada nível é descrito a seguir:
 
 \begin{figure}[h]
 	\centering
@@ -181,9 +181,9 @@ Todos os pacotes do metamodelo SRM apresentados na Figura~\ref{fig:pacotes_SRM_c
 	\fautor
 \end{figure}
 
-A camada CEE utiliza as metaclasses do metamodelo KDM para representar os elementos estruturais que serão refatorados. A camada CR contém o pacote \texttt{Refactoring}. Esse pacote define metaclasses para representar metadados sobre refatorações, tais como autor da refatoração, nome da refatoração, parâmetro, catálogo, etc. A camada CRTR contém dois pacotes: (\textit{i})  \texttt{Transformation} e \texttt{Constraint}. Coletivamente esses pacotes representam a operação/mecanismos e as restrições/asserções de uma determinada refatoração.
+A camada CEE utiliza as metaclasses do metamodelo KDM para representar os elementos estruturais que serão refatorados. A camada CR contém o pacote \texttt{Refactoring}. Esse pacote define metaclasses para representar metadados sobre refatorações, tais como autor da refatoração, nome da refatoração, parâmetro, catálogo, etc. A camada CRTR contém dois pacotes: (\textit{i})  \texttt{Transformation} e \texttt{Constraint}. Coletivamente esses pacotes representam a operação/mecanismos e as restrições/asserções de uma determinada refatoração. A seguir os pacotes do SRM, bem como suas metaclasses são apresentados.
 
-\subsection{Pacote \texttt{Refactoring}}
+\subsubsection{Pacote \texttt{Refactoring}}
 
 O pacote \texttt{Refactoring} define um conjunto de metaclasses cujo propósito é representar metadados de refatoração em alto nível. O pacote inclui metaclasses para definir a qual catalogo de refatoração uma determinada refatoração pertence, definir o nome da refatoração, autor, catalogo, parâmetros, classificação e sua biblioteca de refatoração, etc. Na Figura~\ref{fig:pacote_refactoring_srm} o pacote \texttt{Refactoring}, bem como suas metaclasses são apresentados. Como ilustrado nesse figura o pacote \texttt{Refactoring} utiliza outros pacotes: (\textit{i}) pacotes do KDM, (\textit{ii}) pacote \texttt{Transformation} e (\textit{iii}) pacote \texttt{Constraint}. Uma descrição de cada metaclasse desse pacote é apresenta a seguir: 
 
@@ -315,17 +315,17 @@ O pacote \texttt{Refactoring} define um conjunto de metaclasses cujo propósito 
 
 \end{itemize}
 
-\subsection{Pacote \texttt{Transformation}}
+\subsubsection{Pacote \texttt{Transformation}}
 
 O pacote \texttt{Transformation} contém apenas uma metaclasse e uma enumeração para definir o mecanismo da refatoração. O propósito dessa metaclasse é representar metadados de ATL e/ou QVT. Com o uso da ATL e/ou QVT pode-se automatizar os mecanismos e todos os passos que uma determinada refatoração deve realizar. Dessa forma, com o propósito desse pacote é prover o reúso dos mecanismo e todos os passos de uma refatoração no contexto do metamodelo SRM, tanto ATL e QVT foram consideradas boas candidatas para especificar programaticamente os metadados sobre o mecanismo das refatorações. Por tanto, o SRM permite persistir metadados relacionados a ATL e QVT.
 
-Na Figura~\ref{fig:pacote_transformation_srm} é mostrado esquematicamente o pacote \texttt{Transformation}, bem como sua metaclasse são mostrados. Como ilustrado nesse figura o pacote \texttt{Transformation} utiliza outros pacotes: (\textit{i}) pacotes do KDM, (\textit{ii}) pacote \texttt{Refactoring} e (\textit{iii}) pacote \texttt{Constraint}. A seguir uma descrição de cada elemento desse pacote é apresentado.
+Na Figura~\ref{fig:pacote_transformation_srm} é mostrado esquematicamente o pacote \texttt{Transformation}, sua metaclasse e uma enumeração. Como ilustrado nessa figura o pacote \texttt{Transformation} utiliza outros pacotes: (\textit{i}) pacotes do KDM, (\textit{ii}) pacote \texttt{Refactoring} e (\textit{iii}) pacote \texttt{Constraint}. A seguir uma descrição de cada elemento desse pacote é apresentado.
 
 \begin{figure}[h]
 	\centering
 	% Requires \usepackage{graphicx}
 		\caption{Pacote \texttt{Transformation} do SRM.}
-	\includegraphics[scale=0.70]{images/TransformationPackageSRM2}
+	\includegraphics[scale=0.70]{images/TransformationPackageSRM3}
 	\label{fig:pacote_transformation_srm}
 	\fautor
 \end{figure}
@@ -345,108 +345,24 @@ Na Figura~\ref{fig:pacote_transformation_srm} é mostrado esquematicamente o pac
      
 \end{itemize}
 
+\subsubsection{Pacote \texttt{Constraint}}
 
-Na Figura~\ref{fig:meta_modelo_SRM} é apresentado o metamodelo SRM. O SRM contém 12 metaclasses e três enumerações. Um descrição de cada elementos desse metamodelo é apresentado a seguir:
+Esse pacote contém três metaclasses e uma enumeração para definir as asserções (pré- e pós-condições) de uma determinada refatoração. O propósito desse pacote é representar metadados sobre asserções utilizando as linguagens OCL e/ou XQuery. Utilizando essas linguagens, é possível verificar, por exemplo, se todos os parâmetros obrigatórios para executar uma refatoração foram especificados corretamente. Assegurar que a refatoração será aplicada de forma correta é de suma importância para preservar a sintaxe e semântica da instância do metamodelo, como por exemplo, preservar comportamentos. Na Figura~\ref{fig:pacote_constraint_srm} é mostrado o pacote \texttt{Constraint}, suas metaclasses e uma enumeração. A seguir os elementos desse pacote são descritos:
 
 \begin{figure}[h]
 	\centering
 	% Requires \usepackage{graphicx}
-		\caption{Metamodelo SRM.}
-	\includegraphics[scale=0.65]{images/refactoring_metamodel}
-	\label{fig:meta_modelo_SRM}
+		\caption{Pacote \texttt{Constraint} do SRM.}
+	\includegraphics[scale=0.70]{images/pacoteConstraint2}
+	\label{fig:pacote_constraint_srm}
 	\fautor
 \end{figure}
 
 \begin{itemize}
-\item \texttt{RefactoringModel} representa a metaclasse raiz do metamodelo. Em outras palavras, essa metaclasse representa uma coleção de metadados que corresponde a uma ou mais refatorações definidas para o metamodelo KDM.
-
-\begin{itemize}
-	\item \textbf{Meta-associações}
-		\begin{itemize}
-			\item \texttt{author:Author[0..1]}: representa o autor de uma refatoração; 
-			\item \texttt{libraries:RefactoringLibrary[0..*]}: representa um conjunto de biblioteca de refatorações que uma instância da metaclasse \texttt{RefactoringModel} possui..
-		\end{itemize}
-\end{itemize}
-
-\item \texttt{Author} representa o autor de uma refatoração. Essa metaclasse contém dois meta-atributos.
-
-\begin{itemize}
-	\item \textbf{Meta-atributos}
-		\begin{itemize}
-			\item \texttt{name}: utilizado para definir o nome do autor;
-			\item \texttt{lastName}: utilizado para definir o sobrenome do autor.
-		\end{itemize}	
-\end{itemize} 
-
-\item \texttt{RefactoringLibrary} utilizado para descrever uma biblioteca de refatorações.
-
-\begin{itemize}
-	\item \textbf{Meta-atributos}
-		\begin{itemize}
-			\item \texttt{name}: utilizado para descrever o nome da biblioteca de refatoração;
-			\item \texttt{shortDescription}: representa uma breve descrição sobre a biblioteca de refatoração;
-			\item \texttt{description}: representa uma completa descrição sobre a biblioteca de refatoração.
-		\end{itemize}	
-\end{itemize} 
-
-\begin{itemize}
-	\item \textbf{Meta-associação}
-		\begin{itemize}
-			\item \texttt{catalogs:Catalog[0..*]}: um conjunto de catálogos que contem refatorações.
-		\end{itemize}	
-\end{itemize} 
-
-\item \texttt{Catalog} metaclasse utilizada para representar um catalogo de refatorações.
-
-\begin{itemize}
-	\item \textbf{Meta-atributos}
-		\begin{itemize}
-			\item \texttt{name}: representa o nome do catálogo. 
-		\end{itemize}	
-\end{itemize} 
-
-\begin{itemize}
-	\item \textbf{Meta-associações}
-		\begin{itemize}
-			\item \texttt{author:Author[0..1]}: representa o autor do catalogo;
-			\item \texttt{refactorings:Refactoring[0..*]}: conjunto de todas as refatorações que um catalogo possui.
-		\end{itemize}	
-\end{itemize} 
-
-\item \texttt{Refactoring} representa uma das principais metaclasses do SRM.
-
-\begin{itemize}
-	\item \textbf{Meta-atributos}
-		\begin{itemize}
-			\item \texttt{name}: utilizado para identificar a refatoração e ajuda a construir um vocabulário comum para os desenvolvedores de software;
-			\item \texttt{motivation}: descreve o motivo pelo qual a refatoração deve ser realizada – lista também as circunstâncias na qual a refatoração deve ser utilizada;
-			\item \texttt{summary}: informa quando e onde uma determinada refatoração deve ser utilizada. Também é útil para auxiliar o engenheiro de software a identificar uma refatoração relevante em uma determinada situação. 
-		\end{itemize}	
-\end{itemize} 
-
-\begin{itemize}
-	\item \textbf{Meta-associações}
-		\begin{itemize}
-			\item \texttt{operation:Operation[1]}: deve a ação que será executa, representa o mecanismo da refatoração;
-			\item \texttt{preCondition:PreCondition[1]}: representa uma pré-condição que deve ser satisfeita antes da execução da operação/refatoração;
-			\item \texttt{postCondition:PostCondition[1]}: representa uma pós-condição que tem como intuito verificar a corretude da refatoração;
-			\item \texttt{parameters:Parameter[0..*]}: um conjunto de parâmetros que são utilizados para realizar a refatoração. Tais parâmetros podem ser metaclasses do KDM;
-			\item \texttt{chainOfRefactoring:Refactoring[0..*]}: um conjunto de refatorações que quando combinados podem realizar refatorações complexas, ou seja, \textit{macro-grained refactoring};
-			\item \texttt{classification:Classification[0..*]}: define a classificação de uma refatoração.
-		\end{itemize}	
-\end{itemize} 
-
-\item \texttt{Operation} também representa uma das principais metaclasses do SRM. Essa metaclasse possui metadados do código responsável por realizar a transformação/refatoração.
-
-\begin{itemize}
-	\item \textbf{Meta-atributos}
-		\begin{itemize}
-			\item \texttt{language}: especifica a linguagem que será escrito o código responsável por realizar a transformação/refatoração. Valores válidos são: ``ATL'' e ``QVT'';
-			\item \texttt{body}: especifica a transformação/refatoração com base na linguagem selecionada, ``ATL'' ou ``QVT''.
-		\end{itemize}	
-\end{itemize} 
-
-\item \texttt{PreCondition} define uma pré-condição para ser executada antes de operação/refatoração.
+    
+    \item \texttt{Constraint} representa a metaclasse raiz de asserções. Em outras palavras, essa metaclasse representa de forma genérica que todas as refatorações possuem asserções/restrições. Essa metaclasse é abstrata e não é instanciada.
+    
+    \item \texttt{PreCondition} define uma pré-condição para ser executada antes de operação/refatoração.
 
 \begin{itemize}
 	\item \textbf{Meta-atributos}
@@ -466,49 +382,22 @@ Na Figura~\ref{fig:meta_modelo_SRM} é apresentado o metamodelo SRM. O SRM cont�
 			\item \texttt{language}: especifica a linguagem que será escrito a pós-condição. Valor válido é: ``OCL'' ou ``XQuery'';
 			\item \texttt{body}: especifica a OCL ou ``XQuery'' que representa a pós-condição.
 		\end{itemize}	
-\end{itemize} 
-
-\item \texttt{Parameter} define um conjunto de parâmetros necessários para executar a refatoração. Essa metaclasse utiliza uma estrutura similar a tabela \textit{hash} para definir os parâmetros.
-
-\begin{itemize}
-	\item \textbf{Meta-atributos}
-		\begin{itemize}
-			\item \texttt{key}: representa o nome do parâmetro;
-			\item \texttt{value}: representa o tipo do parâmetro. Esse tipo deve ser tipos primitivos (\textit{int}, \textit{string}, \textit{double}, \textit{float}, etc.) ou metaclasses do metamodelo KDM.
-		\end{itemize}	
-\end{itemize} 
-
-\item \texttt{Classification} define a classificação da refatoração.
-
-\begin{itemize}
-	\item \textbf{Meta-associações}
-		\begin{itemize}
-			\item \texttt{level}: representa se a refatoração é fine ou macro grained refactoring;;
-			\item \texttt{kdmPack}: define qual pacote do KDM é necessário para executar a refatoração..
-		\end{itemize}	
-\end{itemize} 
-
-\item \texttt{Level} utilizado para definir se a refatoração é de granularidade baixa ou alta..
-
-\begin{itemize}
-	\item \textbf{Meta-atributos}
-		\begin{itemize}
-			\item \texttt{kind}: especifica o level da refatoração..
-		\end{itemize}	
-\end{itemize} 
-
-\item \texttt{KDMPackage} define qual pacote do KDM é necessário para executar a refatoração.
-
-\begin{itemize}
-	\item \textbf{Meta-atributos}
-		\begin{itemize}
-			\item \texttt{kind}: representa qual pacote do KDM é necessário para executar a refatoração.
-		\end{itemize}	
-\end{itemize} 
-
 \end{itemize}
 
-Três enumerações também foram definidas, como pode ser observado na Figura~\ref{fig:meta_modelo_SRM} delimitada por um retângulo de linha pontilhada. A primeira enumeração é \texttt{Language}, que é utilizada para especificar a linguagem da operação/refatoração, valores válidos são: ``ATL'' e ``OCL''. A segunda enumeração é \texttt{LevelKind}, a qual é utilizada para definir o nível da refatoração. Finalmente, \texttt{KDMPackageKind} é utilizado para definir qual pacote do metamodelo KDM é (são) utilizado(s) durante a execução da refatoração. 
+\item \texttt{ConstraintKind}: representa quais os tipos de linguagens de restrições de modelos podem ser utilizadas para implementar a asserção. Os valores possíveis são: \aspas{OCL} ou \aspas{XQuery};
+    
+\end{itemize}
+
+A junção dos pacotes e suas metaclasses formam o metamodelo SRM. Dessa forma, na Figura~\ref{fig:meta_modelo_SRM} é apresentado esquematicamente o metamodelo SRM. O SRM contém 13 metaclasses e quatro enumerações. Em seguida é apresentado como o SRM foi implementado.
+
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+		\caption{Visão completa do metamodelo SRM.}
+	\includegraphics[scale=0.65]{images/newMetamodelSRM}
+	\label{fig:meta_modelo_SRM}
+	\fautor
+\end{figure}
 
 %Para facilitar o entendimento do metamodelo SRM, bem como o relacionamento entre suas metaclasses a seguir são apresentadas descrições de como cada metaclasse se relacionam e devem ser utilizadas para proporcionar o reúso de refatorações para o metamodelo KDM.
 
