@@ -388,17 +388,6 @@ Esse pacote contém três metaclasses e uma enumeração para definir as asserç
     
 \end{itemize}
 
-A junção dos pacotes e suas metaclasses formam o metamodelo SRM. Dessa forma, na Figura~\ref{fig:meta_modelo_SRM} é apresentado esquematicamente o metamodelo SRM. O SRM contém 13 metaclasses e quatro enumerações. Em seguida é apresentado como o SRM foi implementado.
-
-\begin{figure}[h]
-	\centering
-	% Requires \usepackage{graphicx}
-		\caption{Visão completa do metamodelo SRM.}
-	\includegraphics[scale=0.65]{images/newMetamodelSRM2}
-	\label{fig:meta_modelo_SRM}
-	\fautor
-\end{figure}
-
 %Para facilitar o entendimento do metamodelo SRM, bem como o relacionamento entre suas metaclasses a seguir são apresentadas descrições de como cada metaclasse se relacionam e devem ser utilizadas para proporcionar o reúso de refatorações para o metamodelo KDM.
 
 %\subsection{Metaclasses \texttt{RefactoringModel}, \texttt{Author} e \texttt{RefactoringLibrary} }
@@ -407,7 +396,18 @@ A junção dos pacotes e suas metaclasses formam o metamodelo SRM. Dessa forma, 
 
 \subsection{Implementar o SRM}\label{sec:implementacao_do_SRM}
 
-O metamodelo SRM foi implementado utilizando EMF. Dessa forma, existem duas possibilidades para instanciar o metamodelo SRM: (\textit{i}) utilizando uma visão de árvore do metamodelo e (\textit{ii}) utilizando a API fornecida pelo EMF. A primeira opção, utiliza uma visão de árvore da instância do metamodelo SRM, como apresentado na Figura~\ref{fig:visao_arvore_metamodelo_srm}. Quando o engenheiro de modernização clica com o botão direito metaclasses do metamodelo são apresentadas para que o engenheiro escolha qual metaclasse especificar e instanciar. Porém, note que o engenheiro de modernização deve conhecer a estrutura correta do metamodelo SRM para utilizar a visão de árvore. 
+A junção dos pacotes apresentados nas seções anteriores e suas metaclasses formam o metamodelo SRM. Na Figura~\ref{fig:meta_modelo_SRM} é apresentado esquematicamente o metamodelo SRM. O SRM contém 13 metaclasses e quatro enumerações. O metamodelo SRM foi implementado utilizando EMF\footnote{\texttt{EString} em EMF representa uma \texttt{String} em Java.}.
+
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+		\caption{Visão completa do metamodelo SRM.}
+	\includegraphics[scale=0.65]{images/newMetamodelSRM}
+	\label{fig:meta_modelo_SRM}
+	\fautor
+\end{figure}
+
+Existem duas opções para instanciar o metamodelo SRM: (\textit{i}) utilizando uma visão de árvore do metamodelo e (\textit{ii}) utilizando a API fornecida pelo EMF. A primeira opção, utiliza uma visão de árvore da instância do metamodelo SRM, como apresentado na Figura~\ref{fig:visao_arvore_metamodelo_srm}. Quando o engenheiro de modernização clica com o botão direito metaclasses do metamodelo são apresentadas para que o engenheiro escolha qual metaclasse especificar e instanciar. Porém, note que o engenheiro de modernização deve conhecer a estrutura correta do metamodelo SRM para utilizar a visão de árvore. 
 
 \begin{figure}[h]
 	\centering
@@ -418,7 +418,11 @@ O metamodelo SRM foi implementado utilizando EMF. Dessa forma, existem duas poss
 	\fautor
 \end{figure}
 
-A segunda opção é a utilização da API fornecida pelo EMF. Nesta segunda opção a linguagem Java é utilizada juntamente com a API EMF. Para utilizar a segunda opção os engenheiros de modernização necessitam ter conhecimento avançado de Java, isto é, a instanciação de uma refatoração utilizando a segunda opção é bastante verbosa, complexa e propensa a erros, pois exige conhecimento avançadas de refatoração e habilidades de programação em relação a API Ecore/EMF. No Código-fonte~\ref{cod:instancia_do_SRM} é apresentado um trecho onde é feita a instanciação em memória de algumas metaclasses definidas no metamodelo SRM utilizando a segunda opção. Note que nesse código-fonte a instanciação das metaclasses do metamodelo SRM é um processo verboso e propenso a erros. Para instanciar o metamodelo SRM o engenheiro deve saber utilizar a API do \textit{framework} EMF. Metaclasses são instanciadas em EMF utilizando o conceito de fabrica (em inglês - \textit{Factory}). Cada fabrica de uma metaclasse possui um método \texttt{createX}, onde X representa o nome da metaclasse do metamodelo. Para criar uma instancia válida do metamodelo SRM o engenheiro de modernização deve seguir um conjunto de passos. Por exemplo, como pode ser observado na linha 1 do Código-fonte~\ref{cod:instancia_do_SRM} uma instância da metaclasse \texttt{Author} é criada por meio da interface \texttt{RefactoringModelFactory} e do método \texttt{createAuthor()}. Em seguida, todos os meta-atributos da metaclasse \texttt{Author} devem ser especificados como apresentado nas linhas 2 e 3 do Código-fonte~\ref{cod:instancia_do_SRM}. Nas linhas 4-14 outras metaclasses do metamodelo SRM são instanciadas. 
+A segunda opção é a utilização da API fornecida pelo EMF. Nesta segunda opção a linguagem Java é utilizada juntamente com a API EMF. Para utilizar a segunda opção os engenheiros de modernização necessitam ter conhecimento avançado de Java, isto é, a instanciação de uma refatoração utilizando a segunda opção é bastante verbosa, complexa e propensa a erros, pois exige conhecimento avançadas de refatoração e habilidades de programação em relação a API Ecore/EMF. 
+
+No Código-fonte~\ref{cod:instancia_do_SRM} é apresentado um trecho onde é feita a instanciação em memória de algumas metaclasses definidas no metamodelo SRM utilizando a segunda opção. Note que nesse código-fonte a instanciação das metaclasses do metamodelo SRM é um processo verboso e propenso a erros. Para instanciar o metamodelo SRM o engenheiro deve saber utilizar a API do \textit{framework} EMF. Metaclasses são instanciadas em EMF utilizando o conceito de fabrica (em inglês - \textit{Factory}). Cada fabrica de uma metaclasse possui um método \texttt{createX}, onde X representa o nome da metaclasse do metamodelo. 
+
+Para criar uma instancia válida do metamodelo SRM o engenheiro de modernização deve seguir um conjunto de passos. Por exemplo, como pode ser observado na linha 1 do Código-fonte~\ref{cod:instancia_do_SRM} uma instância da metaclasse \texttt{Author} é criada por meio da interface \texttt{RefactoringModelFactory} e do método \texttt{createAuthor()}. Em seguida, todos os meta-atributos da metaclasse \texttt{Author} devem ser especificados como apresentado nas linhas 2 e 3 do Código-fonte~\ref{cod:instancia_do_SRM}. Nas linhas 4-14 outras metaclasses do metamodelo SRM são instanciadas. 
 
 \begin{codigo}[caption={[Instanciação do metamodelo SRM programaticamente.] Instanciação do metamodelo SRM.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={cod:instancia_do_SRM}, language=Java]{Name}
 Author author = RefactoringModelFactory.eINSTANCE.createAuthor();
@@ -438,7 +442,7 @@ libr.getCatalogs().add(cat);
 ...
 \end{codigo}
 
-Como observado o processo de instanciação do metamodelo SRM não é um processo trivial em nenhuma opção. Além disso, engenheiros de modernização devem estar familiarizados como as semânticas das refatorações (por exemplo, qual(is) é (são) o(s) pré-requisito(s) para a execução de uma refatoração) e como/onde utilizar e programar tais refatorações. Com o intuito de facilitar e diminuir a quantidade de código-fonte, esforço obrigatórios e competência necessárias para instanciar refatorações utilizando o metamodelo SRM, foi criado uma DSL para auxiliar a instanciação de refatorações. A seguir as gramáticas definidas que regem a DSL para auxiliar a instanciação do metamodelo SRM são apresentadas.
+Como observado o processo de instanciação do metamodelo SRM não é um processo trivial em ambas opções. Além disso, engenheiros de modernização devem estar familiarizados como as semânticas das refatorações (por exemplo, qual(is) é (são) o(s) pré-requisito(s) para a execução de uma refatoração) e como/onde utilizar e programar tais refatorações. Com o intuito de facilitar e diminuir a quantidade de código-fonte, esforço obrigatórios e competência necessárias para instanciar refatorações utilizando o metamodelo SRM, foi criado uma DSL para auxiliar a instanciação de refatorações. A seguir as gramáticas definidas que regem a DSL para auxiliar a instanciação do metamodelo SRM são apresentadas.
 
 \subsubsection{Gramática da DSL utilizada para instanciar o SRM}
 
