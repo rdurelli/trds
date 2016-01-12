@@ -449,7 +449,7 @@ Como observado o processo de instanciação do metamodelo SRM não é um process
 Nesta seção as gramáticas especificadas para criar uma DSL para auxiliar a instanciação do metamodelo SRM são apresentadas.
 %
 %Cada trecho de código da DSL representa uma instancia de uma metaclasse do metamodelo SRM, ou seja, cada declaração da DSL está em conformidade com uma metaclasse do SRM. Por exemplo, considere a palavra-chave \texttt{refactoringModel} \texttt{author} entre \aspas{\{} e \aspas{\}} representa a instanciação da metaclasse \texttt{Author} do SRM que possui dois meta-atributos: \texttt{name} e \texttt{lastName}. 
-
+%
 A DSL criada para auxiliar a instanciação do SRM foi desenvolvida utilizando Xtext\footnote{\texttt{https://www.eclipse.org/Xtext/}}. Xtext é um \textit{framework} do Eclipse\footnote{\texttt{https://www.eclipse.org}} que tem como principal objetivo automatizar e agilizar o processo de desenvolvimento de DSLs. %Note que a sintaxe da DSL segue as terminologias e conceitos definidos no metamodelo SRM para facilitar a utilização da DSL e o entendimento do metamodelo SRM.
 
 Em Xtext a gramática segue uma notação similar ao \textit{Backus–Naur Form} (BNF) chamada de regras do \textit{parser}. Tais regras representam a sintaxe concreta da DSL. Note que para facilitar o entendimento da DSL, trechos da mesma são mostradas em listagens de códigos separados, bem como símbolos para explanar o propósito de uma terminada linha da gramática. No Código-fonte~\ref{lst:dsl_part_1} é ilustrado o primeiro trecho da gramática concreta da DSL desenvolvida. A gramática começa com a definição do nome da DSL (SRM) (ver Código-fonte~\ref{lst:dsl_part_1} \ding{182}). Em sequência é definido os metamodelos que devem ser importados para serem utilizados durante a criação da DSL: o metamodelo SRM\ding{183} e o Ecore\ding{184}.
@@ -517,7 +517,7 @@ O Código-fonte~\ref{lst:dsl_part_4} representa as sintaxes concretas das metacl
 \begin{lstlisting}[language=Xtext, frame=single, basicstyle=\scriptsize, mathescape=true, label={lst:dsl_part_5}, caption={Gramática da DSL - parte 5}]
 Operation: 
 	$\textrm{\ding{182}}$`operation' `{'
-		$\textrm{\ding{229}}$`language' `:' language=Language
+		$\textrm{\ding{229}}$`language' `:' language=LanguageM2M
 		`body' `:' `{'
 			$\textrm{\ding{229} \ding{184}}$body = STRING
 		`}'
@@ -525,7 +525,7 @@ Operation:
 PreCondition: 
 	$\textrm{\ding{185}}$`preCondition' `{'
 		$\textrm{\ding{229}}$`context' `:' context=STRING
-		$\textrm{\ding{229}}$`language' `:' language=Language
+		$\textrm{\ding{229}}$`language' `:' language=ConstraintKind
 		`body' `:' `{' 
 			$\textrm{\ding{229}}$body=STRING	
 		`}'
@@ -533,16 +533,19 @@ PreCondition:
 PostCondition: 
 	$\textrm{\ding{186}}$`postCondition' `{'
 		$\textrm{\ding{229}}$`context' `:' context=STRING
-		$\textrm{\ding{229}}$`language' `:' language=Language
+		$\textrm{\ding{229}}$`language' `:' language=ConstraintKind
 		`body' `:' `{' 
 			$\textrm{\ding{229}}$body=STRING	
 		`}'
 	`}'
-enum Language: 
-	ATL | OCL | XQuery
+enum LanguageM2M: 
+	ATL | QVT
+enum ConstraintKind: 
+	XQuery | OCL
+
 \end{lstlisting}
 
-No Código-fonte~\ref{lst:dsl_part_5} as sintaxes concretas das metaclasses \texttt{Operation}, \texttt{PreCondition} e \texttt{PostCondition} são definidas. A sintaxe concreta da metaclasse \texttt{Operation} inicia com a palavra-chave \texttt{operation} seguida por um \aspas{\{}\ding{182}. Em seguida, deve-se especificar qual a linguagem que a operação/refatoração será escrita. \texttt{Language} é uma enumeração (\textit{enum}) que está representado na linha 24 do Código-fonte~\ref{lst:dsl_part_5}. A linha 5 representa a sintaxe concreta para especificar o \aspas{corpo} da operação/refatoração propriamente dita \ding{184}. Na linha 8 a sintaxe concreta da metaclasse \texttt{PreCondition} é definida. A sintaxe concreta inicia com a palavra-chave \texttt{preCondition} seguida por um \aspas{\{}\ding{182}, \texttt{context}, \texttt{language} e \texttt{body}. A sintaxe concreta da metaclasse \texttt{PostCondition} é definida nas linhas 16 até 23. Note que a sintaxe é similar à sintaxe definida na metaclasse \texttt{PreCondition}. A partir das gramáticas da DSL apresentadas, XText gera um editor textual no ambiente de desenvolvimento Eclipse IDE. Esse editor textual provê \textit{highlighting} de sintaxe, \textit{code completion} e \textit{code navigation}. O editor resultante pode ser observado no Capítulo~\ref{chapter:ferramenta_kdm_re} na Seção~\ref{label:sec_modulo_do_srm}, onde é apresentada a ferramenta KDM-RE.
+No Código-fonte~\ref{lst:dsl_part_5} as sintaxes concretas das metaclasses \texttt{Operation}, \texttt{PreCondition} e \texttt{PostCondition} são definidas. A sintaxe concreta da metaclasse \texttt{Operation} inicia com a palavra-chave \texttt{operation} seguida por um \aspas{\{}\ding{182}. Em seguida, deve-se especificar qual a linguagem que a operação/refatoração será escrita. \texttt{LanguageM2M} é uma enumeração (\textit{enum}) que está representado na linha 24 do Código-fonte~\ref{lst:dsl_part_5}. A linha 5 representa a sintaxe concreta para especificar o \aspas{corpo} da operação/refatoração propriamente dita \ding{184}. Na linha 8 a sintaxe concreta da metaclasse \texttt{PreCondition} é definida. A sintaxe concreta inicia com a palavra-chave \texttt{preCondition} seguida por um \aspas{\{}\ding{182}, \texttt{context}, \texttt{language} e \texttt{body}. A sintaxe concreta da metaclasse \texttt{PostCondition} é definida nas linhas 16 até 23. Note que a sintaxe é similar à sintaxe definida na metaclasse \texttt{PreCondition}. A partir das gramáticas da DSL apresentadas, XText gera um editor textual no ambiente de desenvolvimento Eclipse IDE. Esse editor textual provê \textit{highlighting} de sintaxe, \textit{code completion} e \textit{code navigation}. O editor resultante pode ser observado no Capítulo~\ref{chapter:ferramenta_kdm_re} na Seção~\ref{label:sec_modulo_do_srm}, onde é apresentada a ferramenta KDM-RE.
 
 
 \section{Trabalhos Relacionados}\label{sec:trabalhos_relacionais_SRM}
