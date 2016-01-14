@@ -11,9 +11,8 @@ No Capítulo~\ref{chapter:Abordagem_de_sincronizacao} foi apresentado uma aborda
 
 Com o objetivo de automatizar os conceitos apresentados nos Capítulos~\ref{chapter:catalogo_refactoring_KDM}, ~\ref{chapter:Toward_a_Refactoring_Metamodel_for_KDM} e~\ref{chapter:Abordagem_de_sincronizacao} neste capítulo é apresentado um apoio computacional denominado \sigla{KDM-RE}{\textit{Knowledge Discovery Model-Refactoring Environment}}. A ferramenta KDM-RE foi implementada como um conjunto de \textit{plug-ins} para o Ambiente de Desenvolvimento Eclipse IDE\footnote{\texttt{https://eclipse.org/home/index.php}}. Cada \textit{plug-in} representa um módulo da KDM-RE responsável por demonstrar a viabilidade dos conceitos descritos nos Capítulos~\ref{chapter:catalogo_refactoring_KDM}, ~\ref{chapter:Toward_a_Refactoring_Metamodel_for_KDM} e~\ref{chapter:Abordagem_de_sincronizacao}.  Nota-se que esse Capítulo é uma extensão do seguinte artigo: \textit{KDM-RE: A Model-Driven Refactoring Tool for KDM}~\cite{durelli_VEM_ferramenta}.
 
-Os módulos da KDM-RE estão apresentados nas seções que compõem este capítulo: a forma como a KDM-RE foi desenvolvida é descrita na Seção X\change{mudar}; na Seção Y é apresentado o módulo responsável por aplicar refatorações no metamodelo KDM; na Seção Z é apresentado o módulo responsável por instanciar o metamodelo SRM por meio de uma DSL, e também é apresentado como reutilizar programaticamente as refatorações persistidas no metamodelo SRM; na Seção X\change{mudar} é apresentado o módulo que implementa a abordagem KDM-SInc.
 
-
+As seções deste capítulo estão organizadas da seguinte forma: na Seção~\ref{sec:construcao_da_kdm_re} o desenvolvimento da KDM-RE é mostrado; na Seção~\ref{sec:modulo_de_refatoracao_kdm_re} é apresentado o módulo responsável por aplicar refatorações no metamodelo KDM; na Seção~\ref{label:sec_modulo_do_srm} é apresentado o módulo responsável por instanciar o metamodelo SRM por meio de uma DSL, e também é apresentado como reutilizar programaticamente as refatorações persistidas no metamodelo SRM; na Seção~\ref{sec:modulo_de_sincronizacao_kdm_re} é apresentado o módulo que implementa a abordagem KDM-SInc. As considerações finais desse capítulo são apresentadas na Seção~\ref{sec:consideracoes_final_kdm_re}.
 
 \section{Construção da KDM-RE}\label{sec:construcao_da_kdm_re}
 
@@ -42,7 +41,7 @@ A Figura~\ref{fig:arquitetura_ferramenta_kdm_re} apresenta uma visão lógica da
 Na segunda camada é onde os módulos da KDM-RE são definidos. O módulo de refatoração utiliza EMF, ATL, OCL e MoDisco para criar um \textit{plug-in} onde o engenheiro de software pode aplicar refatorações em instâncias do metamodelo KDM. O módulo de sincronização implementa a abordagem KDM-SInc apresentada no Capítulo~\ref{chapter:Abordagem_de_sincronizacao}. Esse módulo utiliza o \textit{framework} EMFCompare e ATL. Por sua vez, o módulo do SRM utiliza EMF e XText. XText é utilizado no módulo do SRM para definir uma DSL para auxiliar a instanciação do metamodelo SRM. A última camada, UI, é responsável pela interface gráfica da ferramenta KDM-RE. Essa camada possui \textit{Wizards}, editores e visões para a aplicação, definição e reutilização das refatorações no contexto do KDM. Nas seções seguintes os três principais módulos da ferramenta KDM-RE são apresentados e discutidos.
 
 
-\section{Módulo de Refatoração}
+\section{Módulo de Refatoração}\label{sec:modulo_de_refatoracao_kdm_re}
 
 Nessa seção o módulo de refatoração é apresentado. Esse módulo foi implementado para prover suporte as refatorações criadas por meio das diretrizes apresentadas no Capítulo~\ref{chapter:catalogo_refactoring_KDM}. Na literatura é possível identificar um conjunto de técnicas e linguagens específicas para auxiliar a condução e especificação de transformação de modelos~\cite{Biehl_2010, Mens_2006, Allilaire_06}. Nesta Tese, a linguagem de transformação ATL~\cite{ATL_eclipse,Jouault_2008} foi escolhida para definir e aplicar refatorações no metamodelo KDM. Similarmente, as pre- e pós-condições foram implementadas em OCL. KDM-RE programaticamente executa as refatorações implementadas em ATL por meio da ATL EMF \textit{Transformation Virtual Machine}. As pre- e pós-condições são executadas na KDM-RE por meio da API Desden OCL\footnote{\texttt{http://www.dresden-ocl.org/}}. Essa API facilita a aplicação de OCL em qualquer metamodelo definido em EMF, no contexto desta Tese KDM. Como consequência, KDM-RE é capaz de suportar a detecção de violações semânticas estáticas em instâncias do metamodelo KDM.
 
@@ -365,7 +364,7 @@ Cada marcação apresentada nesse XMI representa uma metaclasse do metamodelo SR
 \end{figure}
 
 
-\section{Módulo de Sincronização}
+\section{Módulo de Sincronização}\label{sec:modulo_de_sincronizacao_kdm_re}
 
 Nessa seção é apresentado um módulo desenvolvido para fornecer suporte a abordagem KDM-SInc ver Figura~\ref{fig:kdm_sinc} Capítulo~\ref{chapter:Abordagem_de_sincronizacao}. Como apresentado nos Capítulos~\ref{chapter:fundamentacao_teorica} e~\ref{chapter:Abordagem_de_sincronizacao} o metamodelo KDM contém pacotes heterogêneos que são utilizados para representar diferentes artefatos de um sistema. Assim, é importante manter uma determinada instância do metamodelo KDM consistente e sincronizada após a aplicação de refatorações. 
 
@@ -454,7 +453,7 @@ A KDM-RE fornece uma forma de visualizar graficamente se as propagações foram 
 %Por exemplo, considere a Figura~\ref{fig:extractClassRefactoring} onde o engenheiro de modernização está aplicando a refatoração \texttt{Extract ClassUnit} em uma instância de \texttt{ClassUnit} denominada \texttt{Pessoa}. O primeiro passo do módulo de sincronização irá realiazar uma comparação entre a instância refatorada e a instância original do metamodelo KDM. Como apresentado no Capítulo X\change{mudar} a refatoração \texttt{Extract ClassUnit} é uma refatoração composta, assim, é necessário aplicar um conjunto de operações atômicas: \texttt{add}, \texttt{delete} e \texttt{change}.
 
 
-\section{Considerações Finais}
+\section{Considerações Finais}\label{sec:consideracoes_final_kdm_re}
 
 Este capítulo apresenta a ferramenta KDM-RE. Essa ferramenta foi implementada, de modo a ser utilizada em conjunto com os demais recursos oferecidos pelo ambiente de desenvolvimento Eclipse IDE. Dessa forma, a KDM-RE foi desenvolvida utilizando os conceitos de \textit{plug-ins}. Três \textit{plug-ins} foram criados e são organizados em módulos de acordo com a sua predominante funcionalidade. Os três principais módulos da KDM-RE são: (\textit{i}) módulo de refatoração, (\textit{ii}) módulo do SRM e (\textit{iii}) módulo de sincronização. 
 
