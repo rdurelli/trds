@@ -16,27 +16,26 @@ Diante desse contexto, neste capítulo é apresentado uma abordagem para auxilia
 
 As refatorações aqui criadas são implementadas com o uso da ATL~\cite{Allilaire_06, Jouault_2005, Jouault_2008} e suas restrições (pre- e pós-condições) são implementadas utilizando OCL. ATL e OCL foram escolhidas nesta Tese pois ambas são linguagens bem conhecidas e amplamente utilizadas na literatura. Porém, ressalta-se que as refatorações, bem como as pré- e pós-condições podem ser adaptadas com o uso de outras tecnologias, como, por exemplo, \textit{Query/View/Transformation}~\cite{QVT:OMG}, EMF Henshin~\cite{EMF_Henshin}, SmartQVT~\cite{SmartQVT}, ModelMorf~\cite{ModelMorf}, Kermeta~\cite{kermeta}, \textit{Epsilon Transformation Language}~\cite{ETL_eclipse}, OpenArchitectureWare~\cite{OpenArchitectureWare}, VIATRA~\cite{viatra}, AndroMDA~\cite{andromda} e Fujaba \textit{transformations}~\cite{fujaba}.
 
-As demais seções desta capítulo estão organizadas da seguinte forma: Na Seção~\ref{sec:estrategiasParaAdaptarRefatoracoesParaOMetamodeloKDM} são apresentados os passos para auxiliar os engenheiros de modernização a criar refatorações para o metamodelo KDM. Mais especificadamente, na Subseção~\ref{sec:mapeamento_POO_e_KDM} é apresentado um mapeamento entre os conceitos do POO e as metaclasses do metamodelo KDM; Em seguida as refatorações escolhidas e criadas para o metamodelo KDM são discutidas na Subseção~\ref{sec:refatoracao_para_o_metamodelo_kdm}; Subseção~\ref{sec:linguagemDeTransformacaoUtilizada} é apresenta a linguagem de transformação de modelo que é utilizada para realizar os mecanismos das refatorações; Na Subseção~\ref{sec:linguagem_de_restricao} é apresentado a linguagem de restrição utilizada nas refatorações; Na Subseção\ref{sec:template_refatoracao} é apresentado um \textit{template} para definir refatorações para o metamodelo KDM. Seção~\ref{sec:catalogo_refatoracao_kdm} é apresentado um catálogo de refatoração seguindo os passos destacadas na Seção~\ref{sec:estrategiasParaAdaptarRefatoracoesParaOMetamodeloKDM}. Na Seção~\ref{sec:consideracoes_finais_capitulo_reforacao} as considerações finais desse capítulo são apresentadas.
+As demais seções desta capítulo estão organizadas da seguinte forma: Na Seção~\ref{sec:estrategiasParaAdaptarRefatoracoesParaOMetamodeloKDM} é apresentado a abordagem de criação de refatorações para o metamodelo KDM. Essa abordagem possui cinco passos: (\textit{i}) identificar elementos estruturais, (\textit{ii}) identificar operações; (\textit{iii}) implementar refatoração; (\textit{iv}) definir restrições e (\textit{v}) especificar refatoração. Na Seção~\ref{sec:catalogo_refatoracao_kdm} são apresentados exemplos de uso da abordagem; e na Seção~\ref{sec:consideracoes_finais_capitulo_reforacao} as considerações finais desse capítulo são apresentadas.
 
 %\change{terminar aqui. Deve colocar todas as seções bem escritas.}
 
-\section{Passos para Criar Refatorações para Instâncias do Metamodelo KDM}\label{sec:estrategiasParaAdaptarRefatoracoesParaOMetamodeloKDM}
+\section{Abordagem para Criar Refatorações para o Metamodelo KDM}\label{sec:estrategiasParaAdaptarRefatoracoesParaOMetamodeloKDM}
 
 Refatorações aplicadas em nível de modelos são transformações especiais que são aplicadas em instâncias de modelos para melhorar sua estrutura e ainda preservar suas características internas. Esse tipo de refatoração é uma área relativamente nova quando comparada com refatorações aplicadas em código-fonte. Com base em informações obtidas das refatorações tradicionais e de abordagens dirigidas por modelos, foi possível definir passos para auxiliar o engenheiro de modernização a criar refatorações para o metamodelo KDM. Os passos apresentados nesse capítulo utilizam um conjunto de elementos distintos, os quais são essenciais para a criação e definição de refatorações para o contexto da ADM e KDM. Esses elementos são apresentados a seguir:
 
 \begin{itemize}
-\item Elementos Estruturais: Mapear os conceitos do POO para o metamodelo KDM (ver Subseção~\ref{sec:mapeamento_POO_e_KDM}). Refatorações são aplicadas em elementos de código, tais como: classes, interfaces, atributos, métodos, etc. Assim, é de suma importância que os engenheiros de modernização saibam identificar quais são as metaclasses em KDM que representam os elementos que serão refatorados;
+\item Mapeamento entre POO e KDM: Mapear os conceitos do POO para o metamodelo KDM (ver Subseção~\ref{sec:mapeamento_POO_e_KDM}). Refatorações são aplicadas em elementos de código, tais como: classes, interfaces, atributos, métodos, etc. Assim, é de suma importância que os engenheiros de modernização saibam identificar quais são as metaclasses em KDM que representam os elementos que serão refatorados;
 
-\item Refatorações: Selecionar um conjunto de refatorações que podem ser adaptadas para o metamodelo KDM (ver Subseção~\ref{sec:refatoracao_para_o_metamodelo_kdm});
-Aqui é necessário identificar os elementos do POO que são correspondentes no metamodelo KDM (ver Subseção~\ref{sec:mapeamento_POO_e_KDM});
+\item Operações atômicas/compostas: Identificar as operações que compõem uma determinada refatoração (ver Subseção~\ref{sec:refatoracao_para_o_metamodelo_kdm}); As refatorações podem ser agrupadas em nível de granularidade: (\textit{i}) operações atômicas e (\textit{ii}) operações compostas;
 
-\item Linguagem de Transformação de Modelo: Utilizar uma linguagem de transformação para a definição e adaptação do mecanismo da refatoração. Refatorações são transformações que são aplicadas em determinadas elementos, no contexto desta Tese em instâncias das metaclasses do KDM. Assim, os elementos estruturais juntamente com a linguagem de transformação de modelo formam o sistema de transformação (ver Subseção~\ref{sec:linguagemDeTransformacaoUtilizada});
+\item Linguagem de Transformação de Modelo: Utilizar \textit{templates} para criar a refatoração. Refatorações são transformações que são aplicadas em determinadas elementos, no contexto desta Tese em instâncias das metaclasses do KDM. Assim, os elementos estruturais juntamente com a linguagem de transformação de modelo formam o sistema de transformação (ver Subseção~\ref{sec:linguagemDeTransformacaoUtilizada});
 
 \item Linguagem de Restrições: Utilizar uma linguagem de restrição para garantir a preservação de comportamento (semântica e sintaxe) ao aplicar uma refatoração. Instâncias do metamodelo KDM são entidades não executáveis, assim, se faz necessário a utilização de linguagens de restrições para garantir a correta execução da refatoração antes e depois de sua aplicação (ver Subseção~\ref{sec:linguagem_de_restricao});
 
-\item \textit{Template}: Definir um modelo de como as refatorações são informalmente e formalmente apresentadas e documentadas (ver Subseção~\ref{sec:template_refatoracao});
+\item Especificação: Definir um modelo de como as refatorações são informalmente e formalmente apresentadas e documentadas (ver Subseção~\ref{sec:template_refatoracao});
 
-\item Gerenciamento de Consistência: Refatorar uma instância de um determinado modelo pode fazer com que o mesmo fique inconsistente. Para preservar consistência entre as visões da instância do modelo abordagens de preservação de consistência precisam ser adotadas (ver Capítulo~\ref{chapter:Abordagem_de_sincronizacao});
+\item Gerenciamento de Consistência: Refatorar uma instância de um determinado modelo pode fazer com que o mesmo fique inconsistente. Para preservar consistência entre as visões da instância do modelo abordagens de preservação de consistência precisam ser adotadas (ver Capítulo~\ref{chapter:Abordagem_de_sincronizacao}\change{mudar});
 
 \item Apoio Computacional: Implementar um apoio computacional para auxiliar o engenheiro de software a aplicar a refatoração de forma transparente e instâncias do metamodelo KDM (ver Capítulo~\ref{chapter:ferramenta_kdm_re}).
 \end{itemize}
@@ -49,14 +48,14 @@ No contexto desta Tese cada refatoração criada para o metamodelo KDM consiste 
 \end{definicao}
 
 
-Na Figura~\ref{fig:diretrizes_kdm_refatoracao_capitulo} é apresentada uma macro-visão dos elementos utilizados para a criação de refatorações para o KDM utilizando a notação \sigla{SADT}{\textit{Structured Analysis and Design Technique}}~\cite{Marca_1987}. Como observado um conjunto de elementos são utilizados como base para a criação de refatorações para o KDM: elementos estruturais, linguagens de transformações, linguagens de restrições e mapeamento POO - KDM. 
+Na Figura~\ref{fig:diretrizes_kdm_refatoracao_capitulo} é apresentada uma macro-visão dos elementos utilizados para a criação de refatorações para o KDM utilizando a notação \sigla{SADT}{\textit{Structured Analysis and Design Technique}}~\cite{Marca_1987}. Como observado um conjunto de elementos são utilizados como base para a criação de refatorações para o KDM: operações atômicas, \textit{templates}, linguagens de transformações, linguagens de restrições e mapeamento POO - KDM. 
 
 \begin{figure}[h]
 	\centering
 	% Requires \usepackage{graphicx}
 	\caption{Macro-visão para a criação de refatorações para o KDM.}
 	\label{fig:diretrizes_kdm_refatoracao_capitulo}
-	\includegraphics[scale=0.9]{images/novoMacroAbordagemKDMRefactoring}
+	\includegraphics[scale=0.9]{images/novoMacroAbordagemKDMRefactoring2}
 	\fautor
 \end{figure}
 
@@ -69,15 +68,15 @@ Na Figura~\ref{fig:todos_os_passos_diretrizes} uma micro-visão da Figura~\ref{f
 	% Requires \usepackage{graphicx}
 	\caption{Passos para criar refatorações para o KDM.}
 	\label{fig:todos_os_passos_diretrizes}
-	\includegraphics[scale=0.7]{images/novaImagemAbordagemCriarRefatoracao}
+	\includegraphics[scale=0.7]{images/novaAbordagemCriarRefatoracao3}
 	\fautor
 \end{figure}
 
 \subsection{Identificar Elementos Estruturais}\label{sec:mapeamento_POO_e_KDM}
 
-Nesta atividade o objetivo é traduzir os conceitos do POO para o metamodelo KDM. É identificado os elementos estruturais do POO em relação as metaclasses disponíveis no metamodelo KDM. De acordo com~\citeonline{Zhang_2005, Boger_2003} um dos maiores desafios quando necessita-se adaptar refatorações para um determinado metamodelo é saber quais são as metaclasses corretas que representam determinadas construções/declarações de um determinado paradigma de programação. É importante identificar se a metaclasse escolhida para fazer a refatoração representa realmente o elemento e o conceito do POO. Dessa forma, antes de realizar a adaptação de qualquer refatoração para o metamodelo KDM, deve-se primeiramente identificar as metaclasses do KDM que têm características similares aos conceitos do POO, bem como instruções comumente utilizadas em todas as linguagens de programação, tais como, ramificações, iterações, etc. 
+Neste passo o objetivo é traduzir os conceitos do POO para o metamodelo KDM. É identificado os elementos estruturais do POO em relação as metaclasses disponíveis no metamodelo KDM. De acordo com~\citeonline{Zhang_2005, Boger_2003} um dos maiores desafios quando necessita-se adaptar refatorações para um determinado metamodelo é saber quais são as metaclasses corretas que representam determinadas construções/declarações de um determinado paradigma de programação. É importante identificar se a metaclasse escolhida para fazer a refatoração representa realmente o elemento e o conceito do POO. Dessa forma, antes de realizar a criação de qualquer refatoração para o metamodelo KDM, deve-se primeiramente identificar as metaclasses do KDM que têm características similares aos conceitos do POO, bem como instruções comumente utilizadas em todas as linguagens de programação, tais como, ramificações, iterações, etc. 
 
-Um mapeamento entre os conceitos/elementos do POO e as metaclasses do metamodelo KDM foi realizado. Esse mapeamento pode ser visto na Tabela~\ref{tab:mapemanetoEntreOOPeKDM}. Nessa tabela é possível visualizar as metaclasses do metamodelo KDM que possuem características similares aos conceitos/elementos do POO. Utilizando essa Tabela~\ref{tab:mapemanetoEntreOOPeKDM}, engenheiros de modernização podem identificar os elementos estruturais necessários para adaptar as refatorações para o metamodelo KDM. Assim, qualquer exemplo de refatoração definida para o POO pode ser adaptada para o metamodelo KDM. Como observado, a Tabela~\ref{tab:mapemanetoEntreOOPeKDM} contém três colunas: \aspas{Elemento do Código-fonte}, \aspas{Pacote::metaclasse do KDM} e \aspas{Descrição}. A primeira coluna informa a construção da linguagem de programação (\textit{statement})e/ou o conceito do POO (pacote, classe, interface, etc), respectivamente. Em seguida a coluna \aspas{Pacote::metaclasse do KDM} apresenta a metaclasse responsável por mapear a construção e/ou o conceito do POO. Note que essa coluna segue o formato \aspas{\textit{Package}::\textit{Meta-class}}. A ultima coluna, \aspas{Descrição}, possui informações sobre a metaclasse, tais como: seu propósito, seus meta-atributos e suas meta-associações.
+Um mapeamento entre os conceitos/elementos do POO e as metaclasses do metamodelo KDM foi realizado. Esse mapeamento pode ser visto na Tabela~\ref{tab:mapemanetoEntreOOPeKDM}. Nessa tabela é possível visualizar as metaclasses do metamodelo KDM que possuem características similares aos conceitos/elementos do POO. Utilizando essa Tabela~\ref{tab:mapemanetoEntreOOPeKDM}, engenheiros de modernização podem identificar os elementos estruturais necessários para criar as refatorações para o metamodelo KDM. Assim, qualquer exemplo de refatoração definida para o POO pode ser adaptada para o metamodelo KDM. Como observado, a Tabela~\ref{tab:mapemanetoEntreOOPeKDM} contém três colunas: \aspas{Elemento do Código-fonte}, \aspas{Pacote::metaclasse do KDM} e \aspas{Descrição}. A primeira coluna informa a construção da linguagem de programação (\textit{statement})e/ou o conceito do POO (pacote, classe, interface, etc), respectivamente. Em seguida a coluna \aspas{Pacote::metaclasse do KDM} apresenta a metaclasse responsável por mapear a construção e/ou o conceito do POO. Note que essa coluna segue o formato \aspas{\textit{Package}::\textit{Meta-class}}. A ultima coluna, \aspas{Descrição}, possui informações sobre a metaclasse, tais como: seu propósito, seus meta-atributos e suas meta-associações.
 
 \begin{longtable}[c]{| m{1.9cm} | m{3.57cm}| m{9.3cm} |}
  \caption{Mapeamento entre POO e metaclasses do metamodelo KDM.\label{tab:mapemanetoEntreOOPeKDM}}\\
@@ -130,8 +129,7 @@ Herança \texttt{implements} & code::Implements & A metaclasse \texttt{Implement
 \hline
  \end{longtable}
 
-
-Na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} é possível ver a relação existente entre os conceitos do POO, bem como algumas instruções de linguagens de programação e as algumas metaclasses do metamodelo KDM. Para atender aos objetivos deste trabalho a Tabela~\ref{tab:mapemanetoEntreOOPeKDM} apresenta apenas as principais metaclasses do KDM que são utilizadas nas refatorações aqui adaptado, uma vez que seria inviável mapear todas as noventa metaclasses do metamodelo KDM.
+Na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} é possível ver a relação existente entre os conceitos do POO, bem como algumas instruções de linguagens de programação e as algumas metaclasses do metamodelo KDM. Para atender aos objetivos deste trabalho a Tabela~\ref{tab:mapemanetoEntreOOPeKDM} apresenta apenas as principais metaclasses do KDM, uma vez que seria inviável mapear todas as noventa metaclasses do metamodelo KDM.
 
 Como apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} algumas metaclasses podem ser diretamente mapeadas com elementos do POO, tais como: classes (\texttt{ClassUnit}), interfaces (\texttt{InterfaceUnit}), atributos (\texttt{StorableUnit}), métodos (\texttt{MethodUnit}), etc. Entretanto, como o KDM tem como objetivo ser um metamodelo independente de plataforma para representar de forma genérica todas as abstrações e paradigmas de programação, algumas construções de programação não possuem uma metaclasse particular. Por exemplo, iterações e ramificações em KDM são representadas utilizando a mesma metaclasse, \texttt{ActionElement}. Esse mapeamento ocorre pois o KDM define uma metaclasse genérica para especificar ramificações e iterações para preservar a independência de plataforma; seria inviável para o metamodelo definir específicas metaclasses para representar ramificações e iterações uma vez que cada linguagem de programação possui um determinada particularidade. Para que o mapeamento fique o mais genérico e independente de plataforma possível a metaclasse \texttt{ActionElement} utiliza o meta-atributo \texttt{kind} que possui os seguintes valores: \textit{variable declaration}, \textit{if}, \textit{for}, \textit{while}, etc.
 
@@ -230,7 +228,7 @@ Dado essa motivação, no contexto desta Tese, a segunda abordagem é utilizada.
 ATL possui um modulo de execução denominado \textit{refining} que é utilizado para criar refatorações em nível de modelo. Esse modulo foi introduzido para facilitar a programação de (ou refatoração) transformações. Com o modulo \textit{refining}, os engenheiros de modernização podem se concentrarem no código ATL dedicada à geração de elementos estruturados modificados. Outros elementos estruturados do KDM (por exemplo, aqueles que permanecem inalteradas antes e após a refatoração) são implicitamente processados pelo mecanismo de ATL. O modulo \textit{refining} pode ser utilizado simplesmente substituindo a palavra-chave \texttt{from} pela palavra-chave \texttt{refining}. Obviamente, o modo de \textit{refining} só pode ser utilizado para as transformações endógenas (\aspas{\textit{in-place}}) (ver Capítulo~\ref{chapter:fundamentacao_teorica}, Seção~\ref{sec:transformacoes_de_modelos})
 
 
-Como apresentado na Seção~\ref{sec:refatoracao_para_o_metamodelo_kdm} as refatorações são agrupadas em dois níveis de operações: (\textit{i}) operações atômicas e (\textit{ii}) operações compostas. As granularidades definidas como operações atômicas são: \texttt{add}, \texttt{delete} e \texttt{change}. Essas operações atômicas podem ser facilmente implementadas em ATL. Dessa forma, um \textit{template} para cada operação atômica é disponibilizado como artefato para auxiliar o engenheiro de modernização a criar genericamente refatorações para o KDM. O \textit{template} para a operação atômica \texttt{add} é apresentado no Código-fonte~\ref{codigo:template_addKDMElement}. As partes fixas dos \textit{templates} são formadas por texto ATL e as partes variantes são formadas por três tipos de instruções: (\textit{i}) argumentos, \textbf{ArgX}\footnote{\textbf{ArgX}, onde \textbf{X} representa um número sequencial do argumentos. \label{foot:Arg}}, demarcadas pelos símbolos \aspas{\textbf{<\#}} e \aspas{\textbf{\#>}} e que devem ser substituídos por \textit{strings} validas na linguagem ATL; (\textit{ii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcadas pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e que devem ser substituídos por metaclasses do metamodelo KDM, por exemplo, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc; e (\textit{ii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}} que devem ser substituídos de acordo com o domínio do sistema que será aplicado a refatoração, por exemplo, nomes de pacotes, classes, interfaces, atributos, métodos, etc.  
+Como apresentado na Seção~\ref{sec:refatoracao_para_o_metamodelo_kdm} as refatorações são agrupadas em dois níveis de operações: (\textit{i}) operações atômicas e (\textit{ii}) operações compostas. As granularidades definidas como operações atômicas são: \texttt{add}, \texttt{delete} e \texttt{change}. Essas operações atômicas podem ser facilmente implementadas em ATL. Dessa forma, um \textit{template} para cada operação atômica é disponibilizado como artefato para auxiliar o engenheiro de modernização a criar genericamente refatorações para o KDM. O \textit{template} para a operação atômica \texttt{add} é apresentado no Código-fonte~\ref{codigo:template_addKDMElement}. As partes fixas dos \textit{templates} são formadas por texto ATL e as partes variantes são formadas por três tipos de instruções: (\textit{i}) argumentos, \textbf{ArgX}\footnote{\textbf{ArgX}, onde \textbf{X} representa um número sequencial do argumentos. \label{foot:Arg}}, demarcadas pelos símbolos \aspas{\textbf{<\#}} e \aspas{\textbf{\#>}} e que devem ser substituídos por \textit{strings} validas na linguagem ATL; (\textit{ii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcadas pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e que devem ser substituídos por metaclasses do metamodelo KDM, por exemplo, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc; e (\textit{iii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}} que devem ser substituídos de acordo com o domínio do sistema que será aplicado a refatoração, por exemplo, nomes de pacotes, classes, interfaces, atributos, métodos, etc.  
 
 %argumentos, \textbf{ArgX} onde X representa um número cardinal, demarcadas pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} ou \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}}. O primeiro símbolo (\aspas{\textbf{<\%}} e \aspas{\textbf{\%>}}) informa para o engenheiro de modernização que metaclasses do KDM devem ser substituídas pelo argumento.
 
@@ -422,9 +420,140 @@ Após a criação de uma refatoração o engenheiro de modernização deve espec
 
 \subsection{Definir Restrições (Pré- e Pós-condições)}\label{sec:linguagem_de_restricao}
 
-Após o engenheiro de modernização criar uma determinada refatoração o próximo passo é criar restrições (pré- e pós-condições) para a refatoração. Usualmente antes e após a aplicação de uma determinada refatoração algumas restrições precisam ser satisfeitas. Tais restrições usualmente são úteis para verificar se os parâmetros necessários para executar a refatoração foi completamente e corretamente informando, bem como verificar se a refatoração foi aplicada de forma totalmente correta. No contexto de modelos, tais restrições são especificadas utilizando linguagem como OCL. Essas restrições no contexto de refatorações são conhecidas como pré- e pós-condições. Utilizando OCL, é possível verificar, por exemplo, se todos os parâmetros obrigatórios para executar o mecanismo da refatoração foram especificados pelo modernizador. Além disso, essas condições são importantes para assegurar que a refatoração será aplicada de forma correta e ainda irá preservar a semântica da instância do meta-modelo, como por exemplo, preservar comportamentos, sincronização, etc. 
+Após o engenheiro de modernização criar uma determinada refatoração o próximo passo é criar restrições (pré- e pós-condições) para a refatoração. Usualmente antes e após a aplicação de uma determinada refatoração algumas restrições precisam ser satisfeitas. Tais restrições usualmente são úteis para verificar se os parâmetros necessários para executar a refatoração foi completamente e corretamente informando, bem como verificar se a refatoração foi aplicada de forma totalmente correta. No contexto de modelos, tais restrições são especificadas utilizando linguagem como OCL. Essas restrições no contexto de refatorações são conhecidas como pré- e pós-condições. Utilizando OCL, é possível verificar, por exemplo, se todos os parâmetros obrigatórios para executar o mecanismo da refatoração foram especificados pelo modernizador. Além disso, essas condições são importantes para assegurar que a refatoração será aplicada de forma correta e ainda irá preservar a semântica da instância do metamodelo. Dessa forma, cada refatoração definida nesta Tese está associada com uma pré- e pós-condição definida em OCL. OCL foi escolhida pois a mesma é uma linguagem padronizada pela OMG e também possui suporte na plataforma Eclipse.
 
-Dessa forma, cada refatoração definida nesta Tese está associada com uma pré- e pós-condição definida em OCL. OCL foi escolhida pois a mesma é uma linguagem padronizada pela OMG e também possui suporte na plataforma Eclipse. É importante observar que os passos apresentados neste capítulo não têm a preocupação de ensinar como escrever/implementar as restrições das refatorações utilizando OCL. Assim, o engenheiro de modernização é responsável por criar e implementar todas as pré- e pós-condições de uma dada refatoração para o KDM.
+Para auxiliar o engenheiro de modernização durante a criação dessas restrições (pré- e pós-condições) \textit{templates} foram definidos. Os \textit{templates} aqui apresentados estão associados a uma determinada operação atômica. Por exemplo, para cada operação atômica (\texttt{add}, \texttt{delete} e \texttt{change}) dois \textit{templates} foram definidos para auxiliar a criação das restrições, ou seja, um \textit{template} para auxiliar a criação da pré-condição e outro para auxiliar a criação da pós-condição.
+
+Os \textit{templates} para a operação atômica \texttt{add} é apresentado nos Códigos-fontes~\ref{codigo:pre_template_add} e~\ref{codigo:template_pos_condicao_add}. As partes fixas dos \textit{templates} são formadas por texto em OCL e as partes variantes são formadas por dois tipos de instruções: (\textit{i}) argumentos, \textbf{ArgX}\footnote{\textbf{ArgX}, onde \textbf{X} representa um número sequencial do argumentos. \label{foot:Arg1}}, demarcadas pelos símbolos \aspas{\textbf{<\#}} e \aspas{\textbf{\#>}} e que devem ser substituídos por \textit{strings} validas na linguagem OCL; e (\textit{ii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg1}}, demarcadas pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e que devem ser substituídos por elementos/metaclasses do metamodelo KDM, por exemplo, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc; e (\textit{iii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}} que devem ser substituídos de acordo com o domínio do sistema que será aplicado a refatoração, por exemplo, nomes de pacotes, classes, interfaces, atributos, métodos, etc.  
+
+\begin{codigo}[caption={[\textit{Template} OCL para realizar a pré-condição da operação atômica \texttt{add}.] \textit{Template} OCL para realizar a pré-condição da operação atômica \texttt{add}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:pre_template_add}, language=OCL]{Name}
+context (*@<\textbf{\%Arg1\%}>@*)::(*@<\textbf{\#Arg2\#}>@*)(newName: String)
+pre : (*@<\textbf{\%Arg3\%}>@*).allInstances->select(e : (*@<\textbf{\%Arg3\%}>@*) | a.name = (*@<\textbf{$@$Arg4$@$}>@*)) and not (*@<\textbf{\%Arg1\%}>@*).refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : (*@<\textbf{\%Arg1\%}>@*) | e.name = newName)
+\end{codigo}
+
+O \textit{template} apresentado no Código-fonte~\ref{codigo:pre_template_add} tem como função verificar se uma determinada nova metaclasse a ser criada pela operação atômica \texttt{add} ainda não existe na instância do KDM. Isso é importante para garantir que não exista duas instâncias iguais no KDM. Caso positivo a operação atômica pode ser então executada. A pós-condição apresentada no Código-fonte~\ref{codigo:template_pos_condicao_add} por outro lado verifica se a nova metaclasse realmente foi criada pela execução da operação atômica \texttt{add}.
+
+\begin{codigo}[caption={[\textit{Template} OCL para realizar a pós-condição da operação atômica \texttt{add}.] \textit{Template} OCL para realizar a pós-condição da operação atômica \texttt{add}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_pos_condicao_add}, language=OCL]{Name}
+context (*@<\textbf{\%Arg1\%}>@*)::(*@<\textbf{\#Arg2\#}>@*)(newName: String)
+post : (*@<\textbf{\%Arg3\%}>@*).allInstances->select(e : (*@<\textbf{\%Arg3\%}>@*) | a.name = (*@<\textbf{$@$Arg4$@$}>@*)) and (*@<\textbf{\%Arg1\%}>@*).refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : (*@<\textbf{\%Arg1\%}>@*) | e.name = newName)
+\end{codigo}
+
+\begin{table}[h]
+\centering
+\caption{Guia para auxiliar a substituir os argumentos dos \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_add} e~\ref{codigo:template_pos_condicao_add}.}
+\label{tab:guia_template_pre_pos_add}
+\begin{tabular}{ | m{1.7cm} | m{12cm}| } 
+\hline
+\multicolumn{1}{|c|}{Argumentos}                                         & \multicolumn{1}{c|}{Valores} \\ \hline
+\multicolumn{1}{|c|}{\textbf{<\%Arg1\%>}} & Nome de uma metaclasse (\texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc). Deve-se especificar o nome da metaclassse que foi criada pela operação atômica \texttt{add}; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<\#Arg2\#>}} & Nome da restrição. Pode-se utilizar qualquer \textit{string} válida em OCL; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<\%Arg3\%>}} & Nome de uma metaclasse que contém o elemento especificado no \textbf{<\%Arg1\%>}. Por exemplo, se o \textbf{<\%Arg1\%>} for uma \texttt{ClassUnit} e/ou \texttt{InterfaceUnit} deve-se especificar a metaclasse \texttt{Package}; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<$@$Arg4$@$>}} & Nome da instância do elemento estrutural que contém o elemento especificado no \textbf{<\%Arg3\%>}. Esse argumento depende do domínio do sistema que será aplicado a refatoração; \\ 
+\hline
+\end{tabular}
+\end{table}
+
+Além dos \textit{templates} outro artefato também deve ser utilizado para auxiliar o engenheiro de modernização a criar as restrições (pré- e pós-condições). Esse artefato é apresentado na Tabela~\ref{tab:guia_template_pre_pos_add}. Essa tabela é utilizada como um guia para conduzir o engenheiro de modernização a especificar corretamente as partes variantes dos \textit{templates}.
+
+Considere que o engenheiro de modernização almeja criar a operação atômica \texttt{add} \texttt{ClassUnit}. Dessa forma, utilizando os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_add} e~\ref{codigo:template_pos_condicao_add}, bem como a Tabela~\ref{tab:guia_template_pre_pos_add} é possível criar as restrições dessa operação atômica como apresentado no Código-fonte~\ref{codigo:template_assercao_juntado_add}. O argumento \textbf{<\%Arg1\%>} foi substituído pela metaclasse \texttt{ClassUnit} e o argumento \textbf{<\#Arg2\#>} foi alterado por uma \textit{String} válida em OCL. O argumento \textbf{<$@$Arg4$@$>} foi  substituído por uma \textit{String} que representa o pacote (\aspas{com.br.util}) onde a instância da metaclasse \texttt{ClassUnit} será adicionada.
+
+\begin{codigo}[caption={[Asserções em OCL para realizar a operação atômica \texttt{add}.] Asserções em OCL para realizar a operação atômica \texttt{add}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_assercao_juntado_add}, language=OCL]{Name}
+context ClassUnit::preCond(newName: String)
+pre : Package.allInstances->select(e : Package | a.name = (*@\aspas{com.br.util}@*)) and not ClassUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : ClassUnit | e.name = newName)
+context ClassUnit::postCond(newName: String)
+post : Package.allInstances->select(e : Package | a.name = (*@\aspas{com.br.util}@*)) and ClassUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : ClassUnit | e.name = newName)
+\end{codigo}
+
+Similarmente, o engenheiro de modernização pode implementar as asserções para a operação atômica \texttt{delete} seguinte os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_delete} e ~\ref{codigo:pos_template_delete}. Esses \textit{templates} também possuem partes fixas e instruções demarcados por \textbf{<\%} e \textbf{\%>}, \textbf{<\#} e \textbf{\#>} e \textbf{<\$@} e \textbf{\$@>} que representam as partes variantes.
+
+\begin{codigo}[caption={[\textit{Template} OCL para realizar a pré-condição da operação atômica \texttt{delete}.] \textit{Template} OCL para realizar a pré-condição da operação atômica \texttt{delete}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:pre_template_delete}, language=OCL]{Name}
+context (*@<\textbf{\%Arg1\%}>@*)::(*@<\textbf{\#Arg2\#}>@*)(Ename: String)
+pre : (*@<\textbf{\%Arg3\%}>@*).allInstances->select(e : (*@<\textbf{\%Arg3\%}>@*) | a.name = (*@<\textbf{$@$Arg4$@$}>@*)) and (*@<\textbf{\%Arg1\%}>@*).refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : (*@<\textbf{\%Arg1\%}>@*) | e.name = Ename)
+\end{codigo}
+
+\begin{codigo}[caption={[\textit{Template} OCL para realizar a pós-condição da operação atômica \texttt{delete}.] \textit{Template} OCL para realizar a pós-condição da operação atômica \texttt{delete}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:pos_template_delete}, language=OCL]{Name}
+context (*@<\textbf{\%Arg1\%}>@*)::(*@<\textbf{\#Arg2\#}>@*)(Ename: String)
+post : (*@<\textbf{\%Arg3\%}>@*).allInstances->select(e : (*@<\textbf{\%Arg3\%}>@*) | a.name = (*@<\textbf{$@$Arg4$@$}>@*)) and not (*@<\textbf{\%Arg1\%}>@*).refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : (*@<\textbf{\%Arg1\%}>@*) | e.name = Ename)
+\end{codigo}
+
+O \textit{template} apresentado no Código-fonte~\ref{codigo:pre_template_delete} tem como função verificar se uma determinada metaclasse a ser deletada pela operação atômica \texttt{delete} existe na instância do KDM. Caso positivo a operação atômica pode ser então executada. A pós-condição apresentada no Código-fonte~\ref{codigo:pos_template_delete} por outro lado verifica se a instância da metaclasse realmente foi deletada pela execução da operação atômica \texttt{delete}.
+
+
+O artefato utilizado para auxiliar e conduzir o engenheiro de modernização especificar corretamente as partes variantes dos \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_delete} e ~\ref{codigo:pos_template_delete} é apresentado na Tabela~\ref{tab:guia_template_pre_pos_delete}
+
+\begin{table}[h]
+\centering
+\caption{Guia para auxiliar a substituir os argumentos dos \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_delete} e ~\ref{codigo:pos_template_delete}.}
+\label{tab:guia_template_pre_pos_delete}
+\begin{tabular}{ | m{1.7cm} | m{12cm}| } 
+\hline
+\multicolumn{1}{|c|}{Argumentos}                                         & \multicolumn{1}{c|}{Valores} \\ \hline
+\multicolumn{1}{|c|}{\textbf{<\%Arg1\%>}} & Nome de uma metaclasse (\texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc). Deve-se especificar o nome da metaclassse que será deletada pela operação atômica \texttt{delete}; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<\#Arg2\#>}} & Nome da restrição. Pode-se utilizar qualquer \textit{string} válida em OCL; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<\%Arg3\%>}} & Nome de uma metaclasse que contém o elemento especificado no \textbf{<\%Arg1\%>}. Por exemplo, se o \textbf{<\%Arg1\%>} for uma \texttt{ClassUnit} e/ou \texttt{InterfaceUnit} deve-se especificar a metaclasse \texttt{Package}; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<$@$Arg4$@$>}} & Nome da instância do elemento estrutural que contém o elemento especificado no \textbf{<\%Arg3\%>}. Esse argumento depende do domínio do sistema que será aplicado a refatoração; \\ 
+\hline
+\end{tabular}
+\end{table}
+
+\begin{codigo}[caption={[Asserções em OCL para realizar a operação atômica \texttt{delete}.] Asserções em OCL para realizar a operação atômica \texttt{delete}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_assercao_juntado_delete}, language=OCL]{Name}
+context StorableUnit::preCond(Ename: String)
+pre : ClassUnit.allInstances->select(e : ClassUnit | a.name = (*@\aspas{Foo}@*)) and StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = Ename)
+context StorableUnit::postCond(Ename: String)
+post : ClassUnit.allInstances->select(e : ClassUnit | a.name = (*@\aspas{Foo}@*)) and  not StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = Ename)
+\end{codigo}
+
+\begin{codigo}[caption={[\textit{Template} OCL para realizar a pré-condição da operação atômica \texttt{change}.] \textit{Template} OCL para realizar a pré-condição da operação atômica \texttt{change}.},escapeinside={(*@}{@*)}, mathescape=true, basicstyle=\footnotesize, label={codigo:pre_template_change}, language=OCL]{Name}
+context (*@<\textbf{\%Arg1\%}>@*)::(*@<\textbf{\#Arg2\#}>@*)(el: String | Integer | Real | Boolean)
+pre : (*@<\textbf{\%Arg1\%}>@*).(*@<\textbf{\%Arg3\%}>@*) <> el
+\end{codigo}
+
+No Código-fonte~\ref{codigo:template_assercao_juntado_delete} é apresentado as asserções da operação atômica \texttt{delete} quando almeja-se deletar uma instância da metaclasse \texttt{StorableUnit}. Note que o argumento \textbf{<\%Arg1\%>} foi substituído pela metaclasse \texttt{StorableUnit} e o argumento \textbf{<\#Arg2\#>} foi alterado por uma \textit{String} válida em OCL. \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{ClassUnit}. O argumento \textbf{<$@$Arg4$@$>} foi  substituído por uma \textit{String} que representa a classe (\aspas{Foo}) que contém a instância da metaclasse \texttt{StorableUnit} que será deletada. 
+
+Finalmente, as asserções para a operação atômica \texttt{change} também podem ser implementas seguinte os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_change} e~\ref{codigo:post_template_change}. 
+
+O \textit{template} apresentado no Código-fonte~\ref{codigo:pre_template_change} tem como função verificar se um determinado meta-atributo de uma metaclasse é diferente do valor que almeja-se alterar pela operação atômica \texttt{change}. A pós-condição apresentada no Código-fonte~\ref{codigo:post_template_change} por outro lado verifica se o meta-atributo realmente foi alterado pela execução da operação atômica \texttt{change}.
+
+\begin{codigo}[caption={[\textit{Template} OCL para realizar a pós-condição da operação atômica \texttt{change}.] \textit{Template} OCL para realizar a pré-condição da operação atômica \texttt{change}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:post_template_change}, language=OCL]{Name}
+context (*@<\textbf{\%Arg1\%}>@*)::(*@<\textbf{\#Arg2\#}>@*)(el: String | Integer | Real | Boolean)
+post : (*@<\textbf{\%Arg1\%}>@*).(*@<\textbf{\%Arg3\%}>@*) = el
+\end{codigo}
+
+O guia utilizado pelo engenheiro de modernização para especificar corretamente as partes variantes dos \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_change} e ~\ref{codigo:post_template_change} é apresentado na Tabela~\ref{tab:guia_template_pre_pos_change}.
+
+\begin{table}[h]
+\centering
+\caption{Guia para auxiliar a substituir os argumentos dos \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_change} e ~\ref{codigo:post_template_change}.}
+\label{tab:guia_template_pre_pos_change}
+\begin{tabular}{ | m{1.7cm} | m{12cm}| } 
+\hline
+\multicolumn{1}{|c|}{Argumentos}                                         & \multicolumn{1}{c|}{Valores} \\ \hline
+\multicolumn{1}{|c|}{\textbf{<\%Arg1\%>}} & Nome de uma metaclasse (\texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc). Deve-se especificar o nome da metaclassse que almeja-se alterar um meta-atributo por meio da operação atômica \texttt{change}; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<\#Arg2\#>}} & Nome da restrição. Pode-se utilizar qualquer \textit{string} válida em OCL; \\ 
+\hline
+\multicolumn{1}{|c|}{\textbf{<\%Arg3\%>}} & Nome do meta-atributo a ser alterado. Deve-se especificar o meta-atributo da metaclasse especificado no \textbf{<\%Arg1\%>} que almeja-se alterar; \\ 
+\hline
+\end{tabular}
+\end{table}
+
+No Código-fonte~\ref{codigo:template_assercao_juntado_change} é apresentado as asserções da operação atômica \texttt{change} quando almeja-se alterar o meta-atributo \texttt{name} de uma instância da metaclasse \texttt{Package}. O argumento \textbf{<\%Arg1\%>} foi substituído pela metaclasse \texttt{Package}, o argumento \textbf{<\#Arg2\#>} foi alterado por uma \textit{String} válida em OCL e o argumento \textbf{<\%Arg3\%>} foi substituído pelo meta-atributo \texttt{name} da metaclasse \texttt{Package}.
+
+\begin{codigo}[caption={[Asserções em OCL para realizar a operação atômica \texttt{change}.] Asserções em OCL para realizar a operação atômica \texttt{change}.},escapeinside={(*@}{@*)}, mathescape=true, basicstyle=\footnotesize, label={codigo:template_assercao_juntado_change}, language=OCL]{Name}
+context Package::preCond(el: String | Integer | Real | Boolean)
+pre : Package.name <> el
+context Package::postCond(el: String | Integer | Real | Boolean)
+post : Package.name = el
+\end{codigo}
+
+
+%É importante observar que os passos apresentados neste capítulo não têm a preocupação de ensinar como escrever/implementar as restrições das refatorações utilizando OCL. Assim, o engenheiro de modernização é responsável por criar e implementar todas as pré- e pós-condições de uma dada refatoração para o KDM.
 
 
 
@@ -432,7 +561,9 @@ Dessa forma, cada refatoração definida nesta Tese está associada com uma pré
 
 \subsection{Especificar Refatoração}\label{sec:template_refatoracao}
 
-Após definir a refatoração, sua implementação, bem como suas pré- e pós-condições para o metamodelo KDM é importante documentar a refatoração criada. Dessa forma, para facilitar a visualização, formalização e entendimento das refatorações criadas para o metamodelo KDM, os engenheiros de modernização devem especificar as refatorações criadas seguindo duas especificações~\cite{staron2004implementing}: (\textit{i}) especificação informal e (\textit{ii}) especificação formal. 
+O último passo da abordagem é a especificação da refatoração. Esse último passo é opcional e fica a critério do engenheiro de modernização se irá ou não documentar a refatoração criada. Caso, o engenheiro de modernização opte por disponibilizar uma documentação deve-se então seguir as especificações definidas nesse passo.
+
+Dessa forma, após definir a refatoração, sua implementação, bem como suas pré- e pós-condições para o metamodelo KDM é importante documentar a refatoração criada. Dessa forma, para facilitar a visualização, formalização e entendimento das refatorações criadas para o metamodelo KDM, os engenheiros de modernização podem especificar as refatorações criadas seguindo duas especificações~\cite{staron2004implementing}: (\textit{i}) especificação informal e (\textit{ii}) especificação formal. 
 
 Na especificação informal a ideologia da refatoração é expressada, usualmente essa ideologia é definida por meio de linguagem natural. A especificação formal é responsável por representar as pré- e pós-condições, bem como a transformação/refatoração em OCL e ATL, respectivamente. Acredita-se que ambas especificações são úteis para o engenheiro de modernização - a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração, enquanto que a especificação formal facilita a implementação da refatoração. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. 
 %
@@ -451,7 +582,7 @@ As refatorações para o metamodelo KDM devem ser especificadas utilizando os se
 			\item Descrição (opcional): uma pequena explicação da refatoração;
 			\item Pré-condição: uma lista de asserção que tem que ser verdade antes de realizar a refatoração;
 			\item Pós-condição: uma lista de asserção que tem que ser verdade após a realização da refatoração;
-			\item Mecanismo: um mecanismo de transformação descrevendo todos os passos da refatoração, seguido de uma imagem ilustrando o antes e depois da aplicação da refatoração;
+			\item Mecanismo: um mecanismo de transformação descrevendo todos os passos da refatoração;
 			\item Algoritmo: um algoritmo que descreve a refatoração.
 		\end{enumerate}
 	\item Especificação Formal:
@@ -463,152 +594,40 @@ As refatorações para o metamodelo KDM devem ser especificadas utilizando os se
 \end{enumerate}
 
 
-\section{Catálogo de Refatoração para o metamodelo KDM}\label{sec:catalogo_refatoracao_kdm}
+\section{Exemplo de uso da abordagem de criação das refatorações}\label{sec:catalogo_refatoracao_kdm}
 
-Para facilitar o entendimento de como as refatorações são criadas para o metamodelo KDM, nesta seção são apresentadas algumas refatorações que foram criadas para o KDM seguindo os passos descritos anteriormente. As refatorações que foram criadas para o metamodelo KDM podem ser visualizadas na Tabela~\ref{tab:refatoringsCatalogo}. Porém, nesse capítulo apenas algumas refatorações são detalhadas. As refatorações apresentadas na Tabela~\ref{tab:refatoringsCatalogo} foram implementadas em um ambiente computacional denominado KDM-RE apresentado no Capítulo~\ref{chapter:ferramenta_kdm_re}. Nas próximas seções as refatorações \textit{Rename ClassUnit}, \textit{Push Down StorableUnit} e \textit{Extract ClassUnit} são apresentadas e detalhadas. Todas as refatorações são definidas programaticamente utilizando a linguagem de transformação ATL. A linguagem de restrição utilizada nas refatorações foi a OCL. Todas as refatorações aqui criadas são especificadas/documentadas utilizando o \textit{template} apresentado anteriormente.
+Para facilitar o entendimento de como as refatorações são criadas para o metamodelo KDM, nesta seção são apresentadas algumas refatorações que foram criadas para o KDM seguindo os passos descritos anteriormente. As refatorações que foram criadas para o metamodelo KDM podem ser visualizadas na Tabela~\ref{tab:refatoringsCatalogo}. Porém, nesse capítulo apenas algumas refatorações são detalhadas. As refatorações apresentadas na Tabela~\ref{tab:refatoringsCatalogo} foram implementadas em um ambiente computacional denominado KDM-RE apresentado no Capítulo~\ref{chapter:ferramenta_kdm_re}. Nas próximas seções as refatorações \textit{Push Down Attribute} e \textit{Extract Class} são apresentadas e detalhadas. %Todas as refatorações são definidas programaticamente utilizando a linguagem de transformação ATL. A linguagem de restrição utilizada nas refatorações foi a OCL. Todas as refatorações aqui criadas são especificadas/documentadas utilizando o \textit{template} apresentado anteriormente.
 
 
  %O apoio computacional, KDM-RE apresentado no Capítulo X, implementa todas as refatorações descritas na Tabela~\ref{tab:refatoringsCatalogo}.
 
-\subsection{Refatoração \textit{Rename ClassUnit}}
-Nesta seção a refatoração \textit{Rename ClassUnit} é apresentada. Essa refatoração usualmente é aplicada quando o nome da classe não revela o seu real propósito~\cite{Fowler1999}. Assim, deve-se renomear a classe para um nome mais significativo. Note que a descrição da refatoração \textit{Rename ClassUnit} segue os passos definidos, bem como o \textit{template} especificado anteriormente, primeiro a especificação informal da refatoração apresentada seguida da especificação formal.
-
-\begin{enumerate}
-	\item Especificação Informal:
-		\begin{enumerate}
-			\item Nome: \textit{Rename ClassUnit};
-			\item Definição:
-			    \begin{itemize}
-			        \item \texttt{ClassUnit}Selecionada - uma classe que será renomeada;
-			        \item novoNome - um novo nome para a \{\texttt{ClassUnit}Selecionada\}.
-			    \end{itemize}
-			\item Objetivo: Mudar o nome de uma \{\texttt{ClassUnit}Selecionada\} para \{novoNome\};
-			\item Descrição (opcional): O nome atual da \{\texttt{ClassUnit}Selecionada\} não reflete seu propósito.
-			\item Pré-condição:
-			    \begin{itemize}
-			        \item o \{novoNome\} segue convenções válidas para nomes de classes;
-			        \item não existe outra \texttt{ClassUnit} com o mesmo nome dentro do mesmo \texttt{Package};
-			        \item a \{\texttt{ClassUnit}Selecionada\} não deve conter nenhuma operação com o mesmo nome, ou seja, o \{novoNome\} não deve coincidir com outros métodos, construtor, etc. 
-			    \end{itemize}
-			\item Pós-condição:
-			    \begin{itemize}
-			        \item o nome da \{\texttt{ClassUnit}Selecionada\} é \{novoNome\};
-			        \item todas as referencias para \{\texttt{ClassUnit}Selecionada\} são por meio do \{novoNome\};
-			        \item todos os construtores da \{\texttt{ClassUnit}Selecionada\} são agora \{novoNome\}.
-			    \end{itemize}
-			\item Mecanismo: O mecanismo da refatoração \textit{Rename ClassUnit} é trivial, deve-se apenas mudar o valor do meta-atributo \texttt{name} da \{\texttt{ClassUnit}Selecionada\} para \{novoNome\}. Note que na na Figura~\ref{fig:antes_e_depois_rename_classUnit} \ding{204} que o meta-atributo \texttt{name} da \{\texttt{ClassUnit}Selecionada\} contém o valor \texttt{ClassX} e na  Figura~\ref{fig:antes_e_depois_rename_classUnit} \ding{205} o seu valor foi alterado para \texttt{ClassY}.
-			\begin{minipage}{.90\textwidth}
-	\vspace*{\fill}
-  \centering
-	% Requires \usepackage{graphicx}
-	\captionof{figure}{Instância simplificada do KDM antes e depois da refatoração \textit{Rename ClassUnit}}
-	\includegraphics[scale=0.6]{images/antes_depois_refatoracao_renameClassUnit}
-	\fautor
-	\label{fig:antes_e_depois_rename_classUnit}
-\end{minipage}\hfill
-			\item Algoritmo: 
-			    \begin{itemize}
-			        \item \{\texttt{ClassUnit}Selecionada\}.renameClassUnit(\{novoNome\});
-			        %\item para cada construtor - \texttt{MethodUnit.Kind=Construtor}.renameMethodUnit(\{novoNome\});
-			        %\item para cada referência da \{\texttt{ClassUnit}Selecionada\} deve-se mudar o meta-relacionamento \texttt{to} das metaclasses \texttt{Calls}, \texttt{Creates}, etc. 
-			    \end{itemize}
-		\end{enumerate}
-	\item Especificação Formal:
-		\begin{enumerate}
-			\item Pré-condição: 
-			\begin{codigo}[caption={[OCL representando a pré-condição da refatoração \textit{Rename ClassUnit}.] Pré-condição da refatoração \textit{Rename ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:pre_renameClassUnit}, language=OCL]{Name}
-context ClassUnit::preRenameClassUnit(newName: String)
-pre : newName.isValidadName() 
-and not ClassUnit.eContainer.codeElement(*@$\rightarrow$@*)exist (c : ClassUnit | c.name = newName) 
-and not ClassUnit.codeElement(*@$\rightarrow$@*)exist (m: MethodUnit | m.name = newName and m.kind =  method)
-\end{codigo}
-
-%É importante observar que deve-se especificar a \texttt{ClassUnit} que será renomeada, bem como definir o novo nome dessa \texttt{ClassUnit} antes de executar a pré-condição, como apresentado no Código-fonte~\ref{codigo:pre_renameClassUnit}. 
-Na linha 1 do Código-fonte~\ref{codigo:pre_renameClassUnit} é declarado o nome da pré-condição, também é declarado que essa restrição, é apenas executada para instâncias da metaclasse \texttt{ClassUnit}. Na linha 2 verifica-se se o parâmetro \texttt{newName} é um nome válido. Posteriormente, na linha 3 é verificado também se existe outra instância de \texttt{ClassUnit} com o mesmo valor do parâmetro \texttt{newName}. Linha 4 é verificado se existe alguma instância de \texttt{MethodUnit} com o mesmo valor do parâmetro \texttt{newName}. Caso a restrição definida na pré-condição seja válida a refatoração \textit{Rename ClassUnit} é executada.
-			\item Algoritmo: 
-	\begin{codigo}[caption={[ATL representando a refatoração \textit{Rename ClassUnit}.] ATL da refatoração \textit{Rename ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:rename_classUnit_refatoracao}, language=ATL]{Name}
-module renameClassUnit;
-create OUT : MM refining IN : MM;
-rule changeClassUnit {
-	from
-		source : MM!ClassUnit (source.name = (*@\aspas{\{\texttt{ClassUnit}Selecionada\}}@*))
-	to 
-		target : MM!ClassUnit (
-			name (*@$\leftarrow$@*) (*@\aspas{\{newName\}}@*)
-		)
-}
-\end{codigo}
-A refatoração \textit{Rename ClassUnit} é caracterizada pela operação atômica \texttt{change}. Dessa forma, a refatoração foi implementada seguindo o \textit{template} apresentado na Seção~\ref{sec:linguagemDeTransformacaoUtilizada} no Código-fonte~\ref{codigo:template_change}. Dessa forma, o \textit{template} e a Tabela~\ref{tab:guia_template_operacao_change} foram utilizadas para realizar a implementação do Código-fonte~\ref{codigo:rename_classUnit_refatoracao}. Observe que tanto \{\texttt{ClassUnit}Selecionada\} quanto \{\textit{newName}\} são parâmetros que devem ser especificados pelo engenheiro. Assim, foi criado um \textit{plug-in} para auxiliar o engenheiro durante a especificação e execução das refatorações. Maiores informações sobre esse \textit{plug-in} estão no Capítulo~\ref{chapter:ferramenta_kdm_re}.     
-			\item Pós-condição:
-			 \begin{codigo}[caption={[OCL representando a pós-condição da refatoração \textit{Rename ClassUnit}.] Pós-condição da refatoração \textit{Rename ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:pos_condicao_rename_classUnit}, language=OCL]{Name}
- context ClassUnit::RenameClassUnit(newName: String)
- post : name = newName and ClassUnit.eContainer.codeElement(*@$\rightarrow$@*)exist (m : MethodUnit | implies m.name = newName)
-\end{codigo}
-Na linha 1 do Código-fonte~\ref{codigo:pos_condicao_rename_classUnit} é declarado o nome da pós-condição, também é declarado que essa restrição, é apenas executada para o contexto de instâncias da metaclasse \texttt{ClassUnit}. Na linha 2 o parâmetro \texttt{newName} é comparado com o nome da \texttt{ClassUnit} refatorada, além disso, na linha 2 também é verificado se o construtor também foi alterado o seu nome corretamente. Se ambas as condições foram válidas, a refatoração foi realizada com sucesso.
-		\end{enumerate}
-\end{enumerate}
 		
 %--------------------------
-\subsection{Refatoração \textit{Push Down StorableUnit}}
-Nesta seção a refatoração \textit{Push Down StorableUnit} é apresentada. Essa refatoração é utilizada para remover a generalização de atributos, ou seja, um atributo é apenas utilizado em algumas sub-classes não em todas, assim, não é interessante manter a generalização do atributo na super-classe, uma vez que cada sub-classe pode definir um comportamento para o atributo~\cite{Fowler1999}.
+\subsection{Criar Refatoração \textit{Push Down Attribute}}
+Nesta seção a refatoração \textit{Push Down Attribute} é criado seguinte os passos descritos neste capítulo. Essa refatoração é utilizada para remover a generalização de atributos, ou seja, um atributo é apenas utilizado em algumas subclasses não em todas, assim, não é interessante manter a generalização do atributo na superclasse, uma vez que cada subclasse pode definir um comportamento para o atributo~\cite{Fowler1999}.
 
-\begin{enumerate}
-	\item Especificação Informal:
-		\begin{enumerate}
-			\item Nome: \textit{Push Down StorableUnit};
-			\item Definição:
-			    \begin{itemize}
-			        \item \texttt{StorableUnit}Selecionado - um atributo que será movido para sub-classes;
-			        \item \texttt{ClassUnit} - uma classe na qual o \{\texttt{StorableUnit}Selecionado\} é definido;
-			        \item sub-\texttt{ClassUnit}Selecionadas - sub-classes de \{\texttt{ClassUnit}\}.
-			    \end{itemize}
-			\item Objetivo: Mover um \{\texttt{StorableUnit}Selecionado\} para as \{sub-\texttt{ClassUnit}Selecionadas\}.
-			\item Descrição (opcional): \{\texttt{StorableUnit}Selecionado\} é utilizada em apenas algumas sub-classes.
-			\item Pré-condição:
-			    \begin{itemize}
-			        \item \{\texttt{StorableUnit}Selecionado\} não é utilizado em \texttt{ClassUnit};
-			        \item as sub-\texttt{ClassUnit}Selecionadas não contêm as mesmas características do \{\texttt{StorableUnit} Selecionado\}, ou seja, os nomes e tipos são diferentes.
-			    \end{itemize}
-			\item Pós-condição:
-			    \begin{itemize}
-			        \item \{\texttt{StorableUnit}Selecionado\} não é definido em \texttt{ClassUnit};
-			        \item todos os \textit{siblings} de \{\texttt{StorableUnit}Selecionado\} estão definidos nas sub-\texttt{ClassUnit}Selecionadas.
-			    \end{itemize}
-			\item Mecanismo: Na Figura~\ref{fig:antes_e_depois_pushDown_StorableUnit} duas instâncias simplificada do KDM são ilustradas, a parte superior ilustra a instância antes da realização da refatoração \textit{Push Down StorableUnit} e a parte inferior representa o resultado da refatoração. Como observado, o primeiro passo da refatoração \textit{Push Down StorableUnit} é selecionar um específico \texttt{StorableUnit}, Figura~\ref{fig:antes_e_depois_pushDown_StorableUnit} \ding{202}. Em seguida, deve-se selecionar as sub-classes que realmente utilizam esse \texttt{StorableUnit} para move-lo, com ilustrado na Figura~\ref{fig:antes_e_depois_pushDown_StorableUnit} \ding{203}. Posteriormente o \{\texttt{StorableUnit}Selecionado\} é movido para as sub-\texttt{ClassUnit}Selecionadas, como ilustrado na parte inferior da Figura~\ref{fig:antes_e_depois_pushDown_StorableUnit} \ding{205}. Note que a instância da \texttt{ClassUnit} que havia o \{\texttt{StorableUnit}Selecionado\} não possui mais sua instância, como apresentado na Figura~\ref{fig:antes_e_depois_pushDown_StorableUnit} \ding{204}.
-			
-			
-\begin{minipage}{.90\textwidth}
-	\vspace*{\fill}
-  \centering
+
+\subsubsection{Identificar Elementos Estruturais}
+O primeiro passo da abordagem consiste na identificação do elemento estrutural a ser refatorado. Pelo nome da refatoração é possível identificar que o elemento estrutural a ser refatorado é um atributo (do inglês - \textit{attribute}). Dessa forma, utilizando o artefato de mapeamento entre KDM e POO (ver Tabela~\ref{tab:mapemanetoEntreOOPeKDM}) é possível identificar que um atributo em KDM é representado pela metaclasse \texttt{StorableUnit}.
+
+\subsubsection{Identificar Operações}
+No segundo passo da abordagem o engenheiro de modernização deve identificar as operações atômicas que compõem a refatoração a ser criada. Na Figura~\ref{fig:antes_e_depois_pushDown_StorableUnit} duas instâncias simplificada do KDM são ilustradas, a parte superior ilustra a instância antes da realização da refatoração \textit{Push Down Attribute} e a parte inferior representa o resultado da refatoração. Como observado, o primeiro passo da refatoração \textit{Push Down Attribute} é selecionar um específico \texttt{StorableUnit}, Figura~\ref{fig:antes_e_depois_pushDown_StorableUnit} \ding{202}. Em seguida, deve-se selecionar as subclasses que realmente utilizam esse \texttt{StorableUnit} para move-lo, com ilustrado na Figura~\ref{fig:antes_e_depois_pushDown_StorableUnit} \ding{203}. Posteriormente o \{\texttt{StorableUnit}Selecionado\} é movido para as sub-\texttt{ClassUnit}Selecionadas, como ilustrado na parte inferior da Figura~\ref{fig:antes_e_depois_pushDown_StorableUnit} \ding{205}. Note que a instância da \texttt{ClassUnit} que havia o \{\texttt{StorableUnit}Selecionado\} não possui mais sua instância, como apresentado na Figura~\ref{fig:antes_e_depois_pushDown_StorableUnit} \ding{204}. Observando a Figura~\ref{fig:antes_e_depois_pushDown_StorableUnit} é possível identificar que é a refatoração \textit{Push Down Attribute} pode ser criada por meio da combinação das seguintes operações atômicas: (\textit{i}) \texttt{add} e (\textit{ii}) \texttt{delete}. 
+
+\begin{figure}[h]
+	\centering
 	% Requires \usepackage{graphicx}
-	\captionof{figure}{Instância simplificada do KDM antes e depois da refatoração \textit{Push Down StorableUnit}}
+	\caption{Instância simplificada do KDM antes e depois da refatoração \textit{Push Down Attribute}.}
+	\label{fig:antes_e_depois_pushDown_StorableUnit}
 	\includegraphics[scale=0.6]{images/pushDownStorableUnitAntesDepois2}
 	\fautor
-	\label{fig:antes_e_depois_pushDown_StorableUnit}
-\end{minipage}\hfill
-			\item Algoritmo: 
-			    \begin{itemize}
-			        \item para cada sub-\texttt{ClassUnit}Selecionadas que realmente usa o \{\texttt{StorableUnit}Selecionado\} - sub-\texttt{ClassUnit}Selecionadas.add(\{\texttt{StorableUnit}Selecionado\})
-			        \item \{\texttt{ClassUnit}\}.delete(\{\texttt{StorableUnit}Selecionado\}). 
-			    \end{itemize} 
-	    \end{enumerate}
-		\item Especificação Formal:
-		\begin{enumerate}
-			\item Pré-condição: 
-			\begin{codigo}[caption={[OCL representando a pré-condição da refatoração \textit{Push Down StorableUnit}.] Pré-condição da refatoração \textit{Push Down StorableUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:pre_push_down_storableUnit}, language=OCL]{Name}
-context StorableUnit::PushDownStorableUnit(subClasses:(ClassUnit))
-pre : self.refImmediateComposite().codeElement(*@$\rightarrow$@*)forAll (m: MethodUnit |  not (m.codeRelation(*@$\rightarrow$@*)exists(r: Reads | r.to = self)) 
-and not (m.codeRelation(*@$\rightarrow$@*)exists (w:Writes | w.to = self)) 
-and not (m.codeRelation(*@$\rightarrow$@*)exists (a: Addresses | a.to = self) 
-and subClasses(*@$\rightarrow$@*)forAll (c: ClassUnit | not c.codeElement(*@$\rightarrow$@*)exists(s: StorableUnit | s.name = self.name)))
-\end{codigo}
+\end{figure}
+
+\subsubsection{Implementar Refatoração}
+
+Após identificar as operações que compõem a refatoração a ser criada, o próximo passo consiste na implementação da refatoração. O terceiro passo da abordagem é apoiado por um conjunto de \textit{templates} que auxiliam o engenheiro de modernização a criar a refatoração. As operações atômicas identificadas para implementar a refatoração \textit{Push Down Attribute} foram implementadas em ATL utilizando os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:template_addKDMElement} e~\ref{codigo:template_delete}. A combinação desses \textit{templates} resulta no Código-fonte~\ref{codigo:push_Down_StorableUnit_ATL}.
 
 
-
-%É importante observar que deve-se especificar a \texttt{ClassUnit} que será renomeada, bem como definir o novo nome dessa \texttt{ClassUnit} antes de executar a pré-condição, como apresentado no Código-fonte~\ref{codigo:pre_renameClassUnit}. 
-Na linha 1 do Código-fonte~\ref{codigo:pre_push_down_storableUnit} é declarado a assinatura da pré-condição da refatoração \textit{Push Down StorableUnit}. Note que apenas é utilizado como parâmetro as sub-classes selecionadas para mover o \{\texttt{StorableUnit}Selecionado\}. Na linha 2 a instância da \texttt{ClassUnit} que contém o \{\texttt{StorableUnit}Selecionado\} é obtida por meio da função \texttt{refImmediateComposite()}. Posteriormente, todas as instâncias de \texttt{MethodUnit} são obtidas para realizar uma iteração. Ainda na linha 2, essa iteração verifica se o \{\texttt{StorableUnit}Selecionado\} é lido em alguma instância de \texttt{MethodUnit}. Similarmente, na linha 3 e 4 todos os \texttt{MethodUnits} são verificados para identificar se o \{\texttt{StorableUnit}Selecionado\} é escrito e utilizado. Na linha 5 todas as \{sub-\texttt{ClassUnit}Selecionadas\} são verificadas para identificar se existe uma instância similar ao \{\texttt{StorableUnit}Selecionado\} antes de realizar a refatoração. Caso a pré-condição definida seja válida a refatoração \textit{Push Down StorableUnit} é executada.
-			\item Algoritmo: 
-	\begin{codigo}[caption={[ATL representando a refatoração \textit{Push Down StorableUnit}.] ATL da refatoração \textit{Push Down StorableUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:push_Down_StorableUnit_ATL}, language=ATL]{Name}
+\begin{codigo}[caption={[ATL representando a refatoração \textit{Push Down Attribute}.] ATL da refatoração \textit{Push Down Attribute}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:push_Down_StorableUnit_ATL}, language=ATL]{Name}
 module pushDownStorableUnit;
 create OUT : MM refining IN : MM;
 rule createStorableUnit {
@@ -619,8 +638,7 @@ rule createStorableUnit {
 			codeElement(*@$\leftarrow$@*)source.codeElement(*@$\rightarrow$@*)including(newElement)
 		),
 		newElement: MM!StorableUnit (
-			name(*@$\leftarrow$@*)(*@\{\texttt{StorableUnit}Selecionado.name\}@*),
-			type(*@$\leftarrow$@*)(*@\{\texttt{StorableUnit}Selecionado.type\}@*)
+			name(*@$\leftarrow$@*)(*@\{\texttt{StorableUnit}Selecionado.name\}@*)
 		)
 }
 rule deleteStorableUnit {
@@ -630,86 +648,106 @@ rule deleteStorableUnit {
 		drop
 }
 \end{codigo}
-O Código-fonte~\ref{codigo:push_Down_StorableUnit_ATL} apresenta a refatoração \texttt{Push Down StorableUnit}. Como apresentado na Tabela~\ref{tab:refatoringsCatalogo} essa refatoração pode ser implementada pela combinação de duas operações atômicas: (\textit{i}) \texttt{add} e \texttt{delete}. Dessa forma, os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:template_addKDMElement} e \ref{codigo:template_delete} foram utilizados como guia para implementar essa refatoração.
-%Na linha 1 do Código-fonte~\ref{codigo:push_Down_StorableUnit_ATL} o nome da refatoração é definido. Em seguida, na linha 2 é apresentado o cabeçalho da refatoração, novamente a palavra-chave \textit{refining} é especificada para informar que a transformação/refatoração é do tipo endógenas (ver Capítulo~\ref{chapter:fundamentacao_teorica} Seção~\ref{sec:transformacoes_de_modelos}). Posteriormente, nas linhas 3 até 13 a primeira regra dessa refatoração é definida. Na linha 5 uma condição de guarda é definida para identificar quais são as \{sub-\texttt{ClassUnit}Selecionadas\}. Em seguida, linhas 7, 8 e 9 informa que uma nova instância de \texttt{StorableUnit} será criado nas \{sub-\texttt{ClassUnit}Selecionadas\}. Nas linhas 10, 11 e 12 os meta-atributos do \{\texttt{StorableUnit}Selecionado\} são copiados. Após mover o \{\texttt{StorableUnit}Selecionado\} para as sub-classes, o próximo passo é remover o \{\texttt{StorableUnit}Selecionado\} da super-classe. Esse passo é representado na regra descrita nas linhas 15 até 20. Na linha 17 o \{\texttt{StorableUnit}Selecionado\} é identificado, depois na linha 19 a palavra-chave \textit{drop} é utilizada, a qual especifica que uma determinada instância será removida, neste caso o \{\texttt{StorableUnit}Selecionado\}.   
-			\item Pós-condição:
-			 \begin{codigo}[caption={[OCL representando a pós-condição da refatoração \textit{Push Down StorableUnit}.] Pós-condição da refatoração \textit{Push Down StorableUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:pos_condicao_pushDown_StorableUnit}, language=OCL]{Name}
-context StorableUnit::PushDownStorableUnit(subClasses:Bag(ClassUnit))
-post : self.refImmediateComposite().codeElement(*@$\rightarrow$@*)exists (s: StorableUnit | not (s.name = self.name)) 
-and subClasses->forAll (c: ClassUnit | c.codeElement(*@$\rightarrow$@*)exists (s: StorableUnit | s.name = self.name and s.type = self.type))
+
+\subsubsection{Definir Restrições}
+
+Após identificar as operações que compõem a refatoração e implementar a refatoração utilizando os \textit{templates} definidos na abordagem, o próximo passo consiste na definição de asserções (pré- e pós-condições) da refatoração. Para cada operação atômica identifica no segundo passo da abordagem \textit{templates} são disponibilizados para auxiliar o engenheiro de modernização a criar tais asserções. No Código-fonte~\ref{codigo:precondicao_push_down_attribute} é apresentado a pré-condição criada para a refatoração \textit{Push Down Attribute}. Essa pré-condição foi criada utilizando uma combinação dos \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_add} e~\ref{codigo:pre_template_delete}. Similarmente no Código-fonte~\ref{codigo:poscondicao_push_down_attribute2} é apresentado a pós-condição criada para a refatoração \textit{Push Down Attribute}.
+
+
+\begin{codigo}[caption={[Pré-condição da refatoração \textit{Push Down Attribute}.] Pré-condição da refatoração \textit{Push Down Attribute}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:precondicao_push_down_attribute}, language=OCL]{Name}
+context StorableUnit::preCond(newName: String)
+pre : ClassUnit.allInstances->select(e : ClassUnit | a.name = (*@\aspas{\{sub-\texttt{ClassUnit}Selecionada\}}@*) and not StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = newName) 
+and ClassUnit.allInstances->select(e : ClassUnit | a.name = (*@\{\texttt{ClassUnit}.name\}@*)) and StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = newName)
 \end{codigo}
-Na linha 1 do Código-fonte~\ref{codigo:pos_condicao_pushDown_StorableUnit} é declarado o nome da pós-condição. Na linha 2 é verificado se o \{\texttt{StorableUnit}Selecionado\} ainda está na super-classe. Posteriormente, na linha 3, para todas as \{sub-\texttt{ClassUnit}Selecionadas\} são verificadas para garantir que o \{\texttt{StorableUnit}Selecionado\} foi adicionado corretamente. Caso afirmativo a refatoração foi realizada com sucesso.
+
+\begin{codigo}[caption={[Pós-condição da refatoração \textit{Push Down Attribute}.] Pós-condição da refatoração \textit{Push Down Attribute}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:poscondicao_push_down_attribute2}, language=OCL]{Name}
+context StorableUnit::preCond(newName: String)
+post : ClassUnit.allInstances->select(e : ClassUnit | a.name = (*@\aspas{\{sub-\texttt{ClassUnit}Selecionada\}}@*) and StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = newName) 
+and ClassUnit.allInstances->select(e : ClassUnit | a.name = (*@\{\texttt{ClassUnit}.name\}@*)) and not StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = newName)
+\end{codigo}
+
+
+\subsubsection{Especificar Refatoração}
+
+O último passo da abordagem é a especificação da refatoração e é um passo opcional e fica a critério do engenheiro de modernização criar ou não a documentação da refatoração criada. Para os exemplos apresentado nesse capítulo escolheu-se especificar as refatorações criadas seguindo o \textit{template} apresentado na Seção~\ref{sec:template_refatoracao}.
+
+\begin{enumerate}
+	\item Especificação Informal:
+		\begin{enumerate}
+			\item Nome: \textit{Push Down Attribute};
+			\item Definição:
+			    \begin{itemize}
+			        \item \texttt{StorableUnit}Selecionado - um atributo que será movido para subclasses;
+			        \item \texttt{ClassUnit} - uma classe na qual o \{\texttt{StorableUnit}Selecionado\} é definido;
+			        \item sub-\texttt{ClassUnit}Selecionadas - subclasses de \{\texttt{ClassUnit}\}.
+			    \end{itemize}
+			\item Objetivo: Mover um \{\texttt{StorableUnit}Selecionado\} para as \{sub-\texttt{ClassUnit}Selecionadas\}.
+			\item Descrição (opcional): \{\texttt{StorableUnit}Selecionado\} é utilizada em apenas algumas subclasses.
+			\item Pré-condição:
+			    \begin{itemize}
+			        \item \{\texttt{StorableUnit}Selecionado\} não existe nas sub-\texttt{ClassUnit}Selecionadas; 
+			        \item \{\texttt{StorableUnit}Selecionado\} existe na \texttt{ClassUnit}. 
+			    \end{itemize}
+			\item Pós-condição:
+			    \begin{itemize}
+			        \item \{\texttt{StorableUnit}Selecionado\} existe nas sub-\texttt{ClassUnit}Selecionadas;
+			        \item \{\texttt{StorableUnit}Selecionado\} não existe na \texttt{ClassUnit}.
+			    \end{itemize}
+			\item Mecanismo: move um atributo de uma classe para todas suas subclasses;
+			\item Algoritmo: 
+			    \begin{itemize}
+			        \item para cada sub-\texttt{ClassUnit}Selecionadas que realmente usa o \{\texttt{StorableUnit}Selecionado\} - sub-\texttt{ClassUnit}Selecionadas.add(\{\texttt{StorableUnit}Selecionado\})
+			        \item \{\texttt{ClassUnit}\}.delete(\{\texttt{StorableUnit}Selecionado\}). 
+			    \end{itemize} 
+	    \end{enumerate}
+		\item Especificação Formal:
+		\begin{enumerate}
+			\item Pré-condição: a pré-condição da refatoração \textit{Push Down Attribute} é apresentada no Código-fonte~\ref{codigo:precondicao_push_down_attribute};
+			\item Algoritmo: a ATL responsável por realizar a refatoração \textit{Push Down Attribute} é apresentada no Código-fonte~\ref{codigo:push_Down_StorableUnit_ATL}
+			\item Pós-condição: a pós-condição da refatoração \textit{Push Down Attribute} é apresentada no Código-fonte~\ref{codigo:poscondicao_push_down_attribute2};
 		\end{enumerate}
 	\end{enumerate}		
 	
 	
 	
 %--------------------------
-\subsection{Refatoração \textit{Extract ClassUnit}}
-Nesta seção a refatoração \textit{Extract ClassUnit} é apresentada. Essa refatoração é utilizada quando uma determinada classe está fazendo o trabalho que deveria ser realizada por duas classes~\cite{Fowler1999}. 
+\subsection{Criar Refatoração \textit{Extract Class}}
+A refatoração \textit{Extract Class} deve ser utilizada quando uma determinada classe está fazendo o trabalho que deveria ser realizada por duas classes~\cite{Fowler1999}. Dessa forma, nesta seção a refatoração \textit{Extract Class} é criada seguindo todos os passos da abordagem. 
 
-\begin{enumerate}
-	\item Especificação Informal:
-		\begin{enumerate}
-			\item Nome: \textit{Extract ClassUnit};
-			\item Definição:
-			    \begin{itemize}
-			        \item \texttt{Package} - uma isntância da metaclasse \texttt{Package} para adicionar a nova \texttt{ClassUnit};
-			        \item \texttt{ClassUnit}Selecionada - a classe que contém os atributos e métodos que devem ser movido para a nova classe;
-			        \item novoNome - um novo nome para a nova classe a ser criada;
-			        \item \texttt{StorableUnit}Selecionados - atributos relevantes selecionados para serem movido para a nova classe;
-			        \item \texttt{MethodUnit}Selecionados - métodos relevantes selecionados para serem movidos para a nova classe.
-			    \end{itemize}
-			\item Objetivo: Criar uma nova \texttt{ClassUnit} e mover os \texttt{StorableUnit}Selecionados e \texttt{MethodUnit}Selecionados para esse nova instância.
-			\item Descrição (opcional): \texttt{ClassUnit}Selecionada está realizando o trabalho que deveria ser realizado por duas classes.
-			\item Pré-condição:
-			    \begin{itemize}
-			        \item \{\texttt{ClassUnit}Selecionada\} deve contém atributos e métodos para mover para a nova classe;
-			        \item os \{\texttt{StorableUnit}Selecionados\} não são utilizados na \{\texttt{ClassUnit}Selecionada\};
-			        \item os \{\texttt{MethodUnit}Selecionados\} não são utilizados na \{\texttt{ClassUnit}Selecionada\};
-			        \item o \{novoNome\} da nova instância da \texttt{ClassUnit} deve seguir as convenções válidas para nomes de classes;
-			        \item não deve existir outra instância da \texttt{ClassUnit} com o mesmo nome dentro do mesmo \texttt{Package}.
-			    \end{itemize}
-			\item Pós-condição:
-			    \begin{itemize}
-			        \item \{\texttt{StorableUnit}Selecionados\} não são definido em \{\texttt{ClassUnit}Selecionada\};
-			        \item \{\texttt{MethodUnit}Selecionados\} não são definido em \{\texttt{ClassUnit}Selecionada\};
-			        \item todos os \{\texttt{StorableUnit}Selecionados\} e \{\texttt{MethodUnit}Selecionados\} estão definidos na nova instância da \texttt{ClassUnit} criada.
-			    \end{itemize}
-			\item Mecanismo: O primeiro passo da refatoração \textit{Extract ClassUnit} é selecionar um conjunto de \texttt{StorableUnits} e/ou \texttt{MethodUnits} que serão adicionados para uma nova instância de metaclasse \texttt{ClassUnit}, no exemplo ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{202} duas instâncias de \texttt{StorableUnits} são selecionadas, \texttt{att1} e \texttt{att2}. Em seguida, uma instância da metaclasse \texttt{ClassUnit} é criada e adicionada ao mesmo \texttt{Package} que a instância da metaclasse \texttt{ClassUnit} e que contém os \{\texttt{StorableUnit}Selecionados\}, como ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{204}. Em seguida, todos os \{\texttt{StorableUnit}Selecionados\} são adicionados nessa nova instância, como representado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{203}. Além disso, os \{\texttt{StorableUnit}Selecionados\} devem ser deletados da \{\texttt{ClassUnit}Selecionada\}. 
-\begin{minipage}{.90\textwidth}
-	\vspace*{\fill}
-  \centering
+\subsubsection{Identificar Elementos Estruturais}
+
+A refatoração \textit{Extract Class} basicamente consiste no encapsulamento de atributos de uma classe maior em outra classe. Dessa forma, os elementos estruturais utilizados na refatoração são: (\textit{i}) classes e (\textit{ii}) atributos. Utilizando o artefato apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} é possível identificar que as metaclasses em KDM que representa esses elementos estruturais são \texttt{ClassUnit} e \texttt{StorableUnit}.
+
+\subsubsection{Identificar Operações}
+
+No segundo passo da abordagem deve-se identificar as operações atômicas que compõem a refatoração a ser criada. Na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} são apresentadas duas instâncias simplificada do KDM, uma representa a instância antes da refatoração e a outra representa após a aplicação da refatoração. 
+
+\begin{figure}[h]
+	\centering
 	% Requires \usepackage{graphicx}
-	\captionof{figure}{Instância simplificada do KDM antes e depois da refatoração \textit{Extract ClassUnit}}
+	\caption{Instância simplificada do KDM antes e depois da refatoração \textit{Extract Class}.}
+	\label{fig:antes_e_depois_extract_ClassUnit}
 	\includegraphics[scale=0.6]{images/extractClassUnitAntesEDepois2}
 	\fautor
-	\label{fig:antes_e_depois_extract_ClassUnit}
-\end{minipage}\hfill
-			\item Algoritmo: 
-			    \begin{itemize}
-			        \item addNewClassUnit(\{novoNome\});
-			        \item adiciona essa nova instância dentro de um \texttt{Package};
-			        \item para cada \{\texttt{StorableUnit}Selecionado\} - add(\{newClassUnit\}, \{\texttt{StorableUnit}\-Selecionado\});
-			        \item para cada \{\texttt{StorableUnit}Selecionado\} - delete(\{\texttt{ClassUnit}Selecionada\}, \{\texttt{StorableUnit}\-Selecionado\});
-			        %\item createNewHasType(\{newClassUnit\}, \{\texttt{ClassUnit}Selecionada\}).
-			    \end{itemize} 
-	    \end{enumerate}
-		\item Especificação Formal:
-		\begin{enumerate}
-			\item Pré-condição: 
-			\begin{codigo}[caption={[OCL representando a pré-condição da refatoração \textit{Extract ClassUnit}.] Pré-condição da refatoração \textit{Extract ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:pre_extract_ClassUnit}, language=OCL]{Name}
-context ClassUnit::ExtractClassUnit(newName: String, storableUnitSelected:(StorableUnit), methodUnitSelected: (MethodUnit))
-pre : newName.isValidName() and not self.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (c: ClassUnit | c.name = newName) 
-and not storableUnitSelected(*@$\rightarrow$@*)forAll (s: StorableUnit | self.codeElement(*@$\rightarrow$@*)forAll (m: MethodUnit | not (m.codeRelation(*@$\rightarrow$@*)exists(re: Reads | re.to = s)) and not (m.codeRelation(*@$\rightarrow$@*)exists (wr:Writes | wr.to = s)) and not (m.codeRelation(*@$\rightarrow$@*)exists (add: Addresses | add.to = s)) 
-and not methodUnitSelected(*@$\rightarrow$@*)forAll (m: MethodUnit | self.codeElement(*@$\rightarrow$@*)forAll (m: MethodUnit | not (m.codeRelation(*@$\rightarrow$@*)exists (call: Calls| call.to = m)))))
-\end{codigo}
-%É importante observar que deve-se especificar a \texttt{ClassUnit} que será renomeada, bem como definir o novo nome dessa \texttt{ClassUnit} antes de executar a pré-condição, como apresentado no Código-fonte~\ref{codigo:pre_renameClassUnit}. 
-Na linha 1 do Código-fonte~\ref{codigo:pre_extract_ClassUnit} é declarado a assinatura da pré-condição da refatoração \textit{Extract ClassUnit}, note que essa pré-condição possui três parâmetros: o nome da nova instância da metaclasse \texttt{ClassUnit}, um conjunto de \{\texttt{StorableUnit}Selecionado\} e um conjunto de \{\texttt{MethodUnit}Selecionado\}. Na linha 2 é verificado se o parâmetro \{newName\} é válido para ser utilizado como nome de classe. Ainda na linha 2 a instância de da metaclasse \texttt{Package} é obtida por meio da função \texttt{refImmediateComposite()} para verificar dentro do escopo deste pacote se não existe nenhuma classe com o mesmo nome. Na linha 3 para cada \{\texttt{StorableUnit}Selecionado\} é verificado se são utilizados dentro de uma instância de \texttt{MethodUnit}, ou seja, verifica-se se o \{\texttt{StorableUnit}Selecionado\} é escrito e utilizado nos métodos. Similarmente, na linha 4 é verificado para cada \{\texttt{MethodUnit}Selecionado\} se o mesmo é chamado em algum lugar. Caso a pré-condição definida seja válida a refatoração \textit{Extract ClassUnit} é executada.
-			\item Algoritmo: 
-	\begin{codigo}[caption={[ATL representando a refatoração \textit{Extract ClassUnit}.] ATL da refatoração \textit{Extract ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:extract_classUnit_ATL}, language=ATL]{Name}
+\end{figure}
+
+O primeiro passo da refatoração \textit{Extract ClassUnit} é selecionar um conjunto de \texttt{StorableUnits} que serão adicionados para uma nova instância de metaclasse \texttt{ClassUnit}, no exemplo ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{202} duas instâncias de \texttt{StorableUnits} são selecionadas, \texttt{att1} e \texttt{att2}. Em seguida, uma instância da metaclasse \texttt{ClassUnit} é criada e adicionada ao mesmo \texttt{Package} que a instância da metaclasse \texttt{ClassUnit} e que contém os \{\texttt{StorableUnit}Selecionados\}, como ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{204}. Em seguida, todos os \{\texttt{StorableUnit}Selecionados\} são adicionados nessa nova instância, como representado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{203}. Além disso, os \{\texttt{StorableUnit}Selecionados\} devem ser deletados da \{\texttt{ClassUnit}Selecionada\}. Observando a Figura~\ref{fig:antes_e_depois_extract_ClassUnit} é possível identificar que é a refatoração \textit{Extract Class} pode ser criada por meio da combinação das seguintes operações atômicas: (\textit{i}) \texttt{add} e (\textit{ii}) \texttt{delete}. 
+
+%Mais especificadamente deve-se \texttt{add} uma instância de \texttt{ClassUnit}, \texttt{add} uma instância de \texttt{StorableUnit} na instância de \texttt{ClassUnit} criada e posteriormente deve-se \texttt{delete} 
+
+\subsubsection{Implementar Refatoração}
+
+No passo anterior identificou-se que as operações atômicas \texttt{add} e \texttt{delete} quando combinadas podem  compor e criar a refatoração \textit{Extract Class}. Dessa forma, essas operações atômicas foram implementadas em ATL utilizando os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:template_addKDMElement} e~\ref{codigo:template_delete}. A combinação desses \textit{templates} resultou no Código-fonte~\ref{codigo:extract_classUnit_ATL}. 
+
+\begin{codigo}[caption={[ATL representando a refatoração \textit{Extract ClassUnit}.] ATL da refatoração \textit{Extract ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:extract_classUnit_ATL}, language=ATL]{Name}
 module extractClassUnit;
 create OUT : MM refining IN : MM;
+rule deleteStorableUnit {
+	from
+		source : MM!StorableUnit (source.name = (*@\aspas{\{StorableUnit\}Selecionado}@*))
+	to 
+		drop
+}
 rule createClassUnit {
 	from
 		source : MM!Package (source.name = (*@\aspas{\{\texttt{Package}\}}@*))
@@ -729,24 +767,77 @@ rule createStorableUnit {
 			codeElement(*@$\leftarrow$@*)source.codeElement(*@$\rightarrow$@*)including(newElement)
 		),
 		newElement: MM!StorableUnit (
-			name(*@$\leftarrow$@*)(*@\aspas{\{StorableUnit\}Selecionado}@*)
+			name(*@$\leftarrow$@*)(*@\aspas{storableUnitName}@*)
 		)
-}
-rule deleteStorableUnit {
-	from
-		source : MM!ClassUnit (source.name = (*@\aspas{\{ClassUnit\}Selecionada}@*))
-	to 
-		drop
 }}
 \end{codigo}
-A refatoração \texttt{Extract ClassUnit} é apresentada no Código-fonte~\ref{codigo:extract_classUnit_ATL}. Essa refatoração pode ser implementada com a combinação das operações atômicas \texttt{add} e \texttt{delete} como apresentado na Tabela~\ref{tab:refatoringsCatalogo}. Dessa forma, os \textit{templates} ilustrados nos Códigos-fontes~\ref{codigo:template_addKDMElement} e \ref{codigo:template_delete} foram utilizados para auxiliar o engenheiro de modernização a criar essa refatoração.
-%Na linha 1 do Código-fonte~\ref{codigo:extract_classUnit_ATL} o nome da refatoração é definido. Em seguida, na linha 2 é apresentado o cabeçalho da refatoração. Nas linhas 3 até 13 a primeira regra dessa refatoração é definida. Na linha 5 uma condição de guarda é definida para identificar a instância da metaclasse \texttt{Package} que a nova instância da metaclasse \texttt{ClassUnit} será adicionada. Em seguida, as linhas 7, 8 e 9 representam que uma nova instância de \texttt{StorableUnit} será criado dentro da instância do \texttt{Package} identificado. Nas linhas 10 e 11 uma nova instância da metaclasse \texttt{ClassUnit} é efetivamente criada. Posteriormente, nas linhas 12 e 13 os \{\texttt{StorableUnit}Selecionados\} e os \{\texttt{MethodUnit}Selecionados\} são movidos para a \texttt{ClassUnit} recém instanciada. Após mover os \{\texttt{StorableUnit}Selecionados\} e os \{\texttt{MethodUnits}Selecionados\} para a \texttt{ClassUnit} o próximo passo é criar uma associação entre as duas instâncias de \texttt{ClassUnit}. Esse passo é representado na regra descrita nas linhas 14 até 25. Na linha 17 a {\texttt{ClassUnit}Selecionada\} é identificada, depois as linhas 18, 19 e 20 sinalizam que uma instância da metaclasse \texttt{HasType} será criada. Finalmente, nas linhas 21 até 23 a instância da metaclasse \texttt{HasType} é criada. Mas especificadamente, nas linhas 22 e 23 seus relacionamentos \texttt{to} e \texttt{from} são definidos, os quais representam a associação entre a classe que continha os \{\texttt{StorableUnit}Selecionados\} e os \{\texttt{MethodUnits}Selecionados\} e a nova instância da metaclasse \texttt{ClassUnit}, respectivamente. Linhas 26, 27 e 28 os \textit{helpers} que são utilizadas nessa refatoração são definidos.   
+
+Nas linhas 3-8 uma instância de \texttt{StorableUnit} é deletada. Nas linhas 9-19 uma instância da metaclasse \texttt{ClassUnit} é criada. Finalmente, nas linhas 14-24 uma instância da metaclasse \texttt{StorableUnit} é criada e adicionada na instância da metaclasse \texttt{ClassUnit} recém criada.
+
+\subsubsection{Definir Restrições}
+
+Após identificar as operações e implementar a refatoração o próximo passo consiste na definição das pré- e pós-condições da refatoração. Os \textit{templates} apresentados nesse capítulo foram utilizados para criar as asserções da refatoração \textit{Extract Class}. O Código-fonte~\ref{codigo:precondicao_extractClass} apresenta a pré-condição criada para a refatoração. Essa pré-condição foi criada utilizando os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_add} e~\ref{codigo:pre_template_delete}. Similarmente no Código-fonte~\ref{codigo:poscondicao_extractClass} é apresentado a pós-condição criada para a refatoração \textit{Extract ClassUnit}.
+
+\begin{codigo}[caption={[Pré-condição da refatoração \textit{Extract Class}.] Pré-condição da refatoração \textit{Extract Class}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:precondicao_extractClass}, language=OCL]{Name}
+context StorableUnit::preCond(newName: String)
+pre : ClassUnit.allInstances->select(e : ClassUnit | a.name = (*@\{\texttt{ClassUnit}Selecionada\}@*)) and StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = (*@\{\texttt{StorableUnit}Selecionado\}@*))
+and Package.allInstances->select(e : Package | a.name = (*@\aspas{\{Package\}}@*) and not ClassUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : ClassUnit | e.name = newName) 
+and ClassUnit.allInstances->select(e : ClassUnit | a.name = newName and not StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = (*@\{\texttt{StorableUnit}Selecionado\}@*).name) 
+\end{codigo}
+
+\begin{codigo}[caption={[Pós-condição da refatoração \textit{Extract ClassUnit}.] Pós-condição da refatoração \textit{Extract ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:poscondicao_extractClass}, language=OCL]{Name}
+context StorableUnit::preCond(newName: String)
+post : ClassUnit.allInstances->select(e : ClassUnit | a.name = (*@\{\texttt{ClassUnit}Selecionada\}@*)) and not StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = (*@\{\texttt{StorableUnit}Selecionado\}@*).name)
+and Package.allInstances->select(e : Package | a.name = (*@\aspas{\{Package\}}@*) and ClassUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : ClassUnit | e.name = newName) 
+and ClassUnit.allInstances->select(e : ClassUnit | a.name = newName and StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = (*@\{\texttt{StorableUnit}Selecionado\}@*).name) 
+\end{codigo}
+
+\subsubsection{Especificar Refatoração}
+
+O último passo da abordagem é a especificação da refatoração criada. Esse passo é opcional e fica a critério do engenheiro de modernização realizar esse passo. Para a refatoração \textit{Extract ClassUnit} escolheu-se realizar o passo da especificação da refatoração seguindo o \textit{template} apresentado na Seção~\ref{sec:template_refatoracao}.
+
+
+\begin{enumerate}
+	\item Especificação Informal:
+		\begin{enumerate}
+			\item Nome: \textit{Extract ClassUnit};
+			\item Definição:
+			    \begin{itemize}
+			        \item \texttt{Package} - uma instância da metaclasse \texttt{Package} para adicionar a nova \texttt{ClassUnit};
+			        \item \texttt{ClassUnit}Selecionada - a classe que contém os atributos e métodos que devem ser movido para a nova classe;
+			        \item novoNome - um novo nome para a nova classe a ser criada;
+			        \item \texttt{StorableUnit}Selecionado - atributo selecionado para ser movido para a nova classe.
+			    \end{itemize}
+			\item Objetivo: Criar uma nova \texttt{ClassUnit} e mover o \texttt{StorableUnit}Selecionado para essa nova instância.
+			\item Descrição (opcional): \texttt{ClassUnit}Selecionada está realizando o trabalho que deveria ser realizado por duas classes.
+			\item Pré-condição:
+			    \begin{itemize}
+			        \item \{\texttt{StorableUnit}Selecionado\} existe na \{\texttt{ClassUnit}Selecionada\};
+			        \item nova \texttt{ClassUnit} não existe no \texttt{Package};
+			        \item \{\texttt{StorableUnit}Selecionado\} não existe na nova \texttt{ClassUnit}.
+			    \end{itemize}
 			\item Pós-condição:
-			 \begin{codigo}[caption={[OCL representando a pós-condição da refatoração \textit{Extract ClassUnit}.] Pós-condição da refatoração \textit{Extract ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:pos_condicao_extract_ClassUnit}, language=OCL]{Name}
-context ClassUnit::ExtractClassUnit(storableUnitSelected: (StorableUnit), methodUnitSelected: (MethodUnit), newClass: ClassUnit)
-post : self.codeElement(*@$\rightarrow$@*)exists (s: StorableUnit | not (storableUnitSelected(*@$\rightarrow$@*)forAll (sUS: StorableUnit | sUS.name = s.name))) and self.codeElement(*@$\rightarrow$@*)exists (m: MethodUnit | not (methodUnitSelected(*@$\rightarrow$@*)forAll (mUS: MethodUnit | mUS.name = m.name))) 
-and newClass.codeElement(*@$\rightarrow$@*)exist (s: StorableUnit | (storableUnitSelected(*@$\rightarrow$@*)forAll (sUS: StorableUnit | sUS.name = s.name))) and newClass.codeElement(*@$\rightarrow$@*)exists (m: MethodUnit | not (methodUnitSelected(*@$\rightarrow$@*)forAll (mUS: MethodUnit | mUS.name = m.name)))        \end{codigo}
-Na linha 1 do Código-fonte~\ref{codigo:pos_condicao_extract_ClassUnit} é declarado o nome da pós-condição. Na linha 2 é verificado se todos os \{\texttt{StorableUnit}Selecionados\} e \{\texttt{MethodUnits}Selecionados\} não estão definidos na \{\texttt{ClassUnit}Selecionada\}. Posteriormente, na linha 3, é verificado se todos os \{\texttt{StorableUnit}Selecionados\} e \{\texttt{MethodUnits}Selecionados\} foram efetivamentes movidos para a nova instância da metaclasse \texttt{ClassUnit}. Caso afirmativo a refatoração foi realizada com sucesso.
+			    \begin{itemize}
+			        
+			        \item \{\texttt{StorableUnit}Selecionado\} não existe na \{\texttt{ClassUnit}Selecionada\};
+			        \item nova \texttt{ClassUnit} existe no \texttt{Package};
+			        \item \{\texttt{StorableUnit}Selecionado\} existe na nova \texttt{ClassUnit}.
+			    \end{itemize}
+			\item Mecanismo: Deve-se criar uma nova classe e mover os atributos selecionados;
+			\item Algoritmo: 
+			    \begin{itemize}
+			        \item addNewClassUnit(\{novoNome\});
+			        \item adiciona essa nova instância dentro de um \texttt{Package};
+			        \item para cada \{\texttt{StorableUnit}Selecionado\} - add(\{newClassUnit\}, \{\texttt{StorableUnit}\-Selecionado\});
+			        \item para cada \{\texttt{StorableUnit}Selecionado\} - delete(\{\texttt{ClassUnit}Selecionada\}, \{\texttt{Storable\-Unit}Selecionado\});
+			        %\item createNewHasType(\{newClassUnit\}, \{\texttt{ClassUnit}Selecionada\}).
+			    \end{itemize} 
+	    \end{enumerate}
+		\item Especificação Formal:
+		\begin{enumerate}
+			\item Pré-condição: a pré-condição da refatoração \textit{Extract Class} é apresentada no Código-fonte~\ref{codigo:precondicao_extractClass};
+			\item Algoritmo: a ATL responsável por realizar a refatoração \textit{Extract Class} é apresentada no Código-fonte~\ref{codigo:extract_classUnit_ATL};
+			\item Pós-condição: a pós-condição da refatoração \textit{Extract Class} é apresentada no Código-fonte~\ref{codigo:poscondicao_extractClass};
 		\end{enumerate}
 \end{enumerate}
 	

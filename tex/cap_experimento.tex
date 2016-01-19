@@ -264,7 +264,7 @@ Depois de definir e planejar o experimento, sua fase de operação foi realizada
 
 \begin{figure}[h]
 	\centering
-	\caption{Execução ilustrada do Experimento 1.}
+	\caption{Preparação e Execução ilustrada do Experimento 1.}
 	\label{fig:execucao_experimento}
 	\includegraphics[scale=0.9]{images/Figura_Experimento}
 	\fautor
@@ -473,12 +473,72 @@ Como os dados estão normalizados (ver Tabela~\ref{tab:shapiro_experimento_1}), 
 
 Nesta seção são apresentados os itens que podem afetar os valores e a conclusão do experimento 1. O experimento 1 é afetado pelas ameaças à validade listadas abaixo.
 
-\textbf{Validade Externa:} Validade Externa refere-se a generalidade do experimento. O experimento 1, foi conduzido em sete sistemas diferentes de código aberto amplamente utilizados, pertencentes a diferentes domínios e com tamanhos diferentes. No entanto, não é possível afirmar que os resultados podem ser generalizados para todas as aplicações Java instanciadas para o metamodelo KDM, bem como outras linguagens de programação, e outros engenheiros de software. Outra ameaça pode ser o número limitado de sujeitos/sistemas estudados, o que ameaça externamente a generalização dos nossos resultados. Replicações futuras deste estudo são necessárias para confirmar o resultado da abordagem.
+\textbf{Validade Externa:} A validade externa refere-se a generalidade do experimento. O experimento 1, foi conduzido em sete sistemas diferentes de código aberto amplamente utilizados, pertencentes a diferentes domínios e com tamanhos diferentes. No entanto, não é possível afirmar que os resultados podem ser generalizados para todas as aplicações Java instanciadas para o metamodelo KDM, bem como outras linguagens de programação, e outros engenheiros de software. Outra ameaça pode ser o número limitado de sujeitos/sistemas estudados, o que ameaça externamente a generalização dos nossos resultados. Replicações futuras deste estudo são necessárias para confirmar o resultado da abordagem.
 
 
 \textbf{Validade por Construção}: A validade de construção está preocupada com a relação entre a teoria e o que é observado. Como a ferramenta KDM-RE no seu estado atual não identifica \textit{bad-smells} a escolha das refatorações aplicadas esta totalmente dependente do conhecimento de terceiros. Dessa forma, para mitigar essa ameaça, os sete sistamas foram escolhidos, pois já haviam identificados e listados os \textit{bad-smells} na literatura por outros autores~\cite{Kessentini_2011, Ouni_2013, Moha_2010, Kessentini_2010}.
 
 \textbf{Validade de Conclusão}: Essa validade está relacionada com a precisão das métricas empregadas durante o experimento 1. Para mitigar essa ameaça, foi-se utilizado métricas já consolidadas na literatura, tais como QMOOD. 
+
+
+\section{Estudo de Caso: Abordagem KDM-SInc}\label{sec:experimento_KDM_SINc}
+
+
+
+Nesta seção é apresentado um estudo de caso conduzido com o objetivo de verificar se a abordagem KDM-SInc (ver Capítulo X) realiza a propagação de mudanças de forma correta após a aplicação de refatorações em instâncias do metamodelo KDM. O estudo de caso apresentado nessa seção segue o protocolo de planejamento, condução e análise proposto por~\citeonline{Brereton_2008}. As principais fases definidas nesse protocolo são apresentadas a seguir.
+
+\subsection{Definição do Estudo de Caso}
+
+O objetivo desse estudo de caso é avaliar a abordagem KDM-SInc e verificar se as regras pré-definidas são eficientes e realizam as propagações de forma correta após a aplicação de um conjunto de refatorações em instâncias do metamodelo KDM. Neste contexto, pode-se definir a seguinte questão de pesquisa:
+
+\textbf{Questão de Pesquisa 2} (\mathbf{$QP_2$}): Dado um conjunto de refatorações (\texttt{Extract ClassUnit}, \texttt{Move ClassUnit}, e \texttt{Remove ClassUnit}) a abordagem KDM-SInc é capaz de propagar todas as mudanças de forma eficiente e correta em uma determinada instância do KDM?
+
+Dessa forma, para avaliar a \mathbf{$QP_2$} um sistema denominado \sigla{LabSys}{\textit{Laboratory System}} foi utilizado. LabSys é um sistema gerenciador do uso de laboratórios que é atualmente utilizado pelo Universidade Federal de Tocantins (UFT)
+
+\subsection{Definição do Estudo de Caso}
+
+Esse estudo de caso foi definido utilizando o modelo GQM (\textit{Goal, Question, Metric})~\cite{Wohlin} que é dividido em cinco partes: 
+
+\begin{itemize}
+\item \textbf{Objeto de estudo}: o objeto de estudo desse estudo de caso é a abordagem KDM-SInc;
+\item \textbf{Propósito}: o propósito desse estudo de caso é avaliar a abordagem KDM-SInc;
+\item \textbf{Perspectiva}: esse estudo de caso esta sendo executado sobre a perspectiva de um pesquisador;
+\item \textbf{Qualidade de foco}: o efeito primário sobre investigação nesse estudo de caso é a corretude da abordagem KDM-SInc;
+\item \textbf{Contexto}: esse experimento foi conduzido utilizando o ambiente de desenvolvimento Eclipse 4.3.2 em uma máquina 2.5 GHz Intel Core i5 com 8GB de memória física executando o sistema operacional Mac OS X 10.9.2.
+\end{itemize}
+
+O estudo de caso pode ser resumido utilizando o seguinte \textit{template}~\cite{Wohlin}: \textbf{Analisar} a abordagem KDM-SInc; \textbf{com o propósito de} avaliação; \textbf{com respeito à} corretude e eficiência; \textbf{do ponto de vista dos} pesquisadores; \textbf{no contexto do} sistema LabSys.
+
+\subsection{Operação do Estudo de Caso}
+
+Depois de planejar e definir o estudo de caso, sua fase de operação foi realizada em duas etapas: Preparação e Execução. Na Figura~\ref{fig:execucao_estudo_de_caso} é apresentado o esquema seguido durante a preparação (\ding{202}) e execução (\ding{203}) desse estudo de caso.
+
+\begin{figure}[h]
+	\centering
+	\caption{Preparação e Execução ilustrada do Estudo de Caso.}
+	\label{fig:execucao_estudo_de_caso}
+	\includegraphics[scale=0.9]{images/planejamentoEstudoDeCaso}
+	\fautor
+\end{figure}
+
+
+\subsubsection{Preparação}
+
+O estudo de caso consiste de \textit{single case}~\cite{yin2013} e apenas um sistema foi utilizado durante esse estudo de caso, ou seja, LabSys (ver Figura~\ref{fig:execucao_estudo_de_caso} \ding{202}). Para avaliar e responder a \mathbf{$QP_2$} as regras pré-definidas no Capítulo~\ref{chapter:Abordagem_de_sincronizacao} foram utilizadas como base. Dessa forma, é possível verificar se após a aplicação de uma refatoração a propagação definida foi realmente e corretamente realizada.
+
+O sistema LabSys foi transformado em instância do metamodelo KDM. Essa transformação também foi realizada utilizando a ferramenta MoDisco. Essa ferramenta apenas instância o pacote \texttt{Code} e \texttt{Action} do metamodelo KDM. Assim, antes de realmente aplicar as refatorações manualmente outros pacotes do metamodelo KDM também precisaram ser instanciados no sistema LabSys. Dessa forma, forma os pacotes \texttt{Structure}, \texttt{Data} e \texttt{Conceptual} foram instanciados manualmente para esse sistema. 
+
+
+\subsubsection{Execução}
+
+A execução do estudo de caso foi totalmente apoiada pela ferramenta KDM-RE, mais especificadamente pelo módulo de sincronização (ver Figura~\ref{fig:execucao_estudo_de_caso} \ding{203}). Os três principais passos da abordagem KDM-SInc foram realizados nesse estudo de caso após a aplicação das refatorações. Três refatorações foram escolhidas: \texttt{Extract ClassUnit}, \texttt{Move ClassUnit}, e \texttt{Remove ClassUnit}. Essa refatorações foram escolhidas pois trabalhos recentes do grupo de pesquisa Advanse identificaram possíveis falhas de projeto no sistema LabSys e que podem ser sanadas utilizando essas refatorações.
+
+Após a aplicar a refatoração no sistema LabSys duas instâncias são utilizada como entrada para a abordagem KDM-SInc. Dessa forma, no primeiro passo a abordagem realiza uma comparação entre essas duas instâncias. Essa comparação é realizada utilizando o \textit{framework} EMFCompare e como resultado uma lista que contém todas as instâncias das metaclasses do KDM que sofreram uma modifição durante a refatoração é criada. Em seguida, o segundo passo utiliza como entrada essa lista gerada para ser utilizada como parâmetro para o algoritmo DFS. Como resultado, esse algoritmo também cria uma lista, a qual é utilizada no terceiro passo. O terceiro passo utiliza a lista criada pelo algoritmo para realizar um conjunto de regras pré-definidas em nível de modelo. No Capítulo~\ref{chapter:Abordagem_de_sincronizacao} mais especificadamente nas Tabelas~\ref{tab:propagacaoes_kdm_sinc_package},~\ref{tab:propagacaoes_kdm_sinc_classUnit},~\ref{tab:propagacaoes_kdm_sinc_StorableUnit} e~\ref{tab:propagacaoes_kdm_sinc_method} pode-se visualizar com mais detalhes essas regras.
+
+%No primeiro passo uma da abordagem realiza uma comparação entre a instância refatorada do metamodelo KDM com a instância do metamodelo KDM original. Essa comparação é realizada programaticamente pelo \textit{framework} EMFCompare. Como resultado, esse passo cria uma lista que contém todas as instâncias das metaclasses do KDM que sofreram uma modificação durante a refatoração quando comparado com a instância do KDM original. Em seguida, o segundo passo utiliza como entrada a lista gerada para ser utilizada como parâmetro para o algoritmo DFS. Como resultado, esse algoritmo também cria uma lista, a qual é utilizada no terceiro passo. O terceiro passo utiliza a lista criada pelo algoritmo para realizar um conjunto de regras pré-definidas em nível de modelo. Tais regras foram implementadas utilizando ATL. A abordagem KDM-SInc foi definida com a preocupação de ser uma forma genérica e desacoplada. Portanto, a abordagem pode ser aplicada em um grande conjunto de refatorações fazendo com que o engenheiro de software não tenha que se preocupar com a propagação de mudança para outras visões/artefatos do KDM. 
+
+%daqui para baixar é o experimento 2 que eu tenho que colocar...
+
 
 
 \section{Experimento 2: Ferramenta KDM-RE}\label{sec:experimento_KDM_re}
