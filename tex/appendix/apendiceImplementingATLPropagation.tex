@@ -1,0 +1,51 @@
+\section{Introdução}
+
+Este apêndice apresenta a implementação das regras pré-definidas e apresentadas no Apêndice A. Todas as regras pré-definidas apresentadas no Apêndice~\ref{apendice:regras_propagacao} são implementas em ATL. A ferramenta KDM-RE (ver Capítulo~\ref{chapter:ferramenta_kdm_re}) programaticamente executa as regras por meio da ATL EMF \textit{Transformation Virtual Machine}. A seguir todas as regras implementas em ATL para sincronizar o KDM são apresentadas. As regras aqui apresentadas em ATL são basedas nas regras pré-definidas apresentadas no Apêndice~\ref{apendice:regras_propagacao}. 
+
+\subsection{Propagações em ATL para refatorações realizadas em instâncias da metaclasse \texttt{Package} (ver Tabela~\ref{tab:propagacaoes_kdm_sinc_package})}
+
+\begin{codigo}[caption={[ATL para realizar a operação atômica \texttt{change} \texttt{ClassUnit}.] ATL para realizar a operação atômica \texttt{change} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:propagation1}, language=ATL]{Name}
+create OUT : MM refining IN : MM;
+rule propagationCodeAddPackage{
+	from
+		source : MM!CodeModel
+	to 
+		target: MM!CodeModel (
+			codeElement (*@$\leftarrow$@*) source.codeElement(*@$\rightarrow$@*)including(newElement)
+		),
+		newElement: MM!Package (
+			name (*@$\leftarrow$@*) (*@\aspas{packageName}@*)
+		)
+}
+\end{codigo}
+
+O Código-fonte~\ref{codigo:propagation1} cria uma instância da metaclasse \texttt{Package} na instância da metaclasse \texttt{CodeModel}. 
+
+
+\begin{codigo}[caption={[ATL para realizar a operação atômica \texttt{change} \texttt{ClassUnit}.] ATL para realizar a operação atômica \texttt{change} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:propagation2}, language=ATL]{Name}
+create OUT : MM refining IN : MM;
+rule propagationStructureScenario1AddPackage{
+	from
+		source : MM!StructureModel
+	to 
+		target: MM!StructureModel (
+			structureElement (*@$\leftarrow$@*) source.structureElement(*@$\rightarrow$@*)including(newElement)
+		),
+		newElement: MM!Layer (
+			name (*@$\leftarrow$@*) (*@\aspas{packageName}@*),
+			implementation (*@$\leftarrow$@*) getPackage ((*@\aspas{packageName}@*))
+		)
+}
+
+rule propagationStructureScenario2AddPackage{
+	from
+		source : MM!Layer (source.name = (*@\aspas{layerName}@*))
+	to 
+		target: MM!Layer (
+			implementation (*@$\leftarrow$@*) getPackage ((*@\aspas{packageName}@*))
+		)
+}
+
+helper def : getPackage (packageName : String) : MM!Package = MM!Package.allInstances()->any(e | e.name = packageName);
+\end{codigo}
+
