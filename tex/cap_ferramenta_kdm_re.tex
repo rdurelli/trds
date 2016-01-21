@@ -509,6 +509,15 @@ Em seguida o módulo de sincronização executa o algoritmo DFS para identificar
 
 O terceiro passo do módulo de sincronização objetiva realizar as mudanças e propagações necessários para manter uma determinada instância do metamodelo KDM sincronizada e consistente. Utilizando a lista de operações realizadas na refatoração e a lista que possui os elementos afetados na refatoração o módulo de programação utiliza um conjunto de regras pré-definidas para realizar a propagação. Todas as propagações estão apresentadas nas Tabelas~\ref{tab:propagacaoes_kdm_sinc_package},~\ref{tab:propagacaoes_kdm_sinc_classUnit},~\ref{tab:propagacaoes_kdm_sinc_StorableUnit} e~\ref{tab:propagacaoes_kdm_sinc_method} do Apêndice~\ref{apendice:regras_propagacao}. Para a refatoração \texttt{Extract ClassUnit} utilizada como exemplo as propagações que serão realizadas são:
 
+\begin{figure}[!h]
+	\centering
+	% Requires \usepackage{graphicx}
+	\caption{Instância antes e após a abordagem KDM-SInc..}
+	\label{fig:efeitoPropagacaoKDMSINC}
+	\includegraphics[scale=0.6]{images/propagacaoKDMEfeito}
+	\fautor
+\end{figure}
+
 \begin{itemize}
     \item \texttt{add} uma instância de \texttt{RelationalTable} com o meta-atributo \texttt{name} denominada \texttt{Document};
     
@@ -529,14 +538,7 @@ O terceiro passo do módulo de sincronização objetiva realizar as mudanças e 
 Adicionalmente, a KDM-RE fornece uma forma de visualizar graficamente se as propagações foram realmente executadas. Por exemplo, considere a Figura~\ref{fig:efeitoPropagacaoKDMSINC}. Essa figura representa duas instâncias do metamodelo KDM. A instância apresentada do lado esquerdo é denominada \textbf{versão 1} e equivale a instância antes (original) de aplicar o módulo de sincronização. A instância do lado direito é intitulada de \textbf{versão 2} e representa uma instância do metamodelo KDM sincronizada e propagada de acordo os passos e regras definidas pela abordagem KDM-SInc.% nas Tabelas~\ref{tab:propagacaoes_kdm_sinc_package},~\ref{tab:propagacaoes_kdm_sinc_classUnit},~\ref{tab:propagacaoes_kdm_sinc_StorableUnit} e~\ref{tab:propagacaoes_kdm_sinc_method}.
 
 
-\begin{figure}[!h]
-	\centering
-	% Requires \usepackage{graphicx}
-	\caption{Instância antes e após a abordagem KDM-SInc..}
-	\label{fig:efeitoPropagacaoKDMSINC}
-	\includegraphics[scale=0.6]{images/propagacaoKDMEfeito}
-	\fautor
-\end{figure}
+
 
 
 %Como observado a instância apresentada do lado direito da Figura~\ref{fig:efeitoPropagacaoKDMSINC} representa a instância do metamodelo KDM sincronizada e propagada. 
@@ -554,8 +556,60 @@ Adicionalmente, a KDM-RE fornece uma forma de visualizar graficamente se as prop
 
 \section{Trabalhos Relacionados}
 
+Nesta seção são descritos os principais trabalhos relacionados com ferramentas que aplicam refatorações em nível de modelos encontradas na literatura. Foram identificadas algumas ferramentas que nortearam o desenvolvimento da KDM-RE, assim, nesta seção são mostradas as principais semelhanças e diferenças encontradas.
+
+\citeonline{arendt2013tool} em seu artigo propõem uma ferramenta denominada EMF Refactor para aplicar refatorações em modelos EMF. Na Figura~\ref{fig:arquitetura_emf_refactor} é apresentada a arquitetura da ferramenta EMF Refactor. Como pode ser observado, EMF Refactor também foi desenvolvimento para ser utilizado no ambiente de desenvolvimento Eclipse. EMF Refactor também utiliza o \textit{framework} EMF Compare para mostrar os efeitos da refatoração. De acordo com~\citeonline{arendt2013tool}, EMF Refactor permite realizar a identificação de \textit{bad smells} e em seguida o usuário pode aplicar refatorações. Da mesma forma que a KDM-RE, um conjunto de refatorações propostas por~\citeonline{Fowler1999} foi implementado na EMF Refactor. Por exemplo, na Figura~\ref{fig:wizard_emfCOmpare} é possível visualizar quais refatorações o usuário pode aplicar por meio da EMF Refactor. 
+
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+	\caption{Arquitetura da EMF Refactor.}
+	\label{fig:arquitetura_emf_refactor}
+	\includegraphics[scale=0.9]{images/EMFRefactorArchitecture}
+	\fadaptada{hostesupporting}
+\end{figure}
 
 
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+	\caption{\textit{Wizard} para aplicar refatoração do EMF Refactor.}
+	\label{fig:wizard_emfCOmpare}
+	\includegraphics[scale=0.7]{images/EMFRefactorWizard}
+	\fadaptada{hostesupporting}
+\end{figure}
+
+Existem duas principais diferenças entre a KDM-RE e a ferramenta EMF Refactor. A primeira é que a ferramenta EMF Refactor não se preocupa em sincronizar as instâncias de um determina metamodelo após a aplicação das refatorações; diferentemente da KDM-Re, a qual possível um módulo de sincronização exclusivo para essa característica. A segunda diferença está relacionada a identificação de qual(is) refatoração(ões) aplicar. Por meio da EMF Refactor, é possível identificar quais refatorações precisam ser realizadas, ou seja, a ferramenta permite identificar quais são os \textit{bad smells}; KDM-RE no seu estado atual não permite a identificação de \textit{bad smells}.
+
+
+Outra ferramenta relacionada a KDM-RE é a Refactory\footnote{\texttt{http://www.modelrefactoring.org/index.php/Refactoring}}. Da mesma forma que a EMF Refactor, Refactory também é baseada no EMF e pode refatorar qualquer metamodelo definido pelo EMF. Além disso, de acordo com~\citeonline{reimann2010role}, Refactory, foi criada para permitir refatorações genéricas. Os autores afirmam que realizar uma refatoração, por exemplo, \textit{extract method} em Java é o mesmo mecanismo para um sistema representado por instância da UML. As refatorações são todas implementas em QVT e as asserções são implementadas em OCL. Da mesma forma que a KDM-RE, as refatorações da Refactory também são realizadas por meio de combinação de operações atômicas.
+
+
+~\citeonline{mohamed2011m} propõem uma abordagem e uma ferramenta denominada M-Refactor. M-Refactor possui duas principais funcionalidades: (\textit{i}) identificar \textit{bad smells} em instâncias do metamodelo UML e (\textit{ii}) aplicar refatorações em instâncias do metamodelo UML. A identificação dos \textit{bad-smells} é realizada em diagramas de classe e diagramas de sequência da UML. Os \textit{bad-smells} identificados são representados graficamente como apresentado na Figura~\ref{fig:m_refactor}. Após a identificação e visualização dos \textit{bad-smells}, o usuário pode aplicar as refatorações. Da mesma forma que a KDM-RE, M-Refactor também permite aplicar refatorações diretamente em diagramas de classe da UML. Porém, M-Refactor não se preocupa em sincronizar outras representações da UML como a KDM-RE faz.
+
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+	\caption{Visão geral da ferramenta M-Refactor.}
+	\label{fig:m_refactor}
+	\includegraphics[scale=0.6]{images/m_refactor}
+	\fadaptada{mohamed2011m}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+	\caption{Arquitetura da Ferramenta MOOSE.}
+	\label{fig:moose}
+	\includegraphics[scale=0.32]{images/MOOSEArchitecture}
+	\fadaptada{ducasse2000moose}
+\end{figure}
+
+
+Outra ferramenta relacionada é a MOOSE~\cite{tichelaar2000meta, ducasse2000moose}. A arquitetura da ferramenta MOOSE é apresentada na Figura~\ref{fig:moose}. Como pode ser observado, MOOSE aceita como entrada diversos tipos de linguagem de programação (Smalltalk, Java, C++, etc) transforma tais linguagens em um metamodelo denominado FAMIX~\cite{tichelaar2000meta}. Após realizar essa transformação refatorações podem ser aplicadas. De acordo com os autores, MOOSE permite a aplicação de refatorações em nível de modelo de forma independente. MOOSE utiliza a ferramenta Refactoring Browser~\cite{roberts1997refactoring} e, assim permite que as refatorações aplicadas em instâncias do metamodelo FAMIX sejam automaticamente replicas no código-fonte Smalltalk, porém, essa função apenas funciona quando a linguagem de entrada é a Smalltalk.
+
+
+Embora todas as ferramentas identificadas apliquem refatorações em nível de modelo, nenhuma fornecem uma forma para prover a reutilização de refatorações como a KDM-RE. Dessa forma, acredita-se que a KDM-RE é uma contribuição para a área de pesquisa de refatoração em nível de modelo. Além disso, somente a KDM-RE utiliza o metamodelo KDM como base para as refatorações, o que significa que a KDM-RE é independente de plataforma e linguagem de programação. Embora todas as ferramentas identificas utilizem o EMF, nenhuma utiliza uma metamodelo padronizado, como o KDM. Uma das vantagens de utilizar o KDM é que o mesmo possui diversas metaclasses para representar níveis diferentes de um determinado sistema.
 
 \section{Considerações Finais}\label{sec:consideracoes_final_kdm_re}
 
