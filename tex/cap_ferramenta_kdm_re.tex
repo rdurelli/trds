@@ -619,8 +619,20 @@ Outra ferramenta relacionada a KDM-RE é a Refactory\footnote{\texttt{http://www
 
 Outra ferramenta relacionada é a MOOSE~\cite{tichelaar2000meta, ducasse2000moose}. A arquitetura da ferramenta MOOSE é apresentada na Figura~\ref{fig:moose}. Como pode ser observado, MOOSE aceita como entrada diversos tipos de linguagem de programação (Smalltalk, Java, C++, etc) transforma tais linguagens em um metamodelo denominado FAMIX~\cite{tichelaar2000meta}. Após realizar essa transformação refatorações podem ser aplicadas. De acordo com os autores, MOOSE permite a aplicação de refatorações em nível de modelo de forma independente. MOOSE utiliza a ferramenta Refactoring Browser~\cite{roberts1997refactoring} e, assim permite que as refatorações aplicadas em instâncias do metamodelo FAMIX sejam automaticamente replicas no código-fonte Smalltalk, porém, essa função apenas funciona quando a linguagem de entrada é a Smalltalk.
 
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+	\caption{Visão geral da Ferramenta RACOoN.}
+	\label{fig:racoon}
+	\includegraphics[scale=0.52]{images/fig_racoon}
+	\fdireta{van2006model}
+\end{figure}
 
-Embora todas as ferramentas identificadas apliquem refatorações em nível de modelo, nenhuma fornecem uma forma para prover a reutilização de refatorações como a KDM-RE. Dessa forma, acredita-se que a KDM-RE é uma contribuição para a área de pesquisa de refatoração em nível de modelo. Além disso, somente a KDM-RE utiliza o metamodelo KDM como base para as refatorações, o que significa que a KDM-RE é independente de plataforma e linguagem de programação. Embora todas as ferramentas identificas utilizem o EMF, nenhuma utiliza uma metamodelo padronizado, como o KDM. Uma das vantagens de utilizar o KDM é que o mesmo possui diversas metaclasses para representar níveis diferentes de um determinado sistema.
+RACOoN é um \textit{plug-in} desenvolvido por~\citeonline{van2006model}, ver Figura~\ref{fig:racoon}. Utilizando esse \textit{plug-in} regras de transformação em modelo podem ser implementadas, carregadas e em seguida serem executadas em diagramas da UML. RACOoN é uma ferramenta totalmente manual e permite que o usuário definida qual refatoração almeja aplicar, sendo de inteira responsabilidade do usuário definir a refatoração corretamente. Inconsistência encontradas durante a aplicação de múltiplas refatorações são apresentadas para o usuário juntamente com um conjunto de soluções.
+
+VisTra~\cite{vstolc2010visual} é uma ferramenta visual desenvolvida também como um \textit{plug-in} para o ambiente de desenvolvimento Eclipse para aplicar refatorações em diagramas de classes da UML. Essa ferramenta permite que o usuário defina regras de transformação graficamente e em seguida, a ferramenta gera automaticamente restrições em OCL e regras de transformações em QVT. Da mesma forma, NEPTUNE~\cite{millan2009ocl} é uma ferramenta que permite verificação e transformação em instâncias do metamodelo UML. Essa ferramenta utiliza uma extensão da OCL denominada pOCL para automatizar a detecção de \textit{bad-smells}. Em seguida, NEPTUNE sugere um conjunto de refatorações para reparar os \textit{bad-smells} identificados.
+
+Embora todas as ferramentas identificadas apliquem refatorações em nível de modelo, nenhuma realiza as refatorações utilizando o metamodelo KDM. Além disso, nenhuma ferramenta identificada fornece uma forma para prover a reutilização de refatorações. Dessa forma, acredita-se que a KDM-RE é uma contribuição para a área de pesquisa de refatoração em nível de modelo. Além disso, somente a KDM-RE utiliza o metamodelo KDM como base para as refatorações, o que significa que a KDM-RE é independente de plataforma e linguagem de programação. Embora todas as ferramentas identificas utilizem o EMF, nenhuma utiliza uma metamodelo padronizado, como o KDM. Uma das vantagens de utilizar o KDM é que o mesmo possui diversas metaclasses para representar níveis diferentes de um determinado sistema.
 
 \section{Considerações Finais}\label{sec:consideracoes_final_kdm_re}
 
