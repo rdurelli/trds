@@ -512,7 +512,7 @@ O terceiro passo do módulo de sincronização objetiva realizar as mudanças e 
 \begin{figure}[!h]
 	\centering
 	% Requires \usepackage{graphicx}
-	\caption{Instância antes e após a abordagem KDM-SInc..}
+	\caption{Instância antes e após a abordagem KDM-SInc.}
 	\label{fig:efeitoPropagacaoKDMSINC}
 	\includegraphics[scale=0.6]{images/propagacaoKDMEfeito}
 	\fautor
@@ -576,13 +576,24 @@ Nesta seção são descritos os principais trabalhos relacionados com ferramenta
 	\caption{\textit{Wizard} para aplicar refatoração do EMF Refactor.}
 	\label{fig:wizard_emfCOmpare}
 	\includegraphics[scale=0.7]{images/EMFRefactorWizard}
-	\fadaptada{hostesupporting}
+	\fdireta{hostesupporting}
 \end{figure}
 
 Existem duas principais diferenças entre a KDM-RE e a ferramenta EMF Refactor. A primeira é que a ferramenta EMF Refactor não se preocupa em sincronizar as instâncias de um determina metamodelo após a aplicação das refatorações; diferentemente da KDM-Re, a qual possível um módulo de sincronização exclusivo para essa característica. A segunda diferença está relacionada a identificação de qual(is) refatoração(ões) aplicar. Por meio da EMF Refactor, é possível identificar quais refatorações precisam ser realizadas, ou seja, a ferramenta permite identificar quais são os \textit{bad smells}; KDM-RE no seu estado atual não permite a identificação de \textit{bad smells}.
 
 
-Outra ferramenta relacionada a KDM-RE é a Refactory\footnote{\texttt{http://www.modelrefactoring.org/index.php/Refactoring}}. Da mesma forma que a EMF Refactor, Refactory também é baseada no EMF e pode refatorar qualquer metamodelo definido pelo EMF. Além disso, de acordo com~\citeonline{reimann2010role}, Refactory, foi criada para permitir refatorações genéricas. Os autores afirmam que realizar uma refatoração, por exemplo, \textit{extract method} em Java é o mesmo mecanismo para um sistema representado por instância da UML. As refatorações são todas implementas em QVT e as asserções são implementadas em OCL. Da mesma forma que a KDM-RE, as refatorações da Refactory também são realizadas por meio de combinação de operações atômicas.
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+	\caption{Arquitetura da ferramenta Refactory.}
+	\label{fig:refactory}
+	\includegraphics[scale=0.2]{images/refactoryArchitecture}
+	\fdireta{Reimann_2015}
+\end{figure}
+
+Outra ferramenta relacionada a KDM-RE é a Refactory\footnote{\texttt{http://www.modelrefactoring.org/index.php/Refactoring}}. A arquitetura da ferramenta Refactory é apresentada na Figura~\ref{fig:refactory}. Da mesma forma que a KDM-RE, Refactory também contém três camadas: (\textit{i}) \textit{Platform Layer}, (\textit{ii}) \textit{Core Layer} e (\textit{iii}) \textit{UI layer}. A camada \textit{Core} contém três módulos: (\textit{i}) \textit{Quality Smell Framework}, (\textit{ii}) \textit{Refactoring Framework} e (\textit{iii}) \textit{Co-Refactoring Framework}. Note que Refactory também é baseada no EMF e pode refatorar qualquer metamodelo definido pelo EMF. Além disso, de acordo com~\citeonline{reimann2010role}, Refactory, foi criada para permitir refatorações genéricas. Os autores afirmam que realizar uma refatoração, por exemplo, \textit{extract method} em Java é o mesmo mecanismo para um sistema representado por instância da UML. As refatorações são todas implementas em QVT e as asserções são implementadas em OCL. Do mesmo modo que a KDM-RE, as refatorações da Refactory também são realizadas por meio de combinação de operações atômicas.
+
+
 
 
 ~\citeonline{mohamed2011m} propõem uma abordagem e uma ferramenta denominada M-Refactor. M-Refactor possui duas principais funcionalidades: (\textit{i}) identificar \textit{bad smells} em instâncias do metamodelo UML e (\textit{ii}) aplicar refatorações em instâncias do metamodelo UML. A identificação dos \textit{bad-smells} é realizada em diagramas de classe e diagramas de sequência da UML. Os \textit{bad-smells} identificados são representados graficamente como apresentado na Figura~\ref{fig:m_refactor}. Após a identificação e visualização dos \textit{bad-smells}, o usuário pode aplicar as refatorações. Da mesma forma que a KDM-RE, M-Refactor também permite aplicar refatorações diretamente em diagramas de classe da UML. Porém, M-Refactor não se preocupa em sincronizar outras representações da UML como a KDM-RE faz.
@@ -593,7 +604,7 @@ Outra ferramenta relacionada a KDM-RE é a Refactory\footnote{\texttt{http://www
 	\caption{Visão geral da ferramenta M-Refactor.}
 	\label{fig:m_refactor}
 	\includegraphics[scale=0.6]{images/m_refactor}
-	\fadaptada{mohamed2011m}
+	\fdireta{mohamed2011m}
 \end{figure}
 
 \begin{figure}[h]
@@ -602,7 +613,7 @@ Outra ferramenta relacionada a KDM-RE é a Refactory\footnote{\texttt{http://www
 	\caption{Arquitetura da Ferramenta MOOSE.}
 	\label{fig:moose}
 	\includegraphics[scale=0.32]{images/MOOSEArchitecture}
-	\fadaptada{ducasse2000moose}
+	\fdireta{ducasse2000moose}
 \end{figure}
 
 
