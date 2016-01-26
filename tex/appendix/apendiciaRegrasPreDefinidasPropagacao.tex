@@ -1,6 +1,6 @@
 \section{Introdução}
 
-Este apêndice apresenta as regras pré-definidas que são utilizadas no módulo de sincronização da ferramenta KDM-RE. O módulo de sincronização apresentado no Capítulo~\ref{chapter:ferramenta_kdm_re}, Seção~\ref{sec:modulo_de_sincronizacao_kdm_re} utiliza um conjunto de regras pré-definidas que são iniciadas de acordo a(s) refatoração(ões) aplicada(s) na instância do metamodelo KDM. Todas as propagações especificadas no módulo de sincronização são pré-definidas para serem disparadas após a aplicação de específicas refatorações. Todas as propagações são definidas com base nas mudanças realizadas em uma determinada instância de metaclasses do metamodelo KDM. Além disso, todas as regras pré-definidas foram implementadas em ATL. Nas Tabelas~\ref{tab:propagacaoes_kdm_sinc_package},~\ref{tab:propagacaoes_kdm_sinc_classUnit},~\ref{tab:propagacaoes_kdm_sinc_StorableUnit} e \ref{tab:propagacaoes_kdm_sinc_method} todas as regras de programação pré-definidas são ilustradas e explicadas.  
+Este apêndice apresenta as regras pré-definidas que são utilizadas no módulo de sincronização da ferramenta KDM-RE. O módulo de sincronização apresentado no Capítulo~\ref{chapter:ferramenta_kdm_re}, Seção~\ref{sec:modulo_de_sincronizacao_kdm_re} utiliza regras pré-definidas que são iniciadas de acordo a(s) refatoração(ões) aplicada(s) na instância do metamodelo KDM. Todas as propagações especificadas no módulo de sincronização são pré-definidas para serem disparadas após a aplicação de específicas refatorações. Todas as propagações são definidas com base nas mudanças realizadas em uma determinada instância da metaclasses do metamodelo KDM. Além disso, todas as regras pré-definidas foram implementadas em ATL. Nas Tabelas~\ref{tab:propagacaoes_kdm_sinc_package},~\ref{tab:propagacaoes_kdm_sinc_classUnit},~\ref{tab:propagacaoes_kdm_sinc_StorableUnit} e \ref{tab:propagacaoes_kdm_sinc_method} todas as regras de programação pré-definidas são ilustradas e explicadas.  
 
 \begin{longtable}{ | m{1.9cm} | m{3.57cm}| m{9.3cm} | }
  \caption{Propagações definidas para refatorações realizadas em instâncias da metaclasse \texttt{Package}.\label{tab:propagacaoes_kdm_sinc_package}}\\
@@ -42,24 +42,24 @@ Este apêndice apresenta as regras pré-definidas que são utilizadas no módulo
 \cline{2-3} 
 & \texttt{Action Package} & Não se aplica \tabularnewline
 \cline{2-3}
-& \texttt{Structure Package} & Caso a instância de \texttt{Package} a ser deleta contenha uma representação em nível arquitetural, então deve-se remover a referência do pacote deletado que esta contido na associação \texttt{implementation} do elemento arquitetural. \tabularnewline
+& \texttt{Structure Package} & Caso a instância de \texttt{Package} a ser deleta contenha uma representação em nível arquitetural, então deve-se remover a referência do pacote deletado que está contido na associação \texttt{implementation} do elemento arquitetural. \tabularnewline
 \cline{2-3}
 & \texttt{Data Package} & Não se aplica \tabularnewline
 \cline{2-3}
-& \texttt{Conceptual Package} & Caso o pacote a ser deletado contenha uma representação em nível de regras de negócio, então, deve-se também remover a referência do pacote deletado que esta contido na associação \texttt{implementation} da metaclasse \texttt{ScenarioUnit} \tabularnewline
+& \texttt{Conceptual Package} & Caso o pacote a ser deletado contenha uma representação em nível de regras de negócio, então, deve-se também remover a referência do pacote deletado que está contido na associação \texttt{implementation} da metaclasse \texttt{ScenarioUnit} \tabularnewline
 \hline
 \texttt{change} \texttt{Package} & \texttt{Code Package} & Altera os meta-atributos da instância da metaclasse \texttt{Package}.\tabularnewline
 \cline{2-3}
 & \texttt{Action Package} & Não se aplica \tabularnewline
 \cline{2-3}
-& \texttt{Structure Package} & Caso o pacote a ser alterado contenha uma representação em nível arquitetural, então deve-se alterar o meta-atributo \texttt{name} da instância da metaclasse \texttt{Layer}. \tabularnewline
+& \texttt{Structure Package} & Caso o pacote a ser alterado contenha uma representação em nível arquitetural, então, deve-se alterar o meta-atributo \texttt{name} da instância da metaclasse \texttt{Layer}. \tabularnewline
 \cline{2-3}
 & \texttt{Data Package} & Não se aplica. \tabularnewline
 \cline{2-3}
 & \texttt{Conceptual Package} & Caso o pacote a ser alterado contenha uma representação em nível de regras de negócio, então deve-se alterar o meta-atributo \texttt{name} da instância da metaclasse \texttt{ScenarioUnit}. \tabularnewline
  \end{longtable}
 
-Na Tabela~\ref{tab:propagacaoes_kdm_sinc_classUnit} as regras que regem as propagações pré-definidas para refatorações realizadas em instâncias da metaclasse \texttt{ClassUnit} são apresentadas.
+Na Tabela~\ref{tab:propagacaoes_kdm_sinc_classUnit}, as regras que regem as propagações pré-definidas para refatorações realizadas em instâncias da metaclasse \texttt{ClassUnit} são apresentadas.
 
 \begin{longtable}{ | m{1.9cm} | m{3.57cm}| m{9.3cm} | }
  \caption{Propagações definidas para refatorações realizadas em instâncias da metaclasse \texttt{ClassUnit}.\label{tab:propagacaoes_kdm_sinc_classUnit}}\\
@@ -95,23 +95,23 @@ Na Tabela~\ref{tab:propagacaoes_kdm_sinc_classUnit} as regras que regem as propa
 \cline{2-3} 
  & \texttt{Data Package} & Deve-se criar uma instância da metaclasse \texttt{RelationalTable}. Além disso, deve-se também especificar que o meta-atributo \texttt{name} de ambas as metaclasses (\texttt{ClassUnit} criada e \texttt{RelationalTable}) terão o mesmo valor. Deve-se também criar criar uma instância da metaclasse \texttt{UniqueKey}. \tabularnewline
 \cline{2-3} 
- & \texttt{Conceptual Package} & \textbf{Cenário 1}: Cria-se uma instância da metaclasse \texttt{RuleUnit}. Deve-se associar a instância da metaclasse \texttt{ClassUnit} criada por meio da associação \texttt{implementation} da metaclasse \texttt{RuleUnit} criado. \textbf{Cenário 2}: Já existe uma instância da metaclasse \texttt{RuleUnit} para representar em nível de regra de negócio a instância da metaclasse \texttt{ClassUnit} criada. Assim, apenas deve-se associar a instância da metaclasse \texttt{ClassUnit} criada por meio da associação \texttt{implementation} da metaclasse \texttt{RuleUnit}. \tabularnewline
+ & \texttt{Conceptual Package} & \textbf{Cenário 1}: Cria-se uma instância da metaclasse \texttt{RuleUnit}. Deve-se associar a instância da metaclasse \texttt{ClassUnit} criada por meio da associação \texttt{implementation} da metaclasse \texttt{RuleUnit} criada. \textbf{Cenário 2}: Já existe uma instância da metaclasse \texttt{RuleUnit} para representar em nível de regra de negócio a instância da metaclasse \texttt{ClassUnit} criada. Assim, apenas deve-se associar a instância da metaclasse \texttt{ClassUnit} criada por meio da associação \texttt{implementation} da metaclasse \texttt{RuleUnit}. \tabularnewline
 \hline 
  \texttt{delete} \texttt{ClassUnit} & \texttt{Code Package} & Deleta-se uma instância da metaclasse \texttt{ClassUnit}.\tabularnewline
 \cline{2-3} 
-& \texttt{Action Package} & Deve-se remover todas as instâncias das metaclasses que utilizam a instância da metaclasse \texttt{ClassUnit} deleta. Por exemplo, todas as instâncias das metaclasses \texttt{Calls}, \texttt{Extends}, \texttt{HasType}, \texttt{ParameterUnit}, devem ser removidas. \tabularnewline
+& \texttt{Action Package} & Devem-se remover todas as instâncias das metaclasses que utilizam a instância da metaclasse \texttt{ClassUnit} deletada. Por exemplo, todas as instâncias das metaclasses \texttt{Calls}, \texttt{Extends}, \texttt{HasType}, \texttt{ParameterUnit} devem ser removidas. \tabularnewline
 \cline{2-3}
-& \texttt{Structure Package} & Se a \texttt{ClassUnit} a ser removida esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, que por sua vez, esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se remover todas as instâncias de \texttt{HasType}, \texttt{Calls}, \texttt{Extends}, \texttt{Implements}, etc que possui relacionamento com a \texttt{ClassUnit} a ser removida. Em seguida, deve-se atualizar o meta-atributo \texttt{density} da metaclasse \texttt{AggregationRelationship}. \tabularnewline
+& \texttt{Structure Package} & Se a \texttt{ClassUnit} a ser removida está associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, que, por sua vez, está associada a algum elemento arquitetural por meio da associação \texttt{implementation}, então, deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, devem-se remover todas as instâncias de \texttt{HasType}, \texttt{Calls}, \texttt{Extends}, \texttt{Implements}, etc. que possuem relacionamento com a \texttt{ClassUnit} a ser removida. Em seguida, deve-se atualizar o meta-atributo \texttt{density} da metaclasse \texttt{AggregationRelationship}. \tabularnewline
 \cline{2-3}
-& \texttt{Data Package} & Deve-se identificar uma instância da metaclasse \texttt{RelationalTable} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{ClassUnit} a ser removida. Então deve-se também remover a instância da metaclasse \texttt{RelationalTable} \tabularnewline
+& \texttt{Data Package} & Deve-se identificar uma instância da metaclasse \texttt{RelationalTable} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{ClassUnit} a ser removida. Então, deve-se também remover a instância da metaclasse \texttt{RelationalTable} \tabularnewline
 \cline{2-3}
 & \texttt{Conceptual Package} & Deve-se identificar uma instância da metaclasse \texttt{RuleUnit} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{ClassUnit} a ser removida. Em seguida, deve-se remover a instância da metaclasse \texttt{RuleUnit}. \tabularnewline
 \hline
 \texttt{change} \texttt{ClassUnit} & \texttt{Code Package} & Renomeia o meta-atributo \texttt{name} da instância da metaclasse \texttt{ClassUnit}.\tabularnewline
 \cline{2-3}
-& \texttt{Action Package} & Deve-se alterar todas as metaclasses que utilizam a instância da metaclasse \texttt{ClassUnit} renomeada. Todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Calls}, \texttt{Extends}, \texttt{HasType}, \texttt{ParameterUnit}, devem ser renomeadas. \tabularnewline
+& \texttt{Action Package} & Devem-se alterar todas as metaclasses que utilizam a instância da metaclasse \texttt{ClassUnit} renomeada. Todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Calls}, \texttt{Extends}, \texttt{HasType}, \texttt{ParameterUnit} devem ser renomeadas. \tabularnewline
 \cline{2-3}
-& \texttt{Structure Package} & Se a \texttt{ClassUnit} a ser renomeada esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, que por sua vez, esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se remover todas as associações \texttt{to} ou \texttt{from} das instâncias de \texttt{HasType}, \texttt{Calls}, \texttt{Extends}, \texttt{Implements}, etc que possui relacionamento com a \texttt{ClassUnit} a ser removida. \tabularnewline
+& \texttt{Structure Package} & Se a \texttt{ClassUnit} a ser renomeada está associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, que, por sua vez, está associado a algum elemento arquitetural por meio da associação \texttt{implementation}, então, deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, devem-se remover todas as associações \texttt{to} ou \texttt{from} das instâncias de \texttt{HasType}, \texttt{Calls}, \texttt{Extends}, \texttt{Implements}, etc. que possuem relacionamento com a \texttt{ClassUnit} a ser removida. \tabularnewline
 \cline{2-3}
 & \texttt{Data Package} & Deve-se identificar uma instância da metaclasse \texttt{RelationalTable} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{ClassUnit} a ser renomeada. Em seguida, deve-se renomear o meta-atributo \texttt{name} da instância da metaclasse \texttt{RelationalTable}. \tabularnewline
 \cline{2-3}
@@ -153,25 +153,25 @@ As regras pré-definidas para as refatorações realizadas em instâncias da met
  \cline{2-3} 
  & \texttt{Structure Package} & Não se aplica \tabularnewline
 \cline{2-3} 
- & \texttt{Data Package} & Deve-se verificar se a instância da metaclasse \texttt{StorableUnit} criada esta contido em uma instância da metaclasse \texttt{ClassUnit} que por sua vez contém uma metaclasse \texttt{RelationalTable} correspondente. Caso afirmativo, deve-se criar uma instância da metaclasse \texttt{ColumnSet} e associar a instância da metaclasse \texttt{RelationalTable}. \tabularnewline
+ & \texttt{Data Package} & Deve-se verificar se a instância da metaclasse \texttt{StorableUnit} criada está contida em uma instância da metaclasse \texttt{ClassUnit}, que, por sua vez, contém uma metaclasse \texttt{RelationalTable} correspondente. Caso afirmativo, deve-se criar uma instância da metaclasse \texttt{ColumnSet} e associar a instância da metaclasse \texttt{RelationalTable}. \tabularnewline
 \cline{2-3} 
  & \texttt{Conceptual Package} & Não se aplica. \tabularnewline
 \hline 
  \texttt{delete} \texttt{StorableUnit} & \texttt{Code Package} & Deleta-se uma instância da metaclasse \texttt{StorableUnit}.\tabularnewline
 \cline{2-3} 
-& \texttt{Action Package} & Deve-se remover todas as instâncias das metaclasses \texttt{Reads}, \texttt{Writes} e \texttt{Address} que utilizam a instância da metaclasse \texttt{StorableUnit} deleta. \tabularnewline
+& \texttt{Action Package} & Devem-se remover todas as instâncias das metaclasses \texttt{Reads}, \texttt{Writes} e \texttt{Address} que utilizam a instância da metaclasse \texttt{StorableUnit} deletada. \tabularnewline
 \cline{2-3}
-& \texttt{Structure Package} & Se a \texttt{StorableUnit} a ser removida esta contida em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que por sua vez esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement} e que esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se remover todas as instâncias de \texttt{Reads}, \texttt{Writes} e \texttt{Address} que utilizam a instância da metaclasse \texttt{StorableUnit} deletada. Em seguida, deve-se atualizar o meta-atributo \texttt{density} da metaclasse \texttt{AggregationRelationship}. \tabularnewline
+& \texttt{Structure Package} & Se a \texttt{StorableUnit} a ser removida estiver contida em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que, por sua vez, está associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, a qual está associada a algum elemento arquitetural por meio do associação \texttt{implementation}, então, deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, devem-se remover todas as instâncias de \texttt{Reads}, \texttt{Writes} e \texttt{Address} que utilizam a instância da metaclasse \texttt{StorableUnit} deletada. Em seguida, deve-se atualizar o meta-atributo \texttt{density} da metaclasse \texttt{AggregationRelationship}. \tabularnewline
 \cline{2-3}
-& \texttt{Data Package} & Deve-se identificar uma instância da metaclasse \texttt{ColumnSet} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{StorableUnit} a ser removida. Então deve-se também remover a instância da metaclasse \texttt{ColumnSet}. \tabularnewline
+& \texttt{Data Package} & Deve-se identificar uma instância da metaclasse \texttt{ColumnSet} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{StorableUnit} a ser removida. Então, deve-se também remover a instância da metaclasse \texttt{ColumnSet}. \tabularnewline
 \cline{2-3}
 & \texttt{Conceptual Package} & Não se aplica. \tabularnewline
 \hline
 \texttt{change} \texttt{StorableUnit} & \texttt{Code Package} & Renomeia o meta-atributo \texttt{name} da instância da metaclasse \texttt{StorableUnit}.\tabularnewline
 \cline{2-3}
-& \texttt{Action Package} & Deve-se alterar todas as metaclasses que utilizam a instância da metaclasse \texttt{StorableUnit} renomeada. Todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Reads}, \texttt{Writes} e \texttt{Address} devem ser renomeadas. \tabularnewline
+& \texttt{Action Package} & Devem-se alterar todas as metaclasses que utilizam a instância da metaclasse \texttt{StorableUnit} renomeada. Todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Reads}, \texttt{Writes} e \texttt{Address} devem ser renomeadas. \tabularnewline
 \cline{2-3}
-& \texttt{Structure Package} & Se a \texttt{StorableUnit} a ser renomeado esta contido em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que por sua vez esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, e que esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se renomear todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Reads}, \texttt{Writes} e \texttt{Address} que utilizam a instância da metaclasse \texttt{StorableUnit} renomeada. \tabularnewline
+& \texttt{Structure Package} & Se a \texttt{StorableUnit} a ser renomeada estiver contido em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que, por sua vez, está associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, a qual está associada a algum elemento arquitetural por meio da associação \texttt{implementation}, então, deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se renomear todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Reads}, \texttt{Writes} e \texttt{Address} que utilizam a instância da metaclasse \texttt{StorableUnit} renomeada. \tabularnewline
 \cline{2-3}
 & \texttt{Data Package} & Deve-se identificar uma instância da metaclasse \texttt{ColumnSet} que possui o mesmo meta-atributo \texttt{name} da instância da metaclasse \texttt{StorableUnit} a ser renomeada. Em seguida, deve-se renomear o meta-atributo \texttt{name} da instância da metaclasse \texttt{ColumnSet}. \tabularnewline
 \cline{2-3}
@@ -179,7 +179,7 @@ As regras pré-definidas para as refatorações realizadas em instâncias da met
  \end{longtable}
 
 
-Finalmente as regras pré-definidas para as refatorações realizadas em instâncias da metaclasse \texttt{MethodUnit} são apresentadas na Tabela~\ref{tab:propagacaoes_kdm_sinc_method}.
+Finalmente, as regras pré-definidas para as refatorações realizadas em instâncias da metaclasse \texttt{MethodUnit} são apresentadas na Tabela~\ref{tab:propagacaoes_kdm_sinc_method}.
 
 \begin{longtable}{ | m{1.9cm} | m{3.57cm}| m{9.3cm} | }
  \caption{Propagações definidas para refatorações realizadas em instâncias metaclasse \texttt{MethodUnit}.\label{tab:propagacaoes_kdm_sinc_method}}\\
@@ -219,9 +219,9 @@ Finalmente as regras pré-definidas para as refatorações realizadas em instân
 \hline 
  \texttt{delete} \texttt{MethodUnit} & \texttt{Code Package} & Deleta-se uma instância da metaclasse \texttt{MethodUnit}.\tabularnewline
 \cline{2-3} 
-& \texttt{Action Package} & Deve-se remover todas as instâncias das metaclasses \texttt{Calls} que utilizam a instância da metaclasse \texttt{MethodUnit} deleta. \tabularnewline
+& \texttt{Action Package} & Devem-se remover todas as instâncias das metaclasses \texttt{Calls} que utilizam a instância da metaclasse \texttt{MethodUnit} deletada. \tabularnewline
 \cline{2-3}
-& \texttt{Structure Package} & Se a \texttt{MethodUnit} a ser removida esta contida em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que por sua vez esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, e que esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se remover todas as instâncias de \texttt{Calls} que utilizam a instância da metaclasse \texttt{StorableUnit} deletada. Em seguida, deve-se atualizar o meta-atributo \texttt{density} da metaclasse \texttt{AggregationRelationship}. \tabularnewline
+& \texttt{Structure Package} & Se a \texttt{MethodUnit} a ser removida estiver contida em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que, por sua vez, está associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, a qual está associada a algum elemento arquitetural por meio da associação \texttt{implementation}, então devem-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se remover todas as instâncias de \texttt{Calls} que utilizam a instância da metaclasse \texttt{StorableUnit} deletada. Em seguida, deve-se atualizar o meta-atributo \texttt{density} da metaclasse \texttt{AggregationRelationship}. \tabularnewline
 \cline{2-3}
 & \texttt{Data Package} & Não se aplica. \tabularnewline
 \cline{2-3}
@@ -229,9 +229,9 @@ Finalmente as regras pré-definidas para as refatorações realizadas em instân
 \hline
 \texttt{change} \texttt{MethodUnit} & \texttt{Code Package} & Renomeia o meta-atributo \texttt{name} da instância da metaclasse \texttt{MethodUnit}.\tabularnewline
 \cline{2-3}
-& \texttt{Action Package} & Deve-se alterar todas as metaclasses que utilizam a instância da metaclasse \texttt{MethodUnit} renomeada. Todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Calls} devem ser renomeadas. \tabularnewline
+& \texttt{Action Package} & Devem-se alterar todas as metaclasses que utilizam a instância da metaclasse \texttt{MethodUnit} renomeada. Todas as associações \texttt{to} ou \texttt{from} das instâncias das metaclasses \texttt{Calls} devem ser renomeadas. \tabularnewline
 \cline{2-3}
-& \texttt{Structure Package} & Se o \texttt{MethodUnit} a ser renomeado esta contido em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que por sua vez esta associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, e que esta associado a algum elemento arquitetural por meio do associação \texttt{implementation}, então deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, deve-se renomear todas as associações \texttt{to} ou \texttt{from} da instância da metaclasse \texttt{Calls} que utilizam a instância da metaclasse \texttt{MethodUnit} renomeada. \tabularnewline
+& \texttt{Structure Package} & Se o \texttt{MethodUnit} a ser renomeado estiver contido em uma instância de \texttt{ClassUnit} por meio da associação \texttt{codeElement}, que, por sua vez, está associada a uma instância \texttt{Package} por meio da associação \texttt{codeElement}, a qual está associada a algum elemento arquitetural por meio da associação \texttt{implementation}, então, deve-se verificar se o elemento arquitetural possui uma instância da metaclasse \texttt{AggregationRelationship}. Em seguida, devem-se renomear todas as associações \texttt{to} ou \texttt{from} da instância da metaclasse \texttt{Calls}, as quais utilizam a instância da metaclasse \texttt{MethodUnit} renomeada. \tabularnewline
 \cline{2-3}
 & \texttt{Data Package} & Não se aplica. \tabularnewline
 \cline{2-3}
