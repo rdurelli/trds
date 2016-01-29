@@ -40,7 +40,7 @@ Refatorações aplicadas em nível de modelos são transformações especiais ap
 \item Apoio Computacional: Implementar um apoio computacional para auxiliar o engenheiro de software a aplicar a refatoração de forma transparente em instâncias do metamodelo KDM (ver Capítulo~\ref{chapter:ferramenta_kdm_re}).
 \end{itemize}
 
-No contexto desta tese, cada refatoração criada para o metamodelo KDM consiste em uma transformação que é executada em uma instância do metamodelo KDM. Além disso, as refatorações também possuem pré- e pós-condições que devem ser satisfeitas antes e depois da transformação/refatoração ser executada. Por exemplo, a refatoração \texttt{Remove ClassUnit} tem como pré-condição que uma determinada instância de \texttt{ClassUnit} deve existir na instância do KDM sendo refatorada. Nota-se que a definição de refatoração no contexto desta tese engloba transformações que preservam o comportamento no contexto de modelos. No contexto do metamodelo KDM, a preservação de comportamento é alcançada por meio do pacote \texttt{Action}, o qual é apresentado no Capítulo~\ref{chapter:catalogo_refactoring_KDM}, Seção~\ref{sec:actionPackage}. Ainda, é importante destacar que, apenas a semântica e a sintaxe são garantidas e preservadas no contexto desta tese após a aplicação de refatorações no KDM. Garantir que a saída/resultado de um sistema representado por meio do KDM não mude após a aplicação de refatorações não é o objetivo desta tese, uma vez que a instância do KDM não pode ser executada. Diante disso, apenas a semântica e a sintaxe da instância do KDM são preservadas. Dessa forma, a Definição~\ref{def:refatoracao} formaliza refatorações no contexto desta tese:
+No contexto desta tese, cada refatoração criada para o metamodelo KDM consiste em uma transformação que é executada em uma instância do metamodelo KDM. Além disso, as refatorações também possuem pré- e pós-condições que devem ser satisfeitas antes e depois da transformação/refatoração ser executada. Por exemplo, a refatoração \texttt{Remove ClassUnit} tem como pré-condição que uma determinada instância de \texttt{ClassUnit} deve existir na instância do KDM sendo refatorada. Nota-se que a definição de refatoração no contexto desta tese engloba transformações que preservam o comportamento no contexto de modelos. No contexto do metamodelo KDM, a preservação de comportamento é alcançada por meio do pacote \texttt{Action}, o qual é apresentado no Capítulo~\ref{chapter:fundamentacao_teorica}, Seção~\ref{sec:actionPackage}. Ainda, é importante destacar que, apenas a semântica e a sintaxe são garantidas e preservadas no contexto desta tese após a aplicação de refatorações no KDM. Garantir que a saída/resultado de um sistema representado por meio do KDM não mude após a aplicação de refatorações não é o objetivo desta tese, uma vez que a instância do KDM não pode ser executada. Diante disso, apenas a semântica e a sintaxe da instância do KDM são preservadas. Dessa forma, a Definição~\ref{def:refatoracao} formaliza refatorações no contexto desta tese:
 
 
 \begin{definicao}\label{def:refatoracao}
@@ -314,7 +314,7 @@ module (*@<\textbf{\#Arg1\#}>@*);
 create OUT : MM refining IN : MM;
 rule delete(*@<\textbf{\#Arg2\#}>@*) {
   from
-      source : MM!(*@<\textbf{\%Arg3\%}>@*) (source.name = (*@<\textbf{$@$Arg4$@$}>@*))
+      source : MM!(*@<\textbf{\%Arg3\%}>@*) (source.name = (*@<\textbf{$@$Arg4$@$}>@*) and source.refImmediateComposite().name = (*@<\textbf{$@$Arg5$@$}>@*)
   to
       drop
 }
@@ -338,10 +338,12 @@ O guia para auxiliar o engenheiro de modernização a especificar corretamente a
 \hline
 \multicolumn{1}{|c|}{\textbf{<$@$Arg4@>}} & Nome da instância do elemento estrutural especificado no \textbf{<\%Arg3\%>}. Deve-se especificar o nome da instância da metaclasse que representa a instância da metaclasse a ser deletada. Esse argumento depende do domínio do sistema que será aplicada à refatoração e é identificada no meta-atributo \texttt{name} das metaclasses do KDM.  \\ 
 \hline
+\multicolumn{1}{|c|}{\textbf{<$@$Arg5@>}} & Nome da instância do elemento estrutural que contém o elemento especificado no \textbf{<\%Arg3\%>}. Deve-se especificar o nome da instância da metaclasse que possui a instância da metaclasse a ser deletada. Esse argumento depende do domínio do sistema que será aplicada à refatoração e é identificada no meta-atributo \texttt{name} das metaclasses do KDM.  \\ 
+\hline
 \end{tabular}
 \end{table}
 
-Os argumentos \textbf{<\#Arg1\#>} e \textbf{<\#Arg2\#>} foram substituídos pelas \textit{Strings} \texttt{remove} e \texttt{Class}, respectivamente (ver linhas 1 e 3). Na linha 5 \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{ClassUnit} e o argumento \textbf{<$@$Arg4$@$>} foi substituído pela \textit{String} \texttt{\aspas{ClassToRemove}}. Essa \textit{String} representa o nome da instância da \texttt{ClassUnit} que se almeja deletar.
+O argumento \textbf{<\#Arg1\#>} foi substituído pela \textit{String} \texttt{remove} (ver linha 1). Em seguida, o argumento \textbf{<\#Arg2\#>} foi substituído pela \textit{String} \texttt{CLass} (ver linha 3). Depois, na linha 5 o argumento \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{ClassUnit} e o argumento \textbf{<$@$Arg4$@$>} foi substituído pela \textit{String} \texttt{\aspas{ClassToRemove}}. Essa \textit{String} representa o nome da instância da \texttt{ClassUnit} que se almeja deletar. O argumento \textbf{<$@$Arg5$@$>} foi substituído pela \textit{String}\texttt{\aspas{Package\-ThatContainsTheClassToRemove}}, a qual representa o pacote que contém a classe que será deletada.
 
 
 \begin{codigo}[caption={[ATL para realizar a operação atômica \texttt{delete} \texttt{ClassUnit}.] ATL para realizar a operação atômica \texttt{delete} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:exemplo_delete_classUnit}, language=ATL]{Name}
@@ -349,7 +351,7 @@ module remove;
 create OUT : MM refining IN : MM;
 rule deleteClass {
   from
-      source : MM!ClassUnit (source.name = (*@\aspas{ClassToRemove}@*))
+      source : MM!ClassUnit (source.name = (*@\aspas{ClassToRemove}@*) and source.refImmediateComposite().name = (*@\aspas{PackageThatContainsTheClassToRemove}@*))
   to
       drop
 }
@@ -643,7 +645,7 @@ rule deleteStorableUnit {
 
 \subsubsection{Definir Restrições}
 
-Após identificar as operações que compõem a refatoração e implementar a refatoração utilizando os \textit{templates} definidos na abordagem, o próximo passo consiste na definição de asserções (pré- e pós-condições) da refatoração. Para cada operação atômica identifica no segundo passo da abordagem \textit{templates} são disponibilizados para auxiliar o engenheiro de modernização a criar tais asserções. No Código-fonte~\ref{codigo:precondicao_push_down_attribute}, é apresentada a pré-condição criada para a refatoração \textit{Push Down Attribute}, a qual foi criada usando uma combinação dos \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_add} e~\ref{codigo:pre_template_delete}. Similarmente, no Código-fonte~\ref{codigo:poscondicao_push_down_attribute2}, é apresentada a pós-condição criada para a refatoração \textit{Push Down Attribute}.
+Após identificar as operações que compõem a refatoração e implementar a refatoração utilizando os \textit{templates} definidos na abordagem, o próximo passo consiste na definição de asserções (pré- e pós-condições) da refatoração. Para cada operação atômica identifica no segundo passo da abordagem \textit{templates} são disponibilizados para auxiliar o engenheiro de modernização a criar tais asserções. No Código-fonte~\ref{codigo:precondicao_push_down_attribute}, é apresentada a pré-condição criada para a refatoração \textit{Push Down Attribute}, a qual foi criada usando uma combinação dos \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_add} e~\ref{codigo:pre_template_delete}. 
 
 
 \begin{codigo}[caption={[Pré-condição da refatoração \textit{Push Down Attribute}.] Pré-condição da refatoração \textit{Push Down Attribute}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:precondicao_push_down_attribute}, language=OCL]{Name}
@@ -651,6 +653,8 @@ context StorableUnit::preCond(newName: String)
 pre : ClassUnit.allInstances->select(e : ClassUnit | a.name = (*@\aspas{\{sub-\texttt{ClassUnit}Selecionada\}}@*) and not StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = newName) 
 and ClassUnit.allInstances->select(e : ClassUnit | a.name = (*@\{\texttt{ClassUnit}.name\}@*)) and StorableUnit.refImmediateComposite().codeElement(*@$\rightarrow$@*)exist (e : StorableUnit | e.name = newName)
 \end{codigo}
+
+Similarmente, no Código-fonte~\ref{codigo:poscondicao_push_down_attribute2}, é apresentada a pós-condição criada para a refatoração \textit{Push Down Attribute}.
 
 \begin{codigo}[caption={[Pós-condição da refatoração \textit{Push Down Attribute}.] Pós-condição da refatoração \textit{Push Down Attribute}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:poscondicao_push_down_attribute2}, language=OCL]{Name}
 context StorableUnit::preCond(newName: String)
@@ -736,7 +740,7 @@ module extractClassUnit;
 create OUT : MM refining IN : MM;
 rule deleteStorableUnit {
 	from
-		source : MM!StorableUnit (source.name = (*@\aspas{\{StorableUnit\}Selecionado}@*))
+		source : MM!StorableUnit (source.name = (*@\aspas{\{StorableUnit\}Selecionado}@*) and source.refImmediateComposite().name = (*@\aspas{\{ClassUnit\}Selecionado}@*))
 	to 
 		drop
 }
@@ -858,7 +862,7 @@ Antes de criar qualquer refatoração para o metamodelo KDM, o primeiro passo di
 
 Após identificar todos os elementos estruturais e identificar o mapeamento entre POO e o metamodelo KDM, o próximo passo é identificar quais operações compõem a refatoração que se almeja criar para o KDM. No contexto desta tese, todas as refatorações podem ser agrupadas em nível de granularidade. As granularidades podem ser definidas em dois níveis de operações: (\textit{i}) operação atômica e (\textit{ii}) operações compostas. As granularidades definidas como operações atômicas podem ser especificadas por meio de operações primitivas (\texttt{addd}, \texttt{delete} e \texttt{change}). As refatorações de granularidade compostas são uma combinação de operações atômicas (ver Tabela~\ref{tab:refatoringsCatalogo}). Em seguida, no próximo passo, o engenheiro de modernização deve implementar a refatoração por meio da linguagem de transformação ATL. Dessa forma, \textit{templates} foram criados para auxiliar os engenheiros de modernização a implementar refatorações utilizando a linguagem ATL. Posteriormente, o engenheiro de modernização deve implementar as restrições (pré- e pós-condições) da refatoração. Similarmente, \textit{templates} também foram definidos para auxiliar os engenheiros de modernização a criar as restrições para uma refatoração em nível do KDM.
 
-Após criar uma determinada refatoração, bem como suas pré- e pós-condições para o metamodelo KDM, o engenheiro de modernização deve especificar e documentar a refatoração. Esse passo é opcional e fica a critério do engenheiro de modernização realizá-lo. Caso o engenheiro almeje documentar a refatoração duas especificações podem ser utilizadas: (\textit{i}) especificação informal e (\textit{ii}) especificação formal. Na primeira, a ideologia básica é permitir que o engenheiro de modernização expresse o propósito da refatoração por meio de linguagem natural. Na segunda, o engenheiro de modernização representa as pré- e pós-condições, bem como a transformação/refatoração propriamente dita em linguagens executáveis - OCL e ATL foram utilizadas, respectivamente. Ambas as especificações são úteis para o engenheiro de modernização, pois a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração e a especificação formal facilita a visualização da implementação da refatoração e suas asserções. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. %É importante destacar que neste capítulo apenas as refatorações \textit{Rename ClassUnit}, \textit{Pull Up StorableUnit}, \textit{Push Down StorableUnit} e \textit{Extract ClassUnit} são apresentadas e detalhadas.
+Após criar uma determinada refatoração, bem como suas pré- e pós-condições para o metamodelo KDM, o engenheiro de modernização pode especificar e documentar a refatoração. Esse passo é opcional e fica a critério do engenheiro de modernização realizá-lo. Caso o engenheiro almeje documentar a refatoração duas especificações podem ser utilizadas: (\textit{i}) especificação informal e (\textit{ii}) especificação formal. Na primeira, a ideologia básica é permitir que o engenheiro de modernização expresse o propósito da refatoração por meio de linguagem natural. Na segunda, o engenheiro de modernização representa as pré- e pós-condições, bem como a transformação/refatoração propriamente dita em linguagens executáveis - OCL e ATL foram utilizadas, respectivamente. Ambas as especificações são úteis para o engenheiro de modernização, pois a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração e a especificação formal facilita a visualização da implementação da refatoração e suas asserções. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. %É importante destacar que neste capítulo apenas as refatorações \textit{Rename ClassUnit}, \textit{Pull Up StorableUnit}, \textit{Push Down StorableUnit} e \textit{Extract ClassUnit} são apresentadas e detalhadas.
 
 Seguindo os passos apresentados neste capítulo, o engenheiro de modernização pode criar refatorações para o metamodelo KDM. No entanto, as especificações formais e informais resultantes não são suficientes para promover o reúso de refatorações no contexto do metamodelo KDM. Diante disso, no Capítulo~\ref{chapter:Toward_a_Refactoring_Metamodel_for_KDM} é apresentado um metamodelo para auxiliar o engenheiro de modernização a promover o reúso de refatorações no contexto do metamodelo KDM. Com a utilização desse metamodelo, informações (metadados) sobre refatorações podem ser reutilizadas de forma independente de linguagem e plataforma. %No Capítulo~\ref{chapter:Abordagem_de_sincronizacao} uma abordagem para manter instâncias do metamodelo KDM sincronizada e consistente após a aplicação de refatoração é apresentada. 
 No Capítulo~\ref{chapter:ferramenta_kdm_re}, é apresentado um apoio computacional denominado KDM-RE. Esse apoio computacional é composto por três \textit{plug-ins} do Eclipse: (\textit{i}) o primeiro compreende um conjunto de \textit{Wizards} que apoia o engenheiro de software na aplicação das refatorações em diagramas de classe UML; (\textit{ii}) o segundo consiste em um apoio à importação e ao reúso de refatorações disponíveis no repositório; (\textit{iii}) o terceiro constitui um módulo de propagação de mudanças que permite manter modelos internos sincronizados do KDM; 
