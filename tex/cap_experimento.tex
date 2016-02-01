@@ -68,19 +68,19 @@ Dessa forma, para avaliar a \textbf{$QP_1$}, sete sistemas foram escolhidos para
 \hline
 Sistemas & Siglas & Versão & KLOC & Classes \\ 
 \hline
-Xerces-J & XJ & 2.7.0 & 240 & 991\\ 
+Xerces-J & \sigla*{XJ}{Xerces-J} XJ & 2.7.0 & 240 & 991\\ 
 \hline
-Jexel & JEX & 1.3 & 50.4 & 75\\
+Jexel & \sigla*{JEX}{Jexel} JEX & 1.3 & 50.4 & 75\\
 \hline
-JFreeChart & JFC & 1.0.9 & 170 & 521\\ 
+JFreeChart &\sigla*{JFC}{JFreeChart} JFC & 1.0.9 & 170 & 521\\ 
 \hline
-Jester & JES & 0.7 & 48 & 14\\ 
+Jester & \sigla*{JES}{Jester} JES & 0.7 & 48 & 14\\ 
 \hline
-GanttProject & GP & 1.10.2 & 41 & 245\\ 
+GanttProject & \sigla*{GP}{GanttProject} GP & 1.10.2 & 41 & 245\\ 
 \hline
-ArtofIllusion & AOIL &  2.8.1 & 87 & 459\\ 
+ArtofIllusion & \sigla*{AOIL}{ArtofIllusion} AOIL &  2.8.1 & 87 & 459\\ 
 \hline
-JHotDraw & JHD & 7.0.6 & 16 & 468 \\ 
+JHotDraw & \sigla*{JHD}{JHotDraw} JHD & 7.0.6 & 16 & 468 \\ 
 \hline
 \end{tabular}
 \end{table}
@@ -115,31 +115,31 @@ A Tabela~\ref{tab:QMOOD_quality_metrics} apresenta as propriedades de POO e as m
 \caption{Métricas utilizadas no modelo QMOOD~\cite{Bansiya_QMOOD}.}
 \label{tab:QMOOD_quality_metrics}
 \begin{center}
-\begin{tabular}{ | m{4.2cm} | m{1.4cm}| m{6cm} | } 
+\begin{tabular}{ | m{4cm} | m{4.6cm}| m{6cm} | } 
 \hline
 Propriedades de Projeto & Métrica & Descrição \\ 
 \hline
-Tamanho do Projeto & DSC & Número de classes no projeto \\ 
+Tamanho do Projeto & \sigla{DSC}{\textit{Design Size in Classes}} & Número de classes no projeto \\ 
 \hline
-Hierarquias & NOH & Número de Hierarquias \\ 
+Hierarquias & \sigla{NOH}{\textit{Number Of Hierarchies}} & Número de Hierarquias \\ 
 \hline
-Abstração & ANA & Média de Ancestrais \\ 
+Abstração & \sigla{ANA}{\textit{Average Number of Ancestors}} ANA & Média de Ancestrais \\ 
 \hline
-Encapsulamento & DAM & Métrica de acesso a dados \\ 
+Encapsulamento & \sigla{DAM}{\textit{Data Access Metric}} & Métrica de acesso a dados \\ 
 \hline
-Acoplamento & DCC & Acoplamento direto entre classes \\ 
+Acoplamento & \sigla{DCC}{\textit{Direct Class Coupling}} & Acoplamento direto entre classes \\ 
 \hline
-Coesão & CAM & Coesão entre os métodos da classe \\ 
+Coesão & \sigla{CAM}{\textit{Cohesion Among Methods in class}} & Coesão entre os métodos da classe \\ 
 \hline
-Composição & MOA & Medida de agregação \\ 
+Composição & \sigla{MOA}{\textit{Measure Of Aggregation}} & Medida de agregação \\ 
 \hline
-Herança & MFA & Abstração funcional \\ 
+Herança & \sigla{MFA}{\textit{Measure of Functional Abstraction}} & Abstração funcional \\ 
 \hline
-Polimorfismo & NOP & Número de métodos polimórficos \\ 
+Polimorfismo & \sigla{NOP}{\textit{Number Of Polymorphic methods}} & Número de métodos polimórficos \\ 
 \hline
-Troca de Mensagens & CIS & Tamanho da interface de uma classe \\ 
+Troca de Mensagens & \sigla{CIS}{\textit{Class Interface Size}} & Tamanho da interface de uma classe \\ 
 \hline
-Complexidade & NOM & Quantidade de métodos \\ 
+Complexidade & \sigla{NOM}{\textit{Number of methods}} & Quantidade de métodos \\ 
 \hline
 \end{tabular}
 \end{center}
@@ -298,23 +298,23 @@ As refatorações que foram aplicadas nos sete sistemas estão apresentadas na T
 \hline
 \multicolumn{1}{|c|}{Refatorações} & \multicolumn{1}{c|}{Siglas} & \multicolumn{1}{c|}{Sistemas} & \multicolumn{1}{c|}{Siglas}\\ 
 \hline
-\multicolumn{1}{|c|}{Move Method} & \multicolumn{1}{c|}{MM} & \multicolumn{1}{c|}{Xerces-J} & \multicolumn{1}{c|}{XJ}\\ 
+\multicolumn{1}{|c|}{Move Method} & \multicolumn{1}{c|}{\sigla*{MM}{\textit{Move Method}}MM} & \multicolumn{1}{c|}{Xerces-J} & \multicolumn{1}{c|}{XJ}\\ 
 \hline
-\multicolumn{1}{|c|}{Move Field} & \multicolumn{1}{c|}{MF} & \multicolumn{1}{c|}{Jexel} & \multicolumn{1}{c|}{JEX}\\ 
+\multicolumn{1}{|c|}{Move Field} & \multicolumn{1}{c|}{\sigla*{MF}{\textit{Move Field}}MF} & \multicolumn{1}{c|}{Jexel} & \multicolumn{1}{c|}{JEX}\\ 
 \hline
-\multicolumn{1}{|c|}{Extract Class} & \multicolumn{1}{c|}{EC} & \multicolumn{1}{c|}{JFreeChart} & \multicolumn{1}{c|}{JFC}\\ 
+\multicolumn{1}{|c|}{Extract Class} & \multicolumn{1}{c|}{\sigla*{EC}{\textit{Extract Class}}EC} & \multicolumn{1}{c|}{JFreeChart} & \multicolumn{1}{c|}{JFC}\\ 
 \hline
-\multicolumn{1}{|c|}{Extract Interface} & \multicolumn{1}{c|}{EI} & \multicolumn{1}{c|}{Jester} & \multicolumn{1}{c|}{JES} \\ 
+\multicolumn{1}{|c|}{Extract Interface} & \multicolumn{1}{c|}{\sigla*{EI}{\textit{Extract Interface}}EI} & \multicolumn{1}{c|}{Jester} & \multicolumn{1}{c|}{JES} \\ 
 \hline
-\multicolumn{1}{|c|}{Move Class} & \multicolumn{1}{c|}{MC} & \multicolumn{1}{c|}{GanttProject} & \multicolumn{1}{c|}{GP} \\ 
+\multicolumn{1}{|c|}{Move Class} & \multicolumn{1}{c|}{\sigla*{MC}{\textit{Move Class}}MC} & \multicolumn{1}{c|}{GanttProject} & \multicolumn{1}{c|}{GP} \\ 
 \hline
-\multicolumn{1}{|c|}{Pull Up Field} & \multicolumn{1}{c|}{PUF} & \multicolumn{1}{c|}{ArtofIllusion} & \multicolumn{1}{c|}{AOIL} \\ 
+\multicolumn{1}{|c|}{Pull Up Field} & \multicolumn{1}{c|}{\sigla*{PUF}{\textit{Pull Up Field}}PUF} & \multicolumn{1}{c|}{ArtofIllusion} & \multicolumn{1}{c|}{AOIL} \\ 
 \hline
-\multicolumn{1}{|c|}{Pull Up Method} & \multicolumn{1}{c|}{PUM} & \multicolumn{1}{c|}{JHotDraw} & \multicolumn{1}{c|}{JHD} \\ 
+\multicolumn{1}{|c|}{Pull Up Method} & \multicolumn{1}{c|}{\sigla*{PUM}{\textit{Pull Up Method}}PUM} & \multicolumn{1}{c|}{JHotDraw} & \multicolumn{1}{c|}{JHD} \\ 
 \hline
-\multicolumn{1}{|c|}{Push Down Field} & \multicolumn{1}{c|}{PDF} &\multicolumn{1}{c|}{\textemdash} &\multicolumn{1}{c|}{\textemdash} \\ 
+\multicolumn{1}{|c|}{Push Down Field} & \multicolumn{1}{c|}{\sigla*{PDF}{\textit{Push Down Field}}PDF} &\multicolumn{1}{c|}{\textemdash} &\multicolumn{1}{c|}{\textemdash} \\ 
 \hline
-\multicolumn{1}{|c|}{Push Down Method} & \multicolumn{1}{c|}{PDM} &\multicolumn{1}{c|}{\textemdash} &\multicolumn{1}{c|}{\textemdash} \\ 
+\multicolumn{1}{|c|}{Push Down Method} & \multicolumn{1}{c|}{\sigla*{PDM}{\textit{Push Down Method}}PDM} &\multicolumn{1}{c|}{\textemdash} &\multicolumn{1}{c|}{\textemdash} \\ 
 \hline
 \end{tabular}
 \end{table}
@@ -339,6 +339,8 @@ Na Tabela~\ref{tab:experimento_dados_refatoracoes_aplicadas} é possível observ
 \multicolumn{1}{|c|}{PUM}          & 10 & 9   & 8   & 6   & 8  & 14   & 13  & 9.71  & 6.86\%     \\ \hline
 \multicolumn{1}{|c|}{PDF}          & 17 & 13  & 15  & 10  & 9  & 16   & 8   & 12.57 & 8.88\%      \\ \hline
 \multicolumn{1}{|c|}{PDM}          & 16 & 12  & 14  & 11  & 10 & 18   & 15  & 13.71 & 9.69\%      \\ \hline
+\multicolumn{1}{|c|}{TOTAL}          & 157
+ & 134 & 149 & 134  & 133 & 164   & 120  & \textemdash & 100.00\%      \\ \hline
 \end{tabular}
 \end{table}
 
