@@ -78,7 +78,7 @@ Na Figura~\ref{fig:todos_os_passos_diretrizes}, uma microvisão da Figura~\ref{f
 	% Requires \usepackage{graphicx}
 	\caption{Passos para criar refatorações para o KDM.}
 	\label{fig:todos_os_passos_diretrizes}
-	\includegraphics[scale=0.7]{images/Abordagem_Criar_RefatoracaoFinal2}
+	\includegraphics[scale=0.6]{images/Abordagem_Criar_RefatoracaoFinal2}
 	\fautor
 \end{figure}
 
@@ -284,9 +284,14 @@ Por meio da junção dessas operações atômicas, é possível criar refatoraç
 
 Após o engenheiro de modernização escolher qual refatoração irá criar para o metamodelo KDM e identificar qual(is) é(são) a(s) operação(ões) que compõe(m) a refatoração escolhida, o próximo passo é a implementação da refatoração utilizando técnicas e linguagem de transformação em modelo. Na próxima seção, maiores informações são apresentadas.
 
-\subsection{Implementar Refatoração}\label{sec:linguagemDeTransformacaoUtilizada}
+\subsection{Implementar Operações}\label{sec:linguagemDeTransformacaoUtilizada}
 
-Neste passo, o engenheiro de modernização deve implementar as refatorações para o KDM tendo como base as metaclasses e as operações anteriormente identificadas. Os artefatos de entrada para a correta condução deste passo são: (\textit{i}) linguagem de transformação e (\textit{ii}) um conjunto de \textit{templates}. Após a condução deste passo, o artefato gerado e a refatoração criada para o KDM. 
+%Neste passo, o objetivo é implementar as operações identificadas no passo anterior. Os artefatos de entrada para a correta condução deste passo são: (\textit{i}) linguagens 
+
+%identificar as metaclasses do KDM que serão usadas na refatoração que será implementada para o KDM. Os artefatos de entrada para a correta condução deste passo são: (\textit{i}) Mapeamento KDM - POO e (\textit{ii}) Refatoração Desejada. Após a conclusão deste passo, o artefato gerado é uma lista contendo todas as metaclasses que serão utilizadas na criação da refatoração para o KDM.
+
+
+Neste passo, o engenheiro de modernização deve implementar as operações atômicas. Os artefatos de entrada para a correta condução deste passo são: (\textit{i}) linguagem de transformação e (\textit{ii}) um conjunto de \textit{templates}. Após a condução deste passo, o artefato gerado é uma lista de operações atômicas implementas em ATL. 
 
 %Na literatura, é possível identificar um conjunto de técnicas e linguagens específicas para auxiliar a condução e especificação de transformação de modelos~\cite{Biehl_2010, Mens_2006, Allilaire_06}. As duas abordagens mais utilizadas na literatura para a elaboração e condução de transformações/refatoração de modelos são: (\textit{i}) abordagem de manipulação direta e (\textit{ii}) abordagem de transformação genérica. A primeira utiliza linguagens de programação tradicional para a aplicação das refatorações. Ferramentas que utilizam essa abordagem usam linguagens como Java, C, C++ etc.~\cite{Bruneliere_2014}. Usualmente, tais linguagens proporcionam uma infraestrutura mínima para organizar as transformações. Algumas características de suma importância para refatorações de modelo, como regras de transformações e preservação de comportamento, são usualmente criadas pelo engenheiro, uma vez que tais linguagens não possuem API para lidar com tais características. Dessa forma, refatorações que utilizam essa abordagem tornam-se dependentes de plataformas, afetando a reusabilidade das refatorações. A segunda abordagem, transformação genérica, utiliza linguagens desenvolvidas especialmente para realizar transformações em modelos, tais como ATL, QVT, Kermeta, etc. Usualmente, tais abordagens são conhecidas como endógenas e são implementadas utilizando técnicas de reescrita de grafo (ver Capítulo~\ref{chapter:fundamentacao_teorica} Seção~\ref{sec:transformacoes_de_modelos}). Diferentemente da primeira abordagem, a segunda abordagem facilita o reúso de refatorações. Por exemplo, utilizando a segunda abordagem, o engenheiro de modernização pode criar um conjunto de regras de refatorações por meio de linguagens de transformações genéricas, podendo tais refatorações serem invocadas, utilizando qualquer linguagem de programação. O engenheiro de modernização pode escrever um código em Java que tem como entrada uma instância do metamodelo KDM para ser refatorado, a reforação a ser aplicada nessa instância e um conjunto de parâmetros para realizar a refatoração na instância do metamodelo KDM.
 
@@ -296,7 +301,7 @@ Neste passo, o engenheiro de modernização deve implementar as refatorações p
 %ATL possui um módulo de execução denominado \textit{refining}, que é utilizado para criar refatorações em nível de modelo. Esse módulo foi introduzido para facilitar a programação de refatorações. Com o módulo \textit{refining}, os engenheiros de modernização podem se concentrar no código ATL, dedicado à geração de elementos estruturados modificados. Outros elementos estruturados do KDM (por exemplo, aqueles que permanecem inalteradas antes e após a refatoração) são implicitamente processados pelo mecanismo da ATL. O módulo \textit{refining} pode ser utilizado simplesmente substituindo a palavra-chave \texttt{from} pela \texttt{refining}. Obviamente, o modo de \textit{refining} só pode ser utilizado para as transformações endógenas (\aspas{\textit{in-place}}) (ver Capítulo~\ref{chapter:fundamentacao_teorica}, Seção~\ref{sec:transformacoes_de_modelos})
 
 
-Como apresentado na Seção~\ref{sec:refatoracao_para_o_metamodelo_kdm}, as refatorações no contexto desta Tese são agrupadas em dois níveis de operações: (\textit{i}) operações atômicas e (\textit{ii}) operações compostas. As granularidades definidas como operações atômicas são: \texttt{add}, \texttt{delete} e \texttt{change}. Essas operações atômicas podem ser facilmente implementadas em ATL. Dessa forma, um \textit{template} para cada operação atômica é disponibilizado como artefato para auxiliar o engenheiro de modernização a criar genericamente refatorações para o KDM. O \textit{template} para a operação atômica \texttt{add} é apresentado no Código-fonte~\ref{codigo:template_addKDMElement}. As partes fixas dos \textit{templates} são formadas por texto ATL e as partes variantes são formadas por três tipos de instruções: (\textit{i}) argumentos, \textbf{ArgX}\footnote{\textbf{ArgX}, onde \textbf{X} representa um número sequencial dos argumentos. \label{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<\#}} e \aspas{\textbf{\#>}} e que devem ser substituídos por \textit{strings} válidas na linguagem ATL; (\textit{ii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e que devem ser substituídos por metaclasses do metamodelo KDM, por exemplo, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc; (\textit{iii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}}, que devem ser substituídos de acordo com o domínio do sistema que será aplicado à refatoração, por exemplo, nomes de pacotes, classes, interfaces, atributos, métodos, etc.  
+Como apresentado na Seção~\ref{sec:refatoracao_para_o_metamodelo_kdm}, as refatorações no contexto desta Tese são agrupadas em dois níveis de operações: (\textit{i}) operações atômicas e (\textit{ii}) operações compostas. As granularidades definidas como operações atômicas são: \texttt{add}, \texttt{delete} e \texttt{change}. Essas operações atômicas podem ser facilmente implementadas em ATL. Dessa forma, um \textit{template} para cada operação atômica é disponibilizado como artefato para auxiliar o engenheiro de modernização a criar refatorações para o KDM. O \textit{template} para a operação atômica \texttt{add} é apresentado no Código-fonte~\ref{codigo:template_addKDMElement}. As partes fixas dos \textit{templates} são formadas por texto ATL e as partes variantes são formadas por três tipos de instruções: (\textit{i}) argumentos, \textbf{ArgX}\footnote{\textbf{ArgX}, onde \textbf{X} representa um número sequencial dos argumentos. \label{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<\#}} e \aspas{\textbf{\#>}} e que devem ser substituídos por \textit{strings} válidas na linguagem ATL; (\textit{ii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e que devem ser substituídos por metaclasses do metamodelo KDM, por exemplo, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc; (\textit{iii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}}, que devem ser substituídos de acordo com o domínio do sistema que será aplicada a refatoração, por exemplo, nomes de pacotes, classes, interfaces, atributos, métodos, etc.  
 
 %argumentos, \textbf{ArgX} onde X representa um número cardinal, demarcadas pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} ou \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}}. O primeiro símbolo (\aspas{\textbf{<\%}} e \aspas{\textbf{\%>}}) informa para o engenheiro de modernização que metaclasses do KDM devem ser substituídas pelo argumento.
 
@@ -349,7 +354,7 @@ rule create(*@<\textbf{\#Arg2\#}>@*){
 
 %Mostrar que o Engenheiro de modernização pode adaptar qualquer elemento... Mostrar uma exemplo em ATL onde pode ser substituido pela metaclasse do KDM........
 
-Além do \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKDMElement}, outro artefato também deve ser utilizado para auxiliar o engenheiro de modernização a substituir as partes variáveis do \textit{template} de forma correta. Esse artefato é apresentado na Tabela~\ref{tab:guia_template_operacao_add}, a qual é utilizada como um guia para conduzir o engenheiro de modernização a especificar corretamente as partes variantes do \textit{template}, ou seja, os argumentos.
+Além do \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKDMElement}, outro artefato também deve ser utilizado para auxiliar o engenheiro de modernização a substituir as partes variáveis do \textit{template} de forma correta. Esse artefato é apresentado na Tabela~\ref{tab:guia_template_operacao_add}, o qual é utilizado como um guia para conduzir o engenheiro de modernização a especificar corretamente as partes variantes do \textit{template}, ou seja, os argumentos.
 
 Dado o \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKDMElement}, bem como as Tabelas~\ref{tab:mapemanetoEntreOOPeKDM} e~\ref{tab:guia_template_operacao_add}, a combinação desses três artefatos auxiliam/guiam o engenheiro de modernização a criar a operação atômica \texttt{add} para um determinado elemento estrutural do KDM, ou seja, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc. Por exemplo, 
 %
@@ -359,7 +364,7 @@ Dado o \textit{template} apresentado no Código-fonte~\ref{codigo:template_addKD
 %
 %os elemennnnnntos estruturais (\texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{Package}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc) apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM} origina uma operação atômica \texttt{add} para um determinado elemento estrutu
 %
-no Código-fonte~\ref{codigo:exemplo_add_classUnit} é apresentada uma simples ATL que é criada utilizando esses três artefatos. Os argumentos \textbf{<\#Arg1\#>} e \textbf{<\#Arg2\#>} foram substituídos pelas \textit{Strings} \texttt{add} e \texttt{Class}, respectivamente, ver linhas 1 e 3. Na linha 5, \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{Package} e o argumento \textbf{<$@$Arg4$@$>} foi substituído pela \textit{String} \texttt{\aspas{com.br.teste}}, a qual representa o nome da instância da metaclasse \texttt{Package} onde uma nova instância da metaclasse \texttt{ClassUnit} será adicionada. Finalmente, os argumentos \textbf{<\%Arg5\%>} e \textbf{<$@$Arg6$@$>} foram substituídos pela metaclasse \texttt{ClassUnit} e pela \textit{String} \texttt{\aspas{novaClassUnit}}, ver linhas 10 e 11.  A execução desse código cria uma nova instância da metaclasse \texttt{ClassUnit} denominada \aspas{novaClassUnit} no pacote \aspas{com.br.teste}.
+no Código-fonte~\ref{codigo:exemplo_add_classUnit} é apresentada uma simples ATL que foi criada utilizando esses três artefatos. Os argumentos \textbf{<\#Arg1\#>} e \textbf{<\#Arg2\#>} foram substituídos pelas \textit{Strings} \texttt{add} e \texttt{Class}, respectivamente, ver linhas 1 e 3. Na linha 5, \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{Package} e o argumento \textbf{<$@$Arg4$@$>} foi substituído pela \textit{String} \texttt{\aspas{com.br.teste}}, a qual representa o nome da instância da metaclasse \texttt{Package} onde uma nova instância da metaclasse \texttt{ClassUnit} será adicionada. Finalmente, os argumentos \textbf{<\%Arg5\%>} e \textbf{<$@$Arg6$@$>} foram substituídos pela metaclasse \texttt{ClassUnit} e pela \textit{String} \texttt{\aspas{novaClassUnit}}, ver linhas 10 e 11.  A execução desse código cria uma nova instância da metaclasse \texttt{ClassUnit} denominada \aspas{novaClassUnit} no pacote \aspas{com.br.teste}.
 
 \begin{codigo}[caption={[ATL para realizar a operação atômica \texttt{add} \texttt{ClassUnit}.] ATL para realizar a operação atômica \texttt{add} \texttt{ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:exemplo_add_classUnit}, language=ATL]{Name}
 module add;
@@ -483,7 +488,27 @@ rule changePackage {
 \end{codigo}
 
 
+\subsection{Agrupar Operações}
+
 Como apresentado na Tabela~\ref{tab:refatoringsCatalogo}, com a combinação dessas operações atômicas os engenheiros de modernização podem criar refatorações mais significativas. Por exemplo, o Código-fonte~\ref{codigo:exemplo_add_classUnit} e o Código-fonte~\ref{codigo:exemplo_delete_classUnit} ilustram as operações atômicas \texttt{add} e \texttt{delete} para instâncias da metaclasse \texttt{ClassUnit}, respectivamente, assim, a combinação dessas duas operações atômica resulta na refatoração \texttt{move}. %Porém, engenheiros de modernização podem adaptarem esses códigos para utilizam outros elementos estruturais tais como: \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc. Por exemplo, caso almeja-se deletar uma determinada instância da metaclasse \texttt{InterfaceUnit} o engenheiro de modernização deve apenas substituir a linha 5 do Código-fonte~\ref{codigo:exemplo_delete_classUnit} por \aspas{\texttt{source: MM!InterfaceUnit(source.name = \aspas{InterfaceToRemove})}}. 
+
+Para guiar o engenheiro de modernização a agrupar as operações atômicas e criar a refatoração um \textit{template} deve ser utilizado. Esse \textit{template} é apresentado no Código-fonte
+
+\begin{codigo}[caption={[\textit{Template} ATL para agrupar as operações atômicas.] \textit{Template} ATL para agrupar as operações atômicas.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_module}, language=ATL]{Name}
+module (*@<\textbf{\#Arg1\#}>@*);
+create OUT : MM refining IN : MM;
+(*@ 
+[for operações atômicas]@*)
+    (*@[if operação atômica == \texttt{add}]@*)
+        (*@adiciona o@*) (*@\textit{template} preenchido@*) (*@do@*) (*@Código-fonte~\ref{codigo:template_addKDMElement}@*)
+    (*@[elseif operação atômica == \texttt{delete}]@*)
+        (*@adiciona o@*) (*@\textit{template} preenchido@*) (*@do@*) (*@Código-fonte~\ref{codigo:template_delete}@*)
+    (*@[elseif operação atômica == \texttt{change}]@*)
+        (*@adiciona o@*) (*@\textit{template} preenchido@*) (*@do@*) (*@Código-fonte~\ref{codigo:template_change}@*)
+    (*@[/if]@*)
+(*@[/for]@*)
+
+\end{codigo}
 
 Após a criação de uma refatoração, o engenheiro de modernização deve especificar as restrições da refatoração criada. Tais restrições são especificadas utilizando linguagens de restrições, por exemplo, OCL. Na próxima seção, maiores informações são apresentadas.
 
