@@ -301,7 +301,7 @@ Neste passo, o engenheiro de modernização deve implementar as operações atô
 %ATL possui um módulo de execução denominado \textit{refining}, que é utilizado para criar refatorações em nível de modelo. Esse módulo foi introduzido para facilitar a programação de refatorações. Com o módulo \textit{refining}, os engenheiros de modernização podem se concentrar no código ATL, dedicado à geração de elementos estruturados modificados. Outros elementos estruturados do KDM (por exemplo, aqueles que permanecem inalteradas antes e após a refatoração) são implicitamente processados pelo mecanismo da ATL. O módulo \textit{refining} pode ser utilizado simplesmente substituindo a palavra-chave \texttt{from} pela \texttt{refining}. Obviamente, o modo de \textit{refining} só pode ser utilizado para as transformações endógenas (\aspas{\textit{in-place}}) (ver Capítulo~\ref{chapter:fundamentacao_teorica}, Seção~\ref{sec:transformacoes_de_modelos})
 
 
-Como apresentado na Seção~\ref{sec:refatoracao_para_o_metamodelo_kdm}, as refatorações no contexto desta Tese são agrupadas em dois níveis de operações: (\textit{i}) operações atômicas e (\textit{ii}) operações compostas. As granularidades definidas como operações atômicas são: \texttt{add}, \texttt{delete} e \texttt{change}. Essas operações atômicas podem ser facilmente implementadas em ATL. Dessa forma, um \textit{template} para cada operação atômica é disponibilizado como artefato para auxiliar o engenheiro de modernização a criar refatorações para o KDM. O \textit{template} para a operação atômica \texttt{add} é apresentado no Código-fonte~\ref{codigo:template_addKDMElement}. As partes fixas dos \textit{templates} são formadas por texto ATL e as partes variantes são formadas por três tipos de instruções: (\textit{i}) argumentos, \textbf{ArgX}\footnote{\textbf{ArgX}, onde \textbf{X} representa um número sequencial dos argumentos. \label{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<\#}} e \aspas{\textbf{\#>}} e que devem ser substituídos por \textit{strings} válidas na linguagem ATL; (\textit{ii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e que devem ser substituídos por metaclasses do metamodelo KDM, por exemplo, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc; (\textit{iii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}}, que devem ser substituídos de acordo com o domínio do sistema que será aplicada a refatoração, por exemplo, nomes de pacotes, classes, interfaces, atributos, métodos, etc.  
+Como apresentado na Seção~\ref{sec:refatoracao_para_o_metamodelo_kdm}, as refatorações no contexto desta tese são agrupadas em dois níveis de operações: (\textit{i}) operações atômicas e (\textit{ii}) operações compostas. As granularidades definidas como operações atômicas são: \texttt{add}, \texttt{delete} e \texttt{change}. Essas operações atômicas podem ser facilmente implementadas em ATL. Dessa forma, um \textit{template} para cada operação atômica é disponibilizado como artefato para auxiliar o engenheiro de modernização a criar refatorações para o KDM. O \textit{template} para a operação atômica \texttt{add} é apresentado no Código-fonte~\ref{codigo:template_addKDMElement}. As partes fixas dos \textit{templates} são formadas por texto ATL e as partes variantes são formadas por três tipos de instruções: (\textit{i}) argumentos, \textbf{ArgX}\footnote{\textbf{ArgX}, onde \textbf{X} representa um número sequencial dos argumentos. \label{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<\#}} e \aspas{\textbf{\#>}} e que devem ser substituídos por \textit{strings} válidas na linguagem ATL; (\textit{ii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} e que devem ser substituídos por metaclasses do metamodelo KDM, por exemplo, \texttt{ClassUnit}, \texttt{InterfaceUnit}, \texttt{StorableUnit}, \texttt{MethodUnit}, etc; (\textit{iii}) argumentos, \textbf{ArgX}\textsuperscript{\ref{foot:Arg}}, demarcados pelos símbolos \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}}, que devem ser substituídos de acordo com o domínio do sistema que será aplicada a refatoração, por exemplo, nomes de pacotes, classes, interfaces, atributos, métodos, etc.  
 
 %argumentos, \textbf{ArgX} onde X representa um número cardinal, demarcadas pelos símbolos \aspas{\textbf{<\%}} e \aspas{\textbf{\%>}} ou \aspas{\textbf{<$@$}} e \aspas{\textbf{@>}}. O primeiro símbolo (\aspas{\textbf{<\%}} e \aspas{\textbf{\%>}}) informa para o engenheiro de modernização que metaclasses do KDM devem ser substituídas pelo argumento.
 
@@ -506,7 +506,7 @@ Após a criação de uma refatoração, o engenheiro de modernização deve espe
 
 Neste passo, o engenheiro de modernização deve implementar as restrições (pré- e pós-condições). Os artefatos de entrada para a correta condução deste passo são: (\textit{i}) linguagem de restrição e (\textit{ii}) um conjunto de \textit{templates}. Após a condução deste passo, o artefato gerado é uma lista de restrições implementas em OCL. 
 
-Após o engenheiro de modernização criar uma determinada refatoração, o próximo passo consiste na criação de restrições (pré- e pós-condições) para a refatoração. Usualmente, antes e após a aplicação de uma determinada refatoração, algumas restrições precisam ser satisfeitas. Tais restrições, geralmente, são úteis para verificar se os parâmetros necessários para executar a refatoração foram corretamente informados, bem como verificar se a refatoração foi aplicada de forma totalmente correta. No contexto de modelos, tais restrições são especificadas utilizando linguagem como OCL e são caracterizadas como pré- e pós-condições. Utilizando OCL é possível verificar, por exemplo, se todos os parâmetros obrigatórios para executar o mecanismo da refatoração foram especificados pelo modernizador. Além disso, essas condições são importantes para assegurar que a refatoração será aplicada de forma correta e ainda irá preservar a semântica da instância do metamodelo. Diante disso, cada refatoração definida nesta tese está associada com uma pré- e pós-condição definida em OCL. OCL foi escolhida pois é uma linguagem padronizada pelo OMG e também possui suporte no ambiente de desenvolvimento Eclipse.
+Após o engenheiro de modernização criar uma determinada refatoração, o próximo passo consiste na criação de restrições (pré- e pós-condições) para a refatoração. Usualmente, antes e após a aplicação de uma determinada refatoração, algumas restrições precisam ser satisfeitas. Tais restrições, geralmente, são úteis para verificar se os parâmetros necessários para executar a refatoração foram corretamente informados, bem como verificar se a refatoração foi aplicada de forma correta. No contexto de modelos, tais restrições são especificadas utilizando linguagem como OCL e são caracterizadas como pré- e pós-condições. Além disso, essas restrições são importantes para assegurar que a refatoração será aplicada de forma correta e ainda irá preservar a semântica da instância do metamodelo. Por exemplo, verificar se uma determinada instância de uma metaclasse realmente existe antes de aplicar a operação atômica \texttt{delete}, ou verificar se uma determinada instância já existe antes de realizar a operação atômica \texttt{add}. Diante disso, cada refatoração (operação atômica) definida nesta tese está associada com uma pré- e pós-condição definida em OCL. OCL foi escolhida pois é uma linguagem padronizada pelo OMG e também possui suporte no ambiente de desenvolvimento Eclipse.
 
 Para auxiliar o engenheiro de modernização durante a criação dessas restrições (pré- e pós-condições) \textit{templates} também foram definidos. Os \textit{templates} aqui apresentados estão associados a uma determinada operação atômica. Por exemplo, para cada operação atômica (\texttt{add}, \texttt{delete} e \texttt{change}) dois \textit{templates} foram definidos para auxiliar a criação das restrições, ou seja, um \textit{template} para auxiliar a criação da pré-condição e outro para auxiliar a criação da pós-condição.
 
@@ -542,7 +542,7 @@ post : (*@<\textbf{\%Arg3\%}>@*).allInstances->select(e : (*@<\textbf{\%Arg3\%}>
 \end{tabular}
 \end{table}
 
-Além dos \textit{templates} outro artefato também deve ser utilizado para auxiliar o engenheiro de modernização a criar as restrições (pré- e pós-condições). Esse artefato é apresentado na Tabela~\ref{tab:guia_template_pre_pos_add}, a qual é utilizada como guia para conduzir o engenheiro de modernização a especificar corretamente as partes variantes dos \textit{templates}. Por exemplo, pode-se considerar que o engenheiro de modernização almeja criar a operação atômica \texttt{add} \texttt{ClassUnit}. Desse modo, utilizando os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_add} e~\ref{codigo:template_pos_condicao_add}, bem como a Tabela~\ref{tab:guia_template_pre_pos_add} é possível criar as restrições dessa operação atômica como apresentado no Código-fonte~\ref{codigo:template_assercao_juntado_add}. O argumento \textbf{<\%Arg1\%>} foi substituído pela metaclasse \texttt{ClassUnit} e o argumento \textbf{<\#Arg2\#>} foi alterado por uma \textit{String} válida em OCL. O argumento \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{Package} e o  argumento \textbf{<$@$Arg4$@$>} foi  substituído por uma \textit{String} que representa o pacote (\aspas{com.br.util}) onde a instância da metaclasse \texttt{ClassUnit} será adicionada.
+Além dos \textit{templates} outro artefato também deve ser utilizado para auxiliar o engenheiro de modernização a criar as restrições (pré- e pós-condições). Esse artefato é apresentado na Tabela~\ref{tab:guia_template_pre_pos_add}, a qual é utilizada como guia para conduzir o engenheiro de modernização a especificar corretamente as partes variantes dos \textit{templates}. Por exemplo, pode-se considerar que o engenheiro de modernização deseja criar a operação atômica \texttt{add} \texttt{ClassUnit}. Desse modo, utilizando os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:pre_template_add} e~\ref{codigo:template_pos_condicao_add}, bem como a Tabela~\ref{tab:guia_template_pre_pos_add} é possível criar as restrições dessa operação atômica como apresentado no Código-fonte~\ref{codigo:template_assercao_juntado_add}. O argumento \textbf{<\%Arg1\%>} foi substituído pela metaclasse \texttt{ClassUnit} e o argumento \textbf{<\#Arg2\#>} foi alterado por uma \textit{String} válida em OCL. O argumento \textbf{<\%Arg3\%>} foi substituído pela metaclasse \texttt{Package} e o  argumento \textbf{<$@$Arg4$@$>} foi  substituído por uma \textit{String} que representa o pacote (\aspas{com.br.util}) onde a instância da metaclasse \texttt{ClassUnit} será adicionada.
 
 \begin{codigo}[caption={[Asserções em OCL para realizar a operação atômica \texttt{add}.] Asserções em OCL para realizar a operação atômica \texttt{add}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:template_assercao_juntado_add}, language=OCL]{Name}
 context ClassUnit::preCond(newName: String)
@@ -640,11 +640,11 @@ post : Package.name = el
 
 %Com o intuito de facilitar a visualização, formalização e entendimento das refatorações criadas para o metamodelo KDM, as refatorações aqui apresentadas utilizam duas especificações~\cite{staron2004implementing}: (\textit{i}) especificação informal e (\textit{ii}) especificação formal. Na especificação informal a ideologia da reforação é expressada, usualmente essa ideologia é definida por meio de linguagem natural. A especificação formal é responsável por representar as pré- e pós-condições, bem como a transformação/refatoração em OCL e ATL, respectivamente. Acredita-se que ambas especificações são úteis para o engenheiro de modernização - a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração, enquanto que a especificação formal facilita a implementação da refatoração. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. Maiores detalhes sobre essas especificações são apresentados na Subseção~\ref{sec:template_refatoracao}.
 
-\subsection{Especificar Refatoração}\label{sec:template_refatoracao}
+\subsection{Documentar Refatoração}\label{sec:template_refatoracao}
 
-O último passo da abordagem é a especificação da refatoração. Esse último passo é opcional e fica a critério do engenheiro de modernização documentar ou não documentar a refatoração criada. Caso, o engenheiro de modernização opte por disponibilizar uma documentação deve-se então seguir as especificações definidas nesse passo.
+O último passo da abordagem é a documentação da refatoração. Esse último passo é opcional e fica a critério do engenheiro de modernização documentar ou não a refatoração criada. Caso, o engenheiro de modernização opte por disponibilizar uma documentação deve-se então seguir as especificações definidas nesse passo.
 
-Dessa forma, após definir a refatoração, sua implementação, bem como suas pré- e pós-condições para o metamodelo KDM, é importante documentar a refatoração criada. Dessa forma, para facilitar a visualização, formalização e entendimento das refatorações criadas para o metamodelo KDM, os engenheiros de modernização podem especificar as refatorações criadas seguindo duas especificações~\cite{staron2004implementing}: (\textit{i}) especificação informal e (\textit{ii}) especificação formal. 
+Dessa forma, após implementar a refatoração, bem como suas pré- e pós-condições para o metamodelo KDM, é importante documentar a refatoração criada. Dessa forma, para facilitar a visualização, formalização e entendimento das refatorações criadas para o metamodelo KDM, os engenheiros de modernização podem especificar as refatorações criadas seguindo duas especificações~\cite{staron2004implementing}: (\textit{i}) especificação informal e (\textit{ii}) especificação formal. 
 
 Na especificação informal, a ideologia da refatoração é expressada e frequentemente definida por meio de linguagem natural. A especificação formal é responsável por representar as pré- e pós-condições, bem como a transformação/refatoração em OCL e ATL, respectivamente. Acredita-se que ambas especificações são úteis para o engenheiro de modernização, pois a especificação informal é utilizada para facilitar a compreensão e o propósito da refatoração e a especificação formal facilita a implementação da refatoração. Além disso, a especificação formal é de extrema importância para facilitar a automação das refatorações. 
 %
@@ -685,7 +685,7 @@ Para facilitar o entendimento de como as refatorações são criadas para o meta
 		
 %--------------------------
 \subsection{Criar Refatoração \textit{Push Down Attribute}}
-Nesta seção, a refatoração \textit{Push Down Attribute} é criado seguinte os passos descritos neste capítulo. Essa refatoração é utilizada para remover a generalização de atributos, ou seja, um atributo é apenas utilizado em algumas subclasses, assim, não é interessante manter a generalização do atributo na superclasse, uma vez que cada subclasse pode definir um comportamento para o atributo~\cite{Fowler1999}.
+Nesta seção, a refatoração \textit{Push Down Attribute} é criada seguindo os passos descritos neste capítulo. Essa refatoração é utilizada para remover a generalização de atributos, ou seja, um atributo é apenas utilizado em algumas subclasses, assim, não é interessante manter o atributo na superclasse, uma vez que cada subclasse pode definir um comportamento para o atributo~\cite{Fowler1999}.
 
 
 \subsubsection{Identificar Elementos Estruturais}
@@ -703,10 +703,37 @@ No segundo passo da abordagem o engenheiro de modernização deve identificar as
 	\fautor
 \end{figure}
 
-\subsubsection{Implementar Refatoração}
+\subsubsection{Implementar Operações}
 
-Após identificar as operações que compõem a refatoração a ser criada, o próximo passo consiste na implementação da refatoração. O terceiro passo da abordagem é apoiado por um conjunto de \textit{templates} que auxilia o engenheiro de modernização a criar a refatoração. As operações atômicas identificadas para implementar a refatoração \textit{Push Down Attribute} foram implementadas em ATL utilizando os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:template_addKDMElement} e~\ref{codigo:template_delete}. A combinação desses \textit{templates} resulta no Código-fonte~\ref{codigo:push_Down_StorableUnit_ATL}.
+Após identificar as operações que compõem a refatoração a ser criada, o próximo passo consiste na implementação das operações. O terceiro passo da abordagem é apoiado por um conjunto de \textit{templates} que auxilia o engenheiro de modernização a implementar as operações. As operações atômicas identificadas para implementar a refatoração \textit{Push Down Attribute} foram implementadas em ATL utilizando os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:template_addKDMElement} e~\ref{codigo:template_delete}. A combinação desses \textit{templates} resulta nos Códigos-fontes~\ref{codigo:push_Down_StorableUnit_ATL1} e~\ref{codigo:push_Down_StorableUnit_ATL2}.
 
+
+\begin{codigo}[caption={[ATL representando a operação atômica \texttt{add}.] ATL representando a operação atômica \texttt{add}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:push_Down_StorableUnit_ATL1}, language=ATL]{Name}
+rule createStorableUnit {
+	from
+		source : MM!ClassUnit (source.name = (*@\aspas{\{sub-\texttt{ClassUnit}Selecionada\}}@*)
+	to 
+		target : MM!ClassUnit (
+			codeElement(*@$\leftarrow$@*)source.codeElement(*@$\rightarrow$@*)including(newElement)
+		),
+		newElement: MM!StorableUnit (
+			name(*@$\leftarrow$@*)(*@\{\texttt{StorableUnit}Selecionado.name\}@*)
+		)
+}
+\end{codigo}
+
+\begin{codigo}[caption={[ATL representando a operação atômica \texttt{delete}.] ATL representando a operação atômica \texttt{delete}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:push_Down_StorableUnit_ATL2}, language=ATL]{Name}
+rule deleteStorableUnit {
+	from
+		source : MM!StorableUnit (source.name = (*@\{\texttt{StorableUnit}Selecionado.name\}@*) and source.refImmediateComposite().name = (*@\{\texttt{ClassUnit}.name\}@*) )
+	to
+		drop
+}
+\end{codigo}
+
+\subsubsection{Agrupar Operações}
+
+Após implementar as operações atômicas seguindo os \textit{templates} apresentados neste capítulo, o próximo passo, consiste em agrupar tais operações. Dessa forma, um \textit{template} para guiar o agrupamento das operações atômicas também foi definido neste capítulo (ver Código-fonte~\ref{codigo:template_module_agrupar}). O agrupamento das operações atômicas apresentadas nos Códigos-fontes~\ref{codigo:push_Down_StorableUnit_ATL1} e~\ref{codigo:push_Down_StorableUnit_ATL2} resulta na refatoração apresentada no Código-fonte~\ref{push_Down_StorableUnit_ATL}.
 
 \begin{codigo}[caption={[ATL representando a refatoração \textit{Push Down Attribute}.] ATL da refatoração \textit{Push Down Attribute}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:push_Down_StorableUnit_ATL}, language=ATL]{Name}
 module pushDownStorableUnit;
@@ -799,7 +826,7 @@ A refatoração \textit{Extract Class} deve ser utilizada quando uma determinada
 
 \subsubsection{Identificar Elementos Estruturais}
 
-A refatoração \textit{Extract Class} basicamente consiste no encapsulamento de atributos de uma classe maior em outra classe. Dessa forma, os elementos estruturais utilizados na refatoração são: (\textit{i}) classes e (\textit{ii}) atributos. Utilizando o artefato apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM}, é possível identificar que as metaclasses em KDM que representa esses elementos estruturais são \texttt{ClassUnit} e \texttt{StorableUnit}, respectivamente.
+A refatoração \textit{Extract Class} basicamente consiste na criação de uma nova classe, e em sequência deve-se mover todos os atributos relevantes de uma classe para essa nova classe. Dessa forma, as construções da linguagem OO utilizadas na refatoração são: (\textit{i}) classes e (\textit{ii}) atributos. Utilizando o artefato apresentado na Tabela~\ref{tab:mapemanetoEntreOOPeKDM}, é possível identificar que as metaclasses em KDM que representam essas construções em OO são \texttt{ClassUnit} e \texttt{StorableUnit}, respectivamente.
 
 \subsubsection{Identificar Operações}
 
@@ -814,23 +841,60 @@ No segundo passo da abordagem deve-se identificar as operações atômicas que c
 	\fautor
 \end{figure}
 
-O primeiro passo da refatoração \textit{Extract ClassUnit} é selecionar um conjunto de \texttt{StorableUnits} que serão adicionados para uma nova instância de metaclasse \texttt{ClassUnit}, no exemplo ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{202}, duas instâncias de \texttt{StorableUnits} são selecionadas, \texttt{att1} e \texttt{att2}. Em seguida, uma instância da metaclasse \texttt{ClassUnit} é criada e adicionada ao mesmo \texttt{Package} que a instância da metaclasse \texttt{ClassUnit} e que contém os \{\texttt{StorableUnit}Selecionados\}, como ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{204}. Em seguida, todos \{\texttt{StorableUnit}Selecionados\} são adicionados nessa nova instância, como representado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{203}. Além disso, os \{\texttt{StorableUnit}Selecionados\} devem ser deletados da \{\texttt{ClassUnit}Selecionada\}. Observando a Figura~\ref{fig:antes_e_depois_extract_ClassUnit} é possível identificar que é a refatoração \textit{Extract Class} pode ser criada por meio da combinação das seguintes operações atômicas: (\textit{i}) \texttt{add} e (\textit{ii}) \texttt{delete}. 
+O primeiro passo da refatoração \textit{Extract ClassUnit} é selecionar um conjunto de \texttt{StorableUnits} que será adicionado em uma nova instância de metaclasse \texttt{ClassUnit}, no exemplo ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{202}, duas instâncias de \texttt{StorableUnits} são selecionadas, \texttt{att1} e \texttt{att2}. Em seguida, uma instância da metaclasse \texttt{ClassUnit} é criada e adicionada ao mesmo \texttt{Package} que a instância da metaclasse \texttt{ClassUnit} e que contém os \{\texttt{StorableUnit}Selecionados\}, como ilustrado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{204}. Em seguida, todos \{\texttt{StorableUnit}Selecionados\} são adicionados nessa nova instância, como representado na Figura~\ref{fig:antes_e_depois_extract_ClassUnit} \ding{203}. Além disso, os \{\texttt{StorableUnit}Selecionados\} devem ser deletados da \{\texttt{ClassUnit}Selecionada\}. Observando a Figura~\ref{fig:antes_e_depois_extract_ClassUnit} é possível identificar que é a refatoração \textit{Extract Class} pode ser criada por meio da combinação das seguintes operações atômicas: (\textit{i}) \texttt{add} e (\textit{ii}) \texttt{delete}. 
 
 %Mais especificadamente deve-se \texttt{add} uma instância de \texttt{ClassUnit}, \texttt{add} uma instância de \texttt{StorableUnit} na instância de \texttt{ClassUnit} criada e posteriormente deve-se \texttt{delete} 
 
-\subsubsection{Implementar Refatoração}
+\subsubsection{Implementar Operações}
 
-No passo anterior identificou-se que as operações atômicas \texttt{add} e \texttt{delete} quando combinadas podem  compor e criar a refatoração \textit{Extract Class}. Dessa forma, essas operações atômicas foram implementadas em ATL utilizando os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:template_addKDMElement} e~\ref{codigo:template_delete}. A combinação desses \textit{templates} resultou no Código-fonte~\ref{codigo:extract_classUnit_ATL}. 
+No passo anterior identificou-se que as operações atômicas \texttt{add} e \texttt{delete} quando combinadas podem compor e criar a refatoração \textit{Extract Class}. Dessa forma, essas operações atômicas foram implementadas em ATL utilizando os \textit{templates} apresentados nos Códigos-fontes~\ref{codigo:template_addKDMElement} e~\ref{codigo:template_delete}. A combinação desses \textit{templates} resultou nos Códigos-fontes~\ref{codigo:extract_classUnit_ATL1}, ~\ref{codigo:extract_classUnit_ATL2} e~\ref{codigo:extract_classUnit_ATL3}. 
 
-\begin{codigo}[caption={[ATL representando a refatoração \textit{Extract ClassUnit}.] ATL da refatoração \textit{Extract ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:extract_classUnit_ATL}, language=ATL]{Name}
-module extractClassUnit;
-create OUT : MM refining IN : MM;
+\begin{codigo}[caption={[ATL representando a operação atômica \texttt{add} \texttt{ClassUnit} da refatoração \textit{Extract ClassUnit}.] ATL representando a operação atômica \texttt{add} \texttt{ClassUnit} da refatoração \textit{Extract ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:extract_classUnit_ATL1}, language=ATL]{Name}
+rule createClassUnit {
+	from
+		source : MM!Package (source.name = (*@\aspas{\{\texttt{Package}\}}@*))
+	to 
+		target: MM!Package (
+			codeElement(*@$\leftarrow$@*)source.codeElement(*@$\rightarrow$@*)including(newElement)
+		),
+		newElement: MM!ClassUnit (
+			name(*@$\leftarrow$@*)(*@\aspas{\{newName\}}@*)
+		)
+}
+\end{codigo}
+
+\begin{codigo}[caption={[ATL representando a operação atômica \texttt{add} \texttt{StorableUnit} da refatoração \textit{Extract ClassUnit}.] ATL representando a operação atômica \texttt{add} \texttt{StorableUnit} da refatoração \textit{Extract ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:extract_classUnit_ATL2}, language=ATL]{Name}
+rule createStorableUnit {
+	from
+		source : MM!ClassUnit (source.name = (*@\aspas{\{newName\}}@*))
+	to 
+		target: MM!ClassUnit (
+			codeElement(*@$\leftarrow$@*)source.codeElement(*@$\rightarrow$@*)including(newElement)
+		),
+		newElement: MM!StorableUnit (
+			name(*@$\leftarrow$@*)(*@\aspas{storableUnitName}@*)
+		)
+}
+\end{codigo}
+
+\begin{codigo}[caption={[ATL representando a operação atômica \texttt{delete} \texttt{StorableUnit} da refatoração \textit{Extract ClassUnit}.] ATL representando a operação atômica \texttt{delete} \texttt{StorableUnit} da refatoração \textit{Extract ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:extract_classUnit_ATL3}, language=ATL]{Name}
 rule deleteStorableUnit {
 	from
 		source : MM!StorableUnit (source.name = (*@\aspas{\{StorableUnit\}Selecionado}@*) and source.refImmediateComposite().name = (*@\aspas{\{ClassUnit\}Selecionado}@*))
 	to 
 		drop
 }
+\end{codigo}
+
+%Nas linhas 3-8 uma instância de \texttt{StorableUnit} é deletada. Nas linhas 9-19 uma instância da metaclasse \texttt{ClassUnit} é criada. Finalmente, nas linhas 14-24 uma instância da metaclasse \texttt{StorableUnit} é criada e adicionada na instância da metaclasse \texttt{ClassUnit} recém criada.
+
+\subsubsection{Agrupar Operações}
+
+Após implementar as operações atômicas seguindo os \textit{templates} apresentados neste capítulo, o próximo passo, consiste em agrupar tais operações. Dessa forma, um \textit{template} para guiar o agrupamento das operações atômicas também foi definido neste capítulo (ver Código-fonte~\ref{codigo:template_module_agrupar}). O agrupamento das operações atômicas apresentadas nos Códigos-fontes~\ref{codigo:extract_classUnit_ATL1}, ~\ref{codigo:extract_classUnit_ATL2} e~\ref{codigo:extract_classUnit_ATL3} resulta na refatoração apresentada no Código-fonte~\ref{codigo:extract_classUnit_ATL}.
+
+\begin{codigo}[caption={[ATL representando a refatoração \textit{Extract ClassUnit}.] ATL da refatoração \textit{Extract ClassUnit}.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={codigo:extract_classUnit_ATL}, language=ATL]{Name}
+module extractClassUnit;
+create OUT : MM refining IN : MM;
 rule createClassUnit {
 	from
 		source : MM!Package (source.name = (*@\aspas{\{\texttt{Package}\}}@*))
@@ -852,10 +916,14 @@ rule createStorableUnit {
 		newElement: MM!StorableUnit (
 			name(*@$\leftarrow$@*)(*@\aspas{storableUnitName}@*)
 		)
+}
+rule deleteStorableUnit {
+	from
+		source : MM!StorableUnit (source.name = (*@\aspas{\{StorableUnit\}Selecionado}@*) and source.refImmediateComposite().name = (*@\aspas{\{ClassUnit\}Selecionado}@*))
+	to 
+		drop
 }}
 \end{codigo}
-
-Nas linhas 3-8 uma instância de \texttt{StorableUnit} é deletada. Nas linhas 9-19 uma instância da metaclasse \texttt{ClassUnit} é criada. Finalmente, nas linhas 14-24 uma instância da metaclasse \texttt{StorableUnit} é criada e adicionada na instância da metaclasse \texttt{ClassUnit} recém criada.
 
 \subsubsection{Definir Restrições}
 
@@ -940,6 +1008,36 @@ Uma abordagem muito similar é proposta por~\citeonline{tichelaar2000meta}. Os a
 ~\citeonline{langer2010model} também apresentam uma abordagem para realizar transformações em modelos, a qual é denominada REMA e busca a derivação incremental de regras de transformação. Essas regras podem ser usadas para aplicar refatorações automaticamente em qualquer modelo. Similar à abordagem apresentada neste capítulo,~\citeonline{astels2002refactoring} define uma abordagem para aplicar refatorações em diagrama de classe da UML e suas refatorações são criadas por meio da combinação de operações atômicas (\texttt{add}, \texttt{delete}, etc.). Além disso, o autor também utiliza linguagem de transformação e OCL para definir as refatorações e suas restrições, respectivamente. 
 
 ~\citeonline{Reimann_2015} define uma abordagem para criar e aplicar refatorações em nível de modelo de forma genérica. De acordo com o autor, sua abordagem pode ser aplicada em qualquer metametamodelo, metamodelo e modelo. Para isso, ele definiu um conjunto de passos e criou uma DSL, em que o usuário pode especificar a refatoração de forma independente e genérica. ~\citeonline{misbhauddin2012towards} descreve uma abordagem para aplicar refatorações em diversos diagramas da UML. Quando uma refatoração é aplicada, por exemplo, em um diagrama de classe, o efeito da refatoração é replicado em outros diagramas, tais como: diagrama de sequência, diagrama de caso de uso, etc.
+
+\begin{table}[h]
+\centering
+\caption{Comparação entre a abordagem definida neste capítulo e os trabalhos relacionados.}
+\label{tab:relatedWorks_consideracoes_abordagem}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|c|}{ATR} & DRZ & KDM & TPT & OA & CR & RTÇ \\ \hline
+Durelli R. S. Capítulo~\ref{chapter:catalogo_refactoring_KDM}     &     \multicolumn{1}{c|}{\checkmark}       & \multicolumn{1}{c|}{\checkmark}    & \multicolumn{1}{c|}{\checkmark}          &    \multicolumn{1}{c|}{\checkmark}                &     \multicolumn{1}{c|}{\checkmark}                       & \multicolumn{1}{c|}{\checkmark}           \\ \hline
+~\citeonline{sen2012reusable}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{\checkmark}\\ \hline
+~\citeonline{tichelaar2000meta, ducasse2005moose}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{\checkmark}\\ \hline
+
+~\citeonline{Zhang_2005}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{\checkmark}\\ \hline
+
+
+~\citeonline{brosch2009operation}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{-}\\ \hline
+
+~\citeonline{sun2009model}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{-}\\ \hline
+
+~\citeonline{langer2010model}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{\checkmark}\\ \hline
+
+~\citeonline{astels2002refactoring}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{\checkmark}\\ \hline
+
+~\citeonline{Reimann_2015}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{-}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{\checkmark}&\multicolumn{1}{c|}{-}\\ \hline
+\end{tabular}
+\end{table}
+
+Na Tabela~\ref{tab:relatedWorks_consideracoes_abordagem} é apresentada uma comparação entre a abordagem apresenta neste capítulo e os trabalhos relacionados quanto à forma como criam refatorações para modelos. Dessa forma, alguns critérios foram definidos durante a comparação, tais critérios são: (\textit{i}) a abordagem fornece diretrizes/passos; (\textit{ii}) a abordagem emprega o metamodelo KDM; (\textit{iii}) a abordagem disponibiliza \textit{templates}; (\textit{iv}) a abordagem considera operações atômicas; (\textit{v}) considera a composição de refatorações; e (\textit{vi}) a abordagem considera restrições. Os colunas da tabela foram abreviadas para caber nas dimensões da páginas, assim, \aspas{ATR} representa \aspas{Autor(es)}, \aspas{DRZ} representa \aspas{Diretrizes}, \aspas{TPT} representa \aspas{\textit{Templates}}, \aspas{OA} representa \aspas{Operações Atômicas}, \aspas{CR} representa \aspas{Composição de Refatoração} e \aspas{RTÇ} representa \aspas{Restrições}. O símbolo \aspas{\checkmark} representa que a abordagem define o critério e o símbolo \aspas{-} representa que a abordagem não define o critério.
+
+
 
 \section{Considerações Finais}\label{sec:consideracoes_finais_capitulo_reforacao}
 
