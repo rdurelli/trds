@@ -592,7 +592,7 @@ Existem duas principais diferenças entre a KDM-RE e a ferramenta EMF Refactor. 
 	\fdireta{Reimann_2015}
 \end{figure}
 
-Outra ferramenta relacionada a KDM-RE é a Refactory\footnote{\texttt{http://www.modelrefactoring.org/index.php/Refactoring}}. A arquitetura da ferramenta Refactory é apresentada na Figura~\ref{fig:refactory}. Da mesma forma que a KDM-RE, Refactory também contém três camadas: (\textit{i}) \textit{Platform Layer}, (\textit{ii}) \textit{Core Layer} e (\textit{iii}) \textit{UI layer}. A camada \textit{Core} contém três módulos: (\textit{i}) \textit{Quality Smell Framework}, (\textit{ii}) \textit{Refactoring Framework} e (\textit{iii}) \textit{Co-Refactoring Framework}. Note que, Refactory também é baseada no EMF e pode refatorar qualquer metamodelo definido pelo EMF. Além disso, de acordo com~\citeonline{reimann2010role}, Refactory, foi criada para permitir refatorações genéricas. Os autores afirmam que, realizar uma refatoração, por exemplo, \textit{extract method} em Java é o mesmo mecanismo para um sistema representado por instância da UML. As refatorações são todas implementas em QVT e as asserções são implementadas em OCL. Do mesmo modo que a KDM-RE, as refatorações da Refactory também são realizadas por meio de combinação de operações atômicas.
+Outra ferramenta relacionada à KDM-RE é a Refactory\footnote{\texttt{http://www.modelrefactoring.org/index.php/Refactoring}}. A arquitetura da ferramenta Refactory é apresentada na Figura~\ref{fig:refactory}. Da mesma forma que a KDM-RE, Refactory também contém três camadas: (\textit{i}) \textit{Platform Layer}, (\textit{ii}) \textit{Core Layer} e (\textit{iii}) \textit{UI layer}. A camada \textit{Core} contém três módulos: (\textit{i}) \textit{Quality Smell Framework}, (\textit{ii}) \textit{Refactoring Framework} e (\textit{iii}) \textit{Co-Refactoring Framework}. Note que, Refactory também é baseada no EMF e pode refatorar qualquer metamodelo definido pelo EMF. Além disso, de acordo com~\citeonline{reimann2010role}, Refactory, foi criada para permitir refatorações genéricas. Os autores afirmam que, realizar uma refatoração, por exemplo, \textit{extract method} em Java é o mesmo mecanismo para um sistema representado por instância da UML. As refatorações são todas implementas em QVT e as asserções são implementadas em OCL. Do mesmo modo que a KDM-RE, as refatorações da Refactory também são realizadas por meio de combinação de operações atômicas.
 
 
 
@@ -629,13 +629,46 @@ Outra ferramenta relacionada é a MOOSE~\cite{tichelaar2000meta, ducasse2000moos
 	\fdireta{van2006model}
 \end{figure}
 
-RACOoN é um \textit{plug-in} desenvolvido por~\citeonline{van2006model}, ver Figura~\ref{fig:racoon}. Utilizando esse \textit{plug-in} regras de transformação em modelo podem ser implementadas, carregadas e em seguida serem executadas em diagramas da UML. RACOoN é uma ferramenta totalmente manual e permite que o usuário definida qual refatoração almeja aplicar, sendo de inteira responsabilidade do usuário definir a refatoração corretamente. Inconsistência encontradas durante a aplicação de múltiplas refatorações são apresentadas para o usuário juntamente com um conjunto de soluções. RACOoN e KDM-RE são similares, poém, RACOoN foi definida para diagramas da UML e KDM-RE para o metamodelo KDM.
+RACOoN é um \textit{plug-in} desenvolvido por~\citeonline{van2006model}, ver Figura~\ref{fig:racoon}. Utilizando esse \textit{plug-in} regras de transformação em modelo podem ser implementadas, carregadas e em seguida serem executadas em diagramas da UML. RACOoN é uma ferramenta totalmente manual e permite que o usuário definida qual refatoração almeja aplicar, sendo de inteira responsabilidade do usuário definir a refatoração corretamente. Inconsistências encontradas durante a aplicação de múltiplas refatorações são apresentadas para o usuário juntamente com um conjunto de soluções. RACOoN e KDM-RE são similares, porém, RACOoN foi definida para diagramas da UML e KDM-RE para o metamodelo KDM.
+
+~\citeonline{Boger_2003} definiram uma extensão da ferramenta Refactoring Browser~\cite{roberts1997refactoring} e criaram a primeira ferramenta para aplicar refatorações em modelos UML, a qual é denominada Refactoring Browser UML.
 
 
-~\citeonline{Boger_2003} definiram uma extensão da ferramenta Refactoring Browser~\cite{roberts1997refactoring} e criaram a primeira ferramenta para aplicar refatorações em modelos UML. Seguindo a mesma linha de pensamento,
 VisTra~\cite{vstolc2010visual} é uma ferramenta visual desenvolvida também como um \textit{plug-in} para o ambiente de desenvolvimento Eclipse, a qual aplica refatorações em diagramas de classes da UML. Essa ferramenta permite que o usuário defina regras de transformação graficamente e, em seguida, a ferramenta gera automaticamente restrições em OCL e regras de transformações em QVT. Da mesma forma, NEPTUNE~\cite{millan2009ocl} é uma ferramenta que permite verificar e transformar instâncias do metamodelo UML. Essa ferramenta utiliza uma extensão da OCL denominada pOCL para automatizar a detecção de \textit{bad-smells}. Em seguida, NEPTUNE sugere um conjunto de refatorações para reparar os \textit{bad-smells} identificados. 
 
-Embora todas as ferramentas identificadas apliquem refatorações em nível de modelo, nenhuma realiza as refatorações utilizando o metamodelo KDM. Além disso, nenhuma ferramenta identificada fornece uma forma para prover a reutilização de refatorações. Dessa forma, acredita-se que a KDM-RE é uma contribuição para a área de pesquisa de refatoração em nível de modelo. Além disso, somente a KDM-RE utiliza o metamodelo KDM como base para as refatorações, o que significa que a KDM-RE é independente de plataforma e linguagem de programação. Embora todas as ferramentas identificas utilizem o EMF e/ou UML, nenhuma utiliza o metamodelo KDM. Uma das vantagens de utilizar o KDM é que ele possui diversas metaclasses para representar níveis diferentes de um determinado sistema.
+\begin{table}[h]
+\centering
+\caption{Comparação entre a KDM-RE e as ferramentas relacionadas.}
+\label{tab:relatedWorks_consideracoes_KDM_re}
+\begin{tabular}{| m{8.3cm} |c|c|c|c|c|c|}
+\hline
+\multicolumn{1}{|c|}{Ferramenta} & B-S & AG & S/P & LT & LR & KDM \\ \hline
+KDM-RE  & \ding{55} & \ding{51}   & \ding{51}    & \ding{51}   & \ding{51} & \ding{51}\\ \hline
+
+EMF Refactor~\cite{arendt2013tool}  & \ding{51} & \ding{51}   & \ding{55}    & \ding{55}   & \ding{51} & \ding{55}\\ \hline
+
+Refactory~\cite{reimann2010role} & \ding{55} & \ding{51}   & \ding{55}    & \ding{51}   & \ding{51} & \ding{55}\\ \hline
+
+M-Refactor~\cite{mohamed2011m}  & \ding{51} & \ding{51}   & \ding{55}    & \ding{51}   & \ding{51}& \ding{55}\\ \hline
+
+MOOSE~\cite{ducasse2000moose}  & \ding{55} & \ding{51}   & \ding{55}    & \ding{55}   & \ding{55}& \ding{55}\\ \hline
+
+RACOoN~\cite{van2006model}  & \ding{55} & \ding{51}   & \ding{55}    & \ding{51}   & \ding{51}& \ding{55}\\ \hline
+
+Refactoring Browser for UML~\cite{Boger_2003} & \ding{55} & \ding{51}   & \ding{55}    & \ding{55}  & \ding{51}& \ding{55}\\ \hline
+
+VisTra~\cite{vstolc2010visual} & \ding{51} & \ding{51}   & \ding{55}    & \ding{51}  & \ding{51}& \ding{55}\\ \hline
+
+NEPTUNE~\cite{millan2009ocl} & \ding{51} & \ding{51}   & \ding{55}    & \ding{51}  & \ding{51}& \ding{55}\\ \hline
+
+\end{tabular}
+\end{table}
+
+Na Tabela~\ref{tab:relatedWorks_consideracoes_KDM_re} é apresentada uma comparação entre a KDM-RE e as ferramentas relacionadas identificados. Alguns critérios foram definidos durante a comparação, tais critérios são: (\textit{i}) a ferramenta permite identificar \textit{bad-smells}, (\textit{ii}) a ferramenta permite aplicar refatorações graficamente, ou seja, por meio de diagramas, (\textit{iii}) a ferramenta permite a sincronização/propagação da instância do metamodelo após aplicar um conjunto de refatorações, (\textit{iv}) a ferramenta utiliza linguagens de transformação para executar a refatoração, (\textit{v}) a ferramenta utiliza linguagens de restrições para verificar pré- e pós-condições. A Tabela~\ref{tab:relatedWorks_consideracoes_KDM_re} contém sete colunas e algumas foram abreviadas: (\textit{i}) \aspas{B-S} significa \aspas{\textit{\textbf{B}ad-\textbf{S}mells}}, (\textit{ii}) \aspas{AG} significa \aspas{\textbf{A}plicação das refatorações \textbf{G}raficamente}, (\textit{iii}) \aspas{S/P} representa se a ferramenta realiza a \aspas{\textbf{S}incronização/\textbf{P}ropagação} após aplicar um conjunto de refatorações}, (\textit{iv}) \aspas{LT} representa se a ferramenta utiliza \aspas{\textbf{L}inguagens de \textbf{T}ransformações} para aplicar a refatoração, (\textit{v}) \aspas{LR} informa se a ferramenta utiliza \aspas{\textbf{L}inguagens de \textbf{R}estrições} para verificar as pré- e pós-condições e (\textit{vi}) \aspas{KDM} representa se a ferramenta aplica as refatorações no metamodelo KDM. O símbolo \aspas{\ding{51}} representa que o metamodelo define o critério e o símbolo \aspas{\ding{55}} representa que o metamodelo não define o critério.% O símbolo \aspas{+} representa o grau de facilidade de compreensão do metamodelo, sendo que \aspas{+++} representa maior facilidade de compreensão e \aspas{+} representa menor facilidade de compreensão.
+
+
+
+Embora todas as ferramentas identificadas apliquem refatorações em nível de modelo, nenhuma realiza as refatorações utilizando o metamodelo KDM. Além disso, nenhuma ferramenta identificada fornece uma forma de reutilizar as refatorações. Dessa forma, acredita-se que a KDM-RE é uma contribuição para a área de pesquisa de refatoração em nível de modelo. Além disso, somente a KDM-RE utiliza o metamodelo KDM como base para as refatorações, o que significa que a KDM-RE é independente de plataforma e de linguagem de programação. Embora todas as ferramentas identificas utilizem o EMF e/ou UML, nenhuma utiliza o metamodelo KDM. Uma das vantagens de utilizar o KDM é que ele possui diversas metaclasses para representar níveis diferentes de um determinado sistema.
 
 \section{Considerações Finais}\label{sec:consideracoes_final_kdm_re}
 

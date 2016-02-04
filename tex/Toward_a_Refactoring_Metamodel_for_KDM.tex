@@ -683,12 +683,14 @@ Como apresentado na gramática da DSL (ver Código-fonte~\ref{lst:dsl_part_4}), 
 
 \section{Trabalhos Relacionados}\label{sec:trabalhos_relacionais_SRM}
 
-Poucos trabalhos relacionados foram identificados na literatura sobre metamodelos para especificar e promover o reúso de refatorações. Porém, alguns trabalhos foram identificados na literatura e nortearam a criação do SRM. ~\citeonline{ouni2014_multiobjective} definiram um metamodelo, o qual é apresentada na Figura~\ref{fig:refactoring_metamodel_related}. Note que esse metamodelo é semelhante ao metamodelo aqui proposto. A metaclasse \texttt{Refactoring} representa a principal entidade do metamodelo. Refatorações são classificadas em duas principais metaclasses: (\textit{i}) \texttt{Low-Level Refactoring} e (\textit{ii}) \texttt{High-Level Refactoring}. A primeira metaclasse representa operações atômicas (\texttt{add}, \texttt{delete} e \texttt{change}). Tais operações quando combinadas são representadas pela metaclasse \texttt{High-Level Refactoring} e representam refatorações mais complexas, tais como: \textit{Move Method}, \textit{Extract Class}, etc. Similarmente, o metamodelo SRM aqui apresentado também permite especificar operações atômica e refatorações complexas. A representação de refatorações complexas é feita no SRM por meio da associação denominada \texttt{chainOfRefactoring} da metaclasse \texttt{Refactoring} - por meio dessa associação, os engenheiros de modernização podem compor um conjunto de refatorações complexas.
+Poucos trabalhos relacionados foram identificados na literatura sobre metamodelos para especificar e promover o reúso de refatorações. Porém, alguns trabalhos foram identificados e nortearam a criação do SRM. Assim, nesta seção, são mostradas as principais semelhanças e diferenças encontradas entre eles. 
+
+~\citeonline{ouni2014_multiobjective} definiram um metamodelo, o qual é apresentada na Figura~\ref{fig:refactoring_metamodel_related}. Note que esse metamodelo é semelhante ao metamodelo aqui proposto. A metaclasse \texttt{Refactoring} representa a principal entidade do metamodelo. Refatorações são classificadas em duas principais metaclasses: (\textit{i}) \texttt{Low-Level Refactoring} e (\textit{ii}) \texttt{High-Level Refactoring}. A primeira metaclasse representa operações atômicas (\texttt{add}, \texttt{delete} e \texttt{change}). Tais operações quando combinadas são representadas pela metaclasse \texttt{High-Level Refactoring} e representam refatorações mais complexas, tais como: \textit{Move Method}, \textit{Extract Class}, etc. Similarmente, o metamodelo SRM aqui apresentado também permite especificar operações atômica e refatorações complexas. A representação de refatorações complexas é feita no SRM por meio da associação denominada \texttt{chainOfRefactoring} da metaclasse \texttt{Refactoring} - por meio dessa associação, os engenheiros de modernização podem compor um conjunto de refatorações complexas.
 
 \begin{figure}[h]
 	\centering
 	% Requires \usepackage{graphicx}
-	\caption{Metamodelo de refatoração proposto por~\citeonline{ouni2014_multiobjective}.}
+	\caption{RefMetamodel.}
 	\label{fig:refactoring_metamodel_related}
 	\includegraphics[scale=0.45]{images/metamodelo_refatoracao_related}
 	\fdireta{ouni2014_multiobjective}
@@ -701,15 +703,63 @@ Como observado na Figura~\ref{fig:refactoring_metamodel_related} é possível de
 \begin{figure}[h]
 	\centering
 	% Requires \usepackage{graphicx}
+	\caption{\textit{Generic Metamodel} - GenericMT.}
+	\label{fig:genericMt}
+	\includegraphics[scale=0.45]{images/GenericMT}
+	\fdireta{sen2012reusable}
+\end{figure}
+
+~\citeonline{sen2012reusable} definem uma abordagem para especificar refatorações de forma genérica. Os autores apresentam um metamodelo denominado \textit{GenericMT} (ver Figura~\ref{fig:genericMt}), o qual contém algumas construções do POO (classes, métodos, atributos, parâmetros, etc.). Por meio desse metamodelo, refatorações genéricas podem ser criadas. A principal semelhança entre o SRM é o GenericMT, é que ambos objetivam ser independentes de plataformas. As principais diferenças são: (\textit{i}) GenericMT não possui metaclasses para representar metadados de refatoração, (\textit{ii}) GenericMT não possui metaclasses para representar restrições (pré- e pós-condições),  (\textit{iii}) GenericMT não foi definido para permitir a interoperabilidade entre diversas ferramentas e (\textit{iv}) GenericMT não utiliza nenhum metamodelo padronizado (UML/KDM) para especificar os elementos que serão refatorados.
+
+
+Um metamodelo similar ao GenericMT é definido por~\citeonline{tichelaar2000meta}. Os autores introduzem um metamodelo denominado FAMIX (ver Figura~\ref{fig:famixMetamodel}), o qual permite a criação de refatorações para elementos estruturais do POO (classes, objetos, métodos, etc.) e todas as refatorações criadas utilizam a ferramenta MOOSE~\cite{ducasse2005moose}. O metamodelo FAMIX é apresentado na Figura~\ref{fig:famixMetamodel}. A principal semelhança entre o SRM é o FAMIX, é que ambos objetivam ser independentes de plataformas e as principais diferenças entre esses metamodelos são: (\textit{i}) FAMIX não contém metaclasses para representar informações sobre refatoração, (\textit{ii}) FAMIX também não possui metaclasses para representar metadados sobre as restrições (pré- e pós-condições),  (\textit{iii}) FAMIX não foi definido para permitir a interoperabilidade entre diversas ferramentas, FAMIX é utilizado apenas na ferramenta MOOSE~\cite{ducasse2005moose} e (\textit{iv}) FAMIX também não utiliza nenhum metamodelo padronizado (UML/KDM) para especificar os elementos que serão refatorados.
+
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+	\caption{Metamodelo FAMIX.}
+	\label{fig:famixMetamodel}
+	\includegraphics[scale=0.45]{images/FAMIXMetamodelRelated}
+	\fdireta{tichelaar2000meta}
+\end{figure}
+
+
+\begin{table}[h]
+\centering
+\caption{Comparação entre o metamodelo SRM e os metamodelos relacionados.}
+\label{tab:relatedWorks_consideracoes_SRM}
+\begin{tabular}{|m{8.3cm}|c|c|c|c|c|}
+\hline
+\multicolumn{1}{|c|}{Metamodelo} & PMPRR & PMPRRe & FC & IP & I \\ \hline
+Structured Refactoring Metamodel - SRM  & \ding{51}      & \ding{51}       &  ++  & \ding{51}    & \ding{51}   \\ \hline
+
+RefMetamodel~\cite{ouni2014_multiobjective}  & \ding{51}      & \ding{51}       &  +  & \ding{55}    & \ding{55}   \\ \hline
+
+GenericMT~\cite{sen2012reusable}  & \ding{55}      & \ding{55}       &  +++  & \ding{51}    & \ding{55}   \\ \hline
+
+FAMIX~\cite{tichelaar2000meta}  & \ding{55}      & \ding{55}       &  +++  & \ding{51}    & \ding{55}   \\ \hline
+\end{tabular}
+\end{table}
+
+Na Tabela~\ref{tab:relatedWorks_consideracoes_SRM} é apresentada uma comparação entre o metamodelo SRM e os metamodelos identificados quanto à forma como representam as refatorações. Dessa forma, alguns critérios foram definidos durante a comparação, tais critérios são: (\textit{i}) o metamodelo fornece metaclasses para representar refatorações, (\textit{ii}) o metamodelo fornece metaclasses para representar restrições (pré- e pós-condições), (\textit{iii}) qual a facilidade de compreensão do metamodelo, (\textit{iv}) o metamodelo é independente de plataforma e (\textit{v}) o metamodelo provê a interoperabilidade. A Tabela~\ref{tab:relatedWorks_consideracoes_SRM} contém seis colunas e algumas foram abreviadas: (\textit{i}) \aspas{PMPRR} significa \aspas{\textbf{P}ossui \textbf{M}etaclasses \textbf{P}ara \textbf{R}epresentar \textbf{R}efatorações}, (\textit{ii}) \aspas{PMPRRe} significa \aspas{\textbf{P}ossui \textbf{M}etaclasses \textbf{P}ara \textbf{R}epresentar \textbf{Re}strições}, (\textit{iii}) \aspas{FC} representa qual a \aspas{\textbf{F}acilidade de \textbf{C}ompreensão do metamodelo}, (\textit{iv}) \aspas{IP} representa se o \aspas{metamodelo é \textbf{I}ndependente de \textbf{P}lataforma} e (\textit{v}) \aspas{I} informa se o \aspas{metamodelo provê a \textbf{I}nteroperabilidade entre diversas ferramentas}. O símbolo \aspas{\ding{51}} representa que o metamodelo define o critério e o símbolo \aspas{\ding{55}} representa que o metamodelo não define o critério. O símbolo \aspas{+} representa o grau de facilidade de compreensão do metamodelo, sendo que \aspas{+++} representa maior facilidade de compreensão e \aspas{+} representa menor facilidade de compreensão.
+
+
+
+
+Não foram encontrados outros metamodelos similar ao SRM. No entanto, na literatura é possível identificar o metamodelo SMM, o qual é uma padronização da ADM e é utilizado para especificar métricas de software~\cite{ADM:SMM}. A ideia é similar ao metamodelo SRM, por isso o metamodelo SMM foi considerado um trabalho relacionado. O SMM é um metamodelo que proporciona um formato padrão tanto para definir métricas quanto para representar os resultados das medições. Um trecho do SMM é apresentado na Figura~\ref{fig:SMM_metamodel_related} e suas principais metaclasses do SMM são: \texttt{Measures} (métricas) e \texttt{Measurements} (medições). A metaclasse \texttt{Measures} descreve uma maneira para calcular propriedades de um sistema. A metaclasse \texttt{Measurements} representa medições, mais especificamente resultados da aplicação de uma métrica em um modelo alvo a ser medido. Existem algumas vantagens no uso do SMM. Além de ser um metamodelo para métricas e medições proposto pela ADM, ele se faz vantajoso pelo fato de ser um padrão, logo, métricas definidas em conformidade com o metamodelo SMM podem ser testadas, reusadas e compartilhadas da mesma forma que o SRM pode promover o compartilhamento e reúso de refatorações. Além disso, o uso de um padrão facilita o desenvolvimento de ferramentas compatíveis capazes de automatizar o processo de medição~\cite{ADM:SMM}.
+
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
 	\caption{\textit{Structured Metrics Metamodel} - SMM.}
 	\label{fig:SMM_metamodel_related}
 	\includegraphics[scale=0.45]{images/SMM_metamodelo_related}
 	\fdireta{ADM:SMM}
 \end{figure}
 
-Não foi encontrado outro metamodelo similar ao SRM. No entanto, na literatura é possível identificar o metamodelo SMM, o qual é uma padronização da ADM e é utilizado para especificar métricas de software~\cite{ADM:SMM}. A ideia é similar ao metamodelo SRM, por isso o metamodelo SMM foi considerado um trabalho relacionado. O SMM é um metamodelo que proporciona um formato padrão tanto para definir métricas quanto para representar os resultados das medições. Um trecho do SMM é apresentado na Figura~\ref{fig:SMM_metamodel_related} e suas principais metaclasses do SMM são: \texttt{Measures} (métricas) e \texttt{Measurements} (medições). A metaclasse \texttt{Measures} descreve uma maneira para calcular propriedades de um sistema. A metaclasse \texttt{Measurements} representa medições, mais especificamente resultados da aplicação de uma métrica em um modelo alvo a ser medido. Existem algumas vantagens no uso do SMM. Além de ser um metamodelo para métricas e medições proposto pela ADM, ele se faz vantajoso pelo fato de ser um padrão, logo, métricas definidas em conformidade com o metamodelo SMM podem ser testadas, reusadas e compartilhadas da mesma forma que o SRM pode promover o compartilhamento e reúso de refatorações. Além disso, o uso de um padrão facilita o desenvolvimento de ferramentas compatíveis capazes de automatizar o processo de medição~\cite{ADM:SMM}.
 
-Outro metamodelo relacionado ao SRM é o metamodelo \sigla{SPMS}{\textit{Structured Patterns Metamodel Standard}}~\cite{ADM:SPMS}. Esse metamodelo é utilizado para representar padrões de software, tais como: \textit{anti-patterns}, \textit{design patterns}, \textit{architectural patterns}, \textit{build patterns} e etc. SPMS fornece um conjunto de metaclasses para instanciar diversos padrões de software. Uma visão geral do metamodelo SPMS é apresentado na Figura~\ref{fig:SPMS_metamodel_related}. 
+Outro metamodelo relacionado ao SRM é o metamodelo \sigla{SPMS}{\textit{Structured Patterns Metamodel Standard}}~\cite{ADM:SPMS}. Esse metamodelo é utilizado para representar padrões de software, tais como: \textit{anti-patterns}, \textit{design patterns}, \textit{architectural patterns}, \textit{build patterns} e etc. SPMS fornece um conjunto de metaclasses para instanciar diversos padrões de software. Uma visão geral do metamodelo SPMS é apresentado na Figura~\ref{fig:SPMS_metamodel_related}. A metaclasse \texttt{PatternElement} possui meta-atributos para representar o padrão que se almeja instanciar. \texttt{Role} é uma metaclasse para representar elementos conceituais que um determinado padrão necessita. A metaclasse \texttt{PatternDefinition} é uma submetaclasse de \texttt{PatternElement} e possui duas composições: (\textit{i}) \texttt{sections} do tipo \texttt{PaternsSection} e (\textit{ii}) knownUses do tipo \texttt{KnownUses}. Além disso, a metaclasse \texttt{PatternDefinition} tem uma dependência denominada \texttt{relatedPatts} do tipo \texttt{InterPatternRelationship} que representa os padrões internos que um padrão pode possuir.
+ 
 
 \begin{figure}[h]
 	\centering
@@ -720,7 +770,6 @@ Outro metamodelo relacionado ao SRM é o metamodelo \sigla{SPMS}{\textit{Structu
 	\fdireta{ADM:SPMS}
 \end{figure}
 
-A metaclasse \texttt{PatternElement} possui meta-atributos para representar o padrão que se almeja instanciar. \texttt{Role} é uma metaclasse para representar elementos conceituais que um determinado padrão necessita. A metaclasse \texttt{PatternDefinition} é uma submetaclasse de \texttt{PatternElement} e possui duas composições: (\textit{i}) \texttt{sections} do tipo \texttt{PaternsSection} e (\textit{ii}) knownUses do tipo \texttt{KnownUses}. Além disso, a metaclasse \texttt{PatternDefinition} tem uma dependência denominada \texttt{relatedPatts} do tipo \texttt{InterPatternRelationship} que representa os padrões internos que um padrão pode possuir.
 
 
 \section{Considerações Finais}
