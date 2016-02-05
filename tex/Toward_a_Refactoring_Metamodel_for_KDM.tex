@@ -30,14 +30,15 @@ Uma das soluções para a concretização desse cenário, seria a criação de u
 \section{Metamodelo de Refatorações Estruturadas} % (fold)
 \label{sec:meta_modelo_de_refatora_es_estruturadas_srm_do_ingl_s_structured refactoring meta-model_}
 
-Como pôde ser observado na seção anterior, são várias as motivações para definir um metamodelo para especificar refatorações. Nesse sentido, nesta seção, é apresentado um metamodelo denominado Metamodelo de Refatorações Estruturadas (do inglês - \sigla{SRM}{\textit{Structured Refactoring Metamodel}}).
+%Como pôde ser observado na seção anterior, são várias as motivações para definir um metamodelo para especificar refatorações. Nesse sentido, nesta seção, é apresentado um metamodelo denominado Metamodelo de Refatorações Estruturadas (do inglês - \sigla{SRM}{\textit{Structured Refactoring Metamodel}}).
 
-Refatorações são ubíquas durante a manutenção, produção e análise de software. Inúmeras comunidades têm surgido na literatura para criar e definir vários tipos de refatorações, incluindo refatorações de baixa granularidade~\cite{Fowler1999, Demeyer1, Demeyer2}, refatorações arquiteturais, refatorações para o paradigma orientado a aspecto, etc. Por exemplo, uma comunidade que cria refatorações de baixa granularidade usualmente está preocupada em definir e especificar refatorações desse tipo. Por outro lado, uma comunidade que especifica refatorações arquiteturais está interessada apenas em refatorações arquiteturais. Porém, é visto que ambas as comunidades têm em comum a necessidade de especificar como organizar e definir as refatorações. Além disso, tais comunidades devem se preocupar em definir a motivação para a condução da refatoração, especificar o mecanismo da refatoração e descrever tais refatorações de maneira formal e adequada para a sua comunidade. Embora os contextos dessas comunidades sejam diferentes, elas necessitam de uma forma padronizada para definir e especificar as refatorações. 
+%Refatorações são ubíquas durante a manutenção, produção e análise de software. Inúmeras comunidades têm surgido na literatura para criar e definir vários tipos de refatorações, incluindo refatorações de baixa granularidade~\cite{Fowler1999, Demeyer1, Demeyer2}, refatorações arquiteturais, refatorações para o paradigma orientado a aspecto, etc. Por exemplo, uma comunidade que cria refatorações de baixa granularidade usualmente está preocupada em definir e especificar refatorações desse tipo. Por outro lado, uma comunidade que especifica refatorações arquiteturais está interessada apenas em refatorações arquiteturais. Porém, é visto que ambas as comunidades têm em comum a necessidade de especificar como organizar e definir as refatorações. Além disso, tais comunidades devem se preocupar em definir a motivação para a condução da refatoração, especificar o mecanismo da refatoração e descrever tais refatorações de maneira formal e adequada para a sua comunidade. Embora os contextos dessas comunidades sejam diferentes, elas necessitam de uma forma padronizada para definir e especificar as refatorações. 
+Nesta seção é apresentado um metamodelo denominado Metamodelo de Refatorações Estruturadas (do inglês - \sigla{SRM}{\textit{Structured Refactoring Metamodel}}). SRM representa uma fundamentação para o compartilhamento de informações (metadados) relacionadas às refatorações, com isso, detalhes com informações precisas sobre refatorações podem ser armazenados e/ou compartilhados para que outros engenheiros possam reutilizá-los em seus projetos que utilizem o metamodelo KDM.
 
-Nesse contexto, existe a necessidade de definir uma forma de promover o compartilhamento dessas refatorações. Assim, nesta seção, é apresentado um metamodelo para auxiliar tais comunidades, o qual representa uma fundamentação para o compartilhamento de informações (metadados) relacionadas às refatorações, com isso, detalhes com informações precisas sobre refatorações podem ser armazenados e/ou compartilhados para que outros engenheiros possam reutilizá-los em seus projetos que utilizem o metamodelo KDM.
 
+O SRM define uma especificação de refatorações e tem como princípio ser independente de linguagem de programação para fornecer uma plataforma comum pela qual o arquiteto, o pesquisador e o modernizador possam expressar refatorações sem se preocuparem com a plataforma ou linguagem de programação. O SRM objetiva definir uma terminologia comum para a especificação de refatorações para facilitar o reúso e a interoperabilidade entre ferramentas. Esse objetivo é apoiado por um conjunto de metaclasses que definem meta-atributos específicos para representar informações (metadados) de uma refatoração, auxiliando o compartilhamento das refatorações de forma intuitiva para os modernizadores.
 
-O SRM define um padrão comum para a especificação e descrição de refatorações e tem como princípio ser independente de linguagem de programação com o objetivo de fornecer uma plataforma comum pela qual o arquiteto, o pesquisador e o modernizador possam expressar refatorações sem se preocuparem com a plataforma ou linguagem de programação. O SRM possui três principais objetivos: (\textit{i}) prover uma forma de compartilhar informações sobre refatorações; (\textit{ii}) promover o reúso de refatorações de forma independente de plataforma e linguagem; (\textit{iii}) ser uma proposta inicial ao \textit{Call for Proposals} do ADM \textit{Refatoring} do OMG. O primeiro objetivo é apoiado por um conjunto de metaclasses que definem meta-atributos específicos para representar informações (metadados) de uma refatoração, auxiliando o compartilhamento das refatorações de forma intuitiva para os modernizadores. Similarmente, o segundo objetivo também é alcançado por metaclasses que possuem meta-atributos, os quais representam os mecanismos das refatorações, bem como suas pré- e pós-condições. O terceiro objetivo é apoiado pelo metamodelo SRM.
+%três principais objetivos: (\textit{i}) prover uma forma de compartilhar informações sobre refatorações; (\textit{ii}) promover o reúso de refatorações de forma independente de plataforma e linguagem; (\textit{iii}) ser uma proposta inicial ao \textit{Call for Proposals} do ADM \textit{Refatoring} do OMG. O primeiro objetivo é apoiado por um conjunto de metaclasses que definem meta-atributos específicos para representar informações (metadados) de uma refatoração, auxiliando o compartilhamento das refatorações de forma intuitiva para os modernizadores. Similarmente, o segundo objetivo também é alcançado por metaclasses que possuem meta-atributos, os quais representam os mecanismos das refatorações, bem como suas pré- e pós-condições. O terceiro objetivo é apoiado pelo metamodelo SRM.
  
 Na Figura~\ref{fig:refactoring_metamodel}, o SRM é esquematicamente apresentado, onde o centro da figura representa a abordagem ADM. Pode-se entender que o SRM está inserido no contexto da ADM da mesma forma que seus outros metamodelos. A esfera externa é dividida em quatro facetas e cada uma possui o nome de um metamodelo. Além disso, cada faceta é acoplada por um retângulo contendo o nome de um metamodelo e um conjunto de metaclasses. Vê-se nessa figura  que o SRM está inserido no contexto da ADM para preencher a definição de um metamodelo de refatorações. 
 
@@ -50,7 +51,7 @@ Na Figura~\ref{fig:refactoring_metamodel}, o SRM é esquematicamente apresentado
 	\fautor
 \end{figure}
 
-Um dos objetivos do SRM é seguir as padronizações propostas pela ADM. Porém, deve-se ressaltar que o SRM é utilizado para especificar a representação de refatorações sem se preocupar com a representação das partes estruturais de uma refatoração, ou seja, os elementos que serão refatorados (classes, métodos, atributos, etc.). Assim, o SRM assume que tais elementos devem ser representados utilizando outro metamodelo proposto pela ADM, nesse contexto, o KDM. Como visualizado na Figura~\ref{fig:refactoring_metamodel}, o SRM interage com o metamodelo KDM para utilizar instâncias de metaclasses do KDM, representando os elementos que serão refatorados. Consistente com outros metamodelos definidos pela OMG, o SRM é definido utilizando a padronização de modelagem MOF e a \textit{framework} EMF. Um dos benefícios de utilizar MOF é que ele permite que o metamodelo seja serializado e deserializado sem perder nenhum tipo de informação, ou seja, metamodelos instanciados são demonstrados utilizando uma representação textual padronizada (XMI). Além disso, o SRM é compatível com repositórios MOF para armazenamento e recuperação de várias ferramentas, aumentando a interoperabilidade de futuras ferramentas que utilizem esse metamodelo.
+O SRM visa seguir as padronizações propostas pela ADM. Assim, deve-se ressaltar que o SRM é utilizado para especificar a representação de refatorações sem se preocupar com os elementos que serão refatorados (classes, métodos, atributos, etc.). O SRM assume que tais elementos devem ser representados utilizando outro metamodelo proposto pela ADM, nesse contexto, o KDM. Como visualizado na Figura~\ref{fig:refactoring_metamodel}, o SRM interage com o metamodelo KDM para utilizar instâncias de metaclasses desse metamodelo, representando os elementos que serão refatorados. Consistente com outros metamodelos definidos pela OMG, o SRM é definido utilizando a padronização de modelagem MOF e a \textit{framework} EMF. Um dos benefícios de utilizar MOF é que ele permite que o metamodelo seja serializado e deserializado sem perder nenhum tipo de informação, ou seja, metamodelos instanciados são demonstrados utilizando uma representação textual padronizada (XMI). Além disso, o SRM é compatível com repositórios MOF para armazenamento e recuperação em várias ferramentas, aumentando a interoperabilidade de futuras ferramentas que utilizem esse metamodelo.
 
 \begin{figure}[h]
 	\centering
@@ -61,35 +62,29 @@ Um dos objetivos do SRM é seguir as padronizações propostas pela ADM. Porém,
 	\fautor
 \end{figure}
 
-O metamodelo SRM é apresentado na Figura~\ref{fig:meta_modelo_SRM}. Esse metamodelo contém três pacotes, 13 metaclasses e quatro enumerações. Na Figura~\ref{fig:fases_para_a_construcao_e_uso_do_SRM}, é apresentada uma macrovisão da engenharia do metamodelo SRM utilizando a notação SADT.% Como observado, um conjunto de elementos foram utilizados como base para o desenvolvimento do SRM: elementos estruturais, linguagens de transformações, linguagens de restrições e catálogos de refatorações. %A seguir, na Subseção~\ref{Engenharia_do_Meta_modelo_SRM} esses elementos são apresentados e comentados como foram utilizados para desenvolver o metamodelo SRM.
+O metamodelo SRM é apresentado na Figura~\ref{fig:meta_modelo_SRM}. Esse metamodelo contém três pacotes, 13 metaclasses e quatro enumerações. A Figura~\ref{fig:etapas_da_fase_de_e_do_SRM} mostra a metodologia que foi seguida para a criação do metamodelo SRM. Nesse sentido, três principais passos foram seguidos durante a metodologia empregada para a criação do metamodelo SRM: (\textit{i})  Identificação de vocabulário/termos/conceitos, (\textit{ii}) Projeção e criação do SRM e (\textit{iii}) Implementação do SRM. Cada passo da metodologia utilizada para criar o SRM é apresentado com mais detalhes a seguir.
 
-\begin{figure}[h]
-	\centering
-	% Requires \usepackage{graphicx}
-	\caption{Macrovisão para a construção do SRM.}
-	\label{fig:fases_para_a_construcao_e_uso_do_SRM}
-	\includegraphics[scale=0.9]{images/engenhariaDoSRM}
-	\fautor
-\end{figure}
+
+%Na Figura~\ref{fig:fases_para_a_construcao_e_uso_do_SRM}, é apresentada uma macrovisão da engenharia do metamodelo SRM utilizando a notação SADT.% Como observado, um conjunto de elementos foram utilizados como base para o desenvolvimento do SRM: elementos estruturais, linguagens de transformações, linguagens de restrições e catálogos de refatorações. %A seguir, na Subseção~\ref{Engenharia_do_Meta_modelo_SRM} esses elementos são apresentados e comentados como foram utilizados para desenvolver o metamodelo SRM.
 
 %\section{Engenharia do SRM}\label{Engenharia_do_Meta_modelo_SRM}
 
-Refatorações, suas características e terminologia foram analisadas para que o SRM fosse desenvolvido. Antes de iniciar a criação do metamodelo SRM (ou de qualquer outro metamodelo) é necessário definir os elementos que deverão ser representados, bem como suas relações. Nesse sentido, três principais passos que compõem a engenharia do SRM são mostradas na Figura~\ref{fig:etapas_da_fase_de_e_do_SRM}: (\textit{i})  Identificar vocabulário/termos/conceitos, (\textit{ii}) Projetar e criar o SRM e (\textit{iii}) Implementar o SRM. Cada passo da metodologia utilizada para criar o SRM é apresentado com mais detalhes a seguir.
+%Refatorações, suas características e terminologia foram analisadas para que o SRM fosse desenvolvido. Antes de iniciar a criação do metamodelo SRM (ou de qualquer outro metamodelo) é necessário definir os elementos que deverão ser representados, bem como suas relações. Nesse sentido, três principais passos que compõem a engenharia do SRM são mostradas na Figura~\ref{fig:etapas_da_fase_de_e_do_SRM}: (\textit{i})  Identificar vocabulário/termos/conceitos, (\textit{ii}) Projetar e criar o SRM e (\textit{iii}) Implementar o SRM. Cada passo da metodologia utilizada para criar o SRM é apresentado com mais detalhes a seguir.
 
 \begin{figure}[h]
 	\centering
 	% Requires \usepackage{graphicx}
 	\caption{Metodologia empregada na criação do metamodelo SRM.}
 	\label{fig:etapas_da_fase_de_e_do_SRM}
-	\includegraphics[scale=0.65]{images/metodologiaParaCriarOSRM}
+	\includegraphics[scale=0.65]{images/metodologiaParaCriarOSRM2}
 	\fautor
 \end{figure}
 
 
 
-\subsection{Identificar vocabulário/termos/conceitos}
+\subsection{Identificação de vocabulário/termos/conceitos}
 
-Foca-se, aqui, a identificação do vocabulário, termos e conceitos comuns que são utilizados dentro da comunidade de refatoração. Durante a criação de metamodelos, é de suma importância entender o domínio que eles representam. Metamodelos definem abstrações (termos), notações e relacionamentos para representar um determinado domínio. Portanto, nesse passo, tanto os vocabulários, termos e conceitos definidos por~\citeonline{OPDYKE_1992} e \citeonline{Fowler1999} foram analisados para a identificação de abstrações para facilitar a criação do metamodelo SRM. Durante a análise, pode-se observar e identificar alguns termos comumente utilizados durante a definição de uma refatoração. Por exemplo, todas as refatorações descritas e definidas por~\citeonline{OPDYKE_1992} e \citeonline{Fowler1999} seguem os seguintes termos: 
+Neste passo, focou-se na identificação do vocabulário, termos e conceitos comuns que são utilizados dentro da comunidade de refatoração. Os artefatos de entrada que foram utilizadas neste passo foram um conjunto de refatorações, bem como o metamodelo KDM. Durante a criação de metamodelos, é de suma importância entender o domínio que eles representam. Metamodelos definem abstrações (termos), notações e relacionamentos para representar um determinado domínio. Portanto, nesse passo, tanto os vocabulários, termos e conceitos definidos por~\citeonline{OPDYKE_1992} e \citeonline{Fowler1999} foram analisados para a identificação de abstrações para facilitar a criação do metamodelo SRM. Durante a análise, pode-se observar e identificar alguns termos comumente utilizados durante a definição de uma refatoração. Por exemplo, todas as refatorações descritas e definidas por~\citeonline{OPDYKE_1992} e \citeonline{Fowler1999} seguem os seguintes termos: 
 
 \begin{itemize}
 \item Refatoração: o nome da refatoração;
@@ -107,11 +102,12 @@ Foca-se, aqui, a identificação do vocabulário, termos e conceitos comuns que 
 \end{itemize}
 \end{itemize}
 
-Utilizando os termos identificados nos trabalhos de~\citeonline{OPDYKE_1992} e~\citeonline{Fowler1999} foi possível criar o metamodelo SRM como apresentado a seguir. 
 
-\subsection{Projetar e criar o SRM}
+Após a condução deste passo, uma lista dos termos utilizadas no domínio de refatorações foi criada. Utilizando esses termos foi possível projetar e criar o metamodelo SRM como apresentado a seguir.
 
-A partir das informações extraídas, o SRM é especificado. Utilizando as informações extraídas, foi possível identificar terminologias, bem como palavras-chave que geralmente estão relacionadas com refatoração. Por meio de tais terminologias e palavras-chave, foi possível realizar a especificação do SRM, o qual pode ser definido como uma quádrupla, como observado na Definição~\ref{def:SRM}: 
+\subsection{Projeção e criação do SRM}
+
+A partir dos termos identificados anteriormente, o SRM foi especificado. Por meio dos termos, foi possível realizar a especificação do SRM, o qual pode ser definido como uma quádrupla, como observado na Definição~\ref{def:SRM}: 
 
 \begin{definicao}\label{def:SRM}
     \textit{O SRM é uma quádrupla $SRM = (SRM_{mC}, SRM_{mA}, SRM_{e}, SRM_{mR})$, onde $SRM_{mC} $ representa um conjunto de metaclasses, $SRM_{mA}$ representa um conjunto de meta-atributos, $SRM_{e}$ representa um conjunto de enumerações e $SRM_{mR}$ representa associações.}
@@ -126,21 +122,22 @@ Formalmente, pode-se definir o metamodelo como:
 	\item Todas as meta-associações \textit{mR} $\in SRM_{mR}$ são um conjunto R = $E_{1}$, $E_{2}$  , onde  $E_{1}$ e $E_{2}$ são associações de R. Posteriormente, cada R contém um nome. Ambos $E_{1}$  e $E_{1}$ possuem uma cardinalidade e são associados a uma metaclasse de $SRM_{mC}$.
 \end{itemize}
 
-Da mesma forma que o KDM (ver Capítulo~\ref{chapter:fundamentacao_teorica} Seção~\ref{sec:knowledge_discovery_meta_model}), o SRM possui três níveis de conformidade. Além disso, o SRM é estruturado de forma modular, seguindo o princípio da separação de interesse, com a capacidade de representar diferentes partes de uma refatoração. Essa separação de interesse é alcançada por meio de pacotes, como ilustrado na Figura~\ref{fig:pacotes_SRM_conformidade_level}. O primeiro nível de conformidade representa que o SRM utiliza as metaclasses do metamodelo KDM. Além das metaclasses do KDM, o metamodelo SRM é separado em três pacotes: (\textit{i}) \textit{Transformation}, (\textit{ii}) \textit{Constraint} e (\textit{iii}) \textit{Refactoring}. Cada pacote constitui uma determinada ontologia para descrever e representar transformações, restrições e refatorações, respectivamente. O SRM possui três níveis de conformidade, nível 0, nível 1 e nível 2, descritos a seguir:
+O SRM possui dois níveis de conformidade e ele é estruturado de forma modular, seguindo o princípio da separação de interesse, com a capacidade de representar diferentes partes de uma refatoração. Essa separação de interesse é alcançada por meio de pacotes, como ilustrado na Figura~\ref{fig:pacotes_SRM_conformidade_level}. O primeiro nível de conformidade representa que o SRM é separado em três pacotes: (\textit{i}) \textit{Transformation}, (\textit{ii}) \textit{Constraint} e (\textit{iii}) \textit{Refactoring}. Cada pacote constitui de um conjunto de metaclasses para descrever e representar transformações, restrições e refatorações, respectivamente. O SRM possui dois níveis de conformidade, nível 0 e nível 1, descritos a seguir:
 
 \begin{figure}[h]
 	\centering
 	% Requires \usepackage{graphicx}
 		\caption{Pacotes e níveis de conformidade do metamodelo SRM.}
-	\includegraphics[scale=1]{images/pacotesSRM}
+	\includegraphics[scale=1]{images/conformidadeSRM}
 	\label{fig:pacotes_SRM_conformidade_level}
 	\fautor
 \end{figure}
 
 \begin{itemize}
-    \item \textbf{Nível 0}: nesse nível de conformidade, são definidos os pacotes do KDM para representar os elementos estruturais que serão refatorados. Tal nível, representa um denominador comum que pode servir como uma base para a interoperabilidade entre diferentes categorias de ferramentas que utilizem o metamodelo SRM. Para que uma ferramenta esteja em conformidade com o \textbf{Nível 0}, ela deve fornecer completo suporte para todas as metaclasses que foram definidas no KDM;
-    \item \textbf{Nível 1}: nesse nível, os pacotes definidos no \textbf{Nível 0} são utilizados para representar os elementos estruturais de uma refatoração. O \textbf{Nível 1} define os seguintes pacotes: (\textit{i}) \texttt{Transformation}, (\textit{ii}) \texttt{Constraint} e (\textit{iii}) \texttt{Refactoring}. Para que uma ferramenta esteja em conformidade com o \textbf{Nível 1}, ela deve fornecer suporte para todos os pacotes do \textbf{Nível 0} e pelo menos um dos pacotes do \textbf{Nível 1};
-    \item \textbf{Nível 2}: esse nível é a união de todos os pacotes definidos no nível anterior. Para que uma ferramenta esteja em conformidade com o \textbf{Nível 2}, ela deve fornecer suporte para todos os pacotes dos \textbf{Nível 0} e \textbf{Nível 1}.
+    %\item \textbf{Nível 0}: nesse nível de conformidade, são definidos os pacotes do KDM para representar os elementos estruturais que serão refatorados. Tal nível, representa um denominador comum que pode servir como uma base para a interoperabilidade entre diferentes categorias de ferramentas que utilizem o metamodelo SRM. Para que uma ferramenta esteja em conformidade com o \textbf{Nível 0}, ela deve fornecer completo suporte para todas as metaclasses que foram definidas no KDM;
+    \item \textbf{Nível 0}: esse nível define os seguintes pacotes: (\textit{i}) \texttt{Transformation}, (\textit{ii}) \texttt{Constraint} e (\textit{iii}) \texttt{Refactoring}. Para que uma ferramenta esteja em conformidade com o \textbf{Nível 0}, ela deve fornecer completo suporte para todas as metaclasses que foram definidas no SRM;
+    
+    \item \textbf{Nível 1}: esse nível é a união de todos os pacotes definidos no nível anterior. Para que uma ferramenta esteja em conformidade com o \textbf{Nível 1}, ela deve fornecer suporte para todos os pacotes dos \textbf{Nível 0}.
 \end{itemize}
 
 Todos os pacotes do metamodelo SRM apresentados na Figura~\ref{fig:pacotes_SRM_conformidade_level} foram projetados e organizados esquematicamente em três camadas de abstração: (\textit{i}) \sigla{CEE}{Camada de Elementos Estruturais}, (\textit{ii}) \sigla{CR}{Camada de Refatoração} e (\textit{iii}) \sigla{CRTR}{Camada de Recurso de Transformação e Restrições}. As três camadas estão apresentadas na Figura~\ref{fig:camadas_e_pacotes_do_srm}.
@@ -273,7 +270,7 @@ O pacote \texttt{Refactoring} define um conjunto de metaclasses cujo propósito 
 \begin{itemize}
 	\item \textbf{Meta-atributos}
 		\begin{itemize}
-			\item \texttt{kind:LevelKind}: especifica o level da refatoração.
+			\item \texttt{kind:LevelKind}: especifica o nível da refatoração.
 		\end{itemize}	
 \end{itemize} 
 
@@ -371,9 +368,9 @@ Neste contexto, o pacote \texttt{Constraint} do SRM contém três metaclasses e 
 
 %\texttt{RefactoringModel} representa a metaclasse raiz do metamodelo SRM. Em outras palavras, essa metaclasse representa uma coleção de metadados que corresponde a uma ou mais refatorações definidas para o metamodelo KDM. Essa metaclasse não contém nenhum meta-atributo, porém, como apresentado anteriormente possui duas associações: (\textit{i}) \texttt{author:Author[0..1]} e (\textit{ii}) \texttt{libraries:RefactoringLibrary[0..*]}
 
-\subsection{Implementar o SRM}\label{sec:implementacao_do_SRM}
+\subsection{Implementação do SRM}\label{sec:implementacao_do_SRM}
 
-A junção dos pacotes apresentados nas seções anteriores e suas metaclasses forma o metamodelo SRM. Na Figura~\ref{fig:meta_modelo_SRM}, é apresentado esquematicamente o metamodelo SRM. Como pode ser observado, o SRM contém 13 metaclasses e quatro enumerações. 
+Neste passo, o metamodelo SRM foi implementado. A junção dos pacotes apresentados nas seções anteriores e suas metaclasses forma o metamodelo SRM. Na Figura~\ref{fig:meta_modelo_SRM}, é apresentado esquematicamente o metamodelo SRM. Como pode ser observado, o SRM contém 13 metaclasses e quatro enumerações. 
 
 \begin{figure}[h]
 	\centering
