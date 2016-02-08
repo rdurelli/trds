@@ -58,7 +58,16 @@ As motivações que levaram ao desenvolvimento desta tese foram:
 
 %\item Escassez de abordagens para criar refatorações para o KDM; buscar quais são as diretrizes que permitem o engenheiro de modernização criar refatorações tradicionais para o metamodelo KDM. A ausência de diretrizes desse tipo dificulta a criação de refatorações para o KDM, fazendo com que engenheiros de modernização tenham que criar suas próprias soluções;
 
-\item Ausência de uma infraestrutura de suporte ao reúso de refatorações para o KDM. A ausência de uma infraestrutura desse tipo faz com que engenheiros de modernização criem suas próprias soluções para especificar, armazenar e disponibilizar refatorações, dificultando o reúso das refatorações em outros contextos; 
+
+%O SRM objetiva definir uma terminologia comum para a especificação de refatorações para facilitar o reúso e a interoperabilidade entre ferramentas. Esse objetivo é apoiado por um conjunto de metaclasses que definem meta-atributos específicos para representar informações (metadados) de uma refatoração, auxiliando o compartilhamento das refatorações de forma intuitiva para os modernizadores.
+
+\item Ausência de uma terminologia comum para a especificação de refatorações; Essa ausência dificulta o reúso e a interoperabilidade entre ferramentas de modernização. Refatorações são atividades menores dentro de processos de modernização. Assim, a criação de um metamodelo separado, flexibiliza a especificação de refatorações e permite que elas sejam reusadas dentro de transformações maiores. Esse metamodelo deve definir metaclasses e meta-atributos específicos para representar informações (metadados) de uma refatoração, aumentando o reúso e a interoperabilidade das refatorações. 
+
+
+%A grande maioria desses cenários geralmente necessita e é precedida por refatorações de granularidade fina. Dessa forma, pode-se dizer que refatorações são atividades menores dentro de processos de modernização. Um metamodelo separado para refatorações flexibiliza a especificação de refatorações e permite que elas sejam reusadas dentro de transformações maiores.
+
+
+%Ausência de uma infraestrutura de suporte ao reúso de refatorações para o KDM. A ausência de uma infraestrutura desse tipo faz com que engenheiros de modernização criem suas próprias soluções para especificar, armazenar e disponibilizar refatorações, dificultando o reúso das refatorações em outros contextos; 
 
 
 
@@ -108,7 +117,7 @@ Nesse contexto, a pesquisa aqui apresentada visa contribuir para a definição d
 
 \section{Síntese da Abordagem Desenvolvida}\label{sec:introducao:a_abordagem_desenvolvida}
 
-Com base nas motivações apresentadas, por meio desta tese desenvolveu-se uma abordagem para auxiliar dois principais atores: (\textit{i}) o engenheiro de modernização\footnote{No contexto desta tese, engenheiro de modernização é aquele que utiliza a abordagem aqui proposta para criar, disponibilizar e reutilizar refatorações para o KDM.} e  (\textit{ii}) o engenheiro de software\footnote{No contexto desta tese, engenheiro de software é aquele que interage com o apoio computacional desenvolvido aqui para aplicar refatorações em instâncias do KDM.}. O engenheiro de modernização é aquele que cria e disponibiliza refatorações para o metamodelo KDM no sentido de facilitar o reuso das mesmas. Por sua vez, o engenheiro de software é aquele responsável por conduzir um processo de modernização e que se utiliza de apoios computacionais para aplicar refatorações existentes.
+Com base nas motivações apresentadas, por meio desta tese desenvolveu-se uma abordagem para auxiliar dois principais atores: (\textit{i}) o engenheiro de modernização\footnote{No contexto desta tese, engenheiro de modernização é aquele que utiliza a abordagem aqui proposta para criar, disponibilizar e reutilizar refatorações para o KDM.} e  (\textit{ii}) o engenheiro de software\footnote{No contexto desta tese, engenheiro de software é aquele que interage com o apoio computacional desenvolvido aqui para aplicar refatorações em instâncias do KDM.}. O engenheiro de modernização é aquele que cria e disponibiliza refatorações para o metamodelo KDM no sentido de facilitar o reúso das mesmas. Por sua vez, o engenheiro de software é aquele responsável por conduzir um processo de modernização e que se utiliza de apoios computacionais para aplicar refatorações existentes.
 
 
 %pode aplicar refatorações por meio de um apoio computacional.%utilizando o diagrama de classe da UML e de forma transparente um apoio computacional aplica as refatorações em um instância do metamodelo KDM. 
@@ -135,7 +144,7 @@ O passo \ding{182} consiste na criação de refatorações para o metamodelo KDM
 	\fautor
 \end{figure}
 
-O passo \ding{183} consiste na disponibilização das refatorações criadas por meio de um metamodelo aqui definido, o qual contém metaclasses que permitem armazenar metadados relacionados com refatorações, tais como: o nome da refatoração, sua motivação, autor, pré- e pós-condições e seu mecanismo, etc. O objetivo amplo desse metamodelo é viabilizar o reúso de refatorações, além de auxiliar o engenheiro de modernização a definir refatorações em forma de metadados. A instanciação desse metamodelo é apoiada pelo apoio computacional denominado KDM-RE, que define uma linguagem específica de domínio para auxiliar o engenheiro de modernização durante a instanciação desse metamodelo. Em seguida, as instâncias desse metamodelo são enviadas pelo KDM-RE para um repositório e podem ser reutilizadas por engenheiros de software. 
+O passo \ding{183} consiste na disponibilização das refatorações criadas por meio de um metamodelo aqui definido, o qual contém metaclasses que permitem armazenar metadados relacionados com refatorações, tais como: o nome da refatoração, sua motivação, autor, pré- e pós-condições e seu mecanismo, etc. O objetivo amplo desse metamodelo é viabilizar o reúso e a interoperabilidade de refatorações, além de auxiliar o engenheiro de modernização a definir refatorações em forma de metadados. A instanciação desse metamodelo é apoiada pelo apoio computacional denominado KDM-RE, que define uma linguagem específica de domínio para auxiliar o engenheiro de modernização durante a instanciação desse metamodelo. Em seguida, as instâncias desse metamodelo são enviadas pelo KDM-RE para um repositório e podem ser reutilizadas por engenheiros de software. 
 
 %É importante salientar que tanto as restrições (pré- e pós-condições) e os mecanismo das refatorações são disponibilizados no metamodelo por meio de linguagens de transformação (ATL) e restrições (OCL). 
 
@@ -152,7 +161,7 @@ O objetivo geral é apresentar uma abordagem para criação e disponibilização
 
     \item Tornar a criação de refatorações para o metamodelo KDM um processo sistemático e guiado;
     
-    \item Propor um metamodelo inicial como uma solução para promover o reúso de metadados relacionados a refatoração. Esse metamodelo possui um conjunto de metaclasses que define meta-atributos específicos para representar informações (metadados) de refatoração, auxiliando, assim, o compartilhamento das refatorações de forma intuitiva entre os engenheiros. Além disso, esse metamodelo também possui metaclasses e meta-atributos que representam os mecanismos das refatorações, bem como suas pré- e pós-condições;
+    \item Propor um metamodelo inicial como uma solução para promover o reúso e a interoperabilidade de refatoração. Esse metamodelo possui um conjunto de metaclasses que define meta-atributos específicos para representar informações (metadados) de refatoração, auxiliando, assim, o compartilhamento das refatorações de forma intuitiva entre os engenheiros. Além disso, esse metamodelo também possui metaclasses e meta-atributos que representam os mecanismos das refatorações, bem como suas pré- e pós-condições;
     
     \item Viabilizar a disponibilização de refatorações para o metamodelo KDM de forma que possam ser mais facilmente especificadas, disponibilizadas e reusadas; 
     
