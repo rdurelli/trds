@@ -254,57 +254,57 @@ Por meio da junção dessas operações atômicas, é possível criar refatoraç
 %Na Tabela~\ref{tab:refatoringsCatalogo} as refatorações que podem ser facilmente criadas para o metamodelo KDM são apresentadas.
 
 \begin{table}[h]
-\caption{Refatorações adaptadas para o metamodelo KDM.\label{tab:refatoringsCatalogo}}
+\caption{Refatorações criadas para o metamodelo KDM.\label{tab:refatoringsCatalogo}}
 \begin{center}
 \begin{tabular}{ | m{4.5cm} | m{2.5cm} | m{4cm}| } 
 \hline
 \multicolumn{1}{|c|}{Refatoração} & \multicolumn{1}{|c|}{Classificação} & \multicolumn{1}{|c|}{Tipo de Operação}\\ 
 \hline
-\textit{Add Package} &  Atômica & \texttt{add}\\ 
+\multicolumn{1}{|c|}{\textit{Add Package}} &  \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{add}}\\ 
 \hline
-\textit{Add ClassUnit} &  Atômica & \texttt{add}\\ 
+\multicolumn{1}{|c|}{\textit{Add ClassUnit}} &  \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{add}}\\ 
 \hline
-\textit{Add StorableUnit} &  Atômica & \texttt{add}\\ 
+\multicolumn{1}{|c|}{\textit{Add StorableUnit}} &  \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{add}}\\ 
 \hline
-\textit{Add MethodUnit} &  Atômica & \texttt{add}\\ 
+\multicolumn{1}{|c|}{\textit{Add MethodUnit}} &  \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{add}}\\ 
 \hline
-\textit{Delete Package} &  Atômica & \texttt{delete}\\ 
+\multicolumn{1}{|c|}{\textit{Delete Package}} &  \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{delete}}\\ 
 \hline
-\textit{Delete ClassUnit} &  Atômica & \texttt{delete}\\ 
+\multicolumn{1}{|c|}{\textit{Delete ClassUnit}} &  \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{delete}}\\ 
 \hline
-\textit{Delete StorableUnit} &  Atômica & \texttt{delete}\\ 
+\multicolumn{1}{|c|}{\textit{Delete StorableUnit}} &  \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{delete}}\\ 
 \hline
-\textit{Delete MethodUnit} &  Atômica & \texttt{delete}\\ 
+\multicolumn{1}{|c|}{\textit{Delete MethodUnit}} &  \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{delete}}\\ 
 \hline
-\textit{Rename Package} &  Atômica & \texttt{change}\\ 
+\multicolumn{1}{|c|}{\textit{Rename Package}} &  \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{change}}\\ 
 \hline
-\textit{Rename ClassUnit} &  Atômica & \texttt{change}\\ 
+\multicolumn{1}{|c|}{\textit{Rename ClassUnit}} &  \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{change}}\\ 
 \hline
-\textit{Rename StorableUnit} &  Atômica & \texttt{change}\\ 
+\multicolumn{1}{|c|}{\textit{Rename StorableUnit}} & \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{change}}\\ 
 \hline
-\textit{Rename MethodUnit} &  Atômica & \texttt{change}\\ 
+\multicolumn{1}{|c|}{\textit{Rename MethodUnit}} &  \multicolumn{1}{c|}{Atômica} & \multicolumn{1}{c|}{\texttt{change}}\\ 
 \hline
-\textit{Move StorableUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\ 
+\multicolumn{1}{|c|}{\textit{Move StorableUnit}} &  \multicolumn{1}{c|}{Composta} & \multicolumn{1}{c|}{\texttt{add} $|$ \texttt{delete}}\\ 
 \hline
-\textit{Move MethodUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\ 
+\multicolumn{1}{|c|}{\textit{Move MethodUnit}} &  \multicolumn{1}{c|}{Composta} & \multicolumn{1}{c|}{\texttt{add} $|$ \texttt{delete}}\\ 
 \hline
-\textit{Extract ClassUnit} &  Composta & \texttt{add} $|$ \texttt{delete} $|$ \texttt{change}\\
+\multicolumn{1}{|c|}{\textit{Extract ClassUnit}} &  \multicolumn{1}{c|}{Composta} & \multicolumn{1}{c|}{\texttt{add} $|$ \texttt{delete} $|$ \texttt{change}}\\
 \hline
-\textit{Inline ClassUnit} &  Composta & \texttt{change} $|$ \texttt{delete}\\ 
+\multicolumn{1}{|c|}{\textit{Inline ClassUnit}} &  \multicolumn{1}{c|}{Composta} & \multicolumn{1}{c|}{\texttt{change} $|$ \texttt{delete}}\\ 
 \hline
-\textit{Flatten Hierarchy} &  Composta & \texttt{add} $|$ \texttt{delete} $|$ \texttt{change}\\ 
+\multicolumn{1}{|c|}{\textit{Flatten Hierarchy}} &  \multicolumn{1}{c|}{Composta} & \multicolumn{1}{c|}{\texttt{add} $|$ \texttt{delete} $|$ \texttt{change}}\\ 
 \hline
-\textit{Push Down MethodUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\ 
+\multicolumn{1}{|c|}{\textit{Push Down MethodUnit}} &  \multicolumn{1}{c|}{Composta} & \multicolumn{1}{c|}{\texttt{add} $|$ \texttt{delete}}\\ 
 \hline
-\textit{Push Down StorableUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\ 
+\multicolumn{1}{|c|}{\textit{Push Down StorableUnit}} &  \multicolumn{1}{c|}{Composta} & \multicolumn{1}{c|}{\texttt{add} $|$ \texttt{delete}}\\ 
 \hline
-\textit{Pull Up MethodUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\
+\multicolumn{1}{|c|}{\textit{Pull Up MethodUnit}} &  \multicolumn{1}{c|}{Composta} & \multicolumn{1}{c|}{\texttt{add} $|$ \texttt{delete}}\\
 \hline
-\textit{Pull Up StorableUnit} &  Composta & \texttt{add} $|$ \texttt{delete}\\
+\multicolumn{1}{|c|}{\textit{Pull Up StorableUnit}} &  \multicolumn{1}{c|}{Composta} & \multicolumn{1}{c|}{\texttt{add} $|$ \texttt{delete}}\\
 \hline
-\textit{Extract SubClass} &  Composta & \texttt{add} $|$ \texttt{change}\\
+\multicolumn{1}{|c|}{\textit{Extract SubClass}} &  \multicolumn{1}{c|}{Composta} & \multicolumn{1}{c|}{\texttt{add} $|$ \texttt{change}}\\
 \hline
-\textit{Encapsulate StorableUnit} &  Composta & \texttt{add} $|$ \texttt{change}\\
+\multicolumn{1}{|c|}{\textit{Encapsulate StorableUnit}} &  \multicolumn{1}{c|}{Composta} & \multicolumn{1}{c|}{\texttt{add} $|$ \texttt{change}}\\
 \hline
 \end{tabular}
 \end{center}
