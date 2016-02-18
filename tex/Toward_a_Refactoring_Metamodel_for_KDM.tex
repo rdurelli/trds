@@ -519,9 +519,10 @@ Refactoring:
 		$\textrm{\ding{229}}$`name' `:' name = ID
 		$\textrm{\ding{229}}$`motivation' `:' motivation = STRING
 		$\textrm{\ding{229}}$`summary' `:' summary = STRING
-		$\textrm{\ding{229} \ding{186}}$ source = Source?
-		$\textrm{\ding{229} \ding{186}}$ target = Target?
+		$\textrm{\ding{229} \ding{186}}$`source' `:' `{'source += [Source] (`,'(source += [Source]))$^{*}$`}'
+		$\textrm{\ding{229} \ding{186}}$`target' `:' `{'target += [Target] (`,'(target += [Target]))$^{*}$`}'
 		$\textrm{\ding{229} \ding{186}}$ category = Category?
+		$\textrm{\ding{229} \ding{186}}$`elements' `:' `{'elements += [Element] (`,'(elements += [Element]))$^{*}$`}'
 		$\textrm{\ding{229} \ding{187}}$ operation = Operation?
 		$\textrm{\ding{229} \ding{188}}$ preCondition = PreCondition?
 		$\textrm{\ding{229} \ding{188}}$ postCondition = PostCondition?
@@ -529,9 +530,28 @@ Refactoring:
 	`}'
 \end{lstlisting}
 
-O Código-fonte~\ref{lst:dsl_part_4}, representa as sintaxes concretas das metaclasses \texttt{Catalog} e \texttt{Refacto\-ring}. A sintaxe concreta da metaclasse \texttt{Catalog} começa com a palavra-chave \texttt{catalog}, seguida por um \aspas{\{}\ding{182}. Depois, o nome do catálogo de refatoração deve ser especificado por meio da palavra-chave \texttt{name} \ding{183}. Posteriormente, especifica-se uma instância da metaclasse \texttt{Author}, informando quem é o autor desse catálogo de refatoração (ver Código-fonte~\ref{lst:dsl_part_4}\ding{184}). Na linha 5 do Código-fonte~\ref{lst:dsl_part_4}, deve-se informar várias instâncias da metaclasse \texttt{Refactoring}; essa sintaxe representa as refatorações que compõem esse catálogo de refatoração. Nas linhas 7-18, a definição da sintaxe concreta para especificar uma refatoração por meio do metamodelo SRM é apresentada. Inicialmente, uma refatoração deve possuir um nome, conforme ilustrado na linha 9 do Código-fonte~\ref{lst:dsl_part_4}, e posteriormente, a motivação, bem como o resumo da refatoração também devem ser especificados, conforme apresentado nas linhas 10 e 11 do Código-fonte~\ref{lst:dsl_part_4}. As linhas 12, 13 e 14 informam que as metaclasses dos tipos \texttt{Source}\ding{186}, \texttt{Target}\ding{186} e \texttt{Category}\ding{186} devem ser instanciadas. Da mesma forma, as linhas 15, 16 e 17 informam que metaclasses dos tipos \texttt{Operation}\ding{187}, \texttt{PreCondition}\ding{188} e \texttt{PostCondition}\ding{188} devem ser instanciadas, respectivamente. A linha 18 representa a sintaxe da DSL para especificar um conjunto de refatorações, que, quando combinadas podem realizar refatorações complexas.
+O Código-fonte~\ref{lst:dsl_part_4}, representa as sintaxes concretas das metaclasses \texttt{Catalog} e \texttt{Refacto\-ring}. A sintaxe concreta da metaclasse \texttt{Catalog} começa com a palavra-chave \texttt{catalog}, seguida por um \aspas{\{}\ding{182}. Depois, o nome do catálogo de refatoração deve ser especificado por meio da palavra-chave \texttt{name} \ding{183}. Posteriormente, especifica-se uma instância da metaclasse \texttt{Author}, informando quem é o autor desse catálogo de refatoração (ver Código-fonte~\ref{lst:dsl_part_4}\ding{184}). Na linha 5 do Código-fonte~\ref{lst:dsl_part_4}, deve-se informar várias instâncias da metaclasse \texttt{Refactoring}; essa sintaxe representa as refatorações que compõem esse catálogo de refatoração. Nas linhas 7-18, a definição da sintaxe concreta para especificar uma refatoração por meio do metamodelo SRM é apresentada. Inicialmente, uma refatoração deve possuir um nome, conforme ilustrado na linha 9 do Código-fonte~\ref{lst:dsl_part_4}, e posteriormente, a motivação, bem como o resumo da refatoração também devem ser especificados, conforme apresentado nas linhas 10 e 11 do Código-fonte~\ref{lst:dsl_part_4}. As linhas 12, 13, 14 e 15 informam que as metaclasses dos tipos \texttt{Source}\ding{186}, \texttt{Target}\ding{186}, \texttt{Category}\ding{186} e \texttt{Element}\ding{186} devem ser instanciadas. Da mesma forma, as linhas 16, 17 e 18 informam que metaclasses dos tipos \texttt{Operation}\ding{187}, \texttt{PreCondition}\ding{188} e \texttt{PostCondition}\ding{188} devem ser instanciadas, respectivamente. A linha 19 representa a sintaxe da DSL para especificar um conjunto de refatorações, que, quando combinadas podem realizar refatorações complexas.
 
-\begin{lstlisting}[language=Xtext, frame=single, basicstyle=\scriptsize, mathescape=true, label={lst:dsl_part_5}, caption={Gramática da DSL - parte 5}]
+
+\begin{lstlisting}[language=Xtext, frame=single, basicstyle=\scriptsize, mathescape=true, label={lst:dsl_part_5_1}, caption={Gramática da DSL - parte 5}]
+Source: 
+	$\textrm{\ding{182}}$ key=STRING value=KDMEntity
+Target: 
+	$\textrm{\ding{183}}$ key=STRING value=KDMEntity
+Category: 
+	$\textrm{\ding{184}}$`category' `{'
+		$\textrm{\ding{229}}$`name' `:' name=STRING
+	`}'
+Element: 
+	$\textrm{\ding{185}}$ key=STRING value=KDMEntity
+\end{lstlisting}
+
+
+No Código-fonte~\ref{lst:dsl_part_5_1}, as sintaxes concretas das metaclasses \texttt{Source}, \texttt{Target}, \texttt{Category} e \texttt{Element} são definidas. A sintaxe concreta da metaclasse \texttt{Source} inicia com a palavra-chave \texttt{source}, seguida por um \aspas{\{}\ding{182}. Depois, deve-se especificar a palavra-chave \texttt{key}, seguida por \aspas{\texttt{:}}. Posteriormente, a palavra-chave \texttt{value} também é esperada seguida por \aspas{\texttt{:}}. Essa palavra-chave, \texttt{value}, armazena um determinado elemento fonte da metaclasse do metamodelo KDM. Da mesma forma, a sintaxe concreta da metaclasse \texttt{Target} inicia-se com a palavra-chave \texttt{target}, seguida por um \aspas{\{}\ding{183}. Em seguida, também deve-se especificar a palavra-chave \texttt{key}, seguida por \aspas{\texttt{:}}. A palavra-chave \texttt{value} seguida por \aspas{\texttt{:}} é esperada. Novamente, essa palavra-chave armazena um determinado elemento alvo que é uma metaclasse do metamodelo KDM. A sintaxe concreta da metaclasse \texttt{Category} inicia-se com a palavra-chave \texttt{category}, seguida por \aspas{\texttt{:}} \ding{184}. Deve-se, então, especificar a palavra-chave \texttt{name} seguida por \aspas{\texttt{:}}. Nas linhas 15, 16, 17 e 18 do Código-fonte~\ref{lst:dsl_part_5_1}, a sintaxe concreta da metaclasse \texttt{Element} é definida. 
+
+
+
+\begin{lstlisting}[language=Xtext, frame=single, basicstyle=\scriptsize, mathescape=true, label={lst:dsl_part_5}, caption={Gramática da DSL - parte 6}]
 Operation: 
 	$\textrm{\ding{182}}$`operation' `{'
 		$\textrm{\ding{229}}$`language' `:' language=LanguageM2M
@@ -566,7 +586,7 @@ No Código-fonte~\ref{lst:dsl_part_5}, as sintaxes concretas das metaclasses \te
 
 \subsection{Exemplo de uso da DSL}
 
-A partir das gramáticas da DSL apresentadas o engenheiro de modernização pode instanciar o metamodelo SRM. A DSL contém 17 palavras-chave, as quais são ilustradas na Tabela~\ref{tab:palavra_chave_DSL}. A DSL também contém as palavras-chaves \texttt{ATL}, \texttt{QVT}, \texttt{OCL} e \texttt{XQuery} que são enumerações literais para representar a linguagem de transformação e a linguagem de restrição da instância de uma refatoração, respectivamente. A DSL também contém alguns caracteres \sigla{ASCII}{\textit{American Standard Code for Information Interchange}}, tais como: \texttt{:}, \texttt{"}, \texttt{\{} e \texttt{\}}.
+A partir das gramáticas da DSL apresentadas o engenheiro de modernização pode instanciar o metamodelo SRM. A DSL contém 22 palavras-chave, as quais são ilustradas na Tabela~\ref{tab:palavra_chave_DSL}. A DSL também contém as palavras-chaves \texttt{ATL}, \texttt{QVT}, \texttt{OCL} e \texttt{XQuery} que são enumerações literais para representar a linguagem de transformação e a linguagem de restrição da instância de uma refatoração, respectivamente. A DSL também contém alguns caracteres \sigla{ASCII}{\textit{American Standard Code for Information Interchange}}, tais como: \texttt{:}, \texttt{"}, \texttt{\{} e \texttt{\}}.
 
 
 
@@ -582,7 +602,9 @@ A partir das gramáticas da DSL apresentadas o engenheiro de modernização pode
 \texttt{description}      & \texttt{catalog}              & \texttt{refactoring}      \\ \hline
 \texttt{motivation}       & \texttt{summary}              & \texttt{operation}        \\ \hline
 \texttt{language}         & \texttt{body}                 & \texttt{preCondition}     \\ \hline
-\texttt{context}          & \texttt{postCondition}        & \multicolumn{1}{c|}{\textemdash}                 \\ \hline
+\texttt{context}          & \texttt{postCondition}        & \texttt{key}                 \\ \hline
+\texttt{value}          & \texttt{source}        & \texttt{target}                 \\ \hline
+\texttt{category}          & \multicolumn{1}{c|}{\textemdash}         & \multicolumn{1}{c|}{\textemdash}                  \\ \hline
 \end{tabular}
 \end{table}
 
@@ -644,7 +666,7 @@ refactoringModel {
 }
 \end{codigo}
 
-Cada catálogo de refatoração contém um conjunto de refatorações. Dessa forma, o próximo passo é realizar a instanciação da metaclasse \texttt{Refactoring} e seus meta-atributos. Isto pode ser realizado por meio da palavra-chave \texttt{refactoring} seguida por \{ e \} como apresentado na gramática da DSl (ver Código-fonte~\ref{lst:dsl_part_4}).
+Cada catálogo de refatoração contém um conjunto de refatorações. Dessa forma, o próximo passo é realizar a instanciação da metaclasse \texttt{Refactoring} e seus meta-atributos. Isto pode ser realizado por meio da palavra-chave \texttt{refactoring} seguida por \{ e \} como apresentado na gramática da DSL (ver Código-fonte~\ref{lst:dsl_part_4}).
 
 \begin{codigo}[caption={[Exemplo de uso da DSL - parte 5.] Exemplo de uso da DSL - parte 5.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={cod:SRM_part5}, language=myDSL]{Name}
 refactoringModel {
@@ -669,6 +691,46 @@ refactoringModel {
 }
 \end{codigo}
 
+
+Como observado no Código-fonte~\ref{cod:SRM_part5}, a metaclasse \texttt{Refactoring} é instanciada nas linhas 13-16 e seus meta-atributos também devem ser informados, ou seja, \texttt{name}, \texttt{motivation} e \texttt{summary}. Após instanciar a metaclasse \texttt{Refactoring}, o próximo passo consiste na instanciação das metaclasses \texttt{Source}, \texttt{Target}, \texttt{Category} e \texttt{Element} como apresentado no Código-fonte~\ref{cod:SRM_part6_1}.
+
+
+\begin{codigo}[caption={[Exemplo de uso da DSL - parte 5.] Exemplo de uso da DSL - parte 5.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={cod:SRM_part6_1}, language=myDSL]{Name}
+refactoringModel {
+    author {
+		name : Rafael
+		lastName : Durelli
+	}
+	refactoringLibraries {
+	    name : FineGrainedRefactoring
+		shortDescription : "contains a set of refactorings"
+		description : "refactorings"
+		catalog {
+			name : Fowler Catalog
+			author : Rafael
+			refactoring {
+				name : Extract ClassUnit
+				motivation : "You have one ClassUnit doing work that should be done by two."
+				summary : "Create a new ClassUnit and move the relevant StorableUnit from the old ClassUnit into the new ClassUnit."
+				source : {
+				    Package, ClassUnit
+				}
+				target : {
+				    Package, ClassUnit
+				}
+				category : {
+				    name: "Moving Features Between Objects"
+				}
+				elements : {
+				    ClassUnit, StorableUnit
+				}
+			}
+		}
+	}
+}
+\end{codigo}
+
+
 Como observado no Código-fonte~\ref{cod:SRM_part5}, a metaclasse \texttt{Refactoring} é instanciada nas linhas 13-16 e seus meta-atributos também devem ser informados, ou seja, \texttt{name}, \texttt{motivation} e \texttt{summary}. Após instanciar a metaclasse \texttt{Refactoring}, o próximo passo consiste na instanciação da metaclasse \texttt{Operation} como apresentado no Código-fonte~\ref{cod:SRM_part6} linhas 17-21. Note que, para facilitar o entendimento da DSL o código em ATL (ver linhas 19-21) que representa a operação da refatoração foi removido.
 
 \begin{codigo}[caption={[Exemplo de uso da DSL - parte 6.] Exemplo de uso da DSL - parte 6.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={cod:SRM_part6}, language=myDSL]{Name}
@@ -688,6 +750,18 @@ refactoringModel {
 				name : Extract ClassUnit
 				motivation : "You have one ClassUnit doing work that should be done by two."
 				summary : "Create a new ClassUnit and move the relevant StorableUnit from the old ClassUnit into the new ClassUnit."
+				source : {
+				    Package, ClassUnit
+				}
+				target : {
+				    Package, ClassUnit
+				}
+				category : {
+				    name: "Moving Features Between Objects"
+				}
+				elements : {
+				    ClassUnit, StorableUnit
+				}
 				operation {
 				    language : ATL
 				    body : {
@@ -717,6 +791,18 @@ refactoringModel {
 				name : Extract ClassUnit
 				motivation : "You have one ClassUnit doing work that should be done by two."
 				summary : "Create a new ClassUnit and move the relevant StorableUnit from the old ClassUnit into the new ClassUnit."
+				source : {
+				    Package, ClassUnit
+				}
+				target : {
+				    Package, ClassUnit
+				}
+				category : {
+				    name: "Moving Features Between Objects"
+				}
+				elements : {
+				    ClassUnit, StorableUnit
+				}
 				operation {
 				    language : ATL
 				    body : {
