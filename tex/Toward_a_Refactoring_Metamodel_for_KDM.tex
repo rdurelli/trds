@@ -63,7 +63,7 @@ O SRM segue as padronizações propostas pela ADM. Assim, deve-se ressaltar que 
 	\centering
 	% Requires \usepackage{graphicx}
 		\caption{Visão completa (sem os pacotes) do metamodelo SRM.}
-	\includegraphics[scale=0.65]{images/NewSRM}
+	\includegraphics[scale=0.65]{images/NewSRM2}
 	\label{fig:meta_modelo_SRM}
 	\fautor
 \end{figure}
@@ -167,7 +167,7 @@ O pacote \texttt{Refactoring} define um conjunto de metaclasses cujo propósito 
 	\centering
 	% Requires \usepackage{graphicx}
 		\caption{Pacote \texttt{Refactoring} do SR.}
-	\includegraphics[scale=0.70]{images/newRefactoringPackageSRM}
+	\includegraphics[scale=0.70]{images/newRefactoringPackageSRM2}
 	\label{fig:pacote_refactoring_srm}
 	\fautor
 \end{figure}
@@ -247,8 +247,8 @@ O pacote \texttt{Refactoring} define um conjunto de metaclasses cujo propósito 
 			\item \texttt{postCondition:PostCondition[1]}: representa uma pós-condição que tem como intuito verificar a corretude da refatoração;
 			\item \texttt{elements:Element[0..*]}: um conjunto de elementos utilizados para realizar a refatoração. Tais elementos são metaclasses do KDM;
 			\item \texttt{chainOfRefactoring:Refactoring[0..*]}: um conjunto de refatorações que, quando combinadas, descrevem uma refatoração mais complexas;
-			\item \texttt{source:Source[0..*]}: define as metaclasses fontes do KDM que serão utilizadas durante a refatoração.
-			\item \texttt{target:Target[0..*]}: define as metaclasses alvos do KDM que serão utilizadas durante a refatoração.
+			\item \texttt{source:SourceContainer[0..*]}: define as metaclasses fontes do KDM que serão utilizadas durante a refatoração.
+			\item \texttt{target:TargetContainer[0..*]}: define as metaclasses alvos do KDM que serão utilizadas durante a refatoração.
 			\item \texttt{category:Category}: \texttt{String} para definir a categoria da refatoração.
 			\item
 			\texttt{classification:Classification[0..*]}: define a classificação de uma refatoração.
@@ -265,7 +265,7 @@ O pacote \texttt{Refactoring} define um conjunto de metaclasses cujo propósito 
 		\end{itemize}	
 \end{itemize}
 
-\item \texttt{Source} define um conjunto de metaclasses fontes do KDM que serão utilizadas durante a refatoração. Essa metaclasse utiliza uma estrutura similar a da tabela \textit{hash} para definir os elementos.
+\item \texttt{SourceContainer} define um conjunto de metaclasses fontes do KDM que serão utilizadas durante a refatoração. Essa metaclasse utiliza uma estrutura similar a da tabela \textit{hash} para definir os elementos.
 
 \begin{itemize}
 	\item \textbf{Meta-atributos}
@@ -275,7 +275,7 @@ O pacote \texttt{Refactoring} define um conjunto de metaclasses cujo propósito 
 		\end{itemize}	
 \end{itemize}
 
-\item \texttt{Target} define um conjunto de metaclasses alvos do KDM que serão utilizadas durante a refatoração. Essa metaclasse utiliza uma estrutura similar a da tabela \textit{hash} para definir os elementos.
+\item \texttt{TargetContainer} define um conjunto de metaclasses alvos do KDM que serão utilizadas durante a refatoração. Essa metaclasse utiliza uma estrutura similar a da tabela \textit{hash} para definir os elementos.
 
 \begin{itemize}
 	\item \textbf{Meta-atributos}
@@ -416,7 +416,7 @@ Neste passo, o metamodelo SRM foi implementado. A junção dos pacotes apresenta
 	% Requires \usepackage{graphicx}
 	\caption{Visão de árvore do SRM implementado em EMF.}
 	\label{fig:visao_arvore_srm_emf}
-	\includegraphics[scale=0.63]{images/newECORESRM}
+	\includegraphics[scale=0.63]{images/SRM_EMF_Implemented}
 	\fautor
 \end{figure}
 
@@ -519,8 +519,8 @@ Refactoring:
 		$\textrm{\ding{229}}$`name' `:' name = ID
 		$\textrm{\ding{229}}$`motivation' `:' motivation = STRING
 		$\textrm{\ding{229}}$`summary' `:' summary = STRING
-		$\textrm{\ding{229} \ding{186}}$`source' `:' `{'source += [Source] (`,'(source += [Source]))$^{*}$`}'
-		$\textrm{\ding{229} \ding{186}}$`target' `:' `{'target += [Target] (`,'(target += [Target]))$^{*}$`}'
+		$\textrm{\ding{229} \ding{186}}$`source' `:' `{'source += [SourceContainer] (`,'(source += [SourceContainer]))$^{*}$`}'
+		$\textrm{\ding{229} \ding{186}}$`target' `:' `{'target += [TargetContainer] (`,'(target += [TargetContainer]))$^{*}$`}'
 		$\textrm{\ding{229} \ding{186}}$ category = Category?
 		$\textrm{\ding{229} \ding{186}}$`elements' `:' `{'elements += [Element] (`,'(elements += [Element]))$^{*}$`}'
 		$\textrm{\ding{229} \ding{187}}$ operation = Operation?
@@ -530,13 +530,13 @@ Refactoring:
 	`}'
 \end{lstlisting}
 
-O Código-fonte~\ref{lst:dsl_part_4}, representa as sintaxes concretas das metaclasses \texttt{Catalog} e \texttt{Refacto\-ring}. A sintaxe concreta da metaclasse \texttt{Catalog} começa com a palavra-chave \texttt{catalog}, seguida por um \aspas{\{}\ding{182}. Depois, o nome do catálogo de refatoração deve ser especificado por meio da palavra-chave \texttt{name} \ding{183}. Posteriormente, especifica-se uma instância da metaclasse \texttt{Author}, informando quem é o autor desse catálogo de refatoração (ver Código-fonte~\ref{lst:dsl_part_4}\ding{184}). Na linha 5 do Código-fonte~\ref{lst:dsl_part_4}, deve-se informar várias instâncias da metaclasse \texttt{Refactoring}; essa sintaxe representa as refatorações que compõem esse catálogo de refatoração. Nas linhas 7-18, a definição da sintaxe concreta para especificar uma refatoração por meio do metamodelo SRM é apresentada. Inicialmente, uma refatoração deve possuir um nome, conforme ilustrado na linha 9 do Código-fonte~\ref{lst:dsl_part_4}, e posteriormente, a motivação, bem como o resumo da refatoração também devem ser especificados, conforme apresentado nas linhas 10 e 11 do Código-fonte~\ref{lst:dsl_part_4}. As linhas 12, 13, 14 e 15 informam que as metaclasses dos tipos \texttt{Source}\ding{186}, \texttt{Target}\ding{186}, \texttt{Category}\ding{186} e \texttt{Element}\ding{186} devem ser instanciadas. Da mesma forma, as linhas 16, 17 e 18 informam que metaclasses dos tipos \texttt{Operation}\ding{187}, \texttt{PreCondition}\ding{188} e \texttt{PostCondition}\ding{188} devem ser instanciadas, respectivamente. A linha 19 representa a sintaxe da DSL para especificar um conjunto de refatorações, que, quando combinadas podem realizar refatorações complexas.
+O Código-fonte~\ref{lst:dsl_part_4}, representa as sintaxes concretas das metaclasses \texttt{Catalog} e \texttt{Refacto\-ring}. A sintaxe concreta da metaclasse \texttt{Catalog} começa com a palavra-chave \texttt{catalog}, seguida por um \aspas{\{}\ding{182}. Depois, o nome do catálogo de refatoração deve ser especificado por meio da palavra-chave \texttt{name} \ding{183}. Posteriormente, especifica-se uma instância da metaclasse \texttt{Author}, informando quem é o autor desse catálogo de refatoração (ver Código-fonte~\ref{lst:dsl_part_4}\ding{184}). Na linha 5 do Código-fonte~\ref{lst:dsl_part_4}, deve-se informar várias instâncias da metaclasse \texttt{Refactoring}; essa sintaxe representa as refatorações que compõem esse catálogo de refatoração. Nas linhas 7-18, a definição da sintaxe concreta para especificar uma refatoração por meio do metamodelo SRM é apresentada. Inicialmente, uma refatoração deve possuir um nome, conforme ilustrado na linha 9 do Código-fonte~\ref{lst:dsl_part_4}, e posteriormente, a motivação, bem como o resumo da refatoração também devem ser especificados, conforme apresentado nas linhas 10 e 11 do Código-fonte~\ref{lst:dsl_part_4}. As linhas 12, 13, 14 e 15 informam que as metaclasses dos tipos \texttt{SourceContainer}\ding{186}, \texttt{TargetContainer}\ding{186}, \texttt{Category}\ding{186} e \texttt{Element}\ding{186} devem ser instanciadas. Da mesma forma, as linhas 16, 17 e 18 informam que metaclasses dos tipos \texttt{Operation}\ding{187}, \texttt{PreCondition}\ding{188} e \texttt{PostCondition}\ding{188} devem ser instanciadas, respectivamente. A linha 19 representa a sintaxe da DSL para especificar um conjunto de refatorações, que, quando combinadas podem realizar refatorações complexas.
 
 
 \begin{lstlisting}[language=Xtext, frame=single, basicstyle=\scriptsize, mathescape=true, label={lst:dsl_part_5_1}, caption={Gramática da DSL - parte 5}]
-Source: 
+SourceContainer: 
 	$\textrm{\ding{182}}$ key=STRING value=KDMEntity
-Target: 
+TargetContainer: 
 	$\textrm{\ding{183}}$ key=STRING value=KDMEntity
 Category: 
 	$\textrm{\ding{184}}$`category' `{'
@@ -547,7 +547,7 @@ Element:
 \end{lstlisting}
 
 
-No Código-fonte~\ref{lst:dsl_part_5_1}, as sintaxes concretas das metaclasses \texttt{Source}, \texttt{Target}, \texttt{Category} e \texttt{Element} são definidas. A sintaxe concreta da metaclasse \texttt{Source} inicia com a palavra-chave \texttt{source}, seguida por um \aspas{\{}\ding{182}. Depois, deve-se especificar a palavra-chave \texttt{key}, seguida por \aspas{\texttt{:}}. Posteriormente, a palavra-chave \texttt{value} também é esperada seguida por \aspas{\texttt{:}}. Essa palavra-chave, \texttt{value}, armazena um determinado elemento fonte da metaclasse do metamodelo KDM. Da mesma forma, a sintaxe concreta da metaclasse \texttt{Target} inicia-se com a palavra-chave \texttt{target}, seguida por um \aspas{\{}\ding{183}. Em seguida, também deve-se especificar a palavra-chave \texttt{key}, seguida por \aspas{\texttt{:}}. A palavra-chave \texttt{value} seguida por \aspas{\texttt{:}} é esperada. Novamente, essa palavra-chave armazena um determinado elemento alvo que é uma metaclasse do metamodelo KDM. A sintaxe concreta da metaclasse \texttt{Category} inicia-se com a palavra-chave \texttt{category}, seguida por \aspas{\texttt{:}} \ding{184}. Deve-se, então, especificar a palavra-chave \texttt{name} seguida por \aspas{\texttt{:}}. Nas linhas 15, 16, 17 e 18 do Código-fonte~\ref{lst:dsl_part_5_1}, a sintaxe concreta da metaclasse \texttt{Element} é definida. 
+No Código-fonte~\ref{lst:dsl_part_5_1}, as sintaxes concretas das metaclasses \texttt{SourceContainer}, \texttt{TargetContainer}, \texttt{Category} e \texttt{Element} são definidas. A sintaxe concreta da metaclasse \texttt{SourceContainer} inicia com a palavra-chave \texttt{source}, seguida por um \aspas{\{}\ding{182}. Depois, deve-se especificar a palavra-chave \texttt{key}, seguida por \aspas{\texttt{:}}. Posteriormente, a palavra-chave \texttt{value} também é esperada seguida por \aspas{\texttt{:}}. Essa palavra-chave, \texttt{value}, armazena um determinado elemento fonte da metaclasse do metamodelo KDM. Da mesma forma, a sintaxe concreta da metaclasse \texttt{TargetContainer} inicia-se com a palavra-chave \texttt{target}, seguida por um \aspas{\{}\ding{183}. Em seguida, também deve-se especificar a palavra-chave \texttt{key}, seguida por \aspas{\texttt{:}}. A palavra-chave \texttt{value} seguida por \aspas{\texttt{:}} é esperada. Novamente, essa palavra-chave armazena um determinado elemento alvo que é uma metaclasse do metamodelo KDM. A sintaxe concreta da metaclasse \texttt{Category} inicia-se com a palavra-chave \texttt{category}, seguida por \aspas{\texttt{:}} \ding{184}. Deve-se, então, especificar a palavra-chave \texttt{name} seguida por \aspas{\texttt{:}}. Nas linhas 15, 16, 17 e 18 do Código-fonte~\ref{lst:dsl_part_5_1}, a sintaxe concreta da metaclasse \texttt{Element} é definida. 
 
 
 
@@ -692,7 +692,7 @@ refactoringModel {
 \end{codigo}
 
 
-Como observado no Código-fonte~\ref{cod:SRM_part5}, a metaclasse \texttt{Refactoring} é instanciada nas linhas 13-16 e seus meta-atributos também devem ser informados, ou seja, \texttt{name}, \texttt{motivation} e \texttt{summary}. Após instanciar a metaclasse \texttt{Refactoring}, o próximo passo consiste na instanciação das metaclasses \texttt{Source}, \texttt{Target}, \texttt{Category} e \texttt{Element} como apresentado no Código-fonte~\ref{cod:SRM_part6_1}.
+Como observado no Código-fonte~\ref{cod:SRM_part5}, a metaclasse \texttt{Refactoring} é instanciada nas linhas 13-16 e seus meta-atributos também devem ser informados, ou seja, \texttt{name}, \texttt{motivation} e \texttt{summary}. Após instanciar a metaclasse \texttt{Refactoring}, o próximo passo consiste na instanciação das metaclasses \texttt{SourceContainer}, \texttt{TargetContainer}, \texttt{Category} e \texttt{Element} como apresentado no Código-fonte~\ref{cod:SRM_part6_1}.
 
 
 \begin{codigo}[caption={[Exemplo de uso da DSL - parte 5.] Exemplo de uso da DSL - parte 5.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={cod:SRM_part6_1}, language=myDSL]{Name}

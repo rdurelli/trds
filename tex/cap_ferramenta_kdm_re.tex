@@ -169,7 +169,7 @@ Esse módulo fornece uma forma de compartilhar e reutilizar refatorações por m
 
 %Como apresentado e salientado no Capítulo~\ref{chapter:Toward_a_Refactoring_Metamodel_for_KDM} a instanciação de uma refatoração por meio do SRM pode ser um processo demorado e suscetível a erro. Para diminuir a quantidade de código-fonte, esforço obrigatórios e competência necessárias para instanciar refatorações utilizando o metamodelo SRM, a KDM-RE provê uma DSL que auxilia a instanciação de refatorações sistematicamente. Na parte superior a esquerda da Figura~\ref{fig:DSL_SRM} é possível visualizar o relacionamento entre a DSL criada e as metaclasses do metamodelo SRM. 
 
-Por meio das gramáticas apresentadas nos Códigos-fontes~\ref{lst:dsl_part_1}, \ref{lst:dsl_part_2}, \ref{lst:dsl_part_3}, \ref{lst:dsl_part_4} e \ref{lst:dsl_part_5}, Xtext gera um editor textual para o ambiente de desenvolvimento Eclipse IDE. Esse editor textual provê \textit{highlighting} de sintaxe, \textit{autocomplete} de código e navegação de código. Na parte superior, à esquerda da Figura~\ref{fig:DSL_SRM}, é possível visualizar trechos da DSL resultante. Além disso, essa figura ilustra o relacionamento entre a DSL criada e as metaclasses do metamodelo SRM, ou seja, representa que a sintaxe da DSL está em conformidade com as metaclasses do SRM.
+Por meio das gramáticas apresentadas nos Códigos-fontes~\ref{lst:dsl_part_1}, \ref{lst:dsl_part_2}, \ref{lst:dsl_part_3}, \ref{lst:dsl_part_4}, \ref{lst:dsl_part_5_1} e \ref{lst:dsl_part_5}, Xtext gera um editor textual para o ambiente de desenvolvimento Eclipse IDE. Esse editor textual provê \textit{highlighting} de sintaxe, \textit{autocomplete} de código e navegação de código. Na parte superior, à esquerda da Figura~\ref{fig:DSL_SRM}, é possível visualizar trechos da DSL resultante. Além disso, essa figura ilustra o relacionamento entre a DSL criada e as metaclasses do metamodelo SRM, ou seja, representa que a sintaxe da DSL está em conformidade com as metaclasses do SRM.
 
 %\begin{codigo}[caption={[Instanciação do metamodelo SRM programaticamente.] Instanciação do metamodelo SRM.},escapeinside={(*@}{@*)}, basicstyle=\footnotesize, label={cod:instancia_do_SRM}, language=Java]{Name}
 %Author author = RefactoringModelFactory.eINSTANCE.createAuthor();
@@ -194,7 +194,7 @@ Por meio das gramáticas apresentadas nos Códigos-fontes~\ref{lst:dsl_part_1}, 
 	% Requires \usepackage{graphicx}
 	\caption{DSL para auxiliar a instanciação do SRM.}
 	\label{fig:DSL_SRM}
-	\includegraphics[scale=0.6]{images/MetaModelEDSL2}
+	\includegraphics[scale=0.58]{images/MetaModelEDSL3}
 	\fautor
 \end{figure}
 
@@ -347,6 +347,9 @@ Cada marcação apresentada nesse XMI representa uma metaclasse do metamodelo SR
   <libraries name="FineGrainedRefactoring" shortDescription="contains a set of refactorings" description="refactorings">
     <catalogs name="Catalog" author="//@author">
       <refactorings name="ExtractCLass" motivation="Motivation" summary="Summary">
+        <source key="Class" value=//@ClassUnit/>
+        <target key="Class" value=//@ClassUnit/>
+        <elements key="Class" value=//@ClassUnit key "Attribute" value=//@StorableUnit/>
         <preCondition context="TO BE DEFINED" language="OCL" body="TO BE DEFINED"/>
         <postCondition context="TO BE DEFINED" language="OCL" body="TO BE DEFINED"/>
         <operation body="TO BE DEFINED"/>
