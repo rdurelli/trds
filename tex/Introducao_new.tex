@@ -1,44 +1,38 @@
 
 \section{Contextualização}\label{sec:contexto}
+%Nova introducao seguindo as dicas do professor Valter.
+
+Sistemas legados são aqueles cujos custos de manutenção e evolução encontram-se fora dos níveis aceitáveis para uma organização, mas que ainda são úteis para apoiar seus processos internos. Frequentemente esse tipo de software possui sua estrutura inconsistente com a sua documentação, o que dificulta sua manutenção. Porém, substituí-lo complementamente pode ser uma tarefa muito cara e propensa a erros~\cite{Pressman_2009}. Segundo~\citeonline{Pressman_2009}, uma empresa de software pode despender de 60\% a 70\% de todos os seus recursos com manutenção de software.
+
+Como já salientado, manter sistemas legados é uma atividade complexa e onerosa para muitas empresas. Uma alternativa à substituição de um sistema legado são os tradicionais processos de reengenharia. Entretanto, em consequência de algumas pesquisas existentes, o \textit{Object Management Group} (OMG) lançou em 2003 o termo Modernização Dirigida a Arquitetura (do inglês - \sigla{ADM}{\textit{Architecture-Driven Modernization}}) cujo objetivo principal é padronizar processos de reengenharia por meio de metamodelos padronizados~\cite{ADM:OMG}. O Knowledge Discovery Metamodel (KDM) é o principal metamodelo da ADM com uma ampla quantidade de metaclasses para representar desde os níveis mais baixos de abstração de um sistema (código-fonte), até níveis mais altos (arquitetura do sistema), permitindo a representação de conceitos de qualquer domínio~\cite{KDM:specification,KDM:ISO}. %Diferentemente de metamodelos existentes, o KDM mantém todas as visões/representações do sistema em uma única instância; o KDM pode ser considerado como uma família de metamodelos, uma vez que compartilha a consistência e terminologia homogênea. 
+ 
+A ideia principal da ADM é que a comunidade comece a desenvolver ferramentas que atuem apenas sobre instâncias do metamodelo KDM, ao invés de serem dependentes de plataformas e linguagens específicas. Por exemplo, um catálogo de refatorações~\cite{durelli_catalogo} para o KDM tem o poder de alterar um sistema independentemente da linguagem de programação que foi usada em seu desenvolvimento, já que as refatorações ocorrem nos modelos. Outro exemplo seria a aplicação de técnicas de mineração de interesses transversais, utilizando como base o metamodelo KDM~\cite{Durelli:2013_ACM, dani_san, daniel_san_journal}.
+
+Um processo de modernização típico da ADM possui três principais passos: (\textit{i}) engenharia reversa, onde um sistema legado deve ser transformado em uma instância do metamodelo KDM; (\textit{ii}) reestruturação, onde essa instância do KDM é submetida à diversas transformações, ou seja, otimizações e refatorações são realizadas na instância do KDM; e (\textit{iii}) engenharia avante, onde a instância otimizada/refatorada do KDM é transformada novamente para código-fonte. Dessa forma, para apoiar e automatizar esses três passos, é importante que o processo de modernização da ADM possua ferramentas de modernização que atuem em nível de modelo e auxiliem os engenheiros de forma sistemática e guiada para facilitar o processo de modernização.
+
+Considerando o processo de modernização da ADM, uma atividade fundamental durante o passo de reestruturação são as refatorações. Refatorações foram primeiramente propostas por~\citeonline{OPDYKE_1992} como uma metodologia para reestruturar programas. Seguindo a mesma linha de pensamento, pesquisadores como \citeonline{Fowler1999} tornaram a refatoração uma disciplina comumente conhecida e aplicada, a qual é um processo disciplinado e utilizado para melhorar a estrutura do software, preservando o comportamento do mesmo~\cite{Fowler1999}. Com o apoio ferramental adequado, a refatoração pode ser uma maneira eficiente e eficaz para: (\textit{i}) ajudar a melhorar o projeto do software, (\textit{ii}) tornar o software mais fácil de ser entendido, e (\textit{iii}) auxiliar na identificação de erros. %Na literatura é possível identificar um conjunto de ferramentas, automáticas ou semiautomáticas, que auxiliam na aplicação de refatorações (refs). 
+
+%inicia obtendo-se uma instância do KDM que representa o sistema legado, prossegue com as reestruturações cabíveis (otimizações, refatorações, etc.) 
 
 
-Para lidar com mudanças e crescentes necessidades de negócios, sistemas de software estão em constante evolução.
-Atividades de evolução do software podem abranger desde a manutenção até a substituição total do sistema~\cite{seacord_2003}. 
-De acordo com~\citeonline{Lientz_1978} e~\citeonline{Pressman_2009}, a manutenção de software é a atividade mais custosa no ciclo de vida do sistema de software. 
-Essa atividade inclui um conjunto de tarefas necessárias para modificar o software existente e ainda deve-se preservar sua integridade.
-As tarefas de manutenção de software podem ser vistas como modificações incrementais que adicionam ou atualizam um conjunto de funcionalidades, ou corrigem falhas do projeto.
-Usualmente, com o passar do tempo, a integridade conceitual do sistema tende a diminuir, o que afeta a sua qualidade.
-%Essa deterioração é conhecida na literatura como o fenômeno de envelhecimento~\cite{Fowler1999}, e lidar com esse fenômeno não é uma atividade trivial e barata.
-
-Uma técnica comum e amplamente utilizada para lidar com tal problema é a reestruturação de software visando melhorar o projeto do software (do inglês - \emph{design}). Uma etapa da reestruturação de software e utilizada no paradigma orientado a objetos é comumente chamada de refatoração~\cite{OPDYKE_1992, Fowler1999, Mens04}. Refatoração foi primeiramente proposta por~\citeonline{OPDYKE_1992} como uma metodologia para reestruturar programas. Seguindo a mesma linha de pensamento, pesquisadores como \citeonline{Fowler1999} tornaram a refatoração uma disciplina comumente conhecida e aplicada, a qual é um processo disciplinado e utilizado para melhorar a estrutura do software, preservando o comportamento do mesmo~\cite{Fowler1999}. Com o apoio ferramental adequado, a refatoração pode ser uma maneira eficiente e eficaz para: (\textit{i}) ajudar a melhorar o projeto do software, (\textit{ii}) tornar o software mais fácil de ser entendido, e (\textit{iii}) auxiliar na identificação de erros. %Na literatura é possível identificar um conjunto de ferramentas, automáticas ou semiautomáticas, que auxiliam na aplicação de refatorações (refs). 
 
 
-Outra linha de pesquisa é a Engenharia Dirigida por Modelos (do inglês - \sigla{MDE}{\textit{Model-Driven Engineering}}). 
-Usualmente, pesquisas encontradas na literatura sobre refatorações estão mais focadas em criar ferramentas e abordagens para refatorações que ocorrem no âmbito do código-fonte. 
-No entanto, com o surgimento da MDE e a adoção de muitas ferramentas que permitem gerar código a partir de diagramas, aumentou-se o interesse e a necessidade de ferramentas de apoio a refatorações em nível de modelo. Na verdade, de acordo com~\citeonline{Mens04}, a adaptação de ferramentas de refatoração para fornecer apoio à aplicação de refatorações em modelo pode ser de grande utilidade. Algumas motivações podem ser destacadas para a realização dessas adaptações: (\emph{i}) modelos podem fornecer uma visão abstrata do sistema; assim, visualizações de mudanças estruturais são mais fáceis de serem visualizadas e detectadas; (\emph{ii}) problemas descobertos ainda na fase de projeto podem ser solucionados diretamente no modelo, aumentando a produtividade; (\emph{iii}) a capacidade de explorar caminhos alternativos de decisões é muito mais barato em nível de modelo~\cite{Mens_2006}, uma vez que não se faz necessário a alteração direta do código-fonte, fazendo com que o sistema ainda opere enquanto mudanças são testadas pelo modernizador.
+%Um processo de modernização típico da ADM usualmente deve possuir
+
+%Um processo de modernização típico da ADM usualmente deve possuir ferramentas de modernização para auxiliar os engenheiros durante o processo de modernização. Além disso, 
+
+Embora o conceito de refatoração seja bem conhecido e aplicado em código-fonte, sua aplicação em modelos ainda apresentada desafios de pesquisa~\cite{Gorp}. De acordo com~\citeonline{Mens_2006}, refatorações em modelos tendem a ser mais complexas do que refatorações aplicadas em código-fonte, uma vez que, além das refatorações, é necessária também a realização de uma atividade para verificar a consistência do modelo e manter a sincronização dele, bem como suas visões~\cite{KolahdouzRahimi20145}. Segundo~\citeonline{Gorp}, desenvolvedores de software utilizam refatorações em nível de projeto e, assim, é intuitivo explorar os conceitos da UML para a aplicação de refatorações~\cite{Salem_2008, Gorp, Egyed_2008, Briand_2006, staron2004implementing}. Nesse sentido, várias pesquisas iniciaram-se com o objetivo de implementar refatorações no contexto da UML~\cite{revisao_sistematica_uml_refactoring}. Uma das vantagens em se utilizar refatorações em nível de modelos, tais como a UML, é que os desenvolvedores de software não precisam se preocupar com características específicas de linguagens de programação (Java, C++, C\#, etc). Além disso, modelos fornecem uma visão gráfica e abstrata do sistema, assim, o engenheiro de software pode facilmente visualizar e verificar quais refatorações devem ser aplicadas no sistema. 
+
+No entanto, utilizar apenas os diagramas da UML não é uma abordagem adequada para representar todos os artefatos de um sistema de software~\cite{Gorp, KolahdouzRahimi20145, revisao_sistematica_uml_refactoring}. Isso ocorre principalmente porque a UML não consegue representar todas as construções de um determinado sistema. Por exemplo, declarações internas de um método não são consideradas no contexto do metamodelo da UML. Além disso, a UML não contém um conjunto de metaclasses para representar todos os artefatos de um sistema e com ela não é possível representar níveis mais baixos de abstração de um sistema, como o código-fonte, nem mesmo representar níveis mais altos, como a arquitetura do sistema e regras de negócios. Utilizando o metamodelo da UML, poucas informações do código-fonte são representadas, por exemplo, nome da classe, nome do método e seus parâmetros, atributos e tipos. 
+
+Neste contexto, o cenário ideal para concretizar a proposta original da ADM é que ferramentas de modernização apliquem refatorações utilizando diagramas da UML que são representações gráficas do código-fonte, porém, internamente a ferramenta deve aplicar as refatorações em instância do metamodelo KDM ao invés da UML, assim, diversos artefatos de um sistemas podem continuar consistentes e sincronizados após a aplicação de refatorações em instância do KDM. Além disso, algoritmos de refatorações podem ser reutilizados em diversas ferramentas de modernização, uma vez que, o KDM é independente de linguagem e plataforma. Assim, vislumbrou-se uma oportunidade de conduzir essa pesquisa no contexto da ADM. 
+
+%O cenário ideal para concretizar o segundo passo (reestruturação) da proposta original da ADM é que ferramentas de modernização apliquem refatorações em diagramas da UML que são representações gráficas de modelos KDM. A maioria das ferramentas de modernização utilizam diagramas da UML e mantém internamente apenas instâncias do metamodelo UML
 
 
-Refatorações em modelos tendem a ser mais complexas do que refatorações aplicadas em código-fonte~\cite{Mens_2006}, uma vez que, além das refatorações, é necessária também a realização de uma atividade para verificar a consistência do modelo e manter a sincronização dele, bem como suas visões~\cite{KolahdouzRahimi20145}. Segundo~\citeonline{Gorp}, desenvolvedores de software utilizam refatorações em nível de projeto e, assim, é intuitivo explorar os conceitos de MDE usando a UML para a aplicação de refatorações~\cite{Salem_2008, Gorp, Egyed_2008, Briand_2006, staron2004implementing}. Nesse sentido, vários pesquisas iniciaram-se com o objetivo de implementar refatorações no contexto da UML~\cite{revisao_sistematica_uml_refactoring}. Uma das vantagens em se utilizar refatorações em nível de modelos, tais como a UML, é que os desenvolvedores de software não precisam se preocupar com características específicas de linguagens de programação (Java, C++, C\#, etc). Além disso, modelos fornecem uma visão abstrata do sistema, assim, o engenheiro de software pode facilmente visualizar e verificar quais refatorações devem ser aplicadas no sistema. 
 
-No entanto, utilizar apenas os diagramas da UML não é uma abordagem adequada para representar todos os artefatos de um sistema de software~\cite{Gorp, KolahdouzRahimi20145, revisao_sistematica_uml_refactoring}. Isso ocorre principalmente porque a UML não consegue representar todas as construções de um determinado sistema. Por exemplo, declarações internas de um método não são consideradas no contexto do metamodelo da UML. Além disso, a UML não contém um conjunto de metaclasses para representar todos os artefatos de um sistema e com ela não é possível representar níveis mais baixos de abstração de um sistema, como o código-fonte, nem mesmo representar níveis mais altos, como a arquitetura do sistema e regras de negócios. Utilizando o metamodelo da UML, poucas informações do código-fonte são representadas, por exemplo, nome da classe, nome do método e seus parâmetros, atributos e tipos.  
+%seria que as ferramentas de modernização que apoiam utilizam o processo da ADM 
 
-Com o objetivo de padronizar o processo de reengenharia o \textit{Object Management Group} (OMG) criou, em 2003, uma força tarefa para analisar e evoluir os tradicionais processos de reengenharia, formalizando-os e fazendo com que eles fossem totalmente apoiados por modelos~\cite{ADM:OMG}. Logo, o termo Modernização Dirigida a Arquitetura (do inglês - \sigla{ADM}{\textit{Architecture-Driven Modernization}}) surgiu como uma solução para os problemas de padronização. A ADM é um processo de modernização de sistemas legados que utiliza um conjunto de metamodelos para representar completamente um sistema por meio de diferentes representações arquiteturais. Esses modelos são, então, submetidos à refatorações, otimizações e, posteriormente, o código-fonte pode ser gerado novamente por meio de atividades de engenharia avante. Durante a modernização de um sistema, são gerados vários modelos de acordo com os metamodelos da ADM, que representam diferentes partes/visões do sistema, como: fluxo de dados, banco de dados, elementos de programação (métodos, classes, tipos de dados, etc.) e arquitetura~\cite{PerezCastillo20121370}.
-
-O Knowledge Discovery Metamodel (KDM) é o principal metamodelo da ADM com uma ampla quantidade de metaclasses para representar desde os níveis mais baixos de abstração de um sistema (código-fonte), até níveis mais altos (arquitetura do sistema), permitindo a representação de conceitos de qualquer domínio~\cite{KDM:specification,KDM:ISO}. Diferentemente de metamodelos existentes, o KDM mantém todas as visões/representações do sistema em uma única instância; o KDM pode ser considerado como uma família de metamodelos, uma vez que compartilha a consistência e terminologia homogênea. 
-
-A ideia principal da ADM é que a comunidade comece a desenvolver ferramentas que atuem apenas sobre instâncias do metamodelo KDM, ao invés de serem dependentes de plataformas e linguagens específicas. Por exemplo, um catálogo de refatorações~\cite{durelli_catalogo} para o KDM tem o poder de reestruturar um sistema independentemente da linguagem de programação que foi usada em seu desenvolvimento, já que as refatorações ocorrem nos modelos. Outro exemplo seria a aplicação de técnicas de mineração de interesses transversais, utilizando como base o metamodelo KDM~\cite{Durelli:2013_ACM, dani_san, daniel_san_journal}.
-
-
-No entanto, embora a ADM tenha investido esforços objetivando fornecer metamodelos para auxiliar o engenheiro de modernização a conduzir a reengenharia de um sistema, seguindo todas as diretrizes de MDE, a ADM ainda não fornece instruções de como criar, reusar e/ou aplicar refatorações no metamodelo KDM, nem mesmo como manter uma determinada instância do KDM sincronizada após a aplicação de refatorações. Assim, tais particularidades devem ser tratadas pelos engenheiros de modernização. Isso faz com que os engenheiros criem suas próprias soluções. Porém, usualmente, tais soluções são proprietárias e específicas, o que pode dificultar a interoperabilidade entre diferentes soluções. Dessa forma, nesta tese é apresentada uma abordagem para criação e disponibilização de refatorações para o metamodelo KDM, bem como um apoio ferramental que permite aplicá-las em diagramas de classe da UML. 
-
-%Esta tese de doutorado aborda as seguintes questões de pesquisas (QP):
-
-%\begin{itemize}
-% 	\item \textbf{QP$_1$}: Qual é o estado da arte de refatorações no contexto da ADM, e principalmente para o metamodelo KDM?;
-% 	\item \textbf{QP$_2$}: Como manter todas as visões do metamodelo KDM sincronizado após a aplicação de um conjunto de refatorações?;
- %	\item \textbf{QP$_3$}: Como especificar refatorações para que elas possam ser disponibilizadas/reutilizadas de forma independente de linguagem e plataforma de programação?;
- %	\item \textbf{QP$_4$}: Como automatizar o processo de aplicação de refatorações dentro do contexto da ADM e KDM?.
- %\end{itemize} 
 
 
 \section{Motivações}\label{sec:justificativa_e_motivacao}
@@ -51,10 +45,10 @@ As motivações que levaram ao desenvolvimento desta tese foram:
 
 \begin{enumerate}
 
-\item Carência de ferramentas de modernização que permitem aplicar refatorações em diagramas UML que são representações gráficas de modelos KDM. Isto é, a maioria das ferramentas que permitem refatorações em diagramas UML, mantém internamente apenas o metamodelo UML. Isso faz com que os algoritmos de refatoração não sigam o padrão KDM, impedindo seu reúso em ferramentas de modernização que utilizam esse padrão. Além disso, o metamodelo UML restringe bastante o número de refatorações possíveis em processos de modernização.
+\item Carência de ferramentas de modernização que permitem aplicar refatorações em diagramas UML que são representações gráficas de modelos KDM. Isto é, a maioria das ferramentas que permitem refatorações em diagramas UML, mantém internamente apenas o metamodelo UML. Isso faz com que os algoritmos de refatoração não sigam o padrão KDM, impedindo seu reúso em ferramentas de modernização que utilizam esse padrão. Além disso, o metamodelo UML restringe o número de refatorações possíveis em processos de modernização quando comparado com o metamodelo KDM.
 
 
-\item Escassez de abordagens para criar refatorações para o KDM. Esta motivação está relacionada com a ausência de diretrizes claras que guiem o engenheiro de modernização na criação de refatorações para o metamodelo KDM. A ausência de diretrizes desse tipo faz com que os engenheiros de modernização sigam procedimento \textit{ad-hoc} que podem levar a refatorações de baixa qualidade;
+\item Escassez de abordagens de criação de refatorações para o KDM. Esta motivação está relacionada com a ausência de diretrizes claras que guiem engenheiros de modernização na criação de refatorações para esse metamodelo. A ausência de diretrizes desse tipo faz com que os engenheiros de modernização adotem  procedimentos \textit{ad-hoc} que podem levar a refatorações que não executam corretamente sua função.
 
 
 %buscar quais são as diretrizes que permitem o engenheiro de modernização criar refatorações tradicionais para o metamodelo KDM. A ausência de diretrizes desse tipo dificulta a criação de refatorações para o KDM, fazendo com que engenheiros de modernização tenham que criar suas próprias soluções;
@@ -64,7 +58,13 @@ As motivações que levaram ao desenvolvimento desta tese foram:
 
 %O SRM objetiva definir uma terminologia comum para a especificação de refatorações para facilitar o reúso e a interoperabilidade entre ferramentas. Esse objetivo é apoiado por um conjunto de metaclasses que definem meta-atributos específicos para representar informações (metadados) de uma refatoração, auxiliando o compartilhamento das refatorações de forma intuitiva para os modernizadores.
 
-\item Ausência de uma terminologia comum para a especificação de refatorações. Essa ausência dificulta o reúso e a interoperabilidade entre ferramentas de modernização. Refatorações são atividades menores dentro de processos de modernização. Assim, a criação de um metamodelo separado, flexibiliza a especificação de refatorações e permite que elas sejam reusadas dentro de transformações maiores. %Esse metamodelo deve definir metaclasses e meta-atributos específicos para representar informações (metadados) de uma refatoração, aumentando o reúso e a interoperabilidade das refatorações. 
+\item Ausência de um metamodelo que forneça uma terminologia comum, padronizada e independente de linguagem para a especificação de refatorações. Essa ausência faz com que engenheiros de modernização tenham que criar refatorações usando linguagens de transformação de modelos específicas (QVT, ATL, KerMeta, etc) e sem seguir nenhum padrão de terminologia, tornando-as bastante específicas e restringindo suas chances de reúso. Uma especificação de refatoração de mais alto nível habilita ferramentas de modernização a gerarem as implementações das refatorações na linguagem que for de interesse. Dessa forma, ferramentas de modernização que reconheçam um metamodelo de refatorações internamente podem gerar as implementações das refatorações a partir da leitura das instâncias desse metamodelo.
+
+
+%Ausência de uma terminologia comum, padronizada e independente de plataforma, no formato de um metamodelo, para a especificação de refatorações. Essa ausência faz com que engenheiros de modernização tenham que criar refatorações diretamente usando linguagens de transformação de modelos e sem seguir nenhum padrão de terminologia. Além disso, a ausência de um metamodelo desse tipo dificulta a interoperabilidade entre ferramentas de modernização, pois não haveria uma forma sistemática de se reusar refatorações que foram especificadas para uma ferramenta dentro de outra. A existência de um metamodelo eleva o nível de abstração e faz com que esses profissionais possam especificar refatorações sem levar em conta detalhes técnicos das linguagens. Dessa forma, ferramentas de modernização que reconheçam um metamodelo de refatorações internamente podem gerar as implementações das refatorações a partir da leitura das instâncias desse metamodelo. 
+
+
+%Refatorações são atividades menores dentro de processos de modernização. Assim, a criação de um metamodelo separado, flexibiliza a especificação de refatorações e permite que elas sejam reusadas dentro de transformações maiores. %Esse metamodelo deve definir metaclasses e meta-atributos específicos para representar informações (metadados) de uma refatoração, aumentando o reúso e a interoperabilidade das refatorações. 
 
 
 %A grande maioria desses cenários geralmente necessita e é precedida por refatorações de granularidade fina. Dessa forma, pode-se dizer que refatorações são atividades menores dentro de processos de modernização. Um metamodelo separado para refatorações flexibiliza a especificação de refatorações e permite que elas sejam reusadas dentro de transformações maiores.
@@ -120,50 +120,11 @@ Nesse contexto, a pesquisa aqui apresentada visa contribuir para a definição d
 %\end{itemize}
 
 
-\section{Síntese da Pesquisa Conduzida}\label{sec:introducao:a_abordagem_desenvolvida}
-
-Com base nas motivações apresentadas o trabalho desenvolvido aqui visa auxiliar dois principais atores: (\textit{i}) o engenheiro de modernização\footnote{No contexto desta tese, engenheiro de modernização é aquele que utiliza a abordagem aqui proposta para criar, disponibilizar e reutilizar refatorações para o KDM.} e  (\textit{ii}) o engenheiro de software\footnote{No contexto desta tese, engenheiro de software é aquele que interage com o apoio computacional desenvolvido aqui para aplicar refatorações em instâncias do KDM.}. O engenheiro de modernização é aquele que cria e disponibiliza refatorações para o metamodelo KDM no sentido de facilitar o reúso das mesmas. Por sua vez, o engenheiro de software é aquele responsável por conduzir um processo de modernização e que se utiliza de apoios computacionais para aplicar refatorações existentes.
-
-
-%pode aplicar refatorações por meio de um apoio computacional.%utilizando o diagrama de classe da UML e de forma transparente um apoio computacional aplica as refatorações em um instância do metamodelo KDM. 
-
-
-
-Na Figura~\ref{fig:abordagem_kdm_tese_processo}, uma visão geral do trabalho/pesquisa desenvolvida é apresentada. Note que, a figura é dividida em dois retângulos tracejados. O primeiro retângulo representa os passos da abordagem e o segundo ilustra a condução de um processo de modernização. A abordagem desenvolvida contém dois passos e o processo de modernização é abstraído em apenas um passo. Note também que a figura ilustra o papel do engenheiro de modernização e do engenheiro de software. 
-Os dois passos da abordagem são executados pelo engenheiro de modernização e o processo de modernização é executado pelo engenheiro de software. A seguir, uma descrição resumida é apresentada.
-
-O passo \ding{182} consiste na criação de refatorações para o metamodelo KDM. Esse passo é apoiado por seis diretrizes, as quais o engenheiro de modernização segue para criar refatorações para o metamodelo KDM. As refatorações são um conjunto de regras ATL, as quais são criadas por meio da combinação de um conjunto de artefatos: (\textit{i}) mapeamento entre KDM e POO, (\textit{ii}) operações atômicas, (\textit{iii}) \textit{templates}, (\textit{iv}) linguagem de transformação e (\textit{v}) linguagem de restrição.
-
-
-% A primeira diretriz consiste em identificar os elementos estruturais entre o paradigma orientado a objeto e o metamodelo KDM. Em seguida, o engenheiro de modernização escolhe qual refatoração almeja criar para o KDM. Então, a refatoração é implementada por meio da linguagem de transformação ATL. As restrições (pré- e pós-condições) da refatoração são implementadas em OCL e o engenheiro de modernização pode documentar a refatoração por meio de duas especificações: informal e formal.
-
-
-%A criação de refatorações para o KDM é apoiada por cinco diretrizesO objetivo é criar diretrizes para que outros engenheiros de modernização possam criar refatorações para o KDM.
-
-%O metamodelo KDM consiste em um conjunto de pacotes para representar diversos artefatos existentes de um sistema de software. Assim, após a aplicação de refatorações é de suma importância manter todos os pacotes/artefatos sincronizados e consistentes. Dessa forma, no passo \ding{183} regras de propagações são realizadas em instância do metamodelo KDM para manter todos os artefatos sincronizados e consistentes de acordo com a refatoração aplicada. 
-%O passo \ding{183} consiste na disponibilização de refatorações por meio de um metamodelo aqui definido. Esse metamodelo contém metaclasses que permitem armazenar informações relacionadas com refatorações, desde seu nome até seu mecanismo. O objetivo é permitir e aumentar a interoperabilidade de refatorações para um amplo domínio e auxiliar o engenheiro de modernização a definir refatorações representativas em forma de metadados. Posteriormente as instâncias desse metamodelo são enviadas para um repositório e são reutilizadas por engenheiros de software por meio de um apoio computacional. O apoio computacional \ding{184} também foi definido para auxiliar o engenheiro de software a aplicar refatorações em sistemas representados pelo KDM. Após a aplicação de refatorações é de suma importância manter todos os pacotes/artefatos sincronizados e consistentes. Dessa forma, esse apoio computacional contém um plug-in responsável por implementar regras de propagações que são realizadas em instância do metamodelo KDM. Essas regras mantêm todos os artefatos sincronizados e consistentes de acordo com a refatoração aplicada. 
-
-\begin{figure}[h]
-	\centering
-	% Requires \usepackage{graphicx}
-	\caption{Visão geral da abordagem proposta.}
-	\label{fig:abordagem_kdm_tese_processo}
-	\includegraphics[scale=0.8]{images/NovaFiguraSintexeAbordagem}
-	\fautor
-\end{figure}
-
-O passo \ding{183} consiste na disponibilização das refatorações criadas por meio de um metamodelo aqui definido, o qual contém metaclasses que permitem armazenar metadados relacionados com refatorações, tais como: o nome da refatoração, sua motivação, autor, pré- e pós-condições e seu mecanismo. O objetivo desse metamodelo é viabilizar o reúso das refatorações dentro de ferramentas de modernização, propiciando a interoperabilidade entre as mesmas. A instanciação desse metamodelo é apoiada por um apoio computacional criado no contexto desta tese denominado KDM-RE, que fornece uma linguagem específica de domínio para auxiliar o engenheiro de modernização durante a instanciação desse metamodelo. Em seguida, as instâncias desse metamodelo são enviadas pelo KDM-RE para um repositório e podem ser reutilizadas por engenheiros de software. 
-
-%É importante salientar que tanto as restrições (pré- e pós-condições) e os mecanismo das refatorações são disponibilizados no metamodelo por meio de linguagens de transformação (ATL) e restrições (OCL). 
-
-O processo de modernização (ver Figura~\ref{fig:abordagem_kdm_tese_processo} \ding{184}) dá enfoque na aplicação de refatorações e a propagação de mudanças por meio do KDM-RE. KDM-RE foi implementado para automatizar a atividade de aplicação e reutilização de refatorações em sistemas representados pelo KDM. As refatorações podem ser aplicadas diretamente em diagramas de classes UML, porém, a refatoração é de fato realizada transparentemente no metamodelo KDM e, posteriormente, replicada nos diagramas de classes UML. Adicionalmente, após a aplicação de refatorações em sistemas representados pelo KDM, é importante manter todos os pacotes/artefatos sincronizados e consistentes. Dessa forma, o KDM-RE também contém um \textit{plug-in} responsável por aplicar regras de propagações, que são realizadas em instância do metamodelo KDM. O intuito desse \textit{plug-in} é manter todos os artefatos sincronizados e consistentes de acordo com a refatoração aplicada.
-
-
 \section{Objetivos}\label{sec:objetivos}
 
 %A tese subjacente a este trabalho baseia-se no fato de que é possível e benéfico o uso de refatorações para o contexto da ADM, principalmente para o KDM. Nesse contexto, 
 
-O objetivo desta tese é apresentar uma abordagem para criação e disponibilização de refatorações para o metamodelo KDM, bem como um apoio ferramental que permite aplicá-las em diagramas de classe da UML (ver Figura~\ref{fig:abordagem_kdm_tese_processo}). Mais especificamente, os seguintes objetivos podem ser especificados:%Para que esse objetivo seja alcançado, os seguintes objetivos específicos devem ser atingidos:
+O objetivo desta tese é apresentar uma abordagem para criação e disponibilização de refatorações para o metamodelo KDM, bem como um apoio ferramental que permite aplicá-las em diagramas de classe da UML. Mais especificamente, os seguintes objetivos podem ser especificados:%Para que esse objetivo seja alcançado, os seguintes objetivos específicos devem ser atingidos:
 
 \begin{itemize}
 
@@ -187,9 +148,56 @@ O objetivo desta tese é apresentar uma abordagem para criação e disponibiliza
 	
 	%\item Elaborar regras pré-definidas para manter o metamodelo KDM consistente e sincronizado após a aplicar um conjunto de refatorações;
 	
-    \item Desenvolver um apoio ferramental totalmente integrado no ambiente de desenvolvimento Eclipse para apoiar a abordagem proposta nesta tese.
+    \item Desenvolver um apoio ferramental totalmente integrado no ambiente de desenvolvimento Eclipse para apoiar o processo de modernização proposto nesta tese. Esse apoio ferramental deve permitir aplicar refatorações graficamente por meio de diagramas de classe da UML, porém, as refatorações devem ser realizadas transparentemente no metamodelo KDM e, posteriormente replicadas nos diagramas de classe da UML. 
 
 \end{itemize}
+
+\section{Síntese da Pesquisa Conduzida}\label{sec:introducao:a_abordagem_desenvolvida}
+
+Com base nas motivações e nos objetivos supracitados o trabalho desenvolvido aqui visa auxiliar dois principais atores: (\textit{i}) o engenheiro de modernização e (\textit{ii}) o engenheiro de software. O engenheiro de modernização no contexto desta tese, é aquele que utiliza a abordagem aqui proposta para criar, disponibilizar e reutilizar refatorações para o KDM. Por sua vez, o engenheiro de software é aquele que é responsável por conduzir um processo de modernização e que utiliza apoios computacionais para aplicar refatorações existentes em diagramas de classe da UML.
+
+
+
+%\footnote{No contexto desta tese, engenheiro de modernização é aquele que utiliza a abordagem aqui proposta para criar, disponibilizar e reutilizar refatorações para o KDM.} e  (\textit{ii}) o engenheiro de software\footnote{No contexto desta tese, engenheiro de software é aquele que interage com o apoio computacional desenvolvido aqui para aplicar refatorações em instâncias do KDM.}. O engenheiro de modernização é aquele que cria e disponibiliza refatorações para o metamodelo KDM no sentido de facilitar o reúso das mesmas. Por sua vez, o engenheiro de software é aquele responsável por conduzir um processo de modernização e que se utiliza de apoios computacionais para aplicar refatorações existentes em diagramas de classe da UML.
+
+
+%pode aplicar refatorações por meio de um apoio computacional.%utilizando o diagrama de classe da UML e de forma transparente um apoio computacional aplica as refatorações em um instância do metamodelo KDM. 
+
+
+Na Figura~\ref{fig:abordagem_kdm_tese_processo}, uma visão geral do trabalho desenvolvido é apresentada. Note que, a figura é dividida em dois retângulos tracejados. O primeiro retângulo representa os passos da abordagem e o segundo ilustra a ferramenta de apoio a processos de modernização desenvolvida. A abordagem é composta por dois passos e o processo de modernização é abstraído em apenas um passo. Note também que a figura ilustra o papel do engenheiro de modernização e do engenheiro de software. 
+Os dois passos da abordagem são executados pelo engenheiro de modernização e o processo de modernização é executado pelo engenheiro de software. A seguir, uma descrição resumida é apresentada.
+
+\begin{figure}[h]
+	\centering
+	% Requires \usepackage{graphicx}
+	\caption{Visão geral da abordagem proposta.}
+	\label{fig:abordagem_kdm_tese_processo}
+	\includegraphics[scale=0.8]{images/NovaFiguraSintexeAbordagem}
+	\fautor
+\end{figure}
+
+
+O passo \ding{182} consiste na criação de refatorações para o metamodelo KDM. Esse passo é apoiado por seis diretrizes, as quais o engenheiro de modernização segue para criar refatorações para o metamodelo KDM. As refatorações são um conjunto de regras ATL, as quais são criadas por meio da combinação de um conjunto de artefatos: (\textit{i}) mapeamento entre KDM e POO, (\textit{ii}) operações atômicas, (\textit{iii}) \textit{templates}, (\textit{iv}) linguagem de transformação e (\textit{v}) linguagem de restrição.
+
+
+% A primeira diretriz consiste em identificar os elementos estruturais entre o paradigma orientado a objeto e o metamodelo KDM. Em seguida, o engenheiro de modernização escolhe qual refatoração almeja criar para o KDM. Então, a refatoração é implementada por meio da linguagem de transformação ATL. As restrições (pré- e pós-condições) da refatoração são implementadas em OCL e o engenheiro de modernização pode documentar a refatoração por meio de duas especificações: informal e formal.
+
+
+%A criação de refatorações para o KDM é apoiada por cinco diretrizesO objetivo é criar diretrizes para que outros engenheiros de modernização possam criar refatorações para o KDM.
+
+%O metamodelo KDM consiste em um conjunto de pacotes para representar diversos artefatos existentes de um sistema de software. Assim, após a aplicação de refatorações é de suma importância manter todos os pacotes/artefatos sincronizados e consistentes. Dessa forma, no passo \ding{183} regras de propagações são realizadas em instância do metamodelo KDM para manter todos os artefatos sincronizados e consistentes de acordo com a refatoração aplicada. 
+%O passo \ding{183} consiste na disponibilização de refatorações por meio de um metamodelo aqui definido. Esse metamodelo contém metaclasses que permitem armazenar informações relacionadas com refatorações, desde seu nome até seu mecanismo. O objetivo é permitir e aumentar a interoperabilidade de refatorações para um amplo domínio e auxiliar o engenheiro de modernização a definir refatorações representativas em forma de metadados. Posteriormente as instâncias desse metamodelo são enviadas para um repositório e são reutilizadas por engenheiros de software por meio de um apoio computacional. O apoio computacional \ding{184} também foi definido para auxiliar o engenheiro de software a aplicar refatorações em sistemas representados pelo KDM. Após a aplicação de refatorações é de suma importância manter todos os pacotes/artefatos sincronizados e consistentes. Dessa forma, esse apoio computacional contém um plug-in responsável por implementar regras de propagações que são realizadas em instância do metamodelo KDM. Essas regras mantêm todos os artefatos sincronizados e consistentes de acordo com a refatoração aplicada. 
+
+
+
+O passo \ding{183} consiste na disponibilização das refatorações criadas por meio de um metamodelo aqui definido (\textit{Structured Refactoring Metamodel} - SRM), o qual contém metaclasses que permitem armazenar metadados relacionados com refatorações, tais como: o nome da refatoração, sua motivação, autor, pré- e pós-condições e seu mecanismo. O objetivo desse metamodelo é viabilizar o reúso das refatorações dentro de ferramentas de modernização, propiciando a interoperabilidade entre as mesmas. A instanciação desse metamodelo é apoiada por um apoio computacional criado no contexto desta tese denominado KDM-RE, que fornece uma linguagem específica de domínio para auxiliar o engenheiro de modernização durante a instanciação desse metamodelo. Em seguida, as instâncias desse metamodelo são enviadas pelo KDM-RE para um repositório e podem ser reutilizadas por engenheiros de software. 
+
+%É importante salientar que tanto as restrições (pré- e pós-condições) e os mecanismo das refatorações são disponibilizados no metamodelo por meio de linguagens de transformação (ATL) e restrições (OCL). 
+
+O processo de modernização (ver Figura~\ref{fig:abordagem_kdm_tese_processo} \ding{184}) dá enfoque na aplicação de refatorações e a propagação de mudanças por meio do KDM-RE. KDM-RE foi implementado para automatizar a atividade de aplicação e reutilização de refatorações em sistemas representados pelo KDM. As refatorações podem ser aplicadas diretamente em diagramas de classes UML, porém, a refatoração é de fato realizada transparentemente no metamodelo KDM e, posteriormente, replicada nos diagramas de classes UML. Adicionalmente, após a aplicação de refatorações em sistemas representados pelo KDM, é importante manter todos os pacotes/artefatos sincronizados e consistentes. Dessa forma, o KDM-RE também contém um \textit{plug-in} responsável por aplicar regras de propagações, que são realizadas em instância do metamodelo KDM. O intuito desse \textit{plug-in} é manter todos os artefatos sincronizados e consistentes de acordo com a refatoração aplicada.
+
+
+
 
 
 
