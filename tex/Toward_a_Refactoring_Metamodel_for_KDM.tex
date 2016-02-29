@@ -460,7 +460,7 @@ libr.getCatalogs().add(cat);
 ...
 \end{codigo}
 
-Como observado, o processo de instanciação do metamodelo SRM não é um processo trivial em ambas as opções. Além disso, engenheiros de modernização devem estar familiarizados como as semânticas das refatorações (por exemplo, qual(is) é (são) o(s) pré-requisito(s) para a execução de uma refatoração) e como/onde utilizar e programar tais refatorações. Com o intuito de facilitar e diminuir a quantidade de código-fonte, esforços obrigatórios e competências necessárias para instanciar refatorações utilizando o metamodelo SRM, foi criado uma DSL para auxiliar a instanciação de refatorações. A seguir, as gramáticas definidas que regem a DSL para auxiliar a instanciação do metamodelo SRM são apresentadas.
+Como observado, o processo de instanciação do metamodelo SRM não é um processo trivial em ambas as opções. Além disso, engenheiros de modernização devem estar familiarizados como as particularidades das refatorações (por exemplo, qual(is) é (são) o(s) pré-requisito(s) para a execução de uma refatoração) e como/onde utilizar e programar tais refatorações. Com o intuito de facilitar e diminuir a quantidade de código-fonte, esforços obrigatórios e competências necessárias para instanciar refatorações utilizando o metamodelo SRM, foi criado uma DSL para auxiliar a instanciação de refatorações. A seguir, as gramáticas definidas que regem a DSL para auxiliar a instanciação do metamodelo SRM são apresentadas.
 
 \begin{lstlisting}[language=Xtext, frame=single, basicstyle={\scriptsize}, mathescape=true, label={lst:dsl_part_1}, caption={Gramática da DSL - parte 1}]
 $\textrm{\ding{182}}$ grammar refactoring.xtext.SRM with org.eclipse.xtext.common.Terminals 
